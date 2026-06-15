@@ -1,0 +1,52 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780698208452,
+            "stop": 1780698236819
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_dependencies_declared_and_no_mock",
+                "status": "passed",
+                "duration": 529,
+                "start": 1780698208828,
+                "stop": 1780698209357,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_static_page_contract",
+                "status": "passed",
+                "duration": 15495,
+                "start": 1780698209357,
+                "stop": 1780698224852,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_collaborative_stroke_propagation_and_eraser_and_undo",
+                "status": "passed",
+                "duration": 11967,
+                "start": 1780698224852,
+                "stop": 1780698236819,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

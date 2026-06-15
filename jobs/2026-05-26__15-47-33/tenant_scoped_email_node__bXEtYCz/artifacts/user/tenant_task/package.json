@@ -1,0 +1,13 @@
+{
+  "name": "tenant-scoped-knock-workflow",
+  "version": "1.0.0",
+  "description": "Tenant-scoped Knock email workflow automation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@knocklabs/node": "^0.6.0",
+    "@knocklabs/mgmt": "^0.6.0"
+  }
+}

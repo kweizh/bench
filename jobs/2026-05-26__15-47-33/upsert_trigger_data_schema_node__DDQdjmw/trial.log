@@ -1,0 +1,86 @@
+Skipping image OS validation for hb__upsert_trigger_data_schema_node: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-ddqdjmw > /logs/artifacts/run-id && echo upsert_trigger_data_schema_node__DDQdjmw > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Upsert a Knock Workflow With Trigger Data Validation (Node.js)
+
+## Background
+Knock supports JSON-Schema validation of the `data` payload sent to a workflow trigger via the `trigger_data_json_schema` field on a workflow. When this field is set, the Knock trigger endpoint will reject any payload that does not match the schema with a `422 Unprocessable Entity` response. Your job is to programmatically create such a validated workflow using the Knock Node.js Management SDK, activate it, and then exercise it by triggering it with both a valid and an invalid payload using the Knock Node.js SDK.
+
+## Requirements
+- Build a Node.js script that uses the `@knocklabs/mgmt` SDK to upsert a workflow in the `development` environment of your Knock account.
+  - Workflow key: `order-confirmation-${run-id}` (where `${run-id}` is the value of the `ZEALT_RUN_ID` environment variable).
+  - Workflow `name`: `Order Confirmation ${run-id}`.
+  - The workflow must declare a `trigger_data_json_schema` requiring all three properties below as `required`, with the following exact JSON Schema types:
+    - `order_id`: string
+    - `total_amount`: number
+    - `customer_email`: string with `format` set to `email`
+  - The workflow must contain exactly one channel step targeting the `in-app` channel (channel key `in-app`) with a Markdown template body that includes the Liquid placeholders `{{ data.order_id }}` and `{{ data.total_amount }}`.
+- After upsert, activate the workflow in the `development` environment so it can be triggered.
+- Build a second Node.js script that uses the `@knocklabs/node` SDK to:
+  1. Trigger the workflow once with a valid payload and capture the returned `workflow_run_id`.
+  2. Trigger the workflow a second time with an invalid payload (a payload that the schema rejects, e.g., `total_amount` sent as a string) and capture the error.
+- Both scripts must write structured results to a single shared log file so the verifier can inspect them.
+
+## Implementation Hints
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable and append it to the workflow key and workflow name to keep concurrent runs isolated.
+- `@knocklabs/mgmt` provides `client.workflows.upsert(workflowKey, { environment, workflow })` and `client.workflows.activate(workflowKey, { environment, status })` — use the management service token (`KNOCK_SERVICE_TOKEN`) for these calls. Service tokens authenticate management API calls; the trigger API requires the environment-scoped secret API key (`KNOCK_API_TOKEN`).
+- `@knocklabs/node`'s `knock.workflows.trigger(key, { recipients, data })` returns `{ workflow_run_id }` on success and throws on validation errors. Catch the validation error from the invalid trigger and serialize its HTTP status code and message into the log.
+- Use any non-empty recipient identifier for trigger calls (e.g., `recipient-${run-id}`); inline recipients are fine.
+
+## Acceptance Criteria
+- Project path: /home/user/knock_task
+- Ensure both scripts are executed and produce the artifacts listed below.
+- Log file: /home/user/knock_task/output.log
+- The workflow created by the upsert script must be named `order-confirmation-${run-id}` in the `development` environment, must be active, and must carry a `trigger_data_json_schema` requiring `order_id`, `total_amount`, and `customer_email`.
+- The log file must contain the following lines (in any order, one per line) where `${run-id}` is read from the `ZEALT_RUN_ID` environment variable:
+  - `Workflow Key: order-confirmation-${run-id}`
+  - `Workflow Active: true`
+  - `Valid Trigger Workflow Run ID: <uuid>` where `<uuid>` is the `workflow_run_id` returned by the valid trigger call.
+  - `Invalid Trigger Status: 422`
+
+
+EOF
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

@@ -1,0 +1,10 @@
+{
+  "name": "knock-trigger-data-schema-task",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "@knocklabs/mgmt": "^0.5.0",
+    "@knocklabs/node": "^1.0.0"
+  }
+}

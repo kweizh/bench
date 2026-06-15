@@ -1,0 +1,13 @@
+{
+  "name": "knock-top-level-conditions",
+  "version": "1.0.0",
+  "description": "Upsert and trigger a Knock workflow with top-level conditions",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@knocklabs/mgmt": "^0.10.0",
+    "@knocklabs/node": "^2.0.0"
+  }
+}

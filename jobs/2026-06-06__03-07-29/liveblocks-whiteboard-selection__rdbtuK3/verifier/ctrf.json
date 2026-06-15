@@ -1,0 +1,61 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 0,
+            "failed": 3,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780715804002,
+            "stop": 1780715903388
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_single_context_renders_three_shapes",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 35879,
+                "start": 1780715804217,
+                "stop": 1780715840096,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\nliveblocks_config_exists = '/home/user/whiteboard/liveblocks.config.ts'\n\n    def test_single_context_renders_three_shapes(start_app, liveblocks_config_exists):\n        with sync_playwright() as p:\n            browser = p.chromium.launch()\n            try:\n                ctx = browser.new_context()\n                page = ctx.new_page()\n>               page.goto(f\"{BASE_URL}/?user=1\", wait_until=\"domcontentloaded\")\n\ntests/test_final_state.py:152: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nusr/local/lib/python3.12/dist-packages/playwright/sync_api/_generated.py:9612: in goto\n    self._sync(\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_page.py:557: in goto\n    return await self._main_frame.goto(**locals_to_params(locals()))\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py:156: in goto\n    await self._channel.send(\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:69: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f0e00024a10>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f0dff06f100>\nis_internal = False, title = None\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(\n            task, \"__pw_stack__\", None\n        ) or inspect.stack(0)\n    \n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal, title)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.\nE           Call log:\nE             - navigating to \"http://localhost:3000/?user=1\", waiting until \"domcontentloaded\"\n\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:559: TimeoutError",
+                "message": "The test failed in the call phase due to an exception"
+            },
+            {
+                "name": "test_final_state.py::test_cross_user_selection_via_presence",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 31746,
+                "start": 1780715840096,
+                "stop": 1780715871842,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\nliveblocks_config_exists = '/home/user/whiteboard/liveblocks.config.ts'\n\n    def test_cross_user_selection_via_presence(start_app, liveblocks_config_exists):\n        with sync_playwright() as p:\n            browser = p.chromium.launch()\n            try:\n                ctx_a = browser.new_context()\n                ctx_b = browser.new_context()\n                page_a = ctx_a.new_page()\n                page_b = ctx_b.new_page()\n    \n>               page_a.goto(f\"{BASE_URL}/?user=1\", wait_until=\"domcontentloaded\")\n\ntests/test_final_state.py:175: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nusr/local/lib/python3.12/dist-packages/playwright/sync_api/_generated.py:9612: in goto\n    self._sync(\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_page.py:557: in goto\n    return await self._main_frame.goto(**locals_to_params(locals()))\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py:156: in goto\n    await self._channel.send(\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:69: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f0dff293ad0>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f0dfef79d00>\nis_internal = False, title = None\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(\n            task, \"__pw_stack__\", None\n        ) or inspect.stack(0)\n    \n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal, title)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.\nE           Call log:\nE             - navigating to \"http://localhost:3000/?user=1\", waiting until \"domcontentloaded\"\n\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:559: TimeoutError",
+                "message": "The test failed in the call phase due to an exception"
+            },
+            {
+                "name": "test_final_state.py::test_storage_does_not_carry_selection_attribute",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 31545,
+                "start": 1780715871843,
+                "stop": 1780715903388,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\nliveblocks_config_exists = '/home/user/whiteboard/liveblocks.config.ts'\n\n    def test_storage_does_not_carry_selection_attribute(\n        start_app, liveblocks_config_exists\n    ):\n        \"\"\"Selection must be Presence-only \u2014 shapes themselves must not be\n        annotated with a storage-driven selection attribute.\"\"\"\n        with sync_playwright() as p:\n            browser = p.chromium.launch()\n            try:\n                ctx = browser.new_context()\n                page = ctx.new_page()\n>               page.goto(f\"{BASE_URL}/?user=1\", wait_until=\"domcontentloaded\")\n\ntests/test_final_state.py:214: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \nusr/local/lib/python3.12/dist-packages/playwright/sync_api/_generated.py:9612: in goto\n    self._sync(\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_page.py:557: in goto\n    return await self._main_frame.goto(**locals_to_params(locals()))\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py:156: in goto\n    await self._channel.send(\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:69: in send\n    return await self._connection.wrap_api_call(\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <playwright._impl._connection.Connection object at 0x7f0dff293d40>\ncb = <function Channel.send.<locals>.<lambda> at 0x7f0dfdc57060>\nis_internal = False, title = None\n\n    async def wrap_api_call(\n        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None\n    ) -> Any:\n        if self._api_zone.get():\n            return await cb()\n        task = asyncio.current_task(self._loop)\n        st: List[inspect.FrameInfo] = getattr(\n            task, \"__pw_stack__\", None\n        ) or inspect.stack(0)\n    \n        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal, title)\n        self._api_zone.set(parsed_st)\n        try:\n            return await cb()\n        except Exception as error:\n>           raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nE           playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.\nE           Call log:\nE             - navigating to \"http://localhost:3000/?user=1\", waiting until \"domcontentloaded\"\n\nusr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:559: TimeoutError",
+                "message": "The test failed in the call phase due to an exception"
+            }
+        ]
+    }
+}

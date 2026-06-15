@@ -1,0 +1,79 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 6,
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779774863247,
+            "stop": 1779774864491
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_merged_file_exists",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779774863279,
+                "stop": 1779774863280,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_merged_file_is_valid_yaml",
+                "status": "passed",
+                "duration": 6,
+                "start": 1779774863280,
+                "stop": 1779774863286,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_merged_file_is_openapi_3",
+                "status": "passed",
+                "duration": 6,
+                "start": 1779774863286,
+                "stop": 1779774863292,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_merged_file_contains_users_path",
+                "status": "passed",
+                "duration": 5,
+                "start": 1779774863293,
+                "stop": 1779774863298,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_merged_file_contains_products_path",
+                "status": "passed",
+                "duration": 5,
+                "start": 1779774863298,
+                "stop": 1779774863303,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_merged_file_passes_speakeasy_lint",
+                "status": "passed",
+                "duration": 1188,
+                "start": 1779774863303,
+                "stop": 1779774864491,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

@@ -1,0 +1,4 @@
+{
+    "task": ["KNOCK_SERVICE_TOKEN"],
+    "verifier": ["KNOCK_SERVICE_TOKEN"]
+}

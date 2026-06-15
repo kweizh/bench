@@ -1,0 +1,114 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 1,
+            "failed": 8,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780697550153,
+            "stop": 1780697559665
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_form_skeleton_renders",
+                "status": "failed",
+                "duration": 8964,
+                "start": 1780697550610,
+                "stop": 1780697559574,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7fa32dc674a0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        \"\"\"Build (if needed) and start the Next.js app on port 3000.\"\"\"\n    \n        # Build the production bundle first; xprocess only runs the start command.\n        build = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True,\n            env=os.environ.copy(),\n            timeout=600,\n        )\n>       assert build.returncode == 0, f\"`npm run build` failed:\\nSTDOUT:\\n{build.stdout}\\nSTDERR:\\n{build.stderr}\"\nE       AssertionError: `npm run build` failed:\nE         STDOUT:\nE         \nE         > liveblocks-typing-form-starter@0.1.0 build\nE         > next build\nE         \nE         Attention: Next.js now collects completely anonymous telemetry regarding usage.\nE         This information is used to shape Next.js' roadmap and prioritize features.\nE         You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nE         https://nextjs.org/telemetry\nE         \nE           \u25b2 Next.js 14.2.15\nE         \nE            Creating an optimized production build ...\nE         \nE         STDERR:\nE         Failed to compile.\nE         \nE         ./app/page.tsx\nE         Module not found: Can't resolve './liveblocks.config'\nE         \nE         https://nextjs.org/docs/messages/module-not-found\nE         \nE         \nE         > Build failed because of webpack errors\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['npm', 'run', 'build'], returncode=1, stdout=\"\\n> liveblocks-typing-form-starter@0.1.0 build\\n>...veblocks.config'\\n\\nhttps://nextjs.org/docs/messages/module-not-found\\n\\n\\n> Build failed because of webpack errors\\n\").returncode\n\ntests/test_final_state.py:37: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_liveblocks_auth_endpoint_returns_token",
+                "status": "failed",
+                "duration": 11,
+                "start": 1780697559574,
+                "stop": 1780697559585,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7fa32dc674a0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        \"\"\"Build (if needed) and start the Next.js app on port 3000.\"\"\"\n    \n        # Build the production bundle first; xprocess only runs the start command.\n        build = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True,\n            env=os.environ.copy(),\n            timeout=600,\n        )\n>       assert build.returncode == 0, f\"`npm run build` failed:\\nSTDOUT:\\n{build.stdout}\\nSTDERR:\\n{build.stderr}\"\nE       AssertionError: `npm run build` failed:\nE         STDOUT:\nE         \nE         > liveblocks-typing-form-starter@0.1.0 build\nE         > next build\nE         \nE         Attention: Next.js now collects completely anonymous telemetry regarding usage.\nE         This information is used to shape Next.js' roadmap and prioritize features.\nE         You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nE         https://nextjs.org/telemetry\nE         \nE           \u25b2 Next.js 14.2.15\nE         \nE            Creating an optimized production build ...\nE         \nE         STDERR:\nE         Failed to compile.\nE         \nE         ./app/page.tsx\nE         Module not found: Can't resolve './liveblocks.config'\nE         \nE         https://nextjs.org/docs/messages/module-not-found\nE         \nE         \nE         > Build failed because of webpack errors\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['npm', 'run', 'build'], returncode=1, stdout=\"\\n> liveblocks-typing-form-starter@0.1.0 build\\n>...veblocks.config'\\n\\nhttps://nextjs.org/docs/messages/module-not-found\\n\\n\\n> Build failed because of webpack errors\\n\").returncode\n\ntests/test_final_state.py:37: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_storage_sync_between_contexts",
+                "status": "failed",
+                "duration": 10,
+                "start": 1780697559586,
+                "stop": 1780697559596,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7fa32dc674a0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        \"\"\"Build (if needed) and start the Next.js app on port 3000.\"\"\"\n    \n        # Build the production bundle first; xprocess only runs the start command.\n        build = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True,\n            env=os.environ.copy(),\n            timeout=600,\n        )\n>       assert build.returncode == 0, f\"`npm run build` failed:\\nSTDOUT:\\n{build.stdout}\\nSTDERR:\\n{build.stderr}\"\nE       AssertionError: `npm run build` failed:\nE         STDOUT:\nE         \nE         > liveblocks-typing-form-starter@0.1.0 build\nE         > next build\nE         \nE         Attention: Next.js now collects completely anonymous telemetry regarding usage.\nE         This information is used to shape Next.js' roadmap and prioritize features.\nE         You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nE         https://nextjs.org/telemetry\nE         \nE           \u25b2 Next.js 14.2.15\nE         \nE            Creating an optimized production build ...\nE         \nE         STDERR:\nE         Failed to compile.\nE         \nE         ./app/page.tsx\nE         Module not found: Can't resolve './liveblocks.config'\nE         \nE         https://nextjs.org/docs/messages/module-not-found\nE         \nE         \nE         > Build failed because of webpack errors\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['npm', 'run', 'build'], returncode=1, stdout=\"\\n> liveblocks-typing-form-starter@0.1.0 build\\n>...veblocks.config'\\n\\nhttps://nextjs.org/docs/messages/module-not-found\\n\\n\\n> Build failed because of webpack errors\\n\").returncode\n\ntests/test_final_state.py:37: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_typing_indicator_appears_and_clears",
+                "status": "failed",
+                "duration": 9,
+                "start": 1780697559596,
+                "stop": 1780697559605,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7fa32dc674a0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        \"\"\"Build (if needed) and start the Next.js app on port 3000.\"\"\"\n    \n        # Build the production bundle first; xprocess only runs the start command.\n        build = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True,\n            env=os.environ.copy(),\n            timeout=600,\n        )\n>       assert build.returncode == 0, f\"`npm run build` failed:\\nSTDOUT:\\n{build.stdout}\\nSTDERR:\\n{build.stderr}\"\nE       AssertionError: `npm run build` failed:\nE         STDOUT:\nE         \nE         > liveblocks-typing-form-starter@0.1.0 build\nE         > next build\nE         \nE         Attention: Next.js now collects completely anonymous telemetry regarding usage.\nE         This information is used to shape Next.js' roadmap and prioritize features.\nE         You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nE         https://nextjs.org/telemetry\nE         \nE           \u25b2 Next.js 14.2.15\nE         \nE            Creating an optimized production build ...\nE         \nE         STDERR:\nE         Failed to compile.\nE         \nE         ./app/page.tsx\nE         Module not found: Can't resolve './liveblocks.config'\nE         \nE         https://nextjs.org/docs/messages/module-not-found\nE         \nE         \nE         > Build failed because of webpack errors\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['npm', 'run', 'build'], returncode=1, stdout=\"\\n> liveblocks-typing-form-starter@0.1.0 build\\n>...veblocks.config'\\n\\nhttps://nextjs.org/docs/messages/module-not-found\\n\\n\\n> Build failed because of webpack errors\\n\").returncode\n\ntests/test_final_state.py:37: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_typing_indicator_appears_and_clears",
+                "status": "failed",
+                "duration": 9,
+                "start": 1780697559606,
+                "stop": 1780697559615,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7fa32dc674a0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        \"\"\"Build (if needed) and start the Next.js app on port 3000.\"\"\"\n    \n        # Build the production bundle first; xprocess only runs the start command.\n        build = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True,\n            env=os.environ.copy(),\n            timeout=600,\n        )\n>       assert build.returncode == 0, f\"`npm run build` failed:\\nSTDOUT:\\n{build.stdout}\\nSTDERR:\\n{build.stderr}\"\nE       AssertionError: `npm run build` failed:\nE         STDOUT:\nE         \nE         > liveblocks-typing-form-starter@0.1.0 build\nE         > next build\nE         \nE         Attention: Next.js now collects completely anonymous telemetry regarding usage.\nE         This information is used to shape Next.js' roadmap and prioritize features.\nE         You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nE         https://nextjs.org/telemetry\nE         \nE           \u25b2 Next.js 14.2.15\nE         \nE            Creating an optimized production build ...\nE         \nE         STDERR:\nE         Failed to compile.\nE         \nE         ./app/page.tsx\nE         Module not found: Can't resolve './liveblocks.config'\nE         \nE         https://nextjs.org/docs/messages/module-not-found\nE         \nE         \nE         > Build failed because of webpack errors\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['npm', 'run', 'build'], returncode=1, stdout=\"\\n> liveblocks-typing-form-starter@0.1.0 build\\n>...veblocks.config'\\n\\nhttps://nextjs.org/docs/messages/module-not-found\\n\\n\\n> Build failed because of webpack errors\\n\").returncode\n\ntests/test_final_state.py:37: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_typing_indicator_appears_and_clears",
+                "status": "failed",
+                "duration": 13,
+                "start": 1780697559616,
+                "stop": 1780697559629,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7fa32dc674a0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        \"\"\"Build (if needed) and start the Next.js app on port 3000.\"\"\"\n    \n        # Build the production bundle first; xprocess only runs the start command.\n        build = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True,\n            env=os.environ.copy(),\n            timeout=600,\n        )\n>       assert build.returncode == 0, f\"`npm run build` failed:\\nSTDOUT:\\n{build.stdout}\\nSTDERR:\\n{build.stderr}\"\nE       AssertionError: `npm run build` failed:\nE         STDOUT:\nE         \nE         > liveblocks-typing-form-starter@0.1.0 build\nE         > next build\nE         \nE         Attention: Next.js now collects completely anonymous telemetry regarding usage.\nE         This information is used to shape Next.js' roadmap and prioritize features.\nE         You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nE         https://nextjs.org/telemetry\nE         \nE           \u25b2 Next.js 14.2.15\nE         \nE            Creating an optimized production build ...\nE         \nE         STDERR:\nE         Failed to compile.\nE         \nE         ./app/page.tsx\nE         Module not found: Can't resolve './liveblocks.config'\nE         \nE         https://nextjs.org/docs/messages/module-not-found\nE         \nE         \nE         > Build failed because of webpack errors\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['npm', 'run', 'build'], returncode=1, stdout=\"\\n> liveblocks-typing-form-starter@0.1.0 build\\n>...veblocks.config'\\n\\nhttps://nextjs.org/docs/messages/module-not-found\\n\\n\\n> Build failed because of webpack errors\\n\").returncode\n\ntests/test_final_state.py:37: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_lock_overlay_appears_and_clears",
+                "status": "failed",
+                "duration": 13,
+                "start": 1780697559630,
+                "stop": 1780697559643,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7fa32dc674a0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        \"\"\"Build (if needed) and start the Next.js app on port 3000.\"\"\"\n    \n        # Build the production bundle first; xprocess only runs the start command.\n        build = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True,\n            env=os.environ.copy(),\n            timeout=600,\n        )\n>       assert build.returncode == 0, f\"`npm run build` failed:\\nSTDOUT:\\n{build.stdout}\\nSTDERR:\\n{build.stderr}\"\nE       AssertionError: `npm run build` failed:\nE         STDOUT:\nE         \nE         > liveblocks-typing-form-starter@0.1.0 build\nE         > next build\nE         \nE         Attention: Next.js now collects completely anonymous telemetry regarding usage.\nE         This information is used to shape Next.js' roadmap and prioritize features.\nE         You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nE         https://nextjs.org/telemetry\nE         \nE           \u25b2 Next.js 14.2.15\nE         \nE            Creating an optimized production build ...\nE         \nE         STDERR:\nE         Failed to compile.\nE         \nE         ./app/page.tsx\nE         Module not found: Can't resolve './liveblocks.config'\nE         \nE         https://nextjs.org/docs/messages/module-not-found\nE         \nE         \nE         > Build failed because of webpack errors\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['npm', 'run', 'build'], returncode=1, stdout=\"\\n> liveblocks-typing-form-starter@0.1.0 build\\n>...veblocks.config'\\n\\nhttps://nextjs.org/docs/messages/module-not-found\\n\\n\\n> Build failed because of webpack errors\\n\").returncode\n\ntests/test_final_state.py:37: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_soft_lock_allows_takeover",
+                "status": "failed",
+                "duration": 14,
+                "start": 1780697559643,
+                "stop": 1780697559657,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "xprocess = <xprocess.xprocess.XProcess object at 0x7fa32dc674a0>\n\n    @pytest.fixture(scope=\"session\")\n    def start_app(xprocess):\n        \"\"\"Build (if needed) and start the Next.js app on port 3000.\"\"\"\n    \n        # Build the production bundle first; xprocess only runs the start command.\n        build = subprocess.run(\n            [\"npm\", \"run\", \"build\"],\n            cwd=PROJECT_DIR,\n            capture_output=True,\n            text=True,\n            env=os.environ.copy(),\n            timeout=600,\n        )\n>       assert build.returncode == 0, f\"`npm run build` failed:\\nSTDOUT:\\n{build.stdout}\\nSTDERR:\\n{build.stderr}\"\nE       AssertionError: `npm run build` failed:\nE         STDOUT:\nE         \nE         > liveblocks-typing-form-starter@0.1.0 build\nE         > next build\nE         \nE         Attention: Next.js now collects completely anonymous telemetry regarding usage.\nE         This information is used to shape Next.js' roadmap and prioritize features.\nE         You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:\nE         https://nextjs.org/telemetry\nE         \nE           \u25b2 Next.js 14.2.15\nE         \nE            Creating an optimized production build ...\nE         \nE         STDERR:\nE         Failed to compile.\nE         \nE         ./app/page.tsx\nE         Module not found: Can't resolve './liveblocks.config'\nE         \nE         https://nextjs.org/docs/messages/module-not-found\nE         \nE         \nE         > Build failed because of webpack errors\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['npm', 'run', 'build'], returncode=1, stdout=\"\\n> liveblocks-typing-form-starter@0.1.0 build\\n>...veblocks.config'\\n\\nhttps://nextjs.org/docs/messages/module-not-found\\n\\n\\n> Build failed because of webpack errors\\n\").returncode\n\ntests/test_final_state.py:37: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_codebase_uses_real_liveblocks_packages",
+                "status": "passed",
+                "duration": 7,
+                "start": 1780697559658,
+                "stop": 1780697559665,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "task": [
+        "LIVEBLOCKS_SECRET_KEY",
+        "NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY"
+    ],
+    "verifier": [
+        "LIVEBLOCKS_SECRET_KEY",
+        "NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY"
+    ]
+}

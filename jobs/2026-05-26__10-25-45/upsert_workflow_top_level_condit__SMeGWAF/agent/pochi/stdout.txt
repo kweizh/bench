@@ -1,0 +1,79 @@
+- Initializing MCP connections...
+You
+# Gate a Knock workflow with top-level conditions (Node.js) ## Background [Knock](https://docs.knock.app) workflows can carry a top-level [`conditions`](https://docs.knock.app/mapi-reference/workflows/schemas/workflow) object (a `ConditionGroup` of `all`/`any` rules) that determines whether the workflow runs at all when triggered. When the trigger conditions evaluate to false for a recipient, Knock short-circuits the workflow for that recipient and no channel step is executed. You are building an internal "admin-only security alert" notification. The same trigger fires for an arbitrary set of users, but only users whose `role` attribute equals `admin` should actually receive the email. You must implement this gate via the workflow's top-level `conditions` (not via per-step conditions or a branch step). ## Requirements - Create a Node.js project at `/home/user/myproject` with a `package.json` and a runnable script `app.js`. - Use the official [`@knocklabs/mgmt`](https://github.com/knocklabs/knock-mgmt-node) SDK to upsert and activate a workflow in the `development` environment. - Use the [`@knocklabs/node`](https://github.com/knocklabs/knock-node) SDK to trigger that workflow. - The workflow must: - Have a top-level `conditions` group of type `all` containing a single condition that requires `recipient.role` to be `equal_to` the string `admin`. - Contain exactly one channel step targeting the pre-configured `mailtrap` email channel (`channel_key: "mailtrap"`). The step's template must produce an email subject of exactly `Admin alert <run-id>` (substituting the actual run id at upsert time) and a non-empty HTML body that addresses the recipient by `{{ recipient.name }}`. - Be marked `active: true` in the `development` environment. - The trigger call must use **inline recipient identification** to send two recipients in a single `workflows.trigger` request: - An admin recipient with `role: "admin"`. - A viewer recipient with `role: "viewer"`. - Append `<run-id>` (from the `ZEALT_RUN_ID` environment variable) as a suffix to the workflow key, both recipient IDs, the recipient email local-parts, and the email subject so the resource names are safe to use concurrently. - Write the resulting `workflow_run_id` to the log file in the exact format specified below. ## Implementation Hints - Read all secrets and shared identifiers from environment variables (`KNOCK_SERVICE_TOKEN`, `KNOCK_API_TOKEN`, `MAILTRAP_DOMAIN`, `GMAIL_USER_NAME`, `ZEALT_RUN_ID`). - The Management API only accepts writes in the `development` environment; activate the workflow there as well. - For inline recipients, set both the standard fields (`id`, `name`, `email`) and the custom `role` attribute that the workflow condition references. The email of each recipient must follow Gmail's plus-addressing convention required by the test harness: `<gmail_user_name>+<receiver_id>@gmail.com`. - The single channel step should use `channel_key: "mailtrap"` (this email channel is already configured in the Knock account). You do not need to configure the channel yourself. - The Knock workflow key must match the regex `^[a-z0-9_-]+$`. ## Acceptance Criteria - Project path: `/home/user/myproject` - Ensure the real upsert, activate, and trigger actions are executed against the live Knock account (no mocking). - Log file: `/home/user/myproject/output.log` - The log file must contain a line in the exact format: `Workflow run ID: <workflow_run_id>` where `<workflow_run_id>` is a UUID returned by the Knock trigger API. - The workflow key in Knock must be `top-level-conditions-${run-id}` where `${run-id}` is the value of `ZEALT_RUN_ID`. - When fetched via the Management API in the `development` environment, the workflow must: - Be `active: true`. - Have a top-level `conditions` group whose `all` array contains a single rule with `variable == "recipient.role"`, `operator == "equal_to"`, and `argument == "admin"`. - Contain exactly one channel step with `type == "channel"` and `channel_key == "mailtrap"`, whose template `subject` equals `Admin alert ${run-id}`. - After the trigger executes, the test Gmail inbox must contain exactly **one** new message with subject `Admin alert ${run-id}` addressed to `${GMAIL_USER_NAME}+admin-${run-id}@gmail.com`, and **zero** messages with that subject addressed to `${GMAIL_USER_NAME}+viewer-${run-id}@gmail.com`.   
+
+Pochi
+💭 Thinking for 623 characters   
+📋 Updating todo list (4 items) ✔ 
+💫 Executing mkdir -p /home/user/myproject ✔ 
+✏️  Writing /home/user/myproject/package.json ✔ 
+📋 Updating todo list (4 items) ✔ 
+💫 Executing cd /home/user/myproject && npm install ✔ 
+Let me check what was actually installed to understand the SDK APIs:   
+💫 Executing cd /home/user/myproject && ls node_modules/@knocklabs/ ✔ 
+💫 Executing cd /home/user/myproject && cat node_modules/@knocklabs/mgmt/package.json | grep -E '"main"|"module"|"exports"|"version"' | head -20 ✔ 
+💫 Executing cd /home/user/myproject && cat node_modules/@knocklabs/node/package.json | grep -E '"main"|"version"' | head -5 ✔ 
+💫 Executing cd /home/user/myproject && ls node_modules/@knocklabs/mgmt/ ✔ 
+💫 Executing cat /home/user/myproject/node_modules/@knocklabs/mgmt/src/resources/workflows/workflows.ts 2>/dev/null | head -200 || cat /home/user/myproject/node_modules/@knocklabs/mgmt/resources/workflows.d.ts 2>/dev/null | head -200 ✔ 
+💫 Executing grep -n "WorkflowUpsertParams\|ConditionGroup\|conditions\|WorkflowStep\|channel_key" /home/user/myproject/node_modules/@knocklabs/mgmt/src/resources/workflows/workflows.ts | head -80 ✔ 
+💫 Executing sed -n '1900,2000p' /home/user/myproject/node_modules/@knocklabs/mgmt/src/resources/workflows/workflows.ts ✔ 
+💫 Executing grep -n "template\|subject\|html_body\|email_body\|EmailChannelTemplate\|WorkflowEmailStep" /home/user/myproject/node_modules/@knocklabs/mgmt/src/resources/workflows/workflows.ts | head -50 ✔ 
+💫 Executing grep -n "EmailTemplate\|subject\|html_body" /home/user/myproject/node_modules/@knocklabs/mgmt/src/resources/templates.ts | head -40 ✔ 
+💫 Executing sed -n '60,130p' /home/user/myproject/node_modules/@knocklabs/mgmt/src/resources/templates.ts ✔ 
+💫 Executing sed -n '795,870p' /home/user/myproject/node_modules/@knocklabs/mgmt/src/resources/workflows/workflows.ts ✔ 
+Now let me check the `@knocklabs/node` SDK trigger API:   
+💫 Executing grep -n "trigger\|InlineRecipient\|RecipientIdentifier\|workflows" /home/user/myproject/node_modules/@knocklabs/node/index.d.ts 2>/dev/null | head -30 || ls /home/user/myproject/node_modules/@knocklabs/node/ ✔ 
+💫 Executing ls /home/user/myproject/node_modules/@knocklabs/node/ ✔ 
+💫 Executing ls /home/user/myproject/node_modules/@knocklabs/node/src/resources/ ✔ 
+💫 Executing grep -n "trigger\|WorkflowTriggerParams\|InlineRecipient\|recipients" /home/user/myproject/node_modules/@knocklabs/node/src/resources/workflows.ts | head -60 ✔ 
+💫 Executing grep -n "RecipientRequest\|InlineUser\|UserRecipient\|email\|role" /home/user/myproject/node_modules/@knocklabs/node/src/resources/recipients/recipients.ts | head -60 ✔ 
+💫 Executing grep -n "InlineIdentifyUserRequest\|email\|name\|role" /home/user/myproject/node_modules/@knocklabs/node/src/resources/users/users.ts | head -60 ✔ 
+💫 Executing sed -n '455,530p' /home/user/myproject/node_modules/@knocklabs/node/src/resources/users/users.ts ✔ 
+Now I have all the information I need. The `InlineIdentifyUserRequest` has `[k: string]: unknown` which means I can pass custom attributes like `role`. Let me also check the `EmailTemplate.Settings` for `layout_key`:   
+💫 Executing sed -n '114,200p' /home/user/myproject/node_modules/@knocklabs/mgmt/src/resources/templates.ts ✔ 
+Now I have enough information to write the `app.js`. Let me also check the `Knock` client initialization:   
+💫 Executing grep -n "Knock\|KnockClient\|class\|constructor\|apiKey\|serviceToken" /home/user/myproject/node_modules/@knocklabs/mgmt/src/client.ts 2>/dev/null | head -30 ✔ 
+💫 Executing grep -n "class Knock\|apiKey\|constructor\|KNOCK_API" /home/user/myproject/node_modules/@knocklabs/node/src/client.ts 2>/dev/null | head -20 ✔ 
+The `@knocklabs/node` uses `KNOCK_API_KEY` env var, but the requirements say `KNOCK_API_TOKEN`. I'll pass the token explicitly. Now let me write the full `app.js`:   
+📋 Updating todo list (4 items) ✔ 
+✏️  Writing /home/user/myproject/app.js ✔ 
+Now update `package.json` to use ES modules since we're using `import.meta.dirname`:   
+🔧 Applying diff to /home/user/myproject/package.json ✔ 
+📋 Updating todo list (4 items) ✔ 
+💫 Executing cd /home/user/myproject && node app.js ✔ 
+💫 Executing cat /home/user/myproject/output.log ✔ 
+Everything ran successfully. Let me do a quick verification of the final project structure:   
+💫 Executing ls /home/user/myproject/ && echo "---" && cat /home/user/myproject/output.log ✔ 
+📋 Updating todo list (4 items) ✔ 
+🎉 Task Completed
+The Node.js project is complete and executed successfully.
+
+**Project layout** (`/home/user/myproject`):
+```
+package.json   – ES-module project with @knocklabs/mgmt + @knocklabs/node
+app.js         – runnable script
+output.log     – written after execution
+node_modules/
+```
+
+**What `app.js` does (in order):**
+
+1. **Upsert** the workflow via `@knocklabs/mgmt` → `client.workflows.upsert()`:
+   - Key: `top-level-conditions-<ZEALT_RUN_ID>`
+   - Top-level `conditions.all` gate: `variable: "recipient.role"`, `operator: "equal_to"`, `argument: "admin"`
+   - One channel step: `type: "channel"`, `channel_key: "mailtrap"`, subject `Admin alert <RUN_ID>`, HTML body addressing `{{ recipient.name }}`
+   - `commit: true` so the upsert is immediately committed to `development`
+
+2. **Activate** the workflow in `development` via `client.workflows.activate(..., { status: true })`
+
+3. **Trigger** the workflow via `@knocklabs/node` → `client.workflows.trigger()` with two inline recipients:
+   - `admin-<RUN_ID>` — `role: "admin"`, email `<GMAIL_USER_NAME>+admin-<RUN_ID>@gmail.com` → passes the gate → email delivered
+   - `viewer-<RUN_ID>` — `role: "viewer"`, email `<GMAIL_USER_NAME>+viewer-<RUN_ID>@gmail.com` → blocked by top-level conditions → no email
+
+4. **Writes** `Workflow run ID: <uuid>` to `/home/user/myproject/output.log`
+
+**Execution result:**
+```
+Workflow run ID: 7aa5f23f-6fa9-5844-90e0-3afc7a43acd0
+```   
+  

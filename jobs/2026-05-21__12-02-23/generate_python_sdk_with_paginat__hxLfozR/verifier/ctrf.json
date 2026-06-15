@@ -1,0 +1,47 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779762633.4292946,
+            "stop": 1779762638.3081207
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_openapi_spec_valid_via_cli",
+                "status": "passed",
+                "duration": 4.867600838995713,
+                "start": 1779762633.4384477,
+                "stop": 1779762638.3063254,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_pagination_extension_exists",
+                "status": "passed",
+                "duration": 0.0005079259935882874,
+                "start": 1779762638.3065667,
+                "stop": 1779762638.3072133,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_sdk_directory_and_files_exist",
+                "status": "passed",
+                "duration": 0.0004592159966705367,
+                "start": 1779762638.307386,
+                "stop": 1779762638.3079636,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

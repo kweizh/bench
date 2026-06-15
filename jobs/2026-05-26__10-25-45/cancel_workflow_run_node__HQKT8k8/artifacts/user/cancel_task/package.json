@@ -1,0 +1,13 @@
+{
+  "name": "cancel-task",
+  "version": "1.0.0",
+  "description": "Cancel a triggered Knock workflow before email delivery",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@knocklabs/mgmt": "latest",
+    "@knocklabs/node": "latest"
+  }
+}

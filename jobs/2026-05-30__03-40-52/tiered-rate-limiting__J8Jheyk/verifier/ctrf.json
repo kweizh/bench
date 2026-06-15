@@ -1,0 +1,61 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 0,
+            "failed": 3,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780114260947,
+            "stop": 1780114301141
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_unauthorized_request",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 39607,
+                "start": 1780114261485,
+                "stop": 1780114301092,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_unauthorized_request(start_app):\n        url = \"http://localhost:8787/api/data\"\n        response = requests.get(url)\n>       assert response.status_code == 401, f\"Expected 401 Unauthorized, got {response.status_code}\"\nE       AssertionError: Expected 401 Unauthorized, got 500\nE       assert 500 == 401\nE        +  where 500 = <Response [500]>.status_code\n\ntests/test_final_state.py:53: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_free_plan_rate_limit",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 23,
+                "start": 1780114301093,
+                "stop": 1780114301116,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\nfree_token = 'REDACTED.eyJzdWIiOiJ1c2VyMSIsInBsYW4iOiJmcmVlIn0.z-CXjfY39ybgf0suSsZgpng200neKx0VUC_SvckY0PE'\n\n    def test_free_plan_rate_limit(start_app, free_token):\n        url = \"http://localhost:8787/api/data\"\n        headers = {\"Authorization\": f\"Bearer {free_token}\"}\n    \n        # Send 3 requests\n        for i in range(2):\n            response = requests.get(url, headers=headers)\n>           assert response.status_code == 200, f\"Expected 200 OK for free plan request {i+1}, got {response.status_code}\"\nE           AssertionError: Expected 200 OK for free plan request 1, got 500\nE           assert 500 == 200\nE            +  where 500 = <Response [500]>.status_code\n\ntests/test_final_state.py:62: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_pro_plan_rate_limit",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 21,
+                "start": 1780114301119,
+                "stop": 1780114301140,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\npro_token = 'REDACTED.eyJzdWIiOiJ1c2VyMiIsInBsYW4iOiJwcm8ifQ.UdAQSfHDpytVOvPeBHzVufFtK6fJyyIhqahPZjH5fMc'\n\n    def test_pro_plan_rate_limit(start_app, pro_token):\n        url = \"http://localhost:8787/api/data\"\n        headers = {\"Authorization\": f\"Bearer {pro_token}\"}\n    \n        # Send 6 requests\n        for i in range(5):\n            response = requests.get(url, headers=headers)\n>           assert response.status_code == 200, f\"Expected 200 OK for pro plan request {i+1}, got {response.status_code}\"\nE           AssertionError: Expected 200 OK for pro plan request 1, got 500\nE           assert 500 == 200\nE            +  where 500 = <Response [500]>.status_code\n\ntests/test_final_state.py:78: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

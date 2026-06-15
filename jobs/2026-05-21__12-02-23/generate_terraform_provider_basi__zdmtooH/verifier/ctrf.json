@@ -1,0 +1,65 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 1,
+            "failed": 3,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779762761.2984574,
+            "stop": 1779762761.33443
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_terraform_directory_exists",
+                "status": "passed",
+                "duration": 0.0004978380020475015,
+                "start": 1779762761.3092623,
+                "stop": 1779762761.3099585,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_provider_code_generated",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0005649770100717433,
+                "start": 1779762761.310144,
+                "stop": 1779762761.32471,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_provider_code_generated():\n        \"\"\"Priority 3: Check for key generated provider files.\"\"\"\n        provider_file_1 = os.path.join(TERRAFORM_DIR, \"main.go\")\n        provider_file_2 = os.path.join(TERRAFORM_DIR, \"internal\", \"provider\", \"provider.go\")\n    \n>       assert os.path.isfile(provider_file_1) or os.path.isfile(provider_file_2), \\\n            f\"Neither {provider_file_1} nor {provider_file_2} found. Provider code may not have been generated correctly.\"\nE       AssertionError: Neither /home/user/myproject/terraform/main.go nor /home/user/myproject/terraform/internal/provider/provider.go found. Provider code may not have been generated correctly.\nE       assert (False or False)\nE        +  where False = <function isfile at 0x74f5af484220>('/home/user/myproject/terraform/main.go')\nE        +    where <function isfile at 0x74f5af484220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\nE        +  and   False = <function isfile at 0x74f5af484220>('/home/user/myproject/terraform/internal/provider/provider.go')\nE        +    where <function isfile at 0x74f5af484220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:17: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_pet_resource_generated",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.0005198970029596239,
+                "start": 1779762761.3249562,
+                "stop": 1779762761.32778,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_pet_resource_generated():\n        \"\"\"Priority 3: Check if the Pet resource was generated based on OpenAPI annotations.\"\"\"\n        # The exact filename might vary slightly, but we can search for a file containing 'pet' in internal/provider\n        provider_dir = os.path.join(TERRAFORM_DIR, \"internal\", \"provider\")\n    \n        if os.path.isdir(provider_dir):\n            files = os.listdir(provider_dir)\n            pet_files = [f for f in files if \"pet\" in f.lower()]\n            assert len(pet_files) > 0, f\"No file containing 'pet' found in {provider_dir}. Annotations may have been missed.\"\n        else:\n            # If internal/provider doesn't exist, maybe it generated flat structure\n            files = os.listdir(TERRAFORM_DIR)\n            pet_files = [f for f in files if \"pet\" in f.lower()]\n>           assert len(pet_files) > 0, f\"No file containing 'pet' found in {TERRAFORM_DIR}. Annotations may have been missed.\"\nE           AssertionError: No file containing 'pet' found in /home/user/myproject/terraform. Annotations may have been missed.\nE           assert 0 > 0\nE            +  where 0 = len([])\n\ntests/test_final_state.py:33: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_provider_compiles",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 0.004165861995716114,
+                "start": 1779762761.327988,
+                "stop": 1779762761.3342648,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_provider_compiles():\n        \"\"\"Priority 1: Run 'go build' to ensure the generated provider is valid Go code.\"\"\"\n        # First run go mod tidy\n        tidy_result = subprocess.run(\n            [\"go\", \"mod\", \"tidy\"],\n            cwd=TERRAFORM_DIR,\n            capture_output=True,\n            text=True\n        )\n>       assert tidy_result.returncode == 0, f\"'go mod tidy' failed: {tidy_result.stderr}\"\nE       AssertionError: 'go mod tidy' failed: go: go.mod file not found in current directory or any parent directory; see 'go help modules'\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['go', 'mod', 'tidy'], returncode=1, stdout='', stderr=\"go: go.mod file not found in current directory or any parent directory; see 'go help modules'\\n\").returncode\n\ntests/test_final_state.py:44: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

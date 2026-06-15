@@ -1,0 +1,91 @@
+configVersion: 2.0.0
+generation:
+  sdkClassName: MySDK
+  maintainOpenAPIOrder: true
+  usageSnippets:
+    optionalPropertyRendering: withExample
+    sdkInitStyle: constructor
+  useClassNamesForArrayFields: true
+  fixes:
+    nameResolutionDec2023: true
+    nameResolutionFeb2025: false
+    parameterOrderingFeb2024: true
+    requestResponseComponentNamesFeb2024: true
+    securityFeb2025: false
+    sharedErrorComponentsApr2025: false
+    sharedNestedComponentsJan2026: false
+    nameOverrideFeb2026: false
+  auth:
+    oAuth2ClientCredentialsEnabled: false
+    oAuth2PasswordEnabled: false
+    hoistGlobalSecurity: true
+  inferSSEOverload: true
+  sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: body
+  versioningStrategy: automatic
+  persistentEdits: {}
+  tests:
+    generateTests: false
+    generateNewTests: true
+    skipResponseBodyAssertions: false
+python:
+  version: 0.1.1
+  additionalDependencies:
+    dev: {}
+    extra: {}
+    main: {}
+  allowedRedefinedBuiltins:
+    - id
+    - object
+    - input
+    - dir
+  asyncMode: both
+  author: SDK Author
+  authors:
+    - Speakeasy
+  baseErrorName: MySDKError
+  clientServerStatusCodesAsErrors: true
+  constFieldCasing: normal
+  defaultErrorName: MySDKDefaultError
+  description: My SDK
+  enableCustomCodeRegions: false
+  enumFormat: union
+  fixFlags:
+    asyncPaginationSep2025: true
+    conflictResistantModelImportsFeb2026: true
+    responseRequiredSep2024: true
+  flattenGlobalSecurity: true
+  flattenRequests: true
+  flatteningOrder: parameters-first
+  forwardCompatibleEnumsByDefault: true
+  forwardCompatibleUnionsByDefault: tagged-only
+  hooks:
+    enabled: true
+  imports:
+    option: openapi
+    paths:
+      callbacks: ""
+      errors: errors
+      operations: ""
+      shared: ""
+      webhooks: ""
+  inferUnionDiscriminators: true
+  inputModelSuffix: input
+  license: Apache-2.0
+  maxMethodParams: 999
+  methodArguments: infer-optional-args
+  moduleName: my_sdk
+  multipartArrayFormat: standard
+  outputModelSuffix: output
+  packageManager: uv
+  packageName: my-sdk
+  preApplyUnionDiscriminators: true
+  projectUrls: {}
+  pytestFilterWarnings: []
+  pytestTimeout: 0
+  responseFormat: flat
+  sseFlatResponse: false
+  templateVersion: v2
+  useAsyncHooks: false

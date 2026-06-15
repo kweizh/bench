@@ -1,0 +1,94 @@
+- Initializing MCP connections...
+You
+# Tiered Rate Limiting with Zuplo ## Background Zuplo is an edge-native API gateway that allows you to add authentication, rate limiting, and other policies to your APIs. In this task, you will create a Zuplo API gateway that implements tiered rate limiting based on a user's subscription plan extracted from a JWT claim. ## Requirements * Initialize a new Zuplo project in `/home/user/myproject`. * Create a single GET endpoint at `/api/data`. * Secure the endpoint using JWT authentication. The JWTs will be signed using the HS256 algorithm with a symmetric secret. * Implement a tiered rate limiting mechanism: * Users with the claim `"plan": "free"` in their JWT should be limited to 2 requests per minute. * Users with the claim `"plan": "pro"` in their JWT should be limited to 5 requests per minute. * Return a 429 Too Many Requests status when a user exceeds their limit. * Valid requests should return a 200 OK with a simple JSON response. ## Implementation Hints * Use `npx -y create-zuplo-api@latest` to scaffold the project. * You can use Zuplo's built-in JWT authentication policy and configure it to use a symmetric secret (e.g., `my-super-secret-key`). * To implement tiered rate limiting, you might need to use Zuplo's custom policies or configure multiple rate limit policies with different conditions based on `request.user.data.plan`. * When starting the dev server, ensure the editor port is set to 9200 (e.g., using `--editor-port 9200` or modifying `package.json`) to avoid port conflicts, while leaving the gateway on port 8787. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: npm run dev * Port: 8787 * API Endpoints: * GET `/api/data`: * Requires a valid HS256 JWT signed with the secret `my-super-secret-key`. * Returns 401 Unauthorized if the JWT is missing or invalid. * Returns 200 OK with `{"data": "success"}` for valid requests within the rate limit. * Returns 429 Too Many Requests if the rate limit is exceeded. * Rate limits: 2 requests/minute for `"plan": "free"` and 5 requests/minute for `"plan": "pro"`.   
+
+Pochi
+💭 Thinking for 167 characters   
+📂 Listing files in /home ✔ 
+📂 Listing files in /home/user ✔ 
+📋 Updating todo list (3 items) ✔ 
+💫 Executing npx -y create-zuplo-api@latest /home/user/myproject ✔ 
+💭 Thinking for 193 characters   
+💫 Executing printf "No\n" | npx -y create-zuplo-api@latest /home/user/myproject ✔ 
+💭 Thinking for 283 characters   
+📂 Listing files in /home/user ✔ 
+💭 Thinking for 124 characters   
+💫 Executing printf "No\nNo\n" | npx -y create-zuplo-api@latest /home/user/myproject ✔ 
+💭 Thinking for 0 characters   
+💫 Executing yes No | npx -y create-zuplo-api@latest /home/user/myproject ✔ 
+💭 Thinking for 155 characters   
+📂 Listing files in /home/user/myproject ✔ 
+💭 Thinking for 0 characters   
+📖 Reading /home/user/myproject/zuplo.jsonc ✔ 
+💭 Thinking for 138 characters   
+📂 Listing files in /home/user/myproject/config recursively ✔ 
+📖 Reading /home/user/myproject/config/routes.oas.json ✔ 
+💭 Thinking for 314 characters   
+📖 Reading /home/user/myproject/config/policies.json ✔ 
+💭 Thinking for 0 characters   
+📂 Listing files in /home/user/myproject/modules recursively ✔ 
+📖 Reading /home/user/myproject/modules/hello-world.ts ✔ 
+💭 Thinking for 299 characters   
+🔍 Searching for jwt in *.json files in /home/user/myproject ✔ 
+💭 Thinking for 204 characters   
+🔍 Searching for jwt-auth in schema.json files in /home/user/myproject/node_modules/zuplo/docs/policies ✔ 
+💭 Thinking for 198 characters   
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/policies/rate-limit-inbound/schema.json ✔ 
+💭 Thinking for 233 characters   
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/policies/complex-rate-limit-inbound/schema.json ✔ 
+💭 Thinking for 379 characters   
+🔍 Searching for custom policy|custom-policy|custom policy in *.md files in /home/user/myproject/node_modules/zuplo/docs ✔ 
+💭 Thinking for 0 characters   
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/policies/custom-code-inbound/doc.md ✔ 
+💭 Thinking for 267 characters   
+🔍 Searching for rateLimit in *.md files in /home/user/myproject/node_modules/zuplo/docs ✔ 
+💭 Thinking for 0 characters   
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/concepts/rate-limiting.md ✔ 
+💭 Thinking for 198 characters   
+🔍 Searching for jwt-auth-inbound in doc.md files in /home/user/myproject/node_modules/zuplo/docs/policies ✔ 
+💭 Thinking for 242 characters   
+🔍 Searching for HS256 in *.md files in /home/user/myproject/node_modules/zuplo/docs ✔ 
+💭 Thinking for 195 characters   
+🔍 Searching for secret in doc.md files in /home/user/myproject/node_modules/zuplo/docs/policies ✔ 
+💭 Thinking for 0 characters   
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/policies/supabase-jwt-auth-inbound/doc.md ✔ 
+💭 Thinking for 306 characters   
+📂 Listing files in /home/user/myproject/node_modules/zuplo/docs/policies ✔ 
+💭 Thinking for 149 characters   
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/policies/auth0-jwt-auth-inbound/doc.md ✔ 
+💭 Thinking for 315 characters   
+💭 Thinking for 307 characters   
+📖 Reading /home/user/myproject/package.json ✔ 
+💭 Thinking for 160 characters   
+📋 Updating todo list (3 items) ✔ 
+💭 Thinking for 321 characters   
+💭 Thinking for 337 characters   
+🔧 Applying diff to /home/user/myproject/package.json ✔ 
+💭 Thinking for 0 characters   
+🔧 Applying diff to /home/user/myproject/config/policies.json ✔ 
+💭 Thinking for 0 characters   
+✏️  Writing /home/user/myproject/config/routes.oas.json ✔ 
+💭 Thinking for 0 characters   
+✏️  Writing /home/user/myproject/modules/data-handler.ts ✔ 
+✏️  Writing /home/user/myproject/modules/jwt-auth.ts ✔ 
+✏️  Writing /home/user/myproject/modules/rate-limit.ts ✔ 
+💭 Thinking for 191 characters   
+📋 Updating todo list (3 items) ✔ 
+💭 Thinking for 187 characters   
+🎉 Task Completed
+Initialized the Zuplo project in /home/user/myproject, configured /api/data with custom HS256 JWT auth and tiered rate limiting, and updated npm run dev to use editor port 9200.
+
+Key files:
+- config/routes.oas.json: defines GET /api/data with JWT + rate limiting policies and a JSON response.
+- config/policies.json: adds custom JWT policy and rate-limit policy with dynamic limits.
+- modules/jwt-auth.ts: validates HS256 JWTs with secret my-super-secret-key and populates request.user.
+- modules/rate-limit.ts: applies 2/min for plan=free and 5/min for plan=pro.
+- modules/data-handler.ts: returns {"data":"success"}.
+
+Run:
+- cd /home/user/myproject
+- npm run dev (gateway on 8787, editor on 9200)
+
+Notes:
+- The scaffold process attempted to create a Zuplo portal project but failed due to account privileges; local files are ready.   
+  

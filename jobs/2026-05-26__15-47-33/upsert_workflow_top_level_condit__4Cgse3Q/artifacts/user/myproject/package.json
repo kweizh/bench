@@ -1,0 +1,14 @@
+{
+  "name": "knock-workflow-conditions",
+  "version": "1.0.0",
+  "description": "Knock workflow with top-level conditions for admin-only notifications",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@knocklabs/mgmt": "^0.25.0",
+    "@knocklabs/node": "^1.32.0"
+  }
+}

@@ -1,0 +1,48 @@
+- Initializing MCP connections...
+You
+# Enforce Strict Body Size Limit ## Background To protect backend services from excessively large payloads, we need to enforce a strict request body size limit at the API gateway layer using Zuplo. ## Requirements * Initialize a new Zuplo project. * Create a custom inbound policy that restricts the request body size to a maximum of 1024 bytes. * Create a POST route at `/upload` that returns a 200 OK with the text `Upload successful`. * Apply the custom policy to the `/upload` route. * If a request is missing the `content-length` header or its value exceeds 1024, the policy must reject the request with a `413 Payload Too Large` status code and the text `Payload Too Large`. ## Implementation Hints * Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project. * Create a custom policy module (e.g., `modules/body-limit.ts`) that inspects the `content-length` header of the incoming `ZuploRequest`. * Register the policy in `config/policies.json`. * Define the `/upload` POST route in `config/routes.oas.json` and attach the policy and a simple handler. * Remember to kill the background dev server before completing the task. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: zuplo dev --port 9200 * Port: 9200 * API Endpoints: * POST `/upload`: * Rejects requests without a `content-length` header with status 413 and text `Payload Too Large`. * Rejects requests where `content-length` > 1024 with status 413 and text `Payload Too Large`. * Accepts requests where `content-length` <= 1024, returning status 200 and text `Upload successful`.   
+
+Pochi
+💭 Thinking for 179 characters   
+📂 Listing files in /home ✔ 
+💫 Executing npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes ✔ 
+💭 Thinking for 0 characters   
+📂 Listing files in /home/user/myproject ✔ 
+💭 Thinking for 122 characters   
+📋 Updating todo list (4 items) ✔ 
+💭 Thinking for 0 characters   
+📖 Reading /home/user/myproject/config/policies.json ✔ 
+📖 Reading /home/user/myproject/config/routes.oas.json ✔ 
+💭 Thinking for 257 characters   
+📂 Listing files in /home/user/myproject/modules ✔ 
+📖 Reading /home/user/myproject/modules/hello-world.ts ✔ 
+💭 Thinking for 200 characters   
+🔍 Searching for policy in *.ts files in /home/user/myproject ✔ 
+💭 Thinking for 168 characters   
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/policies/ip-restriction-inbound/policy.ts ✔ 
+💭 Thinking for 313 characters   
+🔍 Searching for policies"\s*:\s*\[ in *.json files in /home/user/myproject ✔ 
+💭 Thinking for 197 characters   
+🔍 Searching for policies.json in *.md files in /home/user/myproject/node_modules/zuplo/docs ✔ 
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/policies/custom-code-inbound/doc.md ✔ 
+💭 Thinking for 269 characters   
+💭 Thinking for 272 characters   
+✏️  Writing /home/user/myproject/modules/body-limit.ts ✔ 
+💭 Thinking for 0 characters   
+✏️  Writing /home/user/myproject/modules/upload.ts ✔ 
+💭 Thinking for 0 characters   
+🔧 Applying diff to /home/user/myproject/config/policies.json ✔ 
+💭 Thinking for 278 characters   
+🔧 Applying diff to /home/user/myproject/config/routes.oas.json ✔ 
+💭 Thinking for 0 characters   
+📋 Updating todo list (4 items) ✔ 
+💭 Thinking for 195 characters   
+🎉 Task Completed
+Initialized the Zuplo project at /home/user/myproject, added the body-size-limit inbound policy, and configured the /upload POST route with the policy and upload handler. The policy rejects missing/oversized content-length headers with 413 Payload Too Large and accepts payloads <= 1024 bytes.
+
+Run the gateway with:
+- cd /home/user/myproject
+- zuplo dev --port 9200
+
+No background dev server was started, so there was nothing to stop.   
+  

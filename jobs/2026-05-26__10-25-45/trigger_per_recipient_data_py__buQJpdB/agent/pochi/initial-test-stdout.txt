@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /bootstrap
+plugins: anyio-4.13.0, json-ctrf-0.5.0
+collected 10 items
+
+bootstrap/test_initial_state.py::test_project_directory_exists PASSED
+bootstrap/test_initial_state.py::test_python3_available PASSED
+bootstrap/test_initial_state.py::test_required_python_modules_importable[knockapi] PASSED
+bootstrap/test_initial_state.py::test_required_python_modules_importable[requests] PASSED
+bootstrap/test_initial_state.py::test_required_python_modules_importable[googleapiclient] PASSED
+bootstrap/test_initial_state.py::test_required_python_modules_importable[google.oauth2.credentials] PASSED
+bootstrap/test_initial_state.py::test_required_env_vars_present[KNOCK_SERVICE_TOKEN] PASSED
+bootstrap/test_initial_state.py::test_required_env_vars_present[KNOCK_API_TOKEN] PASSED
+bootstrap/test_initial_state.py::test_required_env_vars_present[GMAIL_USER_NAME] PASSED
+bootstrap/test_initial_state.py::test_required_env_vars_present[ZEALT_RUN_ID] PASSED
+
+============================== 10 passed in 0.28s ==============================

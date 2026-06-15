@@ -1,0 +1,69 @@
+Skipping image OS validation for hb__create_cli_target_from_spec: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-d6uw3bv > /logs/artifacts/run-id && echo create_cli_target_from_spec__D6Uw3bv > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Configure a Speakeasy CLI Target
+
+## Background
+You have an `openapi.yaml` file for a simple API. Use Speakeasy to configure a project that generates a CLI application from this specification.
+
+## Requirements
+- Initialize a Speakeasy workflow configuration in `.speakeasy/workflow.yaml` with a target named `my-target` of type `cli`.
+- The workflow should reference a source named `my-source` pointing to `./openapi.yaml`.
+- Create a valid `gen.yaml` in `.speakeasy/gen.yaml` for the `cli` target.
+- The `gen.yaml` must define the `cli` target with `version: 1.0.0` and the generation config must have `sdkClassName: TestAPI`.
+
+## Implementation Guide
+1. Create the `.speakeasy` directory.
+2. Create `.speakeasy/workflow.yaml` with the source and target configuration.
+3. Create `.speakeasy/gen.yaml` with the `cli` target configuration.
+4. Run `speakeasy lint config` to ensure your configuration is valid.
+
+## Constraints
+- Project path: /home/user/myproject
+- Do not attempt to use commands that require authentication (like `speakeasy generate` or `speakeasy configure`). You must create the configuration files manually based on Speakeasy documentation.
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

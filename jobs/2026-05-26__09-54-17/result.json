@@ -1,0 +1,56 @@
+{
+    "id": "40096b52-5514-499d-9078-16eab2bc97a1",
+    "started_at": "2026-05-26T09:54:17.318106",
+    "updated_at": "2026-05-26T10:18:21.765903",
+    "finished_at": "2026-05-26T10:18:21.765903",
+    "n_total_trials": 11,
+    "stats": {
+        "n_completed_trials": 11,
+        "n_errored_trials": 2,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3-flash__tasks": {
+                "n_trials": 9,
+                "n_errors": 2,
+                "metrics": [
+                    {
+                        "mean": 0.45454545454545453
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "tenant_scoped_email_node__7yNNCr4",
+                            "upsert_branch_workflow_node__wzDkLkF",
+                            "upsert_workflow_top_level_condit__mZgT9wj",
+                            "trigger_email_workflow_py__HKkCr57"
+                        ],
+                        "1.0": [
+                            "cancel_workflow_run_node__jzvAJgz",
+                            "push_workflow_cli__KrgWE9j",
+                            "upsert_step_conditions_py__jCSw27Z",
+                            "upsert_trigger_data_schema_node__5DeZ5QC",
+                            "trigger_per_recipient_data_py__ToJNmoC"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "VerifierTimeoutError": [
+                        "embed_feed_popover_nextjs__bhk6ugD"
+                    ],
+                    "InitialStateError": [
+                        "once_per_recipient_dedup_node__2DGkFBG"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 343321,
+        "cost_usd": null
+    }
+}

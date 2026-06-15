@@ -1,0 +1,66 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 3 items
+
+tests/test_final_state.py .F.                                            [100%]
+
+=================================== FAILURES ===================================
+____________________ test_cross_user_selection_via_presence ____________________
+
+start_app = None
+liveblocks_config_exists = '/home/user/whiteboard/liveblocks.config.ts'
+
+    def test_cross_user_selection_via_presence(start_app, liveblocks_config_exists):
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            try:
+                ctx_a = browser.new_context()
+                ctx_b = browser.new_context()
+                page_a = ctx_a.new_page()
+                page_b = ctx_b.new_page()
+    
+                page_a.goto(f"{BASE_URL}/?user=1", wait_until="domcontentloaded")
+                page_b.goto(f"{BASE_URL}/?user=2", wait_until="domcontentloaded")
+    
+                _wait_for_shapes(page_a)
+                _wait_for_shapes(page_b)
+    
+                # Give Liveblocks time to establish presence on both clients.
+                time.sleep(2)
+    
+                # A clicks shape-b; B should see a red selection ring on shape-b.
+                page_a.click(f'[data-shape-id="shape-b"]')
+>               _wait_for_ring(page_b, "shape-b", USER1_COLOR, timeout=20.0)
+
+tests/test_final_state.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://localhost:3000/?user=2'>, shape_id = 'shape-b'
+color = '#DC2626', timeout = 20.0
+
+    def _wait_for_ring(page, shape_id: str, color: str, timeout: float = 20.0):
+        deadline = time.time() + timeout
+        while time.time() < deadline:
+            if _ring_count_for_shape(page, shape_id, color) >= 1:
+                return
+            time.sleep(0.5)
+>       raise AssertionError(
+            f"Other user did not see a selection ring on {shape_id} "
+            f"with color {color} within {timeout}s."
+        )
+E       AssertionError: Other user did not see a selection ring on shape-b with color #DC2626 within 20.0s.
+
+tests/test_final_state.py:117: AssertionError
+==================================== PASSES ====================================
+___________________ test_single_context_renders_three_shapes ___________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/whiteboard_dev$ npm run dev
+process 'whiteboard_dev' started pid=794
+whiteboard_dev process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_single_context_renders_three_shapes
+PASSED tests/test_final_state.py::test_storage_does_not_carry_selection_attribute
+FAILED tests/test_final_state.py::test_cross_user_selection_via_presence - As...
+========================= 1 failed, 2 passed in 43.00s =========================

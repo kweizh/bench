@@ -1,0 +1,14 @@
+{
+  "name": "knock-workflow-validation",
+  "version": "1.0.0",
+  "description": "Knock workflow with trigger data validation",
+  "type": "module",
+  "scripts": {
+    "upsert": "node upsert-workflow.js",
+    "trigger": "node trigger-workflow.js"
+  },
+  "dependencies": {
+    "@knocklabs/mgmt": "^0.25.0",
+    "@knocklabs/node": "^1.32.0"
+  }
+}

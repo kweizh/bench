@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 2 items
+
+tests/test_final_state.py .F                                             [100%]
+
+=================================== FAILURES ===================================
+_______________________________ test_server_logs _______________________________
+
+start_app = None
+
+    def test_server_logs(start_app):
+        assert os.path.isfile(LOG_FILE), f"Log file not found at {LOG_FILE}"
+        with open(LOG_FILE, "r") as f:
+            logs = f.read()
+>       assert "Custom ID: harbor-test-123" in logs, f"Expected log 'Custom ID: harbor-test-123' not found in server logs. Logs: {logs}"
+E       AssertionError: Expected log 'Custom ID: harbor-test-123' not found in server logs. Logs: Error: Build failed with 1 error:
+E         ./config/routes.oas.json:0:0: ERROR: [plugin: open-api-routes-plugin] Could not find module '../modules/hello-handler'
+E         Ran into irrecoverable error while starting watcher. Fix the error and restart the server.
+E         
+E       assert 'Custom ID: harbor-test-123' in "Error: Build failed with 1 error:\n./config/routes.oas.json:0:0: ERROR: [plugin: open-api-routes-plugin] Could not fi..../modules/hello-handler'\nRan into irrecoverable error while starting watcher. Fix the error and restart the server.\n"
+
+tests/test_final_state.py:43: AssertionError
+==================================== PASSES ====================================
+_____________________________ test_route_response ______________________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ bash -c npx zuplo dev --editor-port 9200 --port 3000 > /home/user/server.log 2>&1
+process 'zuplo_dev' started pid=1761
+zuplo_dev process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_route_response
+FAILED tests/test_final_state.py::test_server_logs - AssertionError: Expected...
+==================== 1 failed, 1 passed in 95.71s (0:01:35) ====================

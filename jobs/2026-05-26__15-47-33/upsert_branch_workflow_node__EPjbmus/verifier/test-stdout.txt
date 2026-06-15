@@ -1,0 +1,212 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 10 items
+
+tests/test_final_state.py FFFEEEEFFF                                     [100%]
+
+==================================== ERRORS ====================================
+____________ ERROR at setup of test_workflow_exists_in_development _____________
+
+    @pytest.fixture(scope="module")
+    def fetched_workflow() -> dict:
+        url = f"{MGMT_BASE}/v1/workflows/{_workflow_key()}"
+        response = requests.get(
+            url,
+            headers=_mgmt_headers(),
+            params={"environment": "development"},
+            timeout=30,
+        )
+>       assert response.status_code == 200, (
+            f"Failed to fetch workflow {_workflow_key()}: "
+            f"{response.status_code} {response.text}"
+        )
+E       AssertionError: Failed to fetch workflow branch-flow-zr-epjbmus: 404 {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:103: AssertionError
+__________________ ERROR at setup of test_workflow_is_active ___________________
+
+    @pytest.fixture(scope="module")
+    def fetched_workflow() -> dict:
+        url = f"{MGMT_BASE}/v1/workflows/{_workflow_key()}"
+        response = requests.get(
+            url,
+            headers=_mgmt_headers(),
+            params={"environment": "development"},
+            timeout=30,
+        )
+>       assert response.status_code == 200, (
+            f"Failed to fetch workflow {_workflow_key()}: "
+            f"{response.status_code} {response.text}"
+        )
+E       AssertionError: Failed to fetch workflow branch-flow-zr-epjbmus: 404 {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:103: AssertionError
+_____________ ERROR at setup of test_branch_step_has_email_branch ______________
+
+    @pytest.fixture(scope="module")
+    def fetched_workflow() -> dict:
+        url = f"{MGMT_BASE}/v1/workflows/{_workflow_key()}"
+        response = requests.get(
+            url,
+            headers=_mgmt_headers(),
+            params={"environment": "development"},
+            timeout=30,
+        )
+>       assert response.status_code == 200, (
+            f"Failed to fetch workflow {_workflow_key()}: "
+            f"{response.status_code} {response.text}"
+        )
+E       AssertionError: Failed to fetch workflow branch-flow-zr-epjbmus: 404 {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:103: AssertionError
+_________ ERROR at setup of test_branch_step_has_default_inapp_branch __________
+
+    @pytest.fixture(scope="module")
+    def fetched_workflow() -> dict:
+        url = f"{MGMT_BASE}/v1/workflows/{_workflow_key()}"
+        response = requests.get(
+            url,
+            headers=_mgmt_headers(),
+            params={"environment": "development"},
+            timeout=30,
+        )
+>       assert response.status_code == 200, (
+            f"Failed to fetch workflow {_workflow_key()}: "
+            f"{response.status_code} {response.text}"
+        )
+E       AssertionError: Failed to fetch workflow branch-flow-zr-epjbmus: 404 {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:103: AssertionError
+=================================== FAILURES ===================================
+______________________ test_log_file_records_workflow_key ______________________
+
+    def test_log_file_records_workflow_key():
+>       content = _read_log()
+
+tests/test_final_state.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log() -> str:
+>       assert os.path.isfile(LOG_FILE), f"Expected log file at {LOG_FILE}."
+E       AssertionError: Expected log file at /home/user/myproject/output.log.
+E       assert False
+E        +  where False = <function isfile at 0x74fa08994220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x74fa08994220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:33: AssertionError
+______________________ test_log_file_records_email_run_id ______________________
+
+    def test_log_file_records_email_run_id():
+>       content = _read_log()
+
+tests/test_final_state.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log() -> str:
+>       assert os.path.isfile(LOG_FILE), f"Expected log file at {LOG_FILE}."
+E       AssertionError: Expected log file at /home/user/myproject/output.log.
+E       assert False
+E        +  where False = <function isfile at 0x74fa08994220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x74fa08994220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:33: AssertionError
+______________________ test_log_file_records_inapp_run_id ______________________
+
+    def test_log_file_records_inapp_run_id():
+>       content = _read_log()
+
+tests/test_final_state.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log() -> str:
+>       assert os.path.isfile(LOG_FILE), f"Expected log file at {LOG_FILE}."
+E       AssertionError: Expected log file at /home/user/myproject/output.log.
+E       assert False
+E        +  where False = <function isfile at 0x74fa08994220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x74fa08994220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:33: AssertionError
+___________________ test_email_run_produced_mailtrap_message ___________________
+
+    def test_email_run_produced_mailtrap_message():
+>       content = _read_log()
+
+tests/test_final_state.py:265: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log() -> str:
+>       assert os.path.isfile(LOG_FILE), f"Expected log file at {LOG_FILE}."
+E       AssertionError: Expected log file at /home/user/myproject/output.log.
+E       assert False
+E        +  where False = <function isfile at 0x74fa08994220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x74fa08994220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:33: AssertionError
+____________________ test_inapp_run_produced_in_app_message ____________________
+
+    def test_inapp_run_produced_in_app_message():
+>       content = _read_log()
+
+tests/test_final_state.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log() -> str:
+>       assert os.path.isfile(LOG_FILE), f"Expected log file at {LOG_FILE}."
+E       AssertionError: Expected log file at /home/user/myproject/output.log.
+E       assert False
+E        +  where False = <function isfile at 0x74fa08994220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x74fa08994220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:33: AssertionError
+______________________ test_email_arrived_in_gmail_inbox _______________________
+
+    def test_email_arrived_in_gmail_inbox():
+        service = _gmail_service()
+        address = _gmail_address()
+        query = f"to:{address}"
+    
+        deadline = time.time() + 120
+        while time.time() < deadline:
+            response = (
+                service.users()
+                .messages()
+                .list(userId="me", q=query, maxResults=5)
+                .execute()
+            )
+            if response.get("messages"):
+                return
+            time.sleep(5)
+    
+>       pytest.fail(
+            f"No email addressed to {address} arrived in the Gmail inbox within the timeout."
+        )
+E       Failed: No email addressed to codes.icy+receiver-zr-epjbmus@gmail.com arrived in the Gmail inbox within the timeout.
+
+tests/test_final_state.py:342: Failed
+=========================== short test summary info ============================
+ERROR tests/test_final_state.py::test_workflow_exists_in_development - Assert...
+ERROR tests/test_final_state.py::test_workflow_is_active - AssertionError: Fa...
+ERROR tests/test_final_state.py::test_branch_step_has_email_branch - Assertio...
+ERROR tests/test_final_state.py::test_branch_step_has_default_inapp_branch - ...
+FAILED tests/test_final_state.py::test_log_file_records_workflow_key - Assert...
+FAILED tests/test_final_state.py::test_log_file_records_email_run_id - Assert...
+FAILED tests/test_final_state.py::test_log_file_records_inapp_run_id - Assert...
+FAILED tests/test_final_state.py::test_email_run_produced_mailtrap_message - ...
+FAILED tests/test_final_state.py::test_inapp_run_produced_in_app_message - As...
+FAILED tests/test_final_state.py::test_email_arrived_in_gmail_inbox - Failed:...
+=================== 6 failed, 4 errors in 124.54s (0:02:04) ====================

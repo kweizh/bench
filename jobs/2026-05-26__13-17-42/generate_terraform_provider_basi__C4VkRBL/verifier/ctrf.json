@@ -1,0 +1,56 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779773087.142913,
+            "stop": 1779773087.9186065
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_terraform_directory_exists",
+                "status": "passed",
+                "duration": 0.00047085699770832434,
+                "start": 1779773087.1533031,
+                "stop": 1779773087.1539812,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_provider_code_generated",
+                "status": "passed",
+                "duration": 0.00039199400634970516,
+                "start": 1779773087.154174,
+                "stop": 1779773087.1546967,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_pet_resource_generated",
+                "status": "passed",
+                "duration": 0.0003868570056511089,
+                "start": 1779773087.1548698,
+                "stop": 1779773087.1553779,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_provider_compiles",
+                "status": "passed",
+                "duration": 0.7627112890040735,
+                "start": 1779773087.1555429,
+                "stop": 1779773087.9184265,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

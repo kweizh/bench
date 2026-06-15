@@ -1,0 +1,175 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 3 items
+
+tests/test_final_state.py FFF                                            [100%]
+
+=================================== FAILURES ===================================
+___________________ test_single_context_renders_three_shapes ___________________
+
+start_app = None
+liveblocks_config_exists = '/home/user/whiteboard/liveblocks.config.ts'
+
+    def test_single_context_renders_three_shapes(start_app, liveblocks_config_exists):
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            try:
+                ctx = browser.new_context()
+                page = ctx.new_page()
+>               page.goto(f"{BASE_URL}/?user=1", wait_until="domcontentloaded")
+
+tests/test_final_state.py:152: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/playwright/sync_api/_generated.py:9612: in goto
+    self._sync(
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_page.py:557: in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py:156: in goto
+    await self._channel.send(
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:69: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7f0e00024a10>
+cb = <function Channel.send.<locals>.<lambda> at 0x7f0dff06f100>
+is_internal = False, title = None
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(
+            task, "__pw_stack__", None
+        ) or inspect.stack(0)
+    
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal, title)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+E           Call log:
+E             - navigating to "http://localhost:3000/?user=1", waiting until "domcontentloaded"
+
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:559: TimeoutError
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/whiteboard_dev$ npm run dev
+process 'whiteboard_dev' started pid=2190
+whiteboard_dev process startup detected
+____________________ test_cross_user_selection_via_presence ____________________
+
+start_app = None
+liveblocks_config_exists = '/home/user/whiteboard/liveblocks.config.ts'
+
+    def test_cross_user_selection_via_presence(start_app, liveblocks_config_exists):
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            try:
+                ctx_a = browser.new_context()
+                ctx_b = browser.new_context()
+                page_a = ctx_a.new_page()
+                page_b = ctx_b.new_page()
+    
+>               page_a.goto(f"{BASE_URL}/?user=1", wait_until="domcontentloaded")
+
+tests/test_final_state.py:175: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/playwright/sync_api/_generated.py:9612: in goto
+    self._sync(
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_page.py:557: in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py:156: in goto
+    await self._channel.send(
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:69: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7f0dff293ad0>
+cb = <function Channel.send.<locals>.<lambda> at 0x7f0dfef79d00>
+is_internal = False, title = None
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(
+            task, "__pw_stack__", None
+        ) or inspect.stack(0)
+    
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal, title)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+E           Call log:
+E             - navigating to "http://localhost:3000/?user=1", waiting until "domcontentloaded"
+
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:559: TimeoutError
+_______________ test_storage_does_not_carry_selection_attribute ________________
+
+start_app = None
+liveblocks_config_exists = '/home/user/whiteboard/liveblocks.config.ts'
+
+    def test_storage_does_not_carry_selection_attribute(
+        start_app, liveblocks_config_exists
+    ):
+        """Selection must be Presence-only — shapes themselves must not be
+        annotated with a storage-driven selection attribute."""
+        with sync_playwright() as p:
+            browser = p.chromium.launch()
+            try:
+                ctx = browser.new_context()
+                page = ctx.new_page()
+>               page.goto(f"{BASE_URL}/?user=1", wait_until="domcontentloaded")
+
+tests/test_final_state.py:214: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/playwright/sync_api/_generated.py:9612: in goto
+    self._sync(
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_page.py:557: in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py:156: in goto
+    await self._channel.send(
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:69: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7f0dff293d40>
+cb = <function Channel.send.<locals>.<lambda> at 0x7f0dfdc57060>
+is_internal = False, title = None
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False, title: str = None
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(
+            task, "__pw_stack__", None
+        ) or inspect.stack(0)
+    
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal, title)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Page.goto: Timeout 30000ms exceeded.
+E           Call log:
+E             - navigating to "http://localhost:3000/?user=1", waiting until "domcontentloaded"
+
+usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:559: TimeoutError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_single_context_renders_three_shapes - ...
+FAILED tests/test_final_state.py::test_cross_user_selection_via_presence - pl...
+FAILED tests/test_final_state.py::test_storage_does_not_carry_selection_attribute
+========================= 3 failed in 99.38s (0:01:39) =========================

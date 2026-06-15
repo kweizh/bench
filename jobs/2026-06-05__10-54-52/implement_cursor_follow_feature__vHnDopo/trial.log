@@ -1,0 +1,89 @@
+Skipping image OS validation for hb__implement_cursor_follow_feature: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-vhndopo > /logs/artifacts/run-id && echo implement_cursor_follow_feature__vHnDopo > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.5-flash --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Liveblocks: Follow Another User's Cursor
+
+## Background
+Liveblocks is a real-time collaboration platform that exposes WebSocket-backed React hooks (e.g. `useMyPresence`, `useUpdateMyPresence`, `useOthers`, `useSelf`) for sharing ephemeral presence data such as cursor positions between users in the same room.
+
+A Next.js (App Router) starter has been scaffolded for you at `/home/user/myproject`. It already includes the Liveblocks packages, a `/api/liveblocks-auth` route that uses the `LIVEBLOCKS_SECRET_KEY` environment variable, a `Room` provider, and an empty `Canvas` page. Your job is to implement a multiplayer **"Follow" feature** on top of this scaffold.
+
+## Requirements
+- Inside a large pannable canvas (at least `4000 x 4000` CSS pixels), every connected user broadcasts their cursor position through Liveblocks presence whenever they move the mouse on the canvas.
+- The page shows a top-right avatar bar containing one colored circle per *other* connected user. Each avatar is rendered with a `data-testid` attribute of `avatar-${connectionId}` (`connectionId` is the unique Liveblocks connection ID returned by `useOthers`).
+- When the current user clicks an avatar in the bar, the canvas viewport must smoothly translate so that the followed user's last known cursor position is centered in the browser viewport. While following, the canvas viewport must continuously track that user's cursor (i.e. translate again whenever their presence changes).
+- Clicking the same avatar a second time, or clicking anywhere else that releases follow, must stop following and leave the viewport where it is.
+- The translatable canvas element must expose its current camera offset via a `data-camera` HTML attribute on a DOM node with `data-testid="canvas-viewport"`. The attribute value MUST be a JSON object of the form `{"x": <number>, "y": <number>}` where `x` and `y` are the CSS pixel translation applied to the canvas (i.e. for a `translate3d(<-x>px, <-y>px, 0)` transform, `data-camera` should contain those exact `x` and `y` values).
+- The DOM node with `data-testid="canvas-viewport"` must also expose `data-following` which is the `connectionId` of the user being followed, or the empty string when no one is being followed.
+- The Liveblocks room ID used by the app MUST be derived from the `ZEALT_RUN_ID` environment variable (read on the server) so that concurrent evaluation runs do not collide. The room ID must be `cursor-follow-${ZEALT_RUN_ID}` and exposed to the client (for example, through a server component prop, `NEXT_PUBLIC_*` variable, or route segment).
+
+## Implementation Hints
+- Use `useUpdateMyPresence` on a `pointermove` handler over the canvas surface and store `{ cursor: { x, y } | null }` in presence.
+- Use `useOthers` to render the avatar bar. Each entry already has a stable `connectionId` and a `presence` object.
+- Track which connection ID is currently being followed in local React state. When that state is set, derive a target camera position from the followed user's cursor and update a CSS transform on the canvas viewport. An effect that runs whenever `others` changes will let you keep tracking a moving cursor.
+- Center the followed cursor in the viewport by computing `camera = { x: cursor.x - window.innerWidth / 2, y: cursor.y - window.innerHeight / 2 }` and apply it as a `translate3d(-camera.x px, -camera.y px, 0)` transform on the canvas. Keep `data-camera` in sync with that computed value.
+- The Liveblocks auth route is already wired up to use `LIVEBLOCKS_SECRET_KEY`; do NOT mock or replace it. The room ID derivation from `ZEALT_RUN_ID` is the only thing you must add server-side.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: `npm run start` (the production server, run after `npm run build`)
+- Port: 3000
+- Routes:
+  - `GET /` renders the collaborative canvas page. The page MUST contain:
+    - A DOM element with `data-testid="canvas-viewport"` carrying the `data-camera` and `data-following` attributes described above.
+    - A DOM element with `data-testid="avatar-bar"` whose children include one `data-testid="avatar-${connectionId}"` element per other connected user.
+  - `POST /api/liveblocks-auth` MUST keep using the real Liveblocks Node SDK with the secret key in `LIVEBLOCKS_SECRET_KEY`. Requests from unauthenticated clients are allowed (no app-side auth is required for this task).
+- The Liveblocks room ID used by the page MUST equal `cursor-follow-${ZEALT_RUN_ID}` where `ZEALT_RUN_ID` is read from the environment on the server.
+- Behavior:
+  - When two browser sessions are connected to the same room and user B moves their cursor, user A's page MUST show an avatar element with `data-testid="avatar-${B.connectionId}"`.
+  - Before any avatar is clicked, `data-following` on `canvas-viewport` MUST be the empty string and `data-camera` MUST be `{"x":0,"y":0}`.
+  - After user A clicks `avatar-${B.connectionId}`, `data-following` on user A's `canvas-viewport` MUST become the string form of `B.connectionId`, and within 2 seconds `data-camera` MUST update so that `camera.x === Math.round(B.cursor.x - window.innerWidth / 2)` and `camera.y === Math.round(B.cursor.y - window.innerHeight / 2)` (rounded to the nearest integer).
+  - Clicking the same avatar a second time MUST set `data-following` back to the empty string.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

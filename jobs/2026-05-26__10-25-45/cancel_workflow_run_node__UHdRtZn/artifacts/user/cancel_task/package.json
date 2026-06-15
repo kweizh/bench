@@ -1,0 +1,14 @@
+{
+  "name": "cancel_task",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Knock workflow cancellation automation",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@knocklabs/mgmt": "^1.4.0",
+    "@knocklabs/node": "^1.7.0"
+  }
+}

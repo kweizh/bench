@@ -1,0 +1,115 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 10,
+            "passed": 10,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779761463968,
+            "stop": 1779761467242
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_key",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779761464138,
+                "stop": 1779761464139,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_run_id",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779761464139,
+                "stop": 1779761464140,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_exists_and_is_active",
+                "status": "passed",
+                "duration": 723,
+                "start": 1779761464140,
+                "stop": 1779761464863,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_single_mailtrap_channel_step",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779761464864,
+                "stop": 1779761464865,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_template_references_per_recipient_data",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779761464866,
+                "stop": 1779761464867,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_owner_email_subject_mentions_role",
+                "status": "passed",
+                "duration": 1305,
+                "start": 1779761464868,
+                "stop": 1779761466173,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_owner_email_body_mentions_role_and_dashboard",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779761466174,
+                "stop": 1779761466176,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_paleo_email_subject_mentions_role",
+                "status": "passed",
+                "duration": 1061,
+                "start": 1779761466176,
+                "stop": 1779761467237,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_paleo_email_body_mentions_role_and_dashboard",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779761467237,
+                "stop": 1779761467239,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_per_recipient_data_does_not_leak_between_recipients",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779761467239,
+                "stop": 1779761467241,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

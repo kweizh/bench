@@ -1,0 +1,67 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 2,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779761122489,
+            "stop": 1779761125151
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_output_log_contains_workflow_run_id",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779761122661,
+                "stop": 1779761122662,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_active_with_top_level_conditions",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 596,
+                "start": 1779761122662,
+                "stop": 1779761123258,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_workflow_active_with_top_level_conditions():\n        service_token = os.environ.get(\"KNOCK_SERVICE_TOKEN\")\n        assert service_token, \"KNOCK_SERVICE_TOKEN must be set for verification.\"\n    \n        workflow_key = _workflow_key()\n        url = f\"{KNOCK_MAPI_BASE}/v1/workflows/{workflow_key}\"\n        response = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {service_token}\"},\n            timeout=30,\n        )\n        assert response.status_code == 200, (\n            f\"Expected HTTP 200 fetching workflow '{workflow_key}', got \"\n            f\"{response.status_code}: {response.text}\"\n        )\n        body = response.json()\n        workflow = body.get(\"workflow\", body)\n    \n        assert workflow.get(\"active\") is True, (\n            f\"Workflow '{workflow_key}' must be active in development; \"\n            f\"got active={workflow.get('active')}.\"\n        )\n    \n        conditions = workflow.get(\"conditions\")\n>       assert isinstance(conditions, dict), (\n            f\"Workflow conditions must be a ConditionGroup object, got: {conditions!r}\"\n        )\nE       AssertionError: Workflow conditions must be a ConditionGroup object, got: None\nE       assert False\nE        +  where False = isinstance(None, dict)\n\ntests/test_final_state.py:138: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_single_mailtrap_step_with_expected_subject",
+                "status": "passed",
+                "duration": 359,
+                "start": 1779761123259,
+                "stop": 1779761123618,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_admin_received_email_but_viewer_did_not",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 1532,
+                "start": 1779761123618,
+                "stop": 1779761125150,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_admin_received_email_but_viewer_did_not():\n        service = _gmail_service()\n        expected_subject = _expected_subject()\n        admin_address = _gmail_address(_admin_email_local())\n        viewer_address = _gmail_address(_viewer_email_local())\n    \n        deadline = time.time() + 180  # up to 3 minutes for Mailtrap \u2192 Gmail delivery\n        matched = []\n        while time.time() < deadline:\n            matched = _list_inbox_messages_matching(service, expected_subject)\n            if matched:\n                break\n            time.sleep(5)\n    \n        assert matched, (\n            f\"Did not find any inbox message with subject '{expected_subject}' \"\n            f\"after polling for delivery.\"\n        )\n    \n        admin_hits = [t for (t, _s) in matched if admin_address in t]\n        viewer_hits = [t for (t, _s) in matched if viewer_address in t]\n    \n        assert len(admin_hits) >= 1, (\n            f\"Expected at least one Gmail message addressed to {admin_address} \"\n            f\"with subject '{expected_subject}', got recipients: \"\n            f\"{[t for (t, _s) in matched]!r}\"\n        )\n>       assert not viewer_hits, (\n            f\"Expected NO Gmail messages addressed to {viewer_address} with subject \"\n            f\"'{expected_subject}' (the workflow's top-level condition should have \"\n            f\"prevented delivery), but found: {viewer_hits!r}\"\n        )\nE       AssertionError: Expected NO Gmail messages addressed to codes.icy+viewer-zr-mzgt9wj@gmail.com with subject 'Admin alert zr-mzgt9wj' (the workflow's top-level condition should have prevented delivery), but found: ['codes.icy+viewer-zr-mzgt9wj@gmail.com']\nE       assert not ['codes.icy+viewer-zr-mzgt9wj@gmail.com']\n\ntests/test_final_state.py:223: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

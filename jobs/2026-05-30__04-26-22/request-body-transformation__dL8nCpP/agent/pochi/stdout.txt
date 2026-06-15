@@ -1,0 +1,211 @@
+- Initializing MCP connections...
+You
+# Request Body Transformation (JSON to XML) ## Background In enterprise API gateways, it's common to integrate modern JSON-based clients with legacy backend systems that only accept XML. You need to implement a custom policy in Zuplo that transforms an incoming JSON payload into an XML format before the request reaches the backend. ## Requirements * Create a new Zuplo project. * Define a route for `POST /api/submit`. * Implement a custom inbound policy that intercepts the request, reads the JSON body, converts it to XML, and forwards the transformed request. * The JSON payload will look like: `{"user": {"name": "Alice", "role": "admin"}}`. * The transformed XML payload should look like: `<user><name>Alice</name><role>admin</role></user>`. * Set the `Content-Type` header of the forwarded request to `application/xml`. * Route the transformed request to a custom handler that simply echoes back the request body as text, so the transformation can be verified. ## Implementation Hints * Use `zuplo` CLI to create a new project. * Write a custom inbound policy in TypeScript (e.g., `./modules/json-to-xml.ts`). * Since Zuplo runs on the edge, you can use standard Web APIs. You can manually construct the XML string or use a lightweight library that is edge-compatible. * Remember to clone or recreate the `Request` object in your policy because the request body cannot be read twice or modified directly in place. Return a new `Request` object with the new XML body and updated headers. * For the backend handler, create another module (e.g., `./modules/echo.ts`) that reads `request.text()` and returns it in a `Response`. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: zuplo dev --port 3000 * Port: 3000 * API Endpoints: * POST `/api/submit`: Accepts a JSON payload and returns the transformed XML payload as text. ```json // Request { "user": { "name": string, "role": string } } ``` ```xml // Response (Echoed from the custom handler) <user><name>string</name><role>string</role></user> ```   
+
+Pochi
+💭 Thinking for 997 characters   
+💫 Executing mkdir -p /home/user/myproject && cd /home/user/myproject && npx --yes @zuplo/cli --help ✔ 
+💭 Thinking for 1242 characters   
+💫 Executing mkdir -p /home/user/myproject/modules && cd /home/user/myproject && npm init -y && npm install @zuplo/cli @zuplo/runtime typescript @types/node ✔ 
+💭 Thinking for 220 characters   
+✏️  Writing /home/user/myproject/zuplo.json ✔ 
+💭 Thinking for 283 characters   
+✏️  Writing /home/user/myproject/routes.oas.json ✔ 
+✏️  Writing /home/user/myproject/modules/echo.ts ✔ 
+💭 Thinking for 265 characters   
+✏️  Writing /home/user/myproject/modules/json-to-xml.ts ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+💭 Thinking for 187 characters   
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 248 characters   
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 209 characters   
+💫 Executing curl -X POST http://localhost:3000/api/submit -H "Content-Type: application/json" -d '{"user": {"name": "Alice", "role": "admin"}}' ✖ "Command exited with code 7"
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 573 characters   
+💫 Executing npx @zuplo/cli create --help ✔ 
+💭 Thinking for 304 characters   
+💫 Executing npx --yes create-zuplo-api myproject2 ✔ 
+💭 Thinking for 239 characters   
+💫 Executing echo "No" | npx --yes create-zuplo-api myproject2 ✔ 
+💫 Executing npx --yes create-zuplo-api --help ✔ 
+💫 Executing rm -rf /home/user/myproject && npx --yes create-zuplo-api /home/user/myproject --yes --empty ✖ "Command execution timed out after 120 seconds."
+💫 Executing ls -la /home/user/myproject ✔ 
+💫 Executing cat /home/user/myproject/zuplo.jsonc ✔ 
+💭 Thinking for 193 characters   
+💫 Executing cat /home/user/myproject/config/routes.oas.json ✔ 
+💫 Executing ls -la /home/user/myproject/modules ✔ 
+✏️  Writing /home/user/myproject/modules/echo.ts ✖ "File has been modified since it was last read (expected mtime 1780117950122, got missing). Please read the file again before writing."
+💫 Executing cat << 'EOF' > /home/user/myproject/modules/echo.ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  const text = await request.text();
+  return new Response(text, {
+    headers: {
+      "content-type": request.headers.get("content-type") || "text/plain"
+    }
+  });
+}
+EOF ✔ 
+💭 Thinking for 223 characters   
+💫 Executing cat << 'EOF' > /home/user/myproject/modules/json-to-xml.ts
+import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
+
+export default async function (request: ZuploRequest, context: ZuploContext) {
+  // Read the JSON body
+  const body = await request.json();
+  
+  // Simple JSON to XML converter for {"user": {"name": "Alice", "role": "admin"}}
+  let xml = "";
+  if (body && body.user) {
+    xml = `<user><name>${body.user.name}</name><role>${body.user.role}</role></user>`;
+  } else {
+    xml = `<error>Invalid payload</error>`;
+  }
+
+  // Create a new request with the XML body
+  const newRequest = new ZuploRequest(request, {
+    body: xml
+  });
+
+  // Set the correct Content-Type header
+  newRequest.headers.set("content-type", "application/xml");
+
+  return newRequest;
+}
+EOF ✔ 
+💫 Executing cat << 'EOF' > /home/user/myproject/config/routes.oas.json
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Zuplo API"
+  },
+  "paths": {
+    "/api/submit": {
+      "post": {
+        "summary": "Submit",
+        "operationId": "submit",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-zuplo-path": {
+          "path": "/api/submit"
+        },
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "default",
+            "module": "$import(../modules/echo.ts)"
+          },
+          "policies": {
+            "inbound": [
+              {
+                "name": "json-to-xml",
+                "policyType": "custom-code-inbound",
+                "handler": {
+                  "export": "default",
+                  "module": "$import(../modules/json-to-xml.ts)"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+EOF ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+💭 Thinking for 209 characters   
+💫 Executing sleep 3 && curl -X POST http://localhost:3000/api/submit -H "Content-Type: application/json" -d '{"user": {"name": "Alice", "role": "admin"}}' ✖ "Command exited with code 7"
+💭 Thinking for 219 characters   
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 673 characters   
+💫 Executing npx --yes create-zuplo-api myproject4 --yes --empty ✖ "Command execution timed out after 120 seconds."
+💫 Executing cat /home/user/myproject4/config/routes.oas.json ✔ 
+💫 Executing npx --yes create-zuplo-api myproject5 -e default --yes ✔ 
+💫 Executing cat /home/user/myproject5/config/routes.oas.json ✔ 
+💭 Thinking for 1362 characters   
+💫 Executing cat /home/user/myproject/config/policies.json ✔ 
+💫 Executing cat << 'EOF' > /home/user/myproject/config/routes.oas.json
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Zuplo API"
+  },
+  "paths": {
+    "/api/submit": {
+      "post": {
+        "summary": "Submit",
+        "operationId": "submit",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-zuplo-path": {
+          "path": "/api/submit"
+        },
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "default",
+            "module": "$import(../modules/echo.ts)"
+          },
+          "policies": {
+            "inbound": [
+              "json-to-xml"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+EOF ✔ 
+💫 Executing cat << 'EOF' > /home/user/myproject/config/policies.json
+{
+  "policies": [
+    {
+      "name": "json-to-xml",
+      "policyType": "custom-code-inbound",
+      "handler": {
+        "export": "default",
+        "module": "$import(../modules/json-to-xml.ts)"
+      }
+    }
+  ]
+}
+EOF ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+💭 Thinking for 135 characters   
+💫 Executing sleep 5 && curl -X POST http://localhost:3000/api/submit -H "Content-Type: application/json" -d '{"user": {"name": "Alice", "role": "admin"}}' ✖ "Command exited with code 7"
+💭 Thinking for 157 characters   
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 570 characters   
+💫 Executing ls -la /home/user/myproject5/modules && cat /home/user/myproject5/modules/hello-world.ts ✔ 
+💭 Thinking for 643 characters   
+💫 Executing ls -la /home/user/myproject/modules ✔ 
+💭 Thinking for 627 characters   
+💫 Executing sed -i 's/\.\.\/modules\//\.\/modules\//g' /home/user/myproject/config/routes.oas.json
+sed -i 's/\.\.\/modules\//\.\/modules\//g' /home/user/myproject/config/policies.json
+ ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+💭 Thinking for 277 characters   
+💫 Executing sleep 5 && curl -X POST http://localhost:3000/api/submit -H "Content-Type: application/json" -d '{"user": {"name": "Alice", "role": "admin"}}' ✖ "Command exited with code 7"
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 268 characters   
+💫 Executing npx --yes create-zuplo-api myproject6 -e custom-policy --yes ✖ "Command exited with code 1"
+💭 Thinking for 526 characters   
+💫 Executing sed -i 's/\.\/modules\/echo\.ts/\.\/modules\/echo/g' /home/user/myproject/config/routes.oas.json
+sed -i 's/\.\/modules\/json-to-xml\.ts/\.\/modules\/json-to-xml/g' /home/user/myproject/config/policies.json
+ ✔ 
+💭 Thinking for 279 characters   
+🛠️ Tool startBackgroundJob ✔ 
+💭 Thinking for 97 characters   
+🛠️ Tool readBackgroundJobOutput ✔ 

@@ -1,0 +1,37 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 1,
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780119728940,
+            "stop": 1780119737798
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_url_rewrite",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 8383,
+                "start": 1780119729414,
+                "stop": 1780119737797,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_url_rewrite(start_app):\n        \"\"\"\n        Test that the URL rewrite policy successfully rewrites /api/v1/users to /users\n        before forwarding to echo.zuplo.io.\n        \"\"\"\n        url = \"http://localhost:9200/api/v1/users\"\n        try:\n            response = requests.get(url, timeout=10)\n        except requests.RequestException as e:\n            pytest.fail(f\"Request to {url} failed: {e}\")\n    \n        assert response.status_code == 200, f\"Expected status code 200, got {response.status_code}. Response: {response.text}\"\n    \n        try:\n            data = response.json()\n        except ValueError:\n            pytest.fail(f\"Response is not valid JSON: {response.text}\")\n    \n        # echo.zuplo.io returns the full requested URL in the 'url' field\n>       assert data.get(\"url\") == \"https://echo.zuplo.io/users\", \\\n            f\"Expected the backend to receive path '/users', but it received URL: {data.get('url')}\"\nE       AssertionError: Expected the backend to receive path '/users', but it received URL: https://echo.zuplo.io/api/v1/users\nE       assert 'https://echo.../api/v1/users' == 'https://echo.zuplo.io/users'\nE         - https://echo.zuplo.io/users\nE         + https://echo.zuplo.io/api/v1/users\nE         ?                       +++++++\n\ntests/test_final_state.py:59: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

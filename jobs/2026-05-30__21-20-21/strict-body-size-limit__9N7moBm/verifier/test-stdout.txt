@@ -1,0 +1,72 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 3 items
+
+tests/test_final_state.py .FF                                            [100%]
+
+=================================== FAILURES ===================================
+____________________________ test_payload_too_large ____________________________
+
+start_app = None
+
+    def test_payload_too_large(start_app):
+        """Test that a payload > 1024 bytes is rejected."""
+        url = "http://localhost:9200/upload"
+        headers = {"Content-Type": "text/plain"}
+        data = "A" * 1025
+    
+        response = requests.post(url, headers=headers, data=data)
+    
+>       assert response.status_code == 413, f"Expected status 413, got {response.status_code}. Response: {response.text}"
+E       AssertionError: Expected status 413, got 200. Response: Upload successful
+E       assert 200 == 413
+E        +  where 200 = <Response [200]>.status_code
+
+tests/test_final_state.py:58: AssertionError
+_________________________ test_missing_content_length __________________________
+
+start_app = None
+
+    def test_missing_content_length(start_app):
+        """Test that a request without Content-Length is rejected."""
+        url = "http://localhost:9200/upload"
+        # requests automatically adds Content-Length if data is provided as a string.
+        # To send a chunked request without Content-Length, we can provide a generator.
+        def generate_chunked_data():
+            yield b"Chunked payload"
+    
+        headers = {"Content-Type": "text/plain"}
+    
+        response = requests.post(url, headers=headers, data=generate_chunked_data())
+    
+>       assert response.status_code == 413, f"Expected status 413, got {response.status_code}. Response: {response.text}"
+E       AssertionError: Expected status 413, got 200. Response: Upload successful
+E       assert 200 == 413
+E        +  where 200 = <Response [200]>.status_code
+
+tests/test_final_state.py:73: AssertionError
+==================================== PASSES ====================================
+___________________________ test_valid_payload_size ____________________________
+---------------------------- Captured stdout setup -----------------------------
+
+added 1 package, and audited 1381 packages in 12s
+
+352 packages are looking for funding
+  run `npm fund` for details
+
+17 vulnerabilities (3 low, 2 moderate, 10 high, 2 critical)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+/tests/.pytest_cache/d/.xprocess/start_app$ npx zuplo dev --port 9200
+process 'start_app' started pid=1015
+start_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_valid_payload_size
+FAILED tests/test_final_state.py::test_payload_too_large - AssertionError: Ex...
+FAILED tests/test_final_state.py::test_missing_content_length - AssertionErro...
+========================= 2 failed, 1 passed in 21.90s =========================

@@ -1,0 +1,91 @@
+Skipping image OS validation for hb__request-body-transformation: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-dl8ncpp > /logs/artifacts/run-id && echo request-body-transformation__dL8nCpP > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Request Body Transformation (JSON to XML)
+
+## Background
+In enterprise API gateways, it's common to integrate modern JSON-based clients with legacy backend systems that only accept XML. You need to implement a custom policy in Zuplo that transforms an incoming JSON payload into an XML format before the request reaches the backend.
+
+## Requirements
+- Create a new Zuplo project.
+- Define a route for `POST /api/submit`.
+- Implement a custom inbound policy that intercepts the request, reads the JSON body, converts it to XML, and forwards the transformed request.
+- The JSON payload will look like: `{"user": {"name": "Alice", "role": "admin"}}`.
+- The transformed XML payload should look like: `<user><name>Alice</name><role>admin</role></user>`.
+- Set the `Content-Type` header of the forwarded request to `application/xml`.
+- Route the transformed request to a custom handler that simply echoes back the request body as text, so the transformation can be verified.
+
+## Implementation Hints
+- Use `zuplo` CLI to create a new project.
+- Write a custom inbound policy in TypeScript (e.g., `./modules/json-to-xml.ts`).
+- Since Zuplo runs on the edge, you can use standard Web APIs. You can manually construct the XML string or use a lightweight library that is edge-compatible.
+- Remember to clone or recreate the `Request` object in your policy because the request body cannot be read twice or modified directly in place. Return a new `Request` object with the new XML body and updated headers.
+- For the backend handler, create another module (e.g., `./modules/echo.ts`) that reads `request.text()` and returns it in a `Response`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: zuplo dev --port 3000
+- Port: 3000
+- API Endpoints:
+  - POST `/api/submit`: Accepts a JSON payload and returns the transformed XML payload as text.
+
+    ```json
+    // Request
+    {
+      "user": {
+        "name": string,
+        "role": string
+      }
+    }
+    ```
+    ```xml
+    // Response (Echoed from the custom handler)
+    <user><name>string</name><role>string</role></user>
+    ```
+
+
+EOF
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

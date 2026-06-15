@@ -1,0 +1,46 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780177102265,
+            "stop": 1780177107819
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_query_parameter_removal",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 5337,
+                "start": 1780177102454,
+                "stop": 1780177107791,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_query_parameter_removal(start_app):\n        \"\"\"\n        Verify that the secret_token query parameter is removed before forwarding.\n        \"\"\"\n        url = \"http://localhost:9200/echo?foo=bar&secret_token=12345\"\n        response = requests.get(url)\n    \n        assert response.status_code == 200, f\"Expected status 200, got {response.status_code}\"\n    \n        try:\n            data = response.json()\n        except Exception as e:\n            pytest.fail(f\"Failed to parse response as JSON: {e}\\nResponse text: {response.text}\")\n    \n        # https://echo.zuplo.io/ returns the request details, usually in 'query' or 'url'\n        # Check that 'foo' is present\n        response_text = response.text\n    \n        assert \"foo\" in response_text and \"bar\" in response_text, \\\n            f\"Expected query parameter 'foo=bar' to be preserved. Response: {response_text}\"\n    \n>       assert \"secret_token\" not in response_text and \"12345\" not in response_text, \\\n            f\"Expected query parameter 'secret_token' to be removed. Response: {response_text}\"\nE       AssertionError: Expected query parameter 'secret_token' to be removed. Response: {\nE           \"url\": \"https://echo.zuplo.io/echo?foo=bar&secret_token=12345\",\nE           \"method\": \"GET\",\nE           \"query\": {\nE             \"foo\": \"bar\",\nE             \"secret_token\": \"12345\"\nE           },\nE           \"headers\": {\nE             \"accept\": \"*/*\",\nE             \"accept-encoding\": \"gzip, br\",\nE             \"connection\": \"Keep-Alive\",\nE             \"host\": \"echo.zuplo.io\",\nE             \"true-client-ip\": \"34.145.37.54\",\nE             \"user-agent\": \"python-requests/2.34.2\",\nE             \"x-forwarded-proto\": \"https\",\nE             \"x-real-ip\": \"34.145.37.54\",\nE             \"zp-rid\": \"52344642-8383-432c-b093-1ce4502c2435\"\nE           }\nE         }\nE       assert ('secret_token' not in '{\\n  \"url\":...435\"\\n  }\\n}'\nE         'secret_token' is contained here:\nE           o?foo=bar&secret_token=12345\",\nE         ?           ++++++++++++\nE             \"method\": \"GET\",\nE             \"query\": {\nE               \"foo\": \"bar\",\nE               \"secret_token\": \"12345\"...\nE         \nE         ...Full output truncated (13 lines hidden), use '-vv' to show)\n\ntests/test_final_state.py:61: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_normal_requests",
+                "status": "passed",
+                "duration": 28,
+                "start": 1780177107791,
+                "stop": 1780177107819,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

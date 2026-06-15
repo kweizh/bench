@@ -1,0 +1,61 @@
+{
+    "id": "82c6697e-b03e-47b7-8353-92a4e1ab4a49",
+    "started_at": "2026-05-30T21:39:33.620511",
+    "updated_at": "2026-05-30T22:05:32.199186",
+    "finished_at": "2026-05-30T22:05:32.199186",
+    "n_total_trials": 10,
+    "stats": {
+        "n_completed_trials": 10,
+        "n_errored_trials": 6,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__glm-5.1__tasks": {
+                "n_trials": 10,
+                "n_errors": 6,
+                "metrics": [
+                    {
+                        "mean": 0.5
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "header-based-api-versioning__NBbf2WA",
+                            "ip-based-rate-limiting__VMzvv8c",
+                            "graphql-endpoint-proxy__4rkSLyN",
+                            "custom-not-found-handler__LYCB8gc",
+                            "strip_sensitive_query_params__e3rG6AX"
+                        ],
+                        "0.0": [
+                            "path-prefix-routing__AX47Zg5",
+                            "api_key_metadata_routing__hDe4UGq",
+                            "jwt-auth-validation__ySU33Ca",
+                            "strict-timeout-policy__pHcr8ki",
+                            "strict-body-size-limit__qyHAfSh"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "header-based-api-versioning__NBbf2WA",
+                        "path-prefix-routing__AX47Zg5",
+                        "jwt-auth-validation__ySU33Ca",
+                        "strict-timeout-policy__pHcr8ki"
+                    ],
+                    "NonZeroAgentExitCodeError": [
+                        "graphql-endpoint-proxy__4rkSLyN",
+                        "custom-not-found-handler__LYCB8gc"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 5859188,
+        "cost_usd": null
+    }
+}

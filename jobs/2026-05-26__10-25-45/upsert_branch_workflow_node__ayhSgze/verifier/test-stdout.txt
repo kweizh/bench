@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 10 items
+
+tests/test_final_state.py ..........                                     [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_log_file_records_workflow_key
+PASSED tests/test_final_state.py::test_log_file_records_email_run_id
+PASSED tests/test_final_state.py::test_log_file_records_inapp_run_id
+PASSED tests/test_final_state.py::test_workflow_exists_in_development
+PASSED tests/test_final_state.py::test_workflow_is_active
+PASSED tests/test_final_state.py::test_branch_step_has_email_branch
+PASSED tests/test_final_state.py::test_branch_step_has_default_inapp_branch
+PASSED tests/test_final_state.py::test_email_run_produced_mailtrap_message
+PASSED tests/test_final_state.py::test_inapp_run_produced_in_app_message
+PASSED tests/test_final_state.py::test_email_arrived_in_gmail_inbox
+============================== 10 passed in 2.86s ==============================

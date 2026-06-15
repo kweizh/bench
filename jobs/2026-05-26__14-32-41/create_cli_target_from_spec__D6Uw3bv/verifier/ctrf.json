@@ -1,0 +1,47 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779779085.746954,
+            "stop": 1779779085.8743222
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_workflow_yaml_exists",
+                "status": "passed",
+                "duration": 0.0005174500038265251,
+                "start": 1779779085.7574384,
+                "stop": 1779779085.758157,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_gen_yaml_exists",
+                "status": "passed",
+                "duration": 0.00044685399916488677,
+                "start": 1779779085.7583466,
+                "stop": 1779779085.758928,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_speakeasy_lint_config",
+                "status": "passed",
+                "duration": 0.11479635000432609,
+                "start": 1779779085.7591007,
+                "stop": 1779779085.8741446,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

@@ -1,0 +1,41 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 1 item
+
+tests/test_final_state.py F                                              [100%]
+
+=================================== FAILURES ===================================
+________________________ test_custom_not_found_handler _________________________
+
+start_app = None
+
+    def test_custom_not_found_handler(start_app):
+        url = "http://localhost:9000/some-random-non-existent-route"
+        try:
+            response = requests.get(url)
+        except requests.exceptions.RequestException as e:
+            pytest.fail(f"Failed to connect to Zuplo dev server at {url}: {e}")
+    
+        assert response.status_code == 404, f"Expected status code 404, got {response.status_code}"
+    
+        try:
+            data = response.json()
+        except ValueError:
+            pytest.fail(f"Response is not valid JSON. Content: {response.text}")
+    
+>       assert data.get("error") == "Not Found", f"Expected error to be 'Not Found', got {data.get('error')}"
+E       AssertionError: Expected error to be 'Not Found', got None
+E       assert None == 'Not Found'
+E        +  where None = <built-in method get of dict object at 0x7fb99d81eb40>('error')
+E        +    where <built-in method get of dict object at 0x7fb99d81eb40> = {'instance': '/some-random-non-existent-route', 'status': 404, 'title': 'Not Found', 'trace': {'buildId': '02df00d1-ec...b46a-ad51ece650d5', 'requestId': '75056415-3e54-4ca8-a452-2301ff187103', 'timestamp': '2026-05-30T21:19:29.786Z'}, ...}.get
+
+tests/test_final_state.py:45: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ npx zuplo dev --editor-port 9200
+process 'zuplo_dev' started pid=4219
+zuplo_dev process startup detected
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_custom_not_found_handler - AssertionEr...
+============================== 1 failed in 21.78s ==============================

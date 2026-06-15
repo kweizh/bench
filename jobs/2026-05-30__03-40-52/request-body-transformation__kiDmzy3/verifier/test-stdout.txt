@@ -1,0 +1,59 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 1 item
+
+tests/test_final_state.py F                                              [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_request_body_transformation _______________________
+
+start_app = None
+
+    def test_request_body_transformation(start_app):
+        """
+        Verify that the JSON payload is transformed into the expected XML format.
+        """
+        url = "http://localhost:3000/api/submit"
+        headers = {"Content-Type": "application/json"}
+        payload = {
+            "user": {
+                "name": "Bob",
+                "role": "developer"
+            }
+        }
+    
+        response = requests.post(url, json=payload, headers=headers)
+    
+        assert response.status_code == 200, f"Expected status code 200, got {response.status_code}. Response: {response.text}"
+    
+        # Remove whitespace to make the comparison robust against formatting differences
+        actual_xml = re.sub(r'>\s+<', '><', response.text.strip())
+        expected_xml = "<user><name>Bob</name><role>developer</role></user>"
+    
+>       assert expected_xml in actual_xml, f"Expected transformed XML to contain '{expected_xml}', but got '{response.text}'"
+E       AssertionError: Expected transformed XML to contain '<user><name>Bob</name><role>developer</role></user>', but got 'You have no routes. Add a route in routes.oas.json to get started'
+E       assert '<user><name>Bob</name><role>developer</role></user>' in 'You have no routes. Add a route in routes.oas.json to get started'
+
+tests/test_final_state.py:70: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+added 100 packages, changed 1 package, and audited 102 packages in 6s
+
+33 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ npx zuplo dev --port 3000
+process 'zuplo_dev' started pid=2152
+zuplo_dev process startup detected
+---------------------------- Captured stderr setup -----------------------------
+npm error Missing script: "build"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+npm error A complete log of this run can be found in: /root/.npm/_logs/2026-05-30T04_25_57_088Z-debug-0.log
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_request_body_transformation - Assertio...
+============================== 1 failed in 12.42s ==============================

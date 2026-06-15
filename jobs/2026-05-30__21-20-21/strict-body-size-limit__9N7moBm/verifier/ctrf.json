@@ -1,0 +1,58 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 1,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780176928896,
+            "stop": 1780176950798
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_valid_payload_size",
+                "status": "passed",
+                "duration": 20722,
+                "start": 1780176929433,
+                "stop": 1780176950155,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_payload_too_large",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 174,
+                "start": 1780176950156,
+                "stop": 1780176950330,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_payload_too_large(start_app):\n        \"\"\"Test that a payload > 1024 bytes is rejected.\"\"\"\n        url = \"http://localhost:9200/upload\"\n        headers = {\"Content-Type\": \"text/plain\"}\n        data = \"A\" * 1025\n    \n        response = requests.post(url, headers=headers, data=data)\n    \n>       assert response.status_code == 413, f\"Expected status 413, got {response.status_code}. Response: {response.text}\"\nE       AssertionError: Expected status 413, got 200. Response: Upload successful\nE       assert 200 == 413\nE        +  where 200 = <Response [200]>.status_code\n\ntests/test_final_state.py:58: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_missing_content_length",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 467,
+                "start": 1780176950331,
+                "stop": 1780176950798,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_missing_content_length(start_app):\n        \"\"\"Test that a request without Content-Length is rejected.\"\"\"\n        url = \"http://localhost:9200/upload\"\n        # requests automatically adds Content-Length if data is provided as a string.\n        # To send a chunked request without Content-Length, we can provide a generator.\n        def generate_chunked_data():\n            yield b\"Chunked payload\"\n    \n        headers = {\"Content-Type\": \"text/plain\"}\n    \n        response = requests.post(url, headers=headers, data=generate_chunked_data())\n    \n>       assert response.status_code == 413, f\"Expected status 413, got {response.status_code}. Response: {response.text}\"\nE       AssertionError: Expected status 413, got 200. Response: Upload successful\nE       assert 200 == 413\nE        +  where 200 = <Response [200]>.status_code\n\ntests/test_final_state.py:73: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

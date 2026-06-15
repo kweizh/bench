@@ -1,0 +1,38 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 3 items
+
+tests/test_final_state.py ...                                            [100%]
+
+=============================== warnings summary ===============================
+test_final_state.py::test_free_plan_rate_limit
+test_final_state.py::test_pro_plan_rate_limit
+  /usr/local/lib/python3.12/dist-packages/jwt/api_jwt.py:147: InsecureKeyLengthWarning: The HMAC key is 19 bytes long, which is below the minimum recommended length of 32 bytes for SHA256. See RFC 7518 Section 3.2.
+    return self._jws.encode(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+==================================== PASSES ====================================
+__________________________ test_unauthorized_request ___________________________
+---------------------------- Captured stdout setup -----------------------------
+
+added 1 package, and audited 1451 packages in 11s
+
+380 packages are looking for funding
+  run `npm fund` for details
+
+17 vulnerabilities (3 low, 2 moderate, 10 high, 2 critical)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+/tests/.pytest_cache/d/.xprocess/start_app$ npm run dev -- --editor-port 9200
+process 'start_app' started pid=2116
+start_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_unauthorized_request
+PASSED tests/test_final_state.py::test_free_plan_rate_limit
+PASSED tests/test_final_state.py::test_pro_plan_rate_limit
+======================== 3 passed, 2 warnings in 11.56s ========================

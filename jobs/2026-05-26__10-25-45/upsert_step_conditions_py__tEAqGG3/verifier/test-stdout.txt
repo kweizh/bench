@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 7 items
+
+tests/test_final_state.py .......                                        [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_log_file_exists
+PASSED tests/test_final_state.py::test_log_file_contains_workflow_key_and_active_lines
+PASSED tests/test_final_state.py::test_workflow_exists_and_is_active
+PASSED tests/test_final_state.py::test_workflow_has_required_steps_in_order
+PASSED tests/test_final_state.py::test_delay_step_uses_5_minutes
+PASSED tests/test_final_state.py::test_mailtrap_step_has_engagement_status_condition
+PASSED tests/test_final_state.py::test_workflow_has_trigger_data_json_schema
+============================== 7 passed in 2.33s ===============================

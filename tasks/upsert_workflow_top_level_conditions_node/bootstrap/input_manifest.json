@@ -1,0 +1,7 @@
+{
+  "library_name": "knock",
+  "task_name": "upsert_workflow_top_level_conditions_node",
+  "complexity_level": "multi-step sequential command set",
+  "research_plan_path": "plan.md",
+  "output_dir": "tasks/"
+}

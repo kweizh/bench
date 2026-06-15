@@ -1,0 +1,118 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 8,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780686906766,
+            "stop": 1780686997440
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_form_skeleton_renders",
+                "status": "passed",
+                "duration": 34955,
+                "start": 1780686907131,
+                "stop": 1780686942086,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_liveblocks_auth_endpoint_returns_token",
+                "status": "passed",
+                "duration": 504,
+                "start": 1780686942087,
+                "stop": 1780686942591,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_storage_sync_between_contexts",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 19036,
+                "start": 1780686942591,
+                "stop": 1780686961627,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "two_contexts = (<Page url='http://localhost:3000/?name=Alice'>, <Page url='http://localhost:3000/?name=Bob'>)\n\n    def test_storage_sync_between_contexts(two_contexts):\n        page_a, page_b = two_contexts\n    \n        # Name field\n        page_a.locator('[data-testid=\"input-name\"]').click()\n        page_a.locator('[data-testid=\"input-name\"]').fill(\"\")\n        page_a.locator('[data-testid=\"input-name\"]').type(\"Hello\", delay=40)\n        page_a.locator('[data-testid=\"input-name\"]').blur()\n        _wait_for(\n            lambda: page_b.locator('[data-testid=\"input-name\"]').input_value() == \"Hello\",\n            timeout=15.0,\n        )\n>       assert page_b.locator('[data-testid=\"input-name\"]').input_value() == \"Hello\", (\n            \"Name field did not sync from context A to context B via Liveblocks Storage.\"\n        )\nE       AssertionError: Name field did not sync from context A to context B via Liveblocks Storage.\nE       assert '' == 'Hello'\nE         - Hello\n\ntests/test_final_state.py:150: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_typing_indicator_appears_and_clears",
+                "status": "passed",
+                "duration": 6778,
+                "start": 1780686961628,
+                "stop": 1780686968406,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "tags": [
+                    "parametrize::field,label::[('name', 'Name'), ('email', 'Email'), ('bio', 'Bio')]"
+                ]
+            },
+            {
+                "name": "test_final_state.py::test_typing_indicator_appears_and_clears",
+                "status": "passed",
+                "duration": 7500,
+                "start": 1780686968407,
+                "stop": 1780686975907,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "tags": [
+                    "parametrize::field,label::[('name', 'Name'), ('email', 'Email'), ('bio', 'Bio')]"
+                ]
+            },
+            {
+                "name": "test_final_state.py::test_typing_indicator_appears_and_clears",
+                "status": "passed",
+                "duration": 5123,
+                "start": 1780686975908,
+                "stop": 1780686981031,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "tags": [
+                    "parametrize::field,label::[('name', 'Name'), ('email', 'Email'), ('bio', 'Bio')]"
+                ]
+            },
+            {
+                "name": "test_final_state.py::test_lock_overlay_appears_and_clears",
+                "status": "passed",
+                "duration": 5480,
+                "start": 1780686981031,
+                "stop": 1780686986511,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_soft_lock_allows_takeover",
+                "status": "passed",
+                "duration": 10790,
+                "start": 1780686986512,
+                "stop": 1780686997302,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_codebase_uses_real_liveblocks_packages",
+                "status": "passed",
+                "duration": 137,
+                "start": 1780686997302,
+                "stop": 1780686997439,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

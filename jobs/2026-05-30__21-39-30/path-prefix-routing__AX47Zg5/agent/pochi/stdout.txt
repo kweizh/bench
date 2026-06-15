@@ -1,0 +1,32 @@
+- Initializing MCP connections...
+You
+# Zuplo Path Prefix Routing ## Background Create an API Gateway using Zuplo that routes incoming requests to different upstream backend services based on the URL path prefix. ## Requirements * Initialize a new Zuplo project in `/home/user/myproject-${run-id}`. * Configure a route for `/api/v1/users/*` that forwards requests to `https://httpbin.org/anything/users/*`. * Configure a route for `/api/v1/products/*` that forwards requests to `https://httpbin.org/anything/products/*`. * Both routes must preserve the HTTP method (GET, POST, etc.) and forward the request body correctly. * Run the local development server on port 9200. ## Implementation Hints * Read the `ZEALT_RUN_ID` environment variable to get the `run-id`. * Use `npx create-zuplo-api` to scaffold the project in the target directory. * Modify `config/routes.oas.json` to define the paths with wildcard or path parameters. * Use the appropriate built-in URL rewrite or proxy handler to forward the requests to the upstream URLs dynamically based on the path. * Start the dev server using `zuplo dev --port 9200`. ## Acceptance Criteria * Project path: /home/user/myproject-${run-id} * Start command: zuplo dev --port 9200 * Port: 9200 * API Endpoints: * GET `/api/v1/users/{id}`: Proxies to `https://httpbin.org/anything/users/{id}`. The response should be the httpbin JSON where the `url` field matches the upstream URL. * POST `/api/v1/products/{id}`: Proxies to `https://httpbin.org/anything/products/{id}`. The response should be the httpbin JSON where the `url` field matches the upstream URL and the `json` field matches the request body.   
+
+Pochi
+💭 Thinking for 422 characters   
+📋 Updating todo list (5 items) ✔ 
+💭 Thinking for 51 characters   
+💫 Executing echo $ZEALT_RUN_ID ✔ 
+💭 Thinking for 130 characters   
+📋 Updating todo list (5 items) ✔ 
+💫 Executing mkdir -p /home/user && ls /home/user/ ✔ 
+💭 Thinking for 69 characters   
+💫 Executing npx create-zuplo-api@latest /home/user/myproject-zr-ax47zg5 --yes 2>&1 ✖ "Command execution timed out after 120 seconds."
+💭 Thinking for 93 characters   
+💫 Executing ls /home/user/myproject-zr-ax47zg5/ ✔ 
+💭 Thinking for 107 characters   
+💫 Executing ls /home/user/myproject-zr-ax47zg5/node_modules/.package-lock.json 2>/dev/null && echo "install complete" || (cd /home/user/myproject-zr-ax47zg5 && npm install 2>&1) ✖ "Command execution timed out after 120 seconds."
+💫 Executing ls /home/user/myproject-zr-ax47zg5/node_modules/zuplo/package.json 2>/dev/null && echo "zuplo installed" || echo "zuplo not found" ✔ 
+💫 Executing cd /home/user/myproject-zr-ax47zg5 && npm install 2>&1 ✖ "Command exited with code 1"
+💭 Thinking for 139 characters   
+💫 Executing cd /home/user/myproject-zr-ax47zg5 && rm -rf node_modules package-lock.json && npm install --ignore-scripts 2>&1 ✔ 
+💫 Executing ls /home/user/myproject-zr-ax47zg5/node_modules/zuplo/package.json 2>/dev/null && echo "zuplo installed" || echo "zuplo not found" ✔ 
+💭 Thinking for 87 characters   
+📋 Updating todo list (5 items) ✔ 
+📖 Reading /home/user/myproject-zr-ax47zg5/config/routes.oas.json ✔ 
+📂 Listing files in /home/user/myproject-zr-ax47zg5/config ✔ 
+📂 Listing files in /home/user/myproject-zr-ax47zg5/modules ✔ 
+💭 Thinking for 11210 characters   
+📖 Reading /home/user/myproject-zr-ax47zg5/modules/hello-world.ts ✔ 
+📖 Reading /home/user/myproject-zr-ax47zg5/config/policies.json ✔ 
+📖 Reading /home/user/myproject-zr-ax47zg5/zuplo.jsonc ✔ 

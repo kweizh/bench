@@ -1,0 +1,89 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 4 items
+
+tests/test_final_state.py .F.F                                           [100%]
+
+=================================== FAILURES ===================================
+________________ test_workflow_active_with_top_level_conditions ________________
+
+    def test_workflow_active_with_top_level_conditions():
+        service_token = os.environ.get("KNOCK_SERVICE_TOKEN")
+        assert service_token, "KNOCK_SERVICE_TOKEN must be set for verification."
+    
+        workflow_key = _workflow_key()
+        url = f"{KNOCK_MAPI_BASE}/v1/workflows/{workflow_key}"
+        response = requests.get(
+            url,
+            params={"environment": "development"},
+            headers={"Authorization": f"Bearer {service_token}"},
+            timeout=30,
+        )
+        assert response.status_code == 200, (
+            f"Expected HTTP 200 fetching workflow '{workflow_key}', got "
+            f"{response.status_code}: {response.text}"
+        )
+        body = response.json()
+        workflow = body.get("workflow", body)
+    
+        assert workflow.get("active") is True, (
+            f"Workflow '{workflow_key}' must be active in development; "
+            f"got active={workflow.get('active')}."
+        )
+    
+        conditions = workflow.get("conditions")
+>       assert isinstance(conditions, dict), (
+            f"Workflow conditions must be a ConditionGroup object, got: {conditions!r}"
+        )
+E       AssertionError: Workflow conditions must be a ConditionGroup object, got: None
+E       assert False
+E        +  where False = isinstance(None, dict)
+
+tests/test_final_state.py:138: AssertionError
+_________________ test_admin_received_email_but_viewer_did_not _________________
+
+    def test_admin_received_email_but_viewer_did_not():
+        service = _gmail_service()
+        expected_subject = _expected_subject()
+        admin_address = _gmail_address(_admin_email_local())
+        viewer_address = _gmail_address(_viewer_email_local())
+    
+        deadline = time.time() + 180  # up to 3 minutes for Mailtrap → Gmail delivery
+        matched = []
+        while time.time() < deadline:
+            matched = _list_inbox_messages_matching(service, expected_subject)
+            if matched:
+                break
+            time.sleep(5)
+    
+        assert matched, (
+            f"Did not find any inbox message with subject '{expected_subject}' "
+            f"after polling for delivery."
+        )
+    
+        admin_hits = [t for (t, _s) in matched if admin_address in t]
+        viewer_hits = [t for (t, _s) in matched if viewer_address in t]
+    
+        assert len(admin_hits) >= 1, (
+            f"Expected at least one Gmail message addressed to {admin_address} "
+            f"with subject '{expected_subject}', got recipients: "
+            f"{[t for (t, _s) in matched]!r}"
+        )
+>       assert not viewer_hits, (
+            f"Expected NO Gmail messages addressed to {viewer_address} with subject "
+            f"'{expected_subject}' (the workflow's top-level condition should have "
+            f"prevented delivery), but found: {viewer_hits!r}"
+        )
+E       AssertionError: Expected NO Gmail messages addressed to codes.icy+viewer-zr-mzgt9wj@gmail.com with subject 'Admin alert zr-mzgt9wj' (the workflow's top-level condition should have prevented delivery), but found: ['codes.icy+viewer-zr-mzgt9wj@gmail.com']
+E       assert not ['codes.icy+viewer-zr-mzgt9wj@gmail.com']
+
+tests/test_final_state.py:223: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_output_log_contains_workflow_run_id
+PASSED tests/test_final_state.py::test_workflow_has_single_mailtrap_step_with_expected_subject
+FAILED tests/test_final_state.py::test_workflow_active_with_top_level_conditions
+FAILED tests/test_final_state.py::test_admin_received_email_but_viewer_did_not
+========================= 2 failed, 2 passed in 2.66s ==========================

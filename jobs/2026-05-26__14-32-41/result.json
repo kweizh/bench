@@ -1,0 +1,66 @@
+{
+    "id": "afd5e834-514a-4a1a-a92c-e1a1ff239f9b",
+    "started_at": "2026-05-26T14:32:42.827353",
+    "updated_at": "2026-05-26T15:45:21.570092",
+    "finished_at": "2026-05-26T15:45:21.570092",
+    "n_total_trials": 21,
+    "stats": {
+        "n_completed_trials": 21,
+        "n_errored_trials": 2,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3.1-pro__tasks": {
+                "n_trials": 21,
+                "n_errors": 2,
+                "metrics": [
+                    {
+                        "mean": 0.8095238095238095
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "configure_custom_sdk_class_name__ZdGq9Nq",
+                            "generate_terraform_provider_basi__LESBaaN",
+                            "create_cli_target_from_spec__D6Uw3bv",
+                            "implement_go_response_hook__tMTiTHX",
+                            "setup_speakeasy_ignore_rules__ywoJVo8",
+                            "implement_typescript_error_hook__sfJsjEt",
+                            "overlay_remove_deprecated_endpoi__ANbarhk",
+                            "overlay_add_response_examples__h9rJ5j6",
+                            "add_global_retries_configuration__zzbJLh4",
+                            "configure_pypi_publishing_python__MK7MEVm",
+                            "create_workflow_yaml_basic__L9hMh5a",
+                            "configure_oauth2_in_gen_yaml__aCXWnY6",
+                            "overlay_hide_internal_endpoints__eug5Yvt",
+                            "add_x_speakeasy_name_override__JRhqBfW",
+                            "configure_go_module_path__fBDhbWk",
+                            "bundle_specs_with_speakeasy_merg__cN77Pi8",
+                            "set_max_method_params_typescript__3DxreVR"
+                        ],
+                        "0.0": [
+                            "configure_csharp_sdk_target__AuVvXyF",
+                            "generate_python_sdk_with_paginat__88WCMNK",
+                            "implement_python_request_hook__h9BUBg2",
+                            "configure_npm_publishing_typescr__Uh24JF2"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "implement_go_response_hook__tMTiTHX",
+                        "implement_python_request_hook__h9BUBg2"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 380422,
+        "cost_usd": null
+    }
+}

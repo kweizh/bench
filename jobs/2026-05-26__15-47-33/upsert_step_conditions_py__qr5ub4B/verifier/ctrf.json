@@ -1,0 +1,106 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 7,
+            "passed": 1,
+            "failed": 6,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779782394801,
+            "stop": 1779782397606
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_exists",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779782394895,
+                "stop": 1779782394896,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_key_and_active_lines",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 19,
+                "start": 1779782394896,
+                "stop": 1779782394915,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_workflow_key_and_active_lines():\n        with open(LOG_PATH) as f:\n            log_text = f.read()\n        expected_key_line = f\"Workflow key: {_workflow_key()}\"\n>       assert expected_key_line in log_text, (\n            f\"Expected log to contain '{expected_key_line}', got:\\n{log_text}\"\n        )\nE       AssertionError: Expected log to contain 'Workflow key: escalation-zr-qr5ub4b', got:\nE         2026-05-26 07:58:16,763 - INFO - Starting Knock channel-escalation workflow setup\nE         2026-05-26 07:58:16,764 - INFO - Run ID: test-run-123\nE         2026-05-26 07:58:16,764 - INFO - Workflow key: escalation-test-run-123\nE         2026-05-26 07:58:16,764 - INFO - Upserting workflow: escalation-test-run-123\nE         2026-05-26 07:58:16,764 - INFO - URL: https://control.knock.app/v1/workflows/escalation-test-run-123?environment=development\nE         2026-05-26 07:58:16,764 - INFO - Payload: {\nE           \"workflow\": {\nE             \"key\": \"escalation-test-run-123\",\nE             \"name\": \"Channel Escalation Workflow (test-run-123)\",\nE             \"description\": \"Intelligent channel escalation: in-app first, email after 5 minutes if not seen\",\nE             \"trigger_data_json_schema\": {\nE               \"type\": \"object\",\nE               \"properties\": {\nE                 \"onboarding_url\": {\nE                   \"type\": \"string\"\nE                 }\nE               },\nE               \"required\": [\nE                 \"onboarding_url\"\nE               ]\nE             },\nE             \"steps\": [\nE               {\nE                 \"key\": \"in_app_feed_1\",\nE                 \"name\": \"In-App Feed Notification\",\nE                 \"type\": \"channel\",\nE                 \"channel_key\": \"in-app\",\nE                 \"templates\": {\nE                   \"markdown\": \"\\n# Welcome to our platform!\\n\\nHello {{ recipient.name }},\\n\\nWe're excited to have you on board! Please complete your onboarding by visiting the link below.\\n\\n[Complete Onboarding]({{ data.onboarding_url }})\\n\"\nE                 }\nE               },\nE               {\nE                 \"key\": \"delay_1\",\nE                 \"name\": \"Wait for engagement\",\nE                 \"type\": \"delay\",\nE                 \"settings\": {\nE                   \"delay_for\": {\nE                     \"unit\": \"minutes\",\nE                     \"value\": 5\nE                   }\nE                 }\nE               },\nE               {\nE                 \"key\": \"email_1\",\nE                 \"name\": \"Email Escalation\",\nE                 \"type\": \"channel\",\nE                 \"channel_key\": \"mailtrap\",\nE                 \"conditions\": [\nE                   {\nE                     \"variable\": \"refs.in_app_feed_1.engagement_status\",\nE                     \"operator\": \"not_contains\",\nE                     \"argument\": \"$message.seen\"\nE                   }\nE                 ],\nE                 \"templates\": {\nE                   \"subject\": \"Complete your onboarding\",\nE                   \"html\": \"\\n<!DOCTYPE html>\\n<html>\\n<head>\\n    <meta charset=\\\"utf-8\\\">\\n    <title>Complete your onboarding</title>\\n</head>\\n<body>\\n    <h1>Welcome to our platform!</h1>\\n    \\n    <p>Hello {{ recipient.name }},</p>\\n    \\n    <p>We noticed you haven't had a chance to complete your onboarding yet. We're excited to have you on board!</p>\\n    \\n    <p>Please click the link below to get started:</p>\\n    \\n    <p><a href=\\\"{{ data.onboarding_url }}\\\">Complete Onboarding</a></p>\\n    \\n    <p>If you have any questions, feel free to reach out to our support team.</p>\\n    \\n    <p>Best regards,<br>The Team</p>\\n</body>\\n</html>\\n\"\nE                 }\nE               }\nE             ]\nE           }\nE         }\nE         2026-05-26 07:58:17,462 - WARNING - Workflow upsert encountered error: {\nE           \"status_code\": 400,\nE           \"error\": \"{\\\"code\\\":\\\"bearer_token_invalid\\\",\\\"message\\\":\\\"The bearer token supplied is invalid\\\",\\\"status\\\":400,\\\"type\\\":\\\"authentication_error\\\"}\"\nE         }\nE         2026-05-26 07:58:17,464 - INFO - Activating workflow: escalation-test-run-123\nE         2026-05-26 07:58:17,465 - INFO - URL: https://control.knock.app/v1/workflows/escalation-test-run-123/activate?environment=development\nE         2026-05-26 07:58:17,465 - INFO - Payload: {\nE           \"status\": true\nE         }\nE         2026-05-26 07:58:18,112 - WARNING - Workflow activation encountered error: {\nE           \"status_code\": 400,\nE           \"error\": \"{\\\"code\\\":\\\"bearer_token_invalid\\\",\\\"message\\\":\\\"The bearer token supplied is invalid\\\",\\\"status\\\":400,\\\"type\\\":\\\"authentication_error\\\"}\"\nE         }\nE         2026-05-26 07:58:18,114 - INFO - Workflow key: escalation-test-run-123\nE         2026-05-26 07:58:18,115 - INFO - Active: true\nE         2026-05-26 07:58:18,115 - INFO - Workflow setup completed successfully\nE         \nE       assert 'Workflow key: escalation-zr-qr5ub4b' in '2026-05-26 07:58:16,763 - INFO - Starting Knock channel-escalation workflow setup\\n2026-05-26 07:58:16,764 - INFO - R...026-05-26 07:58:18,115 - INFO - Active: true\\n2026-05-26 07:58:18,115 - INFO - Workflow setup completed successfully\\n'\n\ntests/test_final_state.py:60: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_exists_and_is_active",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 683,
+                "start": 1779782394915,
+                "stop": 1779782395598,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_workflow_exists_and_is_active():\n>       workflow = _get_workflow_payload()\n\ntests/test_final_state.py:69: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _get_workflow_payload() -> dict:\n        response = requests.get(\n            f\"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}\",\n            params={\"environment\": \"development\"},\n            headers={\n                \"Authorization\": f\"Bearer {_service_token()}\",\n                \"Accept\": \"application/json\",\n            },\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"GET workflow returned HTTP {response.status_code}: {response.text}\"\n        )\nE       AssertionError: GET workflow returned HTTP 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:39: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_required_steps_in_order",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 403,
+                "start": 1779782395599,
+                "stop": 1779782396002,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_workflow_has_required_steps_in_order():\n>       workflow = _get_workflow_payload()\n\ntests/test_final_state.py:79: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _get_workflow_payload() -> dict:\n        response = requests.get(\n            f\"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}\",\n            params={\"environment\": \"development\"},\n            headers={\n                \"Authorization\": f\"Bearer {_service_token()}\",\n                \"Accept\": \"application/json\",\n            },\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"GET workflow returned HTTP {response.status_code}: {response.text}\"\n        )\nE       AssertionError: GET workflow returned HTTP 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:39: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_delay_step_uses_5_minutes",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 398,
+                "start": 1779782396003,
+                "stop": 1779782396401,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_delay_step_uses_5_minutes():\n>       workflow = _get_workflow_payload()\n\ntests/test_final_state.py:126: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _get_workflow_payload() -> dict:\n        response = requests.get(\n            f\"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}\",\n            params={\"environment\": \"development\"},\n            headers={\n                \"Authorization\": f\"Bearer {_service_token()}\",\n                \"Accept\": \"application/json\",\n            },\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"GET workflow returned HTTP {response.status_code}: {response.text}\"\n        )\nE       AssertionError: GET workflow returned HTTP 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:39: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_mailtrap_step_has_engagement_status_condition",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 803,
+                "start": 1779782396402,
+                "stop": 1779782397205,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_mailtrap_step_has_engagement_status_condition():\n>       workflow = _get_workflow_payload()\n\ntests/test_final_state.py:144: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _get_workflow_payload() -> dict:\n        response = requests.get(\n            f\"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}\",\n            params={\"environment\": \"development\"},\n            headers={\n                \"Authorization\": f\"Bearer {_service_token()}\",\n                \"Accept\": \"application/json\",\n            },\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"GET workflow returned HTTP {response.status_code}: {response.text}\"\n        )\nE       AssertionError: GET workflow returned HTTP 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:39: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_trigger_data_json_schema",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 400,
+                "start": 1779782397206,
+                "stop": 1779782397606,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_workflow_has_trigger_data_json_schema():\n>       workflow = _get_workflow_payload()\n\ntests/test_final_state.py:186: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _get_workflow_payload() -> dict:\n        response = requests.get(\n            f\"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}\",\n            params={\"environment\": \"development\"},\n            headers={\n                \"Authorization\": f\"Bearer {_service_token()}\",\n                \"Accept\": \"application/json\",\n            },\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"GET workflow returned HTTP {response.status_code}: {response.text}\"\n        )\nE       AssertionError: GET workflow returned HTTP 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:39: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 8 items
+
+tests/test_final_state.py ........                                       [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_log_file_contains_tenant_id
+PASSED tests/test_final_state.py::test_log_file_contains_workflow_key
+PASSED tests/test_final_state.py::test_log_file_contains_workflow_run_id
+PASSED tests/test_final_state.py::test_log_file_contains_recipient_email
+PASSED tests/test_final_state.py::test_tenant_exists_with_branding_and_custom_property
+PASSED tests/test_final_state.py::test_knock_workflow_exists_and_uses_tenant_templating
+PASSED tests/test_final_state.py::test_knock_user_message_tagged_with_tenant
+PASSED tests/test_final_state.py::test_email_received_in_gmail_inbox_contains_tenant_app_name
+============================== 8 passed in 3.68s ===============================

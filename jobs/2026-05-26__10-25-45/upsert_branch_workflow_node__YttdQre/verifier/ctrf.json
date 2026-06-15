@@ -1,0 +1,115 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 10,
+            "passed": 10,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779764285307,
+            "stop": 1779764288044
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_records_workflow_key",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779764285389,
+                "stop": 1779764285390,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_records_email_run_id",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779764285390,
+                "stop": 1779764285391,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_records_inapp_run_id",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779764285391,
+                "stop": 1779764285392,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_exists_in_development",
+                "status": "passed",
+                "duration": 440,
+                "start": 1779764285392,
+                "stop": 1779764285832,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_is_active",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779764285832,
+                "stop": 1779764285834,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_branch_step_has_email_branch",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779764285835,
+                "stop": 1779764285837,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_branch_step_has_default_inapp_branch",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779764285837,
+                "stop": 1779764285839,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_email_run_produced_mailtrap_message",
+                "status": "passed",
+                "duration": 612,
+                "start": 1779764285840,
+                "stop": 1779764286452,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_inapp_run_produced_in_app_message",
+                "status": "passed",
+                "duration": 601,
+                "start": 1779764286452,
+                "stop": 1779764287053,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_email_arrived_in_gmail_inbox",
+                "status": "passed",
+                "duration": 991,
+                "start": 1779764287053,
+                "stop": 1779764288044,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

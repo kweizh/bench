@@ -1,0 +1,181 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: anyio-4.13.0, json-ctrf-0.5.0
+collected 8 items
+
+tests/test_final_state.py FFFF..FF                                       [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_log_file_contains_workflow_key ______________________
+
+    def test_log_file_contains_workflow_key():
+        run_id = _run_id()
+>       content = _read_log()
+
+tests/test_final_state.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log():
+>       assert os.path.isfile(LOG_PATH), f"Expected log file {LOG_PATH} to exist."
+E       AssertionError: Expected log file /home/user/knock_task/output.log to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7a51ca984220>('/home/user/knock_task/output.log')
+E        +    where <function isfile at 0x7a51ca984220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:46: AssertionError
+____________________ test_log_file_contains_workflow_run_id ____________________
+
+    def test_log_file_contains_workflow_run_id():
+>       content = _read_log()
+
+tests/test_final_state.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log():
+>       assert os.path.isfile(LOG_PATH), f"Expected log file {LOG_PATH} to exist."
+E       AssertionError: Expected log file /home/user/knock_task/output.log to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7a51ca984220>('/home/user/knock_task/output.log')
+E        +    where <function isfile at 0x7a51ca984220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:46: AssertionError
+_____________________ test_log_file_contains_recipient_id ______________________
+
+    def test_log_file_contains_recipient_id():
+        run_id = _run_id()
+>       content = _read_log()
+
+tests/test_final_state.py:87: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log():
+>       assert os.path.isfile(LOG_PATH), f"Expected log file {LOG_PATH} to exist."
+E       AssertionError: Expected log file /home/user/knock_task/output.log to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7a51ca984220>('/home/user/knock_task/output.log')
+E        +    where <function isfile at 0x7a51ca984220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:46: AssertionError
+____________________ test_log_file_contains_recipient_email ____________________
+
+    def test_log_file_contains_recipient_email():
+        run_id = _run_id()
+        gmail = _gmail_user_name()
+>       content = _read_log()
+
+tests/test_final_state.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log():
+>       assert os.path.isfile(LOG_PATH), f"Expected log file {LOG_PATH} to exist."
+E       AssertionError: Expected log file /home/user/knock_task/output.log to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7a51ca984220>('/home/user/knock_task/output.log')
+E        +    where <function isfile at 0x7a51ca984220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:46: AssertionError
+_____________________ test_knock_user_message_for_workflow _____________________
+
+    def test_knock_user_message_for_workflow():
+        run_id = _run_id()
+        user_id = f"user-{run_id}"
+        workflow_key = f"welcome-email-{run_id}"
+        url = f"{KNOCK_API_BASE}/users/{user_id}/messages"
+        headers = {"Authorization": f"Bearer {_api_token()}"}
+    
+        deadline = time.time() + 90
+        last_payload = None
+        matched = None
+        while time.time() < deadline:
+            resp = requests.get(url, headers=headers, timeout=30)
+            if resp.status_code == 200:
+                last_payload = resp.json()
+                items = last_payload.get("items") or last_payload.get("entries") or []
+                for item in items:
+                    source = item.get("source") or {}
+                    if source.get("key") == workflow_key:
+                        matched = item
+                        break
+                if matched:
+                    break
+            time.sleep(5)
+    
+>       assert matched is not None, (
+            f"Expected at least one Knock message for user {user_id} from workflow "
+            f"{workflow_key}. Last response: {last_payload}"
+        )
+E       AssertionError: Expected at least one Knock message for user user-zr-emf8n35 from workflow welcome-email-zr-emf8n35. Last response: {'items': [{'data': {'dashboard_url': 'https://app.example.com/dashboard/zr-emf8n35'}, 'id': '3EFmuuF2wrrXD1KltFoza7uHJt1', 'status': 'sent', 'metadata': {'external_id': '19b34590-58da-11f1-0040-f19bc97d8f56'}, 'source': {'type': 'workflow', 'key': 'cli-welcome-zr-eujxjag', 'version_id': '53e46d69-21b1-4920-ad6e-b6061765365d', 'categories': [], 'workflow_recipient_run_id': '22050ea6-25eb-501d-ae69-90e704bd5111', 'workflow_run_id': 'fdff05c6-7725-56fc-b9cb-caa327972eec', 'step_ref': 'email-welcome-step', '__typename': 'NotificationSource'}, 'channel': {'id': '8499b082-bdd2-4830-90bc-7eafdfc571d9', 'name': 'Mailtrap', 'type': 'email', 'key': 'mailtrap', 'updated_at': '2026-05-25T16:38:35.535018Z', 'provider': 'email_mailtrap', 'created_at': '2026-05-25T16:38:35.535018Z'}, 'inserted_at': '2026-05-26T08:08:37.903381Z', 'updated_at': '2026-05-26T08:08:38.268490Z', 'recipient': 'user-zr-emf8n35', 'scheduled_at': None, 'workflow': 'cli-welcome-zr-eujxjag', 'channel_id': '8499b082-bdd2-4830-90bc-7eafdfc571d9', 'tenant': None, 'seen_at': None, 'read_at': None, 'link_clicked_at': None, 'interacted_at': None, 'archived_at': None, '__typename': 'Message', 'clicked_at': None, 'actors': [], 'engagement_statuses': [], '__cursor': 'g3QAAAABdwtpbnNlcnRlZF9hdHQAAAANdwttaWNyb3NlY29uZGgCYgANyNVhBncGc2Vjb25kYSV3CGNhbGVuZGFydxNFbGl4aXIuQ2FsZW5kYXIuSVNPdwVtb250aGEFdwpfX3N0cnVjdF9fdw9FbGl4aXIuRGF0ZVRpbWV3CnN0ZF9vZmZzZXRhAHcKdXRjX29mZnNldGEAdwl6b25lX2FiYnJtAAAAA1VUQ3cEeWVhcmIAAAfqdwRob3VyYQh3A2RheWEadwZtaW51dGVhCHcJdGltZV96b25lbQAAAAdFdGMvVVRD'}, {'data': {'dashboard_url': 'https://app.example.com/dashboard/zr-emf8n35'}, 'id': '3EFmuysjSvfaujIKEMI4KHQXpol', 'status': 'delivered', 'metadata': None, 'source': {'type': 'workflow', 'key': 'cli-welcome-zr-eujxjag', 'version_id': '53e46d69-21b1-4920-ad6e-b6061765365d', 'categories': [], 'workflow_recipient_run_id': '22050ea6-25eb-501d-ae69-90e704bd5111', 'workflow_run_id': 'fdff05c6-7725-56fc-b9cb-caa327972eec', 'step_ref': 'in-app-welcome-step', '__typename': 'NotificationSource'}, 'channel': {'id': '6bac3ebb-1c37-4590-b4c7-e2c72e5b4f34', 'name': 'In-app', 'type': 'in_app_feed', 'key': 'in-app', 'updated_at': '2026-05-11T04:34:50.087842Z', 'provider': 'in_app_feed_knock', 'created_at': '2026-05-11T04:34:50.087842Z'}, 'inserted_at': '2026-05-26T08:08:37.835995Z', 'updated_at': '2026-05-26T08:08:37.835995Z', 'recipient': 'user-zr-emf8n35', 'scheduled_at': None, 'workflow': 'cli-welcome-zr-eujxjag', 'channel_id': '6bac3ebb-1c37-4590-b4c7-e2c72e5b4f34', 'tenant': None, 'seen_at': None, 'read_at': None, 'link_clicked_at': None, 'interacted_at': None, 'archived_at': None, '__typename': 'Message', 'clicked_at': None, 'actors': [], 'engagement_statuses': [], '__cursor': 'g3QAAAABdwtpbnNlcnRlZF9hdHQAAAANdwttaWNyb3NlY29uZGgCYgAMwZthBncGc2Vjb25kYSV3CGNhbGVuZGFydxNFbGl4aXIuQ2FsZW5kYXIuSVNPdwVtb250aGEFdwpfX3N0cnVjdF9fdw9FbGl4aXIuRGF0ZVRpbWV3CnN0ZF9vZmZzZXRhAHcKdXRjX29mZnNldGEAdwl6b25lX2FiYnJtAAAAA1VUQ3cEeWVhcmIAAAfqdwRob3VyYQh3A2RheWEadwZtaW51dGVhCHcJdGltZV96b25lbQAAAAdFdGMvVVRD'}], 'page_info': {'after': None, 'before': None, 'page_size': 50, 'total_count': 2, '__typename': 'PageInfo'}}
+E       assert None is not None
+
+tests/test_final_state.py:188: AssertionError
+______________________ test_email_received_in_gmail_inbox ______________________
+
+    def test_email_received_in_gmail_inbox():
+        run_id = _run_id()
+        gmail_user = _gmail_user_name()
+        expected_to_fragment = f"{gmail_user}+receiver-{run_id}@gmail.com"
+        expected_subject_fragment = f"Welcome to Knock, Knock User {run_id}!"
+    
+        token_info = json.loads(os.environ["GMAIL_TOKEN_JSON"])
+        creds = Credentials.from_authorized_user_info(token_info, GMAIL_SCOPES)
+        service = build("gmail", "v1", credentials=creds, cache_discovery=False)
+    
+        deadline = time.time() + 120
+        matched = None
+        last_inbox = []
+        while time.time() < deadline:
+            query = f"to:{expected_to_fragment}"
+            response = (
+                service.users()
+                .messages()
+                .list(userId="me", q=query, maxResults=20)
+                .execute()
+            )
+            last_inbox = response.get("messages", []) or []
+            for msg in last_inbox:
+                detail = (
+                    service.users()
+                    .messages()
+                    .get(
+                        userId="me",
+                        id=msg["id"],
+                        format="metadata",
+                        metadataHeaders=["From", "To", "Subject", "Date"],
+                    )
+                    .execute()
+                )
+                headers = detail.get("payload", {}).get("headers", [])
+                to_header = _get_header(headers, "To")
+                subject = _get_header(headers, "Subject")
+                if expected_to_fragment in to_header and expected_subject_fragment in subject:
+                    matched = {"to": to_header, "subject": subject}
+                    break
+            if matched:
+                break
+            time.sleep(10)
+    
+>       assert matched is not None, (
+            "Expected an email in the Gmail inbox addressed to "
+            f"'{expected_to_fragment}' with subject containing "
+            f"'{expected_subject_fragment}'. Found {len(last_inbox)} candidate(s)."
+        )
+E       AssertionError: Expected an email in the Gmail inbox addressed to 'codes.icy+receiver-zr-emf8n35@gmail.com' with subject containing 'Welcome to Knock, Knock User zr-emf8n35!'. Found 1 candidate(s).
+E       assert None is not None
+
+tests/test_final_state.py:243: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_knock_workflow_exists_and_active
+PASSED tests/test_final_state.py::test_knock_user_identified_with_email
+FAILED tests/test_final_state.py::test_log_file_contains_workflow_key - Asser...
+FAILED tests/test_final_state.py::test_log_file_contains_workflow_run_id - As...
+FAILED tests/test_final_state.py::test_log_file_contains_recipient_id - Asser...
+FAILED tests/test_final_state.py::test_log_file_contains_recipient_email - As...
+FAILED tests/test_final_state.py::test_knock_user_message_for_workflow - Asse...
+FAILED tests/test_final_state.py::test_email_received_in_gmail_inbox - Assert...
+=================== 6 failed, 2 passed in 220.29s (0:03:40) ====================

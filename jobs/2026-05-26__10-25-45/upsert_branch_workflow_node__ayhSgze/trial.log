@@ -1,0 +1,99 @@
+Skipping image OS validation for hb__upsert_branch_workflow_node: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-ayhsgze > /logs/artifacts/run-id && echo upsert_branch_workflow_node__ayhSgze > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Upsert a Knock Workflow with a Branch Step via the Node.js Management SDK
+
+## Background
+Knock (https://knock.app) is a notification infrastructure platform whose workflow engine orchestrates cross-channel messaging from a single trigger. Workflows can be authored as code through the Management API (`https://control.knock.app`), upserted into the `development` environment, and then triggered by the regular Knock API (`https://api.knock.app`). The `branch` function step lets a workflow take one of several `if / else if / else` paths at runtime based on the workflow run scope (`recipient.*`, `data.*`, etc.).
+
+The Knock workspace used for this task already has two channels configured:
+- An **in-app feed** channel with channel key `in-app`.
+- A **Mailtrap email** channel with channel key `mailtrap`.
+
+## Requirements
+Build a small Node.js project that, in a single `npm start` run, performs the following with the Knock SDKs:
+1. Uses `@knocklabs/mgmt` (authenticated with `KNOCK_SERVICE_TOKEN`) to **upsert** a workflow in the `development` environment whose body contains a single top-level `branch` function step. The `branch` step must contain two branches whose `terminates` flag is `true` so each branch ends the workflow on its own path:
+   - A non-default branch that runs when `data.channel_preference` equals the string `email`. This branch contains a single `channel` step that sends an email via the `mailtrap` channel.
+   - A default branch that contains a single `channel` step that sends an in-app message via the `in-app` channel.
+2. Sets a `trigger_data_json_schema` on the workflow that requires a string property named `channel_preference`.
+3. **Activates** the workflow in the `development` environment via the Management API after upserting it.
+4. Uses `@knocklabs/node` (authenticated with `KNOCK_API_TOKEN`) to **trigger** the workflow twice against the `development` environment, in this order:
+   1. First trigger with `data.channel_preference = "email"` — this MUST exercise the email branch.
+   2. Second trigger with `data.channel_preference = "in-app"` — this MUST exercise the default in-app branch.
+5. Each trigger MUST use **a single inline recipient** (a `Recipient` object with `id`, `email`, and `name`) whose `email` is set to the Gmail address described in the Acceptance Criteria so that the email branch delivers to a Gmail inbox we can verify.
+6. Logs the workflow key and both `workflow_run_id` values to a log file in the exact format described in the Acceptance Criteria.
+
+## Implementation Hints
+- Read the current run identifier from the `ZEALT_RUN_ID` environment variable and append it to any externally visible identifier (workflow key, recipient IDs, log lines) so concurrent runs do not collide.
+- The Management API only writes to the `development` environment; do not pass any other environment to `workflows.upsert`/`workflows.activate`.
+- The branch step schema (`type: "branch"`) uses a `branches` array. Each non-default branch must declare `conditions` and a nested `steps` array; the final branch must be marked as the default branch and contains the in-app fallback step. Mark each branch as terminating so the workflow exits at the end of the branch.
+- Use the `mailtrap` channel key for the email step and the `in-app` channel key for the in-app step. Provide simple Liquid templates referencing `recipient.name` so a message body is produced.
+- For the email recipient, use the Gmail user name available in `GMAIL_USER_NAME` to build a `+receiver-<run-id>@gmail.com` address (so the email can be verified via Gmail inbound).
+- After triggering, append the workflow key and run IDs to the log file using the exact prefixes shown in Acceptance Criteria.
+
+## Acceptance Criteria
+- Project path: `/home/user/myproject`
+- Ensure the real Knock workflow upsert, activation, and trigger actions are executed and that the log artifact exists.
+- Log file: `/home/user/myproject/output.log`
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable.
+- A workflow whose `key` equals `branch-flow-${run-id}` MUST exist in the `development` environment of the Knock workspace and MUST be `active`.
+- The workflow MUST contain a single top-level `branch` step that has:
+  - A non-default branch whose conditions evaluate `data.channel_preference == "email"` and whose nested step is a `channel` step bound to channel key `mailtrap`.
+  - A default branch whose nested step is a `channel` step bound to channel key `in-app`.
+- The workflow MUST be triggered exactly twice in this order using the workflow trigger API: first with `data.channel_preference = "email"`, then with `data.channel_preference = "in-app"`. Each trigger MUST use a single inline recipient with:
+  - `id` equal to `user-${run-id}`.
+  - `email` equal to `${GMAIL_USER_NAME}+receiver-${run-id}@gmail.com`.
+  - `name` equal to `User ${run-id}`.
+- The log file MUST contain the following three lines (in any order):
+  - `Workflow Key: branch-flow-<run-id>`
+  - `Email Run ID: <uuid>`
+  - `InApp Run ID: <uuid>`
+  where each `<uuid>` is the `workflow_run_id` returned by the corresponding trigger call.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

@@ -1,0 +1,46 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 1,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780131701459,
+            "stop": 1780131797172
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_route_response",
+                "status": "passed",
+                "duration": 95308,
+                "start": 1780131701821,
+                "stop": 1780131797129,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_server_logs",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 42,
+                "start": 1780131797130,
+                "stop": 1780131797172,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_server_logs(start_app):\n        assert os.path.isfile(LOG_FILE), f\"Log file not found at {LOG_FILE}\"\n        with open(LOG_FILE, \"r\") as f:\n            logs = f.read()\n>       assert \"Custom ID: harbor-test-123\" in logs, f\"Expected log 'Custom ID: harbor-test-123' not found in server logs. Logs: {logs}\"\nE       AssertionError: Expected log 'Custom ID: harbor-test-123' not found in server logs. Logs: Error: Build failed with 1 error:\nE         ./config/routes.oas.json:0:0: ERROR: [plugin: open-api-routes-plugin] Could not find module '../modules/hello-handler'\nE         Ran into irrecoverable error while starting watcher. Fix the error and restart the server.\nE         \nE       assert 'Custom ID: harbor-test-123' in \"Error: Build failed with 1 error:\\n./config/routes.oas.json:0:0: ERROR: [plugin: open-api-routes-plugin] Could not fi..../modules/hello-handler'\\nRan into irrecoverable error while starting watcher. Fix the error and restart the server.\\n\"\n\ntests/test_final_state.py:43: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

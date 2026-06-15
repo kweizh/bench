@@ -1,0 +1,75 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: anyio-4.13.0, json-ctrf-0.5.0
+collected 8 items
+
+tests/test_final_state.py .......F                                       [100%]
+
+=================================== FAILURES ===================================
+______________________ test_email_received_in_gmail_inbox ______________________
+
+    def test_email_received_in_gmail_inbox():
+        run_id = _run_id()
+        gmail_user = _gmail_user_name()
+        expected_to_fragment = f"{gmail_user}+receiver-{run_id}@gmail.com"
+        expected_subject_fragment = f"Welcome to Knock, Knock User {run_id}!"
+    
+        token_info = json.loads(os.environ["GMAIL_TOKEN_JSON"])
+        creds = Credentials.from_authorized_user_info(token_info, GMAIL_SCOPES)
+        service = build("gmail", "v1", credentials=creds, cache_discovery=False)
+    
+        deadline = time.time() + 120
+        matched = None
+        last_inbox = []
+        while time.time() < deadline:
+            query = f"to:{expected_to_fragment}"
+            response = (
+                service.users()
+                .messages()
+                .list(userId="me", q=query, maxResults=20)
+                .execute()
+            )
+            last_inbox = response.get("messages", []) or []
+            for msg in last_inbox:
+                detail = (
+                    service.users()
+                    .messages()
+                    .get(
+                        userId="me",
+                        id=msg["id"],
+                        format="metadata",
+                        metadataHeaders=["From", "To", "Subject", "Date"],
+                    )
+                    .execute()
+                )
+                headers = detail.get("payload", {}).get("headers", [])
+                to_header = _get_header(headers, "To")
+                subject = _get_header(headers, "Subject")
+                if expected_to_fragment in to_header and expected_subject_fragment in subject:
+                    matched = {"to": to_header, "subject": subject}
+                    break
+            if matched:
+                break
+            time.sleep(10)
+    
+>       assert matched is not None, (
+            "Expected an email in the Gmail inbox addressed to "
+            f"'{expected_to_fragment}' with subject containing "
+            f"'{expected_subject_fragment}'. Found {len(last_inbox)} candidate(s)."
+        )
+E       AssertionError: Expected an email in the Gmail inbox addressed to 'codes.icy+receiver-zr-hkkcr57@gmail.com' with subject containing 'Welcome to Knock, Knock User zr-hkkcr57!'. Found 0 candidate(s).
+E       assert None is not None
+
+tests/test_final_state.py:243: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_log_file_contains_workflow_key
+PASSED tests/test_final_state.py::test_log_file_contains_workflow_run_id
+PASSED tests/test_final_state.py::test_log_file_contains_recipient_id
+PASSED tests/test_final_state.py::test_log_file_contains_recipient_email
+PASSED tests/test_final_state.py::test_knock_workflow_exists_and_active
+PASSED tests/test_final_state.py::test_knock_user_identified_with_email
+PASSED tests/test_final_state.py::test_knock_user_message_for_workflow
+FAILED tests/test_final_state.py::test_email_received_in_gmail_inbox - Assert...
+=================== 1 failed, 7 passed in 126.54s (0:02:06) ====================

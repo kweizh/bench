@@ -1,0 +1,70 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 5,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779780170046,
+            "stop": 1779780192768
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_workflow_trigger_frequency_is_once_per_recipient",
+                "status": "passed",
+                "duration": 749,
+                "start": 1779780170218,
+                "stop": 1779780170967,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_is_active_in_development",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779780170968,
+                "stop": 1779780170969,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_mailtrap_channel_step",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779780170970,
+                "stop": 1779780170971,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_has_two_workflow_run_id_lines",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779780170972,
+                "stop": 1779780170974,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_exactly_one_email_was_delivered",
+                "status": "passed",
+                "duration": 21793,
+                "start": 1779780170974,
+                "stop": 1779780192767,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

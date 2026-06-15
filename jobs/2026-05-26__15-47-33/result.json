@@ -1,0 +1,58 @@
+{
+    "id": "ddb1766a-a222-43e9-a88a-6bb7801b4ee9",
+    "started_at": "2026-05-26T15:47:33.578399",
+    "updated_at": "2026-05-26T16:19:26.863345",
+    "finished_at": "2026-05-26T16:19:26.863345",
+    "n_total_trials": 11,
+    "stats": {
+        "n_completed_trials": 11,
+        "n_errored_trials": 4,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__glm-4.7__tasks": {
+                "n_trials": 11,
+                "n_errors": 4,
+                "metrics": [
+                    {
+                        "mean": 0.18181818181818182
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "tenant_scoped_email_node__bXEtYCz",
+                            "cancel_workflow_run_node__LKXZHoM",
+                            "embed_feed_popover_nextjs__AeEkovF",
+                            "upsert_step_conditions_py__qr5ub4B",
+                            "upsert_branch_workflow_node__EPjbmus",
+                            "upsert_workflow_top_level_condit__4Cgse3Q",
+                            "trigger_email_workflow_py__EMF8N35",
+                            "trigger_per_recipient_data_py__qNkjLtE",
+                            "once_per_recipient_dedup_node__5eebdvv"
+                        ],
+                        "1.0": [
+                            "push_workflow_cli__EUJXJAG",
+                            "upsert_trigger_data_schema_node__DDQdjmw"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "embed_feed_popover_nextjs__AeEkovF",
+                        "trigger_email_workflow_py__EMF8N35",
+                        "upsert_trigger_data_schema_node__DDQdjmw",
+                        "trigger_per_recipient_data_py__qNkjLtE"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 266879,
+        "cost_usd": null
+    }
+}

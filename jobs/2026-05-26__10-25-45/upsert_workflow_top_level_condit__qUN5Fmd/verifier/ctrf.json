@@ -1,0 +1,61 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779764370907,
+            "stop": 1779764373265
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_output_log_contains_workflow_run_id",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779764371121,
+                "stop": 1779764371122,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_active_with_top_level_conditions",
+                "status": "passed",
+                "duration": 384,
+                "start": 1779764371122,
+                "stop": 1779764371506,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_single_mailtrap_step_with_expected_subject",
+                "status": "passed",
+                "duration": 710,
+                "start": 1779764371506,
+                "stop": 1779764372216,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_admin_received_email_but_viewer_did_not",
+                "status": "passed",
+                "duration": 1048,
+                "start": 1779764372216,
+                "stop": 1779764373264,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

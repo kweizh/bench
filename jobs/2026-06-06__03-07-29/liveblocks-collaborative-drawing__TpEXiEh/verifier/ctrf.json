@@ -1,0 +1,55 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 2,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780717516440,
+            "stop": 1780717553105
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_dependencies_declared_and_no_mock",
+                "status": "passed",
+                "duration": 808,
+                "start": 1780717516787,
+                "stop": 1780717517595,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_static_page_contract",
+                "status": "passed",
+                "duration": 16415,
+                "start": 1780717517595,
+                "stop": 1780717534010,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_collaborative_stroke_propagation_and_eraser_and_undo",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 19093,
+                "start": 1780717534011,
+                "stop": 1780717553104,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None, room_id = 'liveblocks-drawing-zr-tpexieh'\n\n    def test_collaborative_stroke_propagation_and_eraser_and_undo(start_app, room_id):\n        assert _wait_for_http_ok(f\"{APP_URL}/?user=alice\", timeout=180), \"Next.js app did not become ready.\"\n        from playwright.sync_api import sync_playwright\n    \n        unique_a = f\"alice-{uuid.uuid4().hex[:6]}\"\n        unique_b = f\"bob-{uuid.uuid4().hex[:6]}\"\n    \n        with sync_playwright() as p:\n            browser, ctx_a, ctx_b, page_a, page_b = _open_two_contexts(p)\n            try:\n                page_a.goto(f\"{APP_URL}/?user={unique_a}\")\n                page_b.goto(f\"{APP_URL}/?user={unique_b}\")\n                _wait_selector(page_a, '[data-testid=\"canvas\"]')\n                _wait_selector(page_b, '[data-testid=\"canvas\"]')\n                # Allow connection to room.\n                time.sleep(3)\n    \n                # --- Scenario 1: A draws a stroke, B sees it. ---\n                _select_pen(page_a)\n                _set_color(page_a, \"#ff0000\")\n                _set_width(page_a, 6)\n                _draw_stroke(page_a, [(120, 120), (160, 160), (200, 200), (240, 240), (280, 280)])\n                # Wait for propagation.\n                deadline = time.time() + 10\n                propagated = False\n                while time.time() < deadline:\n                    if page_b.locator(f'[data-testid=\"canvas\"] polyline[data-user-id=\"{unique_a}\"]').count() >= 1:\n                        propagated = True\n                        break\n                    time.sleep(0.5)\n>               assert propagated, \"Bob's canvas did not receive Alice's stroke within 10 seconds.\"\nE               AssertionError: Bob's canvas did not receive Alice's stroke within 10 seconds.\nE               assert False\n\ntests/test_final_state.py:249: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

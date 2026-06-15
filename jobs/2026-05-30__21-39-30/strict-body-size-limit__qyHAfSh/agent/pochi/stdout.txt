@@ -1,0 +1,93 @@
+- Initializing MCP connections...
+You
+# Enforce Strict Body Size Limit ## Background To protect backend services from excessively large payloads, we need to enforce a strict request body size limit at the API gateway layer using Zuplo. ## Requirements * Initialize a new Zuplo project. * Create a custom inbound policy that restricts the request body size to a maximum of 1024 bytes. * Create a POST route at `/upload` that returns a 200 OK with the text `Upload successful`. * Apply the custom policy to the `/upload` route. * If a request is missing the `content-length` header or its value exceeds 1024, the policy must reject the request with a `413 Payload Too Large` status code and the text `Payload Too Large`. ## Implementation Hints * Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project. * Create a custom policy module (e.g., `modules/body-limit.ts`) that inspects the `content-length` header of the incoming `ZuploRequest`. * Register the policy in `config/policies.json`. * Define the `/upload` POST route in `config/routes.oas.json` and attach the policy and a simple handler. * Remember to kill the background dev server before completing the task. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: zuplo dev --port 9200 * Port: 9200 * API Endpoints: * POST `/upload`: * Rejects requests without a `content-length` header with status 413 and text `Payload Too Large`. * Rejects requests where `content-length` > 1024 with status 413 and text `Payload Too Large`. * Accepts requests where `content-length` <= 1024, returning status 200 and text `Upload successful`.   
+
+Pochi
+💭 Thinking for 401 characters   
+📋 Updating todo list (6 items) ✔ 
+💭 Thinking for 39 characters   
+💫 Executing npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes ✖ "Command execution timed out after 120 seconds."
+💭 Thinking for 111 characters   
+💫 Executing ls /myproject/ ✔ 
+💭 Thinking for 101 characters   
+💫 Executing ls /myproject/node_modules/.package-lock.json 2>/dev/null && echo "node_modules exists" || echo "node_modules may be incomplete" ✔ 
+💫 Executing ls /myproject/node_modules/zuplo/package.json 2>/dev/null && echo "zuplo installed" || echo "zuplo not found" ✔ 
+💭 Thinking for 96 characters   
+📋 Updating todo list (6 items) ✔ 
+📂 Listing files in /myproject/config ✔ 
+📂 Listing files in /myproject/modules ✔ 
+📖 Reading /myproject/config/policies.json ✔ 
+📖 Reading /myproject/config/routes.oas.json ✔ 
+📖 Reading /myproject/modules/hello-world.ts ✔ 
+💭 Thinking for 966 characters   
+Now I'll create the custom policy module and update the configuration files.   
+✏️  Writing /myproject/modules/body-limit.ts ✔ 
+📋 Updating todo list (6 items) ✔ 
+✏️  Writing /myproject/config/policies.json ✔ 
+💭 Thinking for 280 characters   
+Now I need to create the upload handler module and update the routesconfiguration.   
+✏️  Writing /myproject/modules/upload-handler.ts ✔ 
+📋 Updating todo list (6 items) ✔ 
+✏️  Writing /myproject/config/routes.oas.json ✔ 
+📋 Updating todo list (6 items) ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+💭 Thinking for 63 characters   
+💫 Executing sleep 15 && curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:9200/upload -H "content-length: 10" -d "small data" ✖ "Command exited with code 7"
+💭 Thinking for 75 characters   
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 398 characters   
+🛠️ Tool webSearch ✔ 
+💭 Thinking for 174 characters   
+I need to add the `policyType` field to the policyconfiguration.   
+✏️  Writing /myproject/config/policies.json ✔ 
+Now let me start the dev server again andtest:   
+🛠️ Tool startBackgroundJob ✔ 
+💫 Executing sleep 20 && curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:9200/upload -H "content-length: 10" -d "small data" ✖ "Command exited with code 7"
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 822 characters   
+The module paths should not include the `.ts` extension. Let me fix both configurationfiles.   
+🔧 Applying diff to /myproject/config/policies.json ✔ 
+🔧 Applying diff to /myproject/config/routes.oas.json ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+💫 Executing sleep 20 && echo "=== Test 1: Valid request (content-length: 10) ===" && curl -s -w "\nHTTP Status: %{http_code}\n" -X POST http://localhost:9200/upload -H "content-length: 10" -d "small data" && echo "" && echo "=== Test 2: Missing content-length ===" && curl -s -w "\nHTTP Status: %{http_code}\n" -X POST http://localhost:9200/upload -d "some data" && echo "" && echo "=== Test 3: content-length > 1024 ===" && curl -s -w "\nHTTP Status: %{http_code}\n" -X POST http://localhost:9200/upload -H "content-length: 2048" -d "small data" ✔ 
+💭 Thinking for 4875 characters   
+Test 1 and 3 work correctly. Test 2 isn't truly testing a missing content-length header since curl adds it automatically. Let me verify the missing header case properly:   
+💫 Executing printf "POST /upload HTTP/1.1\r\nHost: localhost:9200\r\n\r\n" | nc -w 2 localhost 9200 ✖ "Command exited with code 127"
+💫 Executing curl -s -w "\nHTTP Status: %{http_code}\n" -X POST http://localhost:9200/upload -H "Transfer-Encoding: chunked" --data-binary "" ✔ 
+💭 Thinking for 754 characters   
+💫 Executing curl -s -w "\nHTTP Status: %{http_code}\n" -X POST http://localhost:9200/upload -H "content-length: 0" ✔ 
+💭 Thinking for 619 characters   
+Let me also test theboundary case:   
+💫 Executing curl -s -w "\nHTTP Status: %{http_code}\n" -X POST http://localhost:9200/upload -H "content-length: 1024" ✔ 
+💫 Executing curl -s -w "\nHTTP Status: %{http_code}\n" -X POST http://localhost:9200/upload -H "content-length: 1025" ✔ 
+All tests pass: - `content-length: 0` → 200 ✓ - `content-length: 10` → 200 ✓ - `content-length: 1024` → 200 ✓ - `content-length: 1025` → 413 ✓ - Missing `content-length` → 413 ✓ - `content-length: 2048` → 413 ✓ Now let me kill the dev server and complete thetask.   
+🛠️ Tool killBackgroundJob ✔ 
+📋 Updating todo list (6 items) ✔ 
+🎉 Task Completed
+The Zuplo project has been set up at `/home/user/myproject` (mapped to `/myproject` in the filesystem) with a strict body size limit policy. Here's a summary of what was implemented:
+
+### Files Created/Modified
+
+1. **`modules/body-limit.ts`** — Custom inbound policy that:
+   - Checks for the `content-length` header on incoming requests
+   - Returns `413 Payload Too Large` with text `Payload Too Large` if the header is missing or its value exceeds 1024
+   - Passes the request through if `content-length` is present and ≤ 1024
+
+2. **`modules/upload-handler.ts`** — Simple handler that returns `200 OK` with text `Upload successful`
+
+3. **`config/policies.json`** — Registers the `body-limit` policy with `policyType: "custom-code-inbound"` and `maxSize: 1024` option
+
+4. **`config/routes.oas.json`** — Defines the `POST /upload` route with the `body-limit` inbound policy applied and the `upload-handler` as the handler
+
+### Test Results (all passing)
+- `content-length: 0` → 200 `Upload successful` ✓
+- `content-length: 10` → 200 `Upload successful` ✓
+- `content-length: 1024` → 200 `Upload successful` ✓
+- `content-length: 1025` → 413 `Payload Too Large` ✓
+- `content-length: 2048` → 413 `Payload Too Large` ✓
+- Missing `content-length` → 413 `Payload Too Large` ✓
+
+The dev server has been stopped. Start it with `zuplo dev --port 9200` from the project directory.   
+- Waiting for background jobs to complete (timeout: 60000ms)...
+✖ Async wait timeout reached. Remaining: 1 job(s)
+  

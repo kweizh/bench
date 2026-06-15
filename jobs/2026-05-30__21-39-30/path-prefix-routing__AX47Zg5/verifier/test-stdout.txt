@@ -1,0 +1,78 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 2 items
+
+tests/test_final_state.py FF                                             [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_users_route_get _____________________________
+
+start_app = None
+
+    def test_users_route_get(start_app):
+        """Test that GET /api/v1/users/{id} proxies to httpbin correctly."""
+        url = f"http://localhost:{PORT}/api/v1/users/u-123"
+        response = requests.get(url)
+>       assert response.status_code == 200, f"Expected status 200, got {response.status_code}. Response: {response.text}"
+E       AssertionError: Expected status 200, got 404. Response: {
+E           "type": "https://httpproblems.com/http-status/404",
+E           "title": "Not Found",
+E           "status": 404,
+E           "instance": "/api/v1/users/u-123",
+E           "trace": {
+E             "timestamp": "2026-05-30T21:51:05.329Z",
+E             "requestId": "eb710f00-bc52-4644-bddc-5374c6ced27c",
+E             "buildId": "518a7c36-7f48-4305-a3dc-76787c2081cc"
+E           }
+E         }
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:48: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+
+added 1 package, removed 100 packages, and audited 1346 packages in 8s
+
+353 packages are looking for funding
+  run `npm fund` for details
+
+17 vulnerabilities (3 low, 3 moderate, 9 high, 2 critical)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ zuplo dev --port 9200
+process 'zuplo_dev' started pid=994
+zuplo_dev process startup detected
+___________________________ test_products_route_post ___________________________
+
+start_app = None
+
+    def test_products_route_post(start_app):
+        """Test that POST /api/v1/products/{id} proxies to httpbin correctly and forwards body."""
+        url = f"http://localhost:{PORT}/api/v1/products/p-456"
+        payload = {"item": "laptop"}
+        response = requests.post(url, json=payload)
+>       assert response.status_code == 200, f"Expected status 200, got {response.status_code}. Response: {response.text}"
+E       AssertionError: Expected status 200, got 404. Response: {
+E           "type": "https://httpproblems.com/http-status/404",
+E           "title": "Not Found",
+E           "status": 404,
+E           "instance": "/api/v1/products/p-456",
+E           "trace": {
+E             "timestamp": "2026-05-30T21:51:05.380Z",
+E             "requestId": "22afb9d9-ef15-4e1f-8e18-121d35262de0",
+E             "buildId": "518a7c36-7f48-4305-a3dc-76787c2081cc"
+E           }
+E         }
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:59: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_users_route_get - AssertionError: Expe...
+FAILED tests/test_final_state.py::test_products_route_post - AssertionError: ...
+============================== 2 failed in 13.98s ==============================

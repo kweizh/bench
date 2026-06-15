@@ -1,0 +1,33 @@
+version = "1.0"
+
+[metadata]
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 10240
+gpus = 0
+allow_internet = true
+mcp_servers = []
+
+[environment.env]
+POCHI_API_KEY = "${POCHI_API_KEY}"
+KNOCK_SERVICE_TOKEN = "${KNOCK_SERVICE_TOKEN}"
+KNOCK_API_TOKEN = "${KNOCK_API_TOKEN}"
+MAILTRAP_DOMAIN = "${MAILTRAP_DOMAIN}"
+GMAIL_USER_NAME = "${GMAIL_USER_NAME}"
+
+[agent]
+timeout_sec = 600.0
+
+[verifier]
+timeout_sec = 600.0
+
+[verifier.env]
+KNOCK_SERVICE_TOKEN = "${KNOCK_SERVICE_TOKEN}"
+GMAIL_USER_NAME = "${GMAIL_USER_NAME}"
+GMAIL_TOKEN_JSON = "${GMAIL_TOKEN_JSON}"
+
+[solution.env]
+

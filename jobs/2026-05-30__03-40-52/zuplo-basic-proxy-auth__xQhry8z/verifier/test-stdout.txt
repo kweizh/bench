@@ -1,0 +1,32 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 1 item
+
+tests/test_final_state.py .                                              [100%]
+
+==================================== PASSES ====================================
+___________________ test_unauthenticated_request_returns_401 ___________________
+---------------------------- Captured stdout setup -----------------------------
+
+added 48 packages, removed 35 packages, changed 103 packages, and audited 1405 packages in 3m
+
+338 packages are looking for funding
+  run `npm fund` for details
+
+17 vulnerabilities (4 low, 2 moderate, 9 high, 2 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+/tests/.pytest_cache/d/.xprocess/start_app$ npm run dev
+process 'start_app' started pid=1673
+start_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_unauthenticated_request_returns_401
+======================== 1 passed in 160.38s (0:02:40) =========================

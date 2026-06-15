@@ -1,0 +1,52 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779763579900,
+            "stop": 1779763917541
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_workflow_exists_and_active",
+                "status": "passed",
+                "duration": 386,
+                "start": 1779763579983,
+                "stop": 1779763580369,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_app_serves_root",
+                "status": "passed",
+                "duration": 2130,
+                "start": 1779763580369,
+                "stop": 1779763582499,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_popover_renders_triggered_notification",
+                "status": "passed",
+                "duration": 335040,
+                "start": 1779763582500,
+                "stop": 1779763917540,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

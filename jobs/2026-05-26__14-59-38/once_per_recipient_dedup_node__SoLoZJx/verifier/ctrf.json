@@ -1,0 +1,73 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 4,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779779925015,
+            "stop": 1779780048772
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_workflow_trigger_frequency_is_once_per_recipient",
+                "status": "passed",
+                "duration": 837,
+                "start": 1779779925187,
+                "stop": 1779779926024,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_is_active_in_development",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779779926024,
+                "stop": 1779779926026,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_mailtrap_channel_step",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779779926026,
+                "stop": 1779779926028,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_has_two_workflow_run_id_lines",
+                "status": "passed",
+                "duration": 2,
+                "start": 1779779926028,
+                "stop": 1779779926030,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_exactly_one_email_was_delivered",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 122742,
+                "start": 1779779926030,
+                "stop": 1779780048772,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "run_id = 'zr-solozjx', workflow_key = 'dedup-test-zr-solozjx'\n\n    def test_exactly_one_email_was_delivered(run_id, workflow_key):\n        gmail_user = os.environ[\"GMAIL_USER_NAME\"]\n        mailtrap_domain = os.environ[\"MAILTRAP_DOMAIN\"]\n        recipient_email = f\"{gmail_user}+receiver-{run_id}@gmail.com\"\n        subject_substr = workflow_key  # `dedup-test-{run-id}`\n    \n        matches = _list_matching_gmail_messages(\n            subject_substr=subject_substr,\n            recipient_email=recipient_email,\n            deadline_seconds=120,\n        )\n    \n>       assert len(matches) >= 1, (\n            f\"No matching email arrived in Gmail within the timeout. \"\n            f\"Looked for subject containing {subject_substr!r} to {recipient_email!r}.\"\n        )\nE       AssertionError: No matching email arrived in Gmail within the timeout. Looked for subject containing 'dedup-test-zr-solozjx' to 'codes.icy+receiver-zr-solozjx@gmail.com'.\nE       assert 0 >= 1\nE        +  where 0 = len([])\n\ntests/test_final_state.py:231: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

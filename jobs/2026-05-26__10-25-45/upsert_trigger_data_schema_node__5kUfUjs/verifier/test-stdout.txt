@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 9 items
+
+tests/test_final_state.py .........                                      [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_log_contains_workflow_key
+PASSED tests/test_final_state.py::test_log_contains_workflow_active
+PASSED tests/test_final_state.py::test_log_contains_valid_trigger_run_id
+PASSED tests/test_final_state.py::test_log_contains_invalid_trigger_status
+PASSED tests/test_final_state.py::test_workflow_exists_via_management_api
+PASSED tests/test_final_state.py::test_workflow_has_trigger_data_json_schema
+PASSED tests/test_final_state.py::test_workflow_has_in_app_channel_step
+PASSED tests/test_final_state.py::test_valid_trigger_succeeds
+PASSED tests/test_final_state.py::test_invalid_trigger_returns_422
+============================== 9 passed in 2.47s ===============================

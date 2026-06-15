@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info:
+  title: Items API
+  version: 1.0.0
+servers:
+  - url: https://api.example.com
+paths:
+  /items:
+    get:
+      summary: Get a list of items
+      operationId: getItems
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          required: true
+      x-speakeasy-pagination:
+        type: offsetLimit
+        inputs:
+          - name: page
+            in: parameters
+            type: page
+        outputs:
+          results: $.data
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                required:
+                  - data

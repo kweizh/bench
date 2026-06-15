@@ -1,0 +1,79 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 5,
+            "passed": 0,
+            "failed": 5,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779783276372,
+            "stop": 1779783400891
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_workflow_trigger_frequency_is_once_per_recipient",
+                "status": "failed",
+                "duration": 371,
+                "start": 1779783276547,
+                "stop": 1779783276918,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "workflow_key = 'dedup-test-zr-5eebdvv'\n\n    @pytest.fixture(scope=\"module\")\n    def workflow_payload(workflow_key):\n        \"\"\"Fetch the workflow from the Knock Management API and return parsed JSON.\"\"\"\n        service_token = os.environ.get(\"KNOCK_SERVICE_TOKEN\")\n        assert service_token, \"KNOCK_SERVICE_TOKEN env var is not set.\"\n        url = f\"{KNOCK_CONTROL_URL}/v1/workflows/{workflow_key}\"\n        resp = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {service_token}\"},\n            timeout=30,\n        )\n>       assert resp.status_code == 200, (\n            f\"Knock Management API GET workflow {workflow_key} returned \"\n            f\"status {resp.status_code}: {resp.text}\"\n        )\nE       AssertionError: Knock Management API GET workflow dedup-test-zr-5eebdvv returned status 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:48: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_is_active_in_development",
+                "status": "failed",
+                "duration": 23,
+                "start": 1779783276918,
+                "stop": 1779783276941,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "workflow_key = 'dedup-test-zr-5eebdvv'\n\n    @pytest.fixture(scope=\"module\")\n    def workflow_payload(workflow_key):\n        \"\"\"Fetch the workflow from the Knock Management API and return parsed JSON.\"\"\"\n        service_token = os.environ.get(\"KNOCK_SERVICE_TOKEN\")\n        assert service_token, \"KNOCK_SERVICE_TOKEN env var is not set.\"\n        url = f\"{KNOCK_CONTROL_URL}/v1/workflows/{workflow_key}\"\n        resp = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {service_token}\"},\n            timeout=30,\n        )\n>       assert resp.status_code == 200, (\n            f\"Knock Management API GET workflow {workflow_key} returned \"\n            f\"status {resp.status_code}: {resp.text}\"\n        )\nE       AssertionError: Knock Management API GET workflow dedup-test-zr-5eebdvv returned status 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:48: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_mailtrap_channel_step",
+                "status": "failed",
+                "duration": 4,
+                "start": 1779783276941,
+                "stop": 1779783276945,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "workflow_key = 'dedup-test-zr-5eebdvv'\n\n    @pytest.fixture(scope=\"module\")\n    def workflow_payload(workflow_key):\n        \"\"\"Fetch the workflow from the Knock Management API and return parsed JSON.\"\"\"\n        service_token = os.environ.get(\"KNOCK_SERVICE_TOKEN\")\n        assert service_token, \"KNOCK_SERVICE_TOKEN env var is not set.\"\n        url = f\"{KNOCK_CONTROL_URL}/v1/workflows/{workflow_key}\"\n        resp = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {service_token}\"},\n            timeout=30,\n        )\n>       assert resp.status_code == 200, (\n            f\"Knock Management API GET workflow {workflow_key} returned \"\n            f\"status {resp.status_code}: {resp.text}\"\n        )\nE       AssertionError: Knock Management API GET workflow dedup-test-zr-5eebdvv returned status 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:48: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_has_two_workflow_run_id_lines",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 3,
+                "start": 1779783276946,
+                "stop": 1779783276949,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_has_two_workflow_run_id_lines():\n>       assert os.path.isfile(LOG_FILE), f\"Log file {LOG_FILE} does not exist.\"\nE       AssertionError: Log file /home/user/myproject/output.log does not exist.\nE       assert False\nE        +  where False = <function isfile at 0x7271428a8220>('/home/user/myproject/output.log')\nE        +    where <function isfile at 0x7271428a8220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:182: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_exactly_one_email_was_delivered",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 123941,
+                "start": 1779783276950,
+                "stop": 1779783400891,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "run_id = 'zr-5eebdvv', workflow_key = 'dedup-test-zr-5eebdvv'\n\n    def test_exactly_one_email_was_delivered(run_id, workflow_key):\n        gmail_user = os.environ[\"GMAIL_USER_NAME\"]\n        mailtrap_domain = os.environ[\"MAILTRAP_DOMAIN\"]\n        recipient_email = f\"{gmail_user}+receiver-{run_id}@gmail.com\"\n        subject_substr = workflow_key  # `dedup-test-{run-id}`\n    \n        matches = _list_matching_gmail_messages(\n            subject_substr=subject_substr,\n            recipient_email=recipient_email,\n            deadline_seconds=120,\n        )\n    \n>       assert len(matches) >= 1, (\n            f\"No matching email arrived in Gmail within the timeout. \"\n            f\"Looked for subject containing {subject_substr!r} to {recipient_email!r}.\"\n        )\nE       AssertionError: No matching email arrived in Gmail within the timeout. Looked for subject containing 'dedup-test-zr-5eebdvv' to 'codes.icy+receiver-zr-5eebdvv@gmail.com'.\nE       assert 0 >= 1\nE        +  where 0 = len([])\n\ntests/test_final_state.py:231: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

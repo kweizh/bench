@@ -1,0 +1,42 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 5 items
+
+tests/test_final_state.py ....F                                          [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_exactly_one_email_was_delivered _____________________
+
+run_id = 'zr-solozjx', workflow_key = 'dedup-test-zr-solozjx'
+
+    def test_exactly_one_email_was_delivered(run_id, workflow_key):
+        gmail_user = os.environ["GMAIL_USER_NAME"]
+        mailtrap_domain = os.environ["MAILTRAP_DOMAIN"]
+        recipient_email = f"{gmail_user}+receiver-{run_id}@gmail.com"
+        subject_substr = workflow_key  # `dedup-test-{run-id}`
+    
+        matches = _list_matching_gmail_messages(
+            subject_substr=subject_substr,
+            recipient_email=recipient_email,
+            deadline_seconds=120,
+        )
+    
+>       assert len(matches) >= 1, (
+            f"No matching email arrived in Gmail within the timeout. "
+            f"Looked for subject containing {subject_substr!r} to {recipient_email!r}."
+        )
+E       AssertionError: No matching email arrived in Gmail within the timeout. Looked for subject containing 'dedup-test-zr-solozjx' to 'codes.icy+receiver-zr-solozjx@gmail.com'.
+E       assert 0 >= 1
+E        +  where 0 = len([])
+
+tests/test_final_state.py:231: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_workflow_trigger_frequency_is_once_per_recipient
+PASSED tests/test_final_state.py::test_workflow_is_active_in_development
+PASSED tests/test_final_state.py::test_workflow_has_mailtrap_channel_step
+PASSED tests/test_final_state.py::test_log_file_has_two_workflow_run_id_lines
+FAILED tests/test_final_state.py::test_exactly_one_email_was_delivered - Asse...
+=================== 1 failed, 4 passed in 123.75s (0:02:03) ====================

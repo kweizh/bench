@@ -1,0 +1,56 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779780770.160962,
+            "stop": 1779780771.2859936
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_openapi_modified_yaml_exists",
+                "status": "passed",
+                "duration": 0.0004668529945774935,
+                "start": 1779780770.170334,
+                "stop": 1779780770.1710303,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_openapi_modified_yaml_content",
+                "status": "passed",
+                "duration": 0.00042425800347700715,
+                "start": 1779780770.1712203,
+                "stop": 1779780770.1717758,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_openapi_modified_is_valid",
+                "status": "passed",
+                "duration": 1.1127534830011427,
+                "start": 1779780770.1719515,
+                "stop": 1779780771.2849405,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_original_openapi_yaml_unmodified",
+                "status": "passed",
+                "duration": 0.000463452008261811,
+                "start": 1779780771.2851684,
+                "stop": 1779780771.2857838,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

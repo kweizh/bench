@@ -1,0 +1,37 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 1,
+            "passed": 0,
+            "failed": 1,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780175948042,
+            "stop": 1780175969834
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_custom_not_found_handler",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 21443,
+                "start": 1780175948391,
+                "stop": 1780175969834,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_custom_not_found_handler(start_app):\n        url = \"http://localhost:9000/some-random-non-existent-route\"\n        try:\n            response = requests.get(url)\n        except requests.exceptions.RequestException as e:\n            pytest.fail(f\"Failed to connect to Zuplo dev server at {url}: {e}\")\n    \n        assert response.status_code == 404, f\"Expected status code 404, got {response.status_code}\"\n    \n        try:\n            data = response.json()\n        except ValueError:\n            pytest.fail(f\"Response is not valid JSON. Content: {response.text}\")\n    \n>       assert data.get(\"error\") == \"Not Found\", f\"Expected error to be 'Not Found', got {data.get('error')}\"\nE       AssertionError: Expected error to be 'Not Found', got None\nE       assert None == 'Not Found'\nE        +  where None = <built-in method get of dict object at 0x7fb99d81eb40>('error')\nE        +    where <built-in method get of dict object at 0x7fb99d81eb40> = {'instance': '/some-random-non-existent-route', 'status': 404, 'title': 'Not Found', 'trace': {'buildId': '02df00d1-ec...b46a-ad51ece650d5', 'requestId': '75056415-3e54-4ca8-a452-2301ff187103', 'timestamp': '2026-05-30T21:19:29.786Z'}, ...}.get\n\ntests/test_final_state.py:45: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

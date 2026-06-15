@@ -1,0 +1,72 @@
+{
+    "id": "62936e6e-8562-4a05-ab54-b3708139657c",
+    "started_at": "2026-06-06T03:07:33.639324",
+    "updated_at": "2026-06-06T03:50:23.057669",
+    "finished_at": "2026-06-06T03:50:23.057669",
+    "n_total_trials": 17,
+    "stats": {
+        "n_completed_trials": 17,
+        "n_errored_trials": 9,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__glm-5.1__pending-tasks": {
+                "n_trials": 16,
+                "n_errors": 9,
+                "metrics": [
+                    {
+                        "mean": 0.058823529411764705
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "liveblocks-collaborative-kanban__ezdXWyn",
+                            "liveblocks-whiteboard-selection__rdbtuK3",
+                            "liveblocks-inbox-notifications-f__X5KgviQ",
+                            "liveblocks-typing-indicator-form__qik2Zsz",
+                            "liveblocks-yjs-tiptap-editor__jzBNMzM",
+                            "liveblocks-spreadsheet-cells__EhtRfaM",
+                            "liveblocks-collaborative-poll-vo__srwXiRm",
+                            "liveblocks-room-readonly-access__QGzuQb5",
+                            "liveblocks-collaborative-todo-li__2gvsenr",
+                            "liveblocks-yjs-blocknote-editor__LVg6QvS",
+                            "liveblocks-nextjs-auth-organizat__aQGat8a",
+                            "liveblocks-mind-map-nodes__2iMm2GR",
+                            "liveblocks-collaborative-drawing__TpEXiEh",
+                            "liveblocks-collaborative-counter__sb6SChd",
+                            "liveblocks-presence-avatars-stac__9L8DfHP"
+                        ],
+                        "1.0": [
+                            "liveblocks-history-undo-redo__AcAnNmx"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "liveblocks-collaborative-kanban__ezdXWyn",
+                        "liveblocks-typing-indicator-form__qik2Zsz",
+                        "liveblocks-yjs-tiptap-editor__jzBNMzM",
+                        "liveblocks-collaborative-poll-vo__srwXiRm",
+                        "liveblocks-yjs-blocknote-editor__LVg6QvS",
+                        "liveblocks-mind-map-nodes__2iMm2GR",
+                        "liveblocks-collaborative-drawing__TpEXiEh"
+                    ],
+                    "VerifierTimeoutError": [
+                        "liveblocks-comments-mentions-res__S8nTbrW"
+                    ],
+                    "NonZeroAgentExitCodeError": [
+                        "liveblocks-presence-avatars-stac__9L8DfHP"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 639324,
+        "cost_usd": null
+    }
+}

@@ -1,0 +1,85 @@
+- Initializing MCP connections...
+You
+# Multiplayer Form with Per-Field Typing Indicators and Field-Lock Overlay ## Background Liveblocks is a realtime collaboration infrastructure that exposes Presence (ephemeral per-user state) and Storage (CRDT-backed persistent state) through React hooks like `useMyPresence`, `useOthers`, `useStorage`, and `useMutation`. Your project is a Next.js (App Router) app that already renders a static form skeleton (Name / Email / Bio fields) but has no realtime behavior wired up. Your job is to turn it into a multiplayer form: every keystroke is synced across browsers via Liveblocks Storage, and every focused/typing user is visible to others via Liveblocks Presence, with a per-field "X is typing in Bio…" indicator and an optimistic per-field lock overlay. You MUST use the real Liveblocks cloud — DO NOT mock the Liveblocks SDK, DO NOT stub the WebSocket, and DO NOT swap in a fake provider. The runtime environment will provide a real `LIVEBLOCKS_SECRET_KEY` (server-side) and `NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY` (client-side, public key starting with `pk_`). ## Requirements * Implement a Liveblocks-backed multiplayer form using `@liveblocks/client` and `@liveblocks/react` (App Router compatible). * Storage: a single `LiveObject` named `form` holding three string fields: `name`, `email`, `bio`. Initialize them to empty strings if the room has no storage yet. * Presence: each user has a `typing` field whose value is one of `"name"`, `"email"`, `"bio"`, or `null`, plus an `info` (or `user`) field with a stable display name (e.g. derived from query-string `?name=Alice`, falling back to `Anonymous`). * Per-field input: each of the three `<input>`/`<textarea>` elements must be controlled by the value from Storage; every keystroke must write back into the `LiveObject` (e.g. with `useMutation`). The same field MUST stay in sync across all open browser tabs/contexts connected to the same room. * Per-field typing indicator: above each field, when at least one *other* user has `presence.typing` equal to that field id, render a visible indicator line whose text contains both the user's display name and the human-readable field label (Name / Email / Bio). Examples that are acceptable: `Alice is typing in Bio...`, `Alice is typing in Bio…`. The indicator MUST disappear when that other user blurs / stops typing in the field. * Optimistic per-field lock overlay: when at least one *other* user is currently `typing` in a field, the corresponding input for the local user MUST show a visually disabled overlay (greyed out / semi-transparent). The input itself MUST remain functionally usable — the local user can still focus it and take over typing (this is a soft lock, not a hard `disabled`). The overlay element MUST be detectable from the DOM (see Acceptance Criteria for the required marker). * The room id must be the same for every visitor of the page so two browser contexts collaborate in the same room. Hardcode the room id as `harbor-typing-form-${ZEALT_RUN_ID}` (read `ZEALT_RUN_ID` from the environment at build/start time; if unset, fall back to `harbor-typing-form-local`). This isolates each evaluation run on the real Liveblocks cloud. * The Liveblocks auth endpoint MUST be implemented on the server (e.g. `app/api/liveblocks-auth/route.ts`) using `LIVEBLOCKS_SECRET_KEY`. The client MUST authenticate via this endpoint (i.e. `LiveblocksProvider` with `authEndpoint: "/api/liveblocks-auth"`). Do NOT ship the secret key to the browser. ## Implementation Hints * The starter project is at `/home/user/myproject`. Inspect the existing form markup in `app/page.tsx` (or equivalent) and replace its static state with Liveblocks-driven state. * `@liveblocks/client`, `@liveblocks/react`, and `@liveblocks/node` are already installed; don't reinstall. * Wire `LiveblocksProvider` + `RoomProvider` around the form. Use `initialStorage={{ form: new LiveObject({ name: "", email: "", bio: "" }) }}` and `initialPresence={{ typing: null, info: { name: <displayName> } }}` (field names are flexible as long as Presence/Storage shapes meet the requirements). * Use `useStorage((root) => root.form)` to read, and `useMutation(({ storage }, field, value) => storage.get("form").set(field, value), [])` to write. * Use `useUpdateMyPresence()` on `onFocus`/`onBlur`/`onChange` to keep `presence.typing` synced with the field the local user is editing. * Use `useOthers()` to compute, per field, the list of OTHER users currently typing in that field; render the indicator and the lock overlay based on that list. * For the overlay, an absolutely-positioned `<div data-testid="lock-overlay-">` on top of the input works well. Pointer-events must NOT permanently disable the input — keep the underlying input reachable by keyboard / click so a user can take over. * Read the display name from `searchParams.get("name")` on the client; fall back to `"Anonymous"`. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: npm run start (a production build will already exist at verification time; the verifier will rebuild and start as needed) * Port: 3000 * Route: `GET /` renders a form page with at least three labeled inputs/textarea elements for `Name`, `Email`, and `Bio`. * The `Name` input has `data-testid="input-name"` and is a single-line `<input>`. * The `Email` input has `data-testid="input-email"` and is a single-line `<input>`. * The `Bio` input has `data-testid="input-bio"` and is a `<textarea>` or multi-line input. * Per-field typing indicator marker: when an OTHER user is typing in a field, an element with `data-testid="typing-indicator-<field>"` is rendered above that field (where `<field>` is one of `name`, `email`, `bio`). Its visible text MUST include both that user's display name and the field's human-readable label (`Name`, `Email`, or `Bio`). * Per-field lock overlay marker: when an OTHER user is typing in a field, an element with `data-testid="lock-overlay-<field>"` is rendered over that field. When NO other user is typing in that field, this overlay element is NOT in the DOM. * Storage sync: typing in any field in browser context A is reflected in the value of the corresponding input in browser context B within \~2 seconds, when both contexts are connected to the same room. * Presence cleanup: when the typing user blurs the field, the indicator and the lock overlay in other contexts MUST disappear within \~2 seconds. * The Liveblocks auth endpoint is reachable at `POST /api/liveblocks-auth` and returns `200` (or `401` only when the request is unauthenticated in a way the implementer chose) for a normal client request initiated by `LiveblocksProvider`. * The room id MUST be derived from the `ZEALT_RUN_ID` environment variable as `harbor-typing-form-${ZEALT_RUN_ID}` so concurrent verification runs do not collide. * The Liveblocks SDK packages (`@liveblocks/client`, `@liveblocks/react`) MUST be used. No mock provider or fake WebSocket may be substituted.   
+
+Pochi
+💭 Thinking for 92 characters   
+📂 Listing files in /home/user/myproject recursively ✔ 
+📖 Reading /home/user/myproject/app/page.tsx ✔ 
+📖 Reading /home/user/myproject/app/layout.tsx ✔ 
+📖 Reading /home/user/myproject/package.json ✔ 
+📖 Reading /home/user/myproject/next.config.js ✔ 
+📋 Updating todo list (7 items) ✔ 
+Now let me create all the necessary files. I'll start with the Liveblocks configuration:   
+📋 Updating todo list (7 items) ✔ 
+✏️  Writing /home/user/myproject/liveblocks.config.ts ✔ 
+📋 Updating todo list (7 items) ✔ 
+✏️  Writing /home/user/myproject/app/api/liveblocks-auth/route.ts ✔ 
+📋 Updating todo list (7 items) ✔ 
+Now I'll create the Room wrapper component that handles `LiveblocksProvider` + `RoomProvider`. Since App Router requires client components for these, I'll create a dedicated client component:   
+✏️  Writing /home/user/myproject/app/components/Room.tsx ✔ 
+📋 Updating todo list (7 items) ✔ 
+Now I'll create the main multiplayer form component:   
+✏️  Writing /home/user/myproject/app/components/MultiplayerForm.tsx ✔ 
+📋 Updating todo list (7 items) ✔ 
+Now update `app/page.tsx` to use the new components:   
+✏️  Writing /home/user/myproject/app/page.tsx ✔ 
+📋 Updating todo list (8 items) ✔ 
+The layout doesn't need special changes since `RoomProvider` is already wrapped at the page level. However, I need to handle the Room ID properly. The `ZEALT_RUN_ID` needs to be made available client-side. Let me update the approach to expose the room ID via a `NEXT_PUBLIC_` variable:   
+📖 Reading /home/user/myproject/next.config.js ✔ 
+I need to use `next.config.js` to expose `ZEALT_RUN_ID` to the client side as `NEXT_PUBLIC_ROOM_ID`:   
+✏️  Writing /home/user/myproject/next.config.js ✔ 
+📋 Updating todo list (8 items) ✔ 
+💫 Executing cd /home/user/myproject && npm run build 2>&1 ✔ 
+The build succeeds. Let me verify the app starts correctly:   
+🛠️ Tool startBackgroundJob ✔ 
+💫 Executing sleep 3 && curl -s http://localhost:3000/ | head -50 ✔ 
+The server is running and returning the page correctly. Let me also verify the auth endpoint works:   
+💫 Executing curl -s -X POST http://localhost:3000/api/liveblocks-auth -H "Content-Type: application/json" -d '{"displayName":"TestUser"}' -w "\nHTTP Status: %{http_code}\n" ✔ 
+The auth endpoint returns a JWT token with HTTP 200. The room ID in the token is `harbor-typing-form-zr-qfrmslg` which matches the `ZEALT_RUN_ID` pattern. Let me also check the room ID is being picked up correctly and the `liveblocks.config.ts` properly uses the `NEXT_PUBLIC_ROOM_ID`. Let me review the Room component once more to make sure it's correct:   
+📖 Reading /home/user/myproject/app/components/Room.tsx ✔ 
+There's a subtle issue: `initialPresence` is set once at mount time, but the `displayName` state is initially "Anonymous" and updates via `useEffect`. This means the presence name starts as "Anonymous". However, in `MultiplayerForm.tsx`, I already handle this correctly by calling `updateMyPresence({ info: { name } })` after getting the URL parameter — so the presence gets updated with the real name. But there's a potential issue: the `Room` component re-renders when `displayName` changes, which would cause `RoomProvider` to re-render with a new `initialPresence` (though `initialPresence` is only used on initial mount). This is actually fine since `initialPresence` is only used once. Let me also make sure there's no issue with the `useMyPresence` import that's unused in `MultiplayerForm.tsx`:   
+🔧 Applying diff to /home/user/myproject/app/components/MultiplayerForm.tsx ✔ 
+Now let me rebuild to make sure everything still compiles cleanly:   
+🛠️ Tool killBackgroundJob ✔ 
+💫 Executing cd /home/user/myproject && npm run build 2>&1 ✔ 
+Build succeeds cleanly. Let me do a final check to make sure all the required files are in place and review the key pieces:   
+💫 Executing find /home/user/myproject/app -type f | grep -v node_modules | sort ✔ 
+📋 Updating todo list (8 items) ✔ 
+🎉 Task Completed
+The multiplayer form has been fully implemented. Here's a summary of all files created/modified:
+
+## Files Created
+
+### `liveblocks.config.ts`
+- Typed Liveblocks configuration with `Presence` (`typing: "name" | "email" | "bio" | null`, `info: { name }`) and `Storage` (`form: LiveObject<{name, email, bio}>`) types
+- Creates the client with `authEndpoint: "/api/liveblocks-auth"`
+- Exports `RoomProvider`, `useStorage`, `useMutation`, `useOthers`, `useUpdateMyPresence`
+
+### `app/api/liveblocks-auth/route.ts`
+- Server-side auth endpoint using `@liveblocks/node` and `LIVEBLOCKS_SECRET_KEY`
+- Room ID derived from `ZEALT_RUN_ID` env var: `harbor-typing-form-${ZEALT_RUN_ID}` (fallback: `harbor-typing-form-local`)
+- Returns a signed JWT token; verified working (HTTP 200)
+
+### `app/components/Room.tsx`
+- Client component wrapping `RoomProvider` with `id={NEXT_PUBLIC_ROOM_ID}`
+- `initialStorage: { form: new LiveObject({ name: "", email: "", bio: "" }) }`
+- `initialPresence: { typing: null, info: { name: displayName } }`
+
+### `app/components/MultiplayerForm.tsx`
+- Reads `?name=` from URL on mount, calls `updateMyPresence({ info: { name } })` to sync
+- Uses `useStorage((root) => root.form)` to read all three field values
+- Uses `useMutation` to write individual fields via `storage.get("form").set(field, value)`
+- `onFocus` → `updateMyPresence({ typing: field })`, `onBlur` → `updateMyPresence({ typing: null })`
+- `<TypingIndicator field="...">` — renders `data-testid="typing-indicator-{field}"` with text like `"Alice is typing in Bio…"` when any other user has `presence.typing === field`
+- `<LockOverlay field="...">` — renders `data-testid="lock-overlay-{field}"` (absolutely-positioned, `pointerEvents: "none"`) only when another user is typing in that field; removed from DOM when no one is typing
+- All three inputs have correct `data-testid` attributes: `input-name`, `input-email`, `input-bio`; Bio uses `<textarea>`
+
+### `app/page.tsx`
+- Replaced static state with `<Room><MultiplayerForm /></Room>`
+
+### `next.config.js` (updated)
+- Injects `NEXT_PUBLIC_ROOM_ID` at build time from `ZEALT_RUN_ID` so the same room ID is used client- and server-side   
+- Waiting for background jobs to complete (timeout: 60000ms)...
+✖ Async wait timeout reached. Remaining: 1 job(s)
+  

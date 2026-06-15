@@ -1,0 +1,128 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 3 items
+
+tests/test_final_state.py .EE                                            [100%]
+
+==================================== ERRORS ====================================
+_________________ ERROR at setup of test_static_page_contract __________________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x7f1e507bbd70>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        class Starter(ProcessStarter):
+            name = "drawing_app"
+            args = ["npm", "run", "dev"]
+            env = os.environ.copy()
+            popen_kwargs = {"cwd": PROJECT_DIR, "text": True}
+            timeout = 240
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                try:
+                    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                        if s.connect_ex(("localhost", 3000)) != 0:
+                            return False
+                    r = requests.get(f"{APP_URL}/?user=warmup", timeout=5)
+                    return r.status_code < 500
+                except Exception:
+                    return False
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x7f1e50687230>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 240                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/drawing_app$ npm run dev
+process 'drawing_app' started pid=1139
+_ ERROR at setup of test_collaborative_stroke_propagation_and_eraser_and_undo __
+
+xprocess = <xprocess.xprocess.XProcess object at 0x7f1e507bbd70>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        class Starter(ProcessStarter):
+            name = "drawing_app"
+            args = ["npm", "run", "dev"]
+            env = os.environ.copy()
+            popen_kwargs = {"cwd": PROJECT_DIR, "text": True}
+            timeout = 240
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                try:
+                    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                        if s.connect_ex(("localhost", 3000)) != 0:
+                            return False
+                    r = requests.get(f"{APP_URL}/?user=warmup", timeout=5)
+                    return r.status_code < 500
+                except Exception:
+                    return False
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x7f1e50687230>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 240                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_dependencies_declared_and_no_mock
+ERROR tests/test_final_state.py::test_static_page_contract - TimeoutError: Th...
+ERROR tests/test_final_state.py::test_collaborative_stroke_propagation_and_eraser_and_undo
+=================== 1 passed, 2 errors in 241.28s (0:04:01) ====================

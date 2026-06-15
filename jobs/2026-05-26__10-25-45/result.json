@@ -1,0 +1,122 @@
+{
+    "id": "c72dcbf1-f4db-456d-9459-bd14bd71e874",
+    "started_at": "2026-05-26T10:25:46.063043",
+    "updated_at": "2026-05-26T11:29:04.300628",
+    "finished_at": "2026-05-26T11:29:04.300628",
+    "n_total_trials": 33,
+    "stats": {
+        "n_completed_trials": 33,
+        "n_errored_trials": 4,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3.1-pro__tasks": {
+                "n_trials": 9,
+                "n_errors": 2,
+                "metrics": [
+                    {
+                        "mean": 0.6363636363636364
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "tenant_scoped_email_node__B9teQNn",
+                            "cancel_workflow_run_node__LMUH2QZ"
+                        ],
+                        "1.0": [
+                            "push_workflow_cli__jq9qujz",
+                            "upsert_step_conditions_py__tEAqGG3",
+                            "upsert_branch_workflow_node__t82i5pL",
+                            "upsert_workflow_top_level_condit__qUN5Fmd",
+                            "trigger_email_workflow_py__76gtdGg",
+                            "upsert_trigger_data_schema_node__dMW3ykY",
+                            "trigger_per_recipient_data_py__buQJpdB"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "VerifierTimeoutError": [
+                        "embed_feed_popover_nextjs__XBidSxz"
+                    ],
+                    "InitialStateError": [
+                        "once_per_recipient_dedup_node__qcf2Ypv"
+                    ]
+                }
+            },
+            "pochi__gpt-5.2-codex__tasks": {
+                "n_trials": 10,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.36363636363636365
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "tenant_scoped_email_node__jnSjZj2",
+                            "cancel_workflow_run_node__UHdRtZn",
+                            "embed_feed_popover_nextjs__x7jT7bU",
+                            "upsert_step_conditions_py__vMLAucw",
+                            "upsert_workflow_top_level_condit__D9uMKNs",
+                            "trigger_email_workflow_py__3tY8WFs"
+                        ],
+                        "1.0": [
+                            "push_workflow_cli__tcfrcky",
+                            "upsert_branch_workflow_node__YttdQre",
+                            "upsert_trigger_data_schema_node__5kUfUjs",
+                            "trigger_per_recipient_data_py__itoqiLA"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "InitialStateError": [
+                        "once_per_recipient_dedup_node__tuCJq8f"
+                    ]
+                }
+            },
+            "pochi__claude-4-6-sonnet__tasks": {
+                "n_trials": 10,
+                "n_errors": 1,
+                "metrics": [
+                    {
+                        "mean": 0.8181818181818182
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "tenant_scoped_email_node__C8kwuJu"
+                        ],
+                        "1.0": [
+                            "cancel_workflow_run_node__HQKT8k8",
+                            "embed_feed_popover_nextjs__8MBLjvo",
+                            "push_workflow_cli__MkJjxKk",
+                            "upsert_step_conditions_py__qNVNGZo",
+                            "upsert_branch_workflow_node__ayhSgze",
+                            "upsert_workflow_top_level_condit__SMeGWAF",
+                            "trigger_email_workflow_py__tpZZGaN",
+                            "upsert_trigger_data_schema_node__t3eZUTB",
+                            "trigger_per_recipient_data_py__5yEKW2J"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "InitialStateError": [
+                        "once_per_recipient_dedup_node__JqpLoms"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 1118168,
+        "cost_usd": null
+    }
+}

@@ -1,0 +1,46 @@
+- Initializing MCP connections...
+You
+# Zuplo Metadata-Based Routing ## Background In multi-tenant Zuplo gateways, it is common to route requests to different backend URLs based on metadata attached to the authenticated user (typically populated by the API Key or JWT policy). In this task, you will implement a custom handler that routes requests dynamically based on `request.user.data.tenantId`. ## Requirements * Initialize a new Zuplo project. * Create a custom inbound policy named `mock-api-key-metadata`. This policy should read the `x-mock-tenant-id` header. If the header is present, it must set `request.user = { sub: "mock-user", data: { tenantId: <header-value> } }` and allow the request to proceed. If missing, it must return a 401 Unauthorized response. * Create an API route for `GET /api/data` and apply the `mock-api-key-metadata` policy to it. * Create a custom handler for the `/api/data` route. The handler must read `tenantId` from `request.user.data.tenantId`. * The custom handler must proxy the request to `https://echo.zuplo.io/{tenantId}/data` and return the upstream response to the client. * If `tenantId` is somehow missing in the handler, it should return a 400 Bad Request. ## Implementation Hints * Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project. * Create the custom policy and custom handler as TypeScript modules in the `modules/` directory. * Update `config/policies.json` to register your custom policy. * Update `config/routes.oas.json` to define the `/api/data` route, attach your policy, and route to your custom handler. * Use the native `fetch` API in your handler to call the upstream URL. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: zuplo dev --port 3000 * Port: 3000 * API Endpoints: * GET `/api/data`: * When `x-mock-tenant-id` header is missing: Returns 401 Unauthorized. * When `x-mock-tenant-id: tenant-a` is provided: Proxies to `https://echo.zuplo.io/tenant-a/data` and returns the successful response. * When `x-mock-tenant-id: tenant-b` is provided: Proxies to `https://echo.zuplo.io/tenant-b/data` and returns the successful response.   
+
+Pochi
+💭 Thinking for 0 characters   
+📂 Listing files in /home ✔ 
+💭 Thinking for 174 characters   
+💫 Executing npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes ✔ 
+💭 Thinking for 0 characters   
+📋 Updating todo list (1 items) ✔ 
+💭 Thinking for 168 characters   
+📂 Listing files in /home/user/myproject recursively ✔ 
+💭 Thinking for 0 characters   
+📖 Reading /home/user/myproject/config/policies.json ✔ 
+📖 Reading /home/user/myproject/config/routes.oas.json ✔ 
+💭 Thinking for 327 characters   
+📖 Reading /home/user/myproject/modules/hello-world.ts ✔ 
+💭 Thinking for 139 characters   
+🔍 Searching for policy in *.ts files in /home/user/myproject ✔ 
+💭 Thinking for 193 characters   
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/policies/ip-restriction-inbound/policy.ts ✔ 
+💭 Thinking for 378 characters   
+💭 Thinking for 177 characters   
+🔍 Searching for policyType.*custom in *.json files in /home/user/myproject/node_modules/zuplo/docs ✔ 
+💭 Thinking for 128 characters   
+🔍 Searching for policies.json in *.* files in /home/user/myproject/node_modules/zuplo/docs ✔ 
+💭 Thinking for 131 characters   
+📖 Reading /home/user/myproject/node_modules/zuplo/docs/policies/custom-code-inbound/doc.md ✔ 
+💭 Thinking for 481 characters   
+💭 Thinking for 235 characters   
+🔍 Searching for badRequest\( in *.ts files in /home/user/myproject/node_modules/@zuplo/runtime ✔ 
+📖 Reading /home/user/myproject/node_modules/@zuplo/runtime/out/types/index.d.ts ✔ 
+💭 Thinking for 334 characters   
+✏️  Writing /home/user/myproject/modules/mock-api-key-metadata.ts ✔ 
+✏️  Writing /home/user/myproject/modules/tenant-data-handler.ts ✔ 
+💭 Thinking for 0 characters   
+🔧 Applying diff to /home/user/myproject/config/policies.json ✔ 
+💭 Thinking for 261 characters   
+🔧 Applying diff to /home/user/myproject/config/routes.oas.json ✔ 
+💭 Thinking for 222 characters   
+📋 Updating todo list (1 items) ✔ 
+💭 Thinking for 149 characters   
+🎉 Task Completed
+Implemented metadata-based routing in /home/user/myproject. Added custom inbound policy modules/mock-api-key-metadata.ts, tenant proxy handler modules/tenant-data-handler.ts, registered policy in config/policies.json, and defined GET /api/data route with the inbound policy and handler in config/routes.oas.json. Start the gateway with: zuplo dev --port 3000.   
+  

@@ -1,0 +1,33 @@
+# Hide Internal Endpoints with a Speakeasy OpenAPI Overlay
+
+## Background
+Your team maintains an OpenAPI 3 specification that mixes public-facing endpoints with internal-only endpoints (for example, `/internal/health`). You want to ship a public SDK that excludes the internal endpoints, but you cannot modify the source `openapi.yaml`. Speakeasy supports the [OpenAPI Overlay Specification](https://overlays.openapi.org/) and provides a `speakeasy overlay` CLI to author and apply overlays.
+
+In this task, you must author an OpenAPI Overlay that marks the internal GET operation on `/internal/health` with the Speakeasy extension `x-speakeasy-ignore: true`, then apply that overlay against the base spec to produce a merged `result.yaml`.
+
+## Requirements
+- Create an overlay file at `/home/user/project/overlay.yaml` that conforms to the OpenAPI Overlay Specification v1.0.0.
+- The overlay must contain at least one action whose `target` JSONPath expression resolves to the `get` operation on the `/internal/health` path of the base spec.
+- The matching action must use an `update` block that adds the extension `x-speakeasy-ignore: true` to that operation.
+- Apply the overlay against the base spec `/home/user/project/openapi.yaml` using the Speakeasy CLI, writing the merged document to `/home/user/project/result.yaml`.
+- Do **not** modify the original `/home/user/project/openapi.yaml`; the public operation(s) must remain unchanged in `result.yaml`.
+
+## Implementation Hints
+- The Speakeasy CLI exposes an `overlay` command group; its `apply` subcommand merges an overlay onto a base schema. Use the documented flags to point at the schema and the overlay, and to write the output to a file.
+- A minimal overlay document has top-level `overlay`, `info`, and `actions` keys. Each action needs a `target` (JSONPath) and either `update` or `remove`.
+- JSONPath expressions in overlays start with `$`. To address the GET operation on `/internal/health`, use a bracket-notation path that escapes the literal `/` characters (e.g. `$.paths["/internal/health"].get`).
+- You may run `speakeasy overlay validate` first to sanity-check your overlay before applying it.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- `/home/user/project/overlay.yaml` exists and:
+  - Has top-level key `overlay` with value `1.0.0`.
+  - Has an `info.title` and `info.version`.
+  - Contains an `actions` entry whose `target` JSONPath resolves to the GET operation on `/internal/health`.
+  - That action contains an `update` block setting `x-speakeasy-ignore` to `true`.
+- `/home/user/project/result.yaml` exists and:
+  - Is a valid OpenAPI 3 document derived from `openapi.yaml` with the overlay applied.
+  - `paths./internal/health.get.x-speakeasy-ignore` is the boolean `true`.
+  - The public operation under `/public/items` (GET) is preserved with no `x-speakeasy-ignore` key.
+- The original `/home/user/project/openapi.yaml` must remain byte-for-byte identical to its seeded contents.
+

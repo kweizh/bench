@@ -1,0 +1,147 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 2 items
+
+../../../tests/test_final_state.py .F                                    [100%]
+
+=================================== FAILURES ===================================
+________________________ test_follow_feature_two_users _________________________
+
+start_app = None
+
+    def test_follow_feature_two_users(start_app):
+        """Open two Playwright browser contexts in the same room and verify the follow behavior."""
+        from playwright.sync_api import sync_playwright
+    
+        target_cursor = {"x": 1500, "y": 1200}
+        viewport = {"width": 1280, "height": 720}
+        expected_cam_x = round(target_cursor["x"] - viewport["width"] / 2)
+        expected_cam_y = round(target_cursor["y"] - viewport["height"] / 2)
+    
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
+            try:
+                ctx_a = browser.new_context(viewport=viewport)
+                ctx_b = browser.new_context(viewport=viewport)
+                page_a = ctx_a.new_page()
+                page_b = ctx_b.new_page()
+    
+                page_a.goto(BASE_URL + "/", wait_until="networkidle", timeout=60000)
+                page_b.goto(BASE_URL + "/", wait_until="networkidle", timeout=60000)
+    
+                for page in (page_a, page_b):
+                    page.wait_for_selector('[data-testid="canvas-viewport"]', timeout=30000)
+                    page.wait_for_selector('[data-testid="avatar-bar"]', timeout=30000)
+    
+                # Verify initial state on user A.
+                initial_following = page_a.get_attribute(
+                    '[data-testid="canvas-viewport"]', "data-following"
+                )
+                assert initial_following == "", (
+                    f"Initial data-following on user A must be empty, got {initial_following!r}"
+                )
+                initial_camera = page_a.get_attribute(
+                    '[data-testid="canvas-viewport"]', "data-camera"
+                )
+                assert json.loads(initial_camera) == {"x": 0, "y": 0}, (
+                    f"Initial data-camera must be (0,0); got {initial_camera!r}"
+                )
+    
+                # Move user B's cursor inside the canvas to the known coordinate.
+                canvas_b = page_b.locator('[data-testid="canvas-viewport"]')
+                box_b = canvas_b.bounding_box()
+                assert box_b is not None, "canvas-viewport has no bounding box on user B."
+                # Use page.mouse.move which produces real pointer events on the canvas.
+                page_b.mouse.move(
+                    box_b["x"] + 20,
+                    box_b["y"] + 20,
+                )
+                # Then dispatch a pointermove at the exact canvas-space target via dispatchEvent
+                # so we don't depend on the canvas's actual on-screen size.
+                page_b.evaluate(
+                    """
+                    ({x, y}) => {
+                        const el = document.querySelector('[data-testid="canvas-viewport"]');
+                        const rect = el.getBoundingClientRect();
+                        const ev = new PointerEvent('pointermove', {
+                            bubbles: true,
+                            cancelable: true,
+                            clientX: rect.left + x,
+                            clientY: rect.top + y,
+                            pointerType: 'mouse',
+                        });
+                        el.dispatchEvent(ev);
+                    }
+                    """,
+                    target_cursor,
+                )
+    
+                # Wait until user A sees an avatar for user B.
+                page_a.wait_for_selector('[data-testid^="avatar-"]', timeout=15000)
+                avatar = page_a.locator('[data-testid^="avatar-"]').first
+                testid = avatar.get_attribute("data-testid")
+                assert testid and testid.startswith("avatar-"), (
+                    f"Expected an avatar with data-testid avatar-*, got {testid!r}"
+                )
+                connection_id = testid.split("avatar-", 1)[1]
+                assert connection_id, "Avatar testid did not contain a connectionId suffix."
+    
+                # Click the avatar to start following user B.
+                avatar.click()
+    
+                # Wait until data-following updates.
+>               page_a.wait_for_function(
+                    """
+                    ([cid]) => {
+                        const el = document.querySelector('[data-testid="canvas-viewport"]');
+                        return el && el.getAttribute('data-following') === cid;
+                    }
+                    """,
+                    arg=[connection_id],
+                    timeout=5000,
+                )
+
+/tests/test_final_state.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/local/lib/python3.12/dist-packages/playwright/sync_api/_generated.py:11302: in wait_for_function
+    self._sync(
+/usr/local/lib/python3.12/dist-packages/playwright/_impl/_page.py:1032: in wait_for_function
+    return await self._main_frame.wait_for_function(**locals_to_params(locals()))
+/usr/local/lib/python3.12/dist-packages/playwright/_impl/_frame.py:771: in wait_for_function
+    return from_channel(await self._channel.send("waitForFunction", params))
+/usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:59: in send
+    return await self._connection.wrap_api_call(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <playwright._impl._connection.Connection object at 0x7f5cd4e619d0>
+cb = <function Channel.send.<locals>.<lambda> at 0x7f5cd3a96480>
+is_internal = False
+
+    async def wrap_api_call(
+        self, cb: Callable[[], Any], is_internal: bool = False
+    ) -> Any:
+        if self._api_zone.get():
+            return await cb()
+        task = asyncio.current_task(self._loop)
+        st: List[inspect.FrameInfo] = getattr(task, "__pw_stack__", inspect.stack())
+        parsed_st = _extract_stack_trace_information_from_stack(st, is_internal)
+        self._api_zone.set(parsed_st)
+        try:
+            return await cb()
+        except Exception as error:
+>           raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+E           playwright._impl._errors.TimeoutError: Page.wait_for_function: Timeout 5000ms exceeded.
+
+/usr/local/lib/python3.12/dist-packages/playwright/_impl/_connection.py:514: TimeoutError
+==================================== PASSES ====================================
+_______________________ test_auth_endpoint_returns_token _______________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/nextjs_app$ npm run start -- -p 3000
+process 'nextjs_app' started pid=1662
+nextjs_app process startup detected
+=========================== short test summary info ============================
+PASSED ../../../tests/test_final_state.py::test_auth_endpoint_returns_token
+FAILED ../../../tests/test_final_state.py::test_follow_feature_two_users - pl...
+========================= 1 failed, 1 passed in 30.97s =========================

@@ -1,0 +1,69 @@
+{
+    "id": "42421d55-94af-4f93-97d4-51d3bd10cab1",
+    "started_at": "2026-05-30T05:22:54.408936",
+    "updated_at": "2026-05-30T06:03:28.067242",
+    "finished_at": "2026-05-30T06:03:28.067242",
+    "n_total_trials": 23,
+    "stats": {
+        "n_completed_trials": 23,
+        "n_errored_trials": 2,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gpt-5.2-codex__tasks": {
+                "n_trials": 22,
+                "n_errors": 2,
+                "metrics": [
+                    {
+                        "mean": 0.13043478260869565
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "ip-whitelisting__FKpw475",
+                            "custom-auth-policy__k3CTxaD",
+                            "zuplo-basic-proxy-auth__iHheaG7",
+                            "basic-proxy-auth__f2Pdokz",
+                            "custom-response-header__jqwyqBT",
+                            "cors-configuration__BrryHd9",
+                            "header-validation__HQ9ypVu",
+                            "url-rewrite-policy__vxMG5cL",
+                            "request-logging__tViFXSe",
+                            "request_body_cloning__6APmBoK",
+                            "mcp-tool-implementation__NTy6fVi",
+                            "tiered-rate-limiting__9cCMDbP",
+                            "response-transformation__sfpjBbj",
+                            "zuplo-custom-response-header__33g3QHT",
+                            "caching-policy__mFmn7JJ",
+                            "circuit_breaker_setup__JvaLJcx",
+                            "zuplo-dynamic-routing__dPeGHK9",
+                            "request-body-transformation__yVx7csg",
+                            "dynamic-upstream-routing__oe7ihSP"
+                        ],
+                        "1.0": [
+                            "custom-error-handling__XeeyxFy",
+                            "query-parameter-validation__YvWjm8U",
+                            "mock-response-handler__PoUAGjL"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "basic-proxy-auth__f2Pdokz"
+                    ],
+                    "InitialStateError": [
+                        "multi-tenant-gateway__HdWQqmT"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 804801,
+        "cost_usd": null
+    }
+}

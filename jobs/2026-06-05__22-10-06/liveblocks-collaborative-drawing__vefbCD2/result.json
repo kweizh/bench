@@ -1,0 +1,117 @@
+{
+    "id": "73ca42df-bc72-4c30-ab7d-e959a3c07ea2",
+    "task_name": "liveblocks-collaborative-drawing-strokes",
+    "trial_name": "liveblocks-collaborative-drawing__vefbCD2",
+    "trial_uri": "file:///home/kweizh/zealt/zealt-agent/jobs/2026-06-05__22-10-06/liveblocks-collaborative-drawing__vefbCD2",
+    "task_id": {
+        "path": "/home/kweizh/zealt/liveblocks-benchmark/scratchpad/pending-tasks/liveblocks-collaborative-drawing-strokes"
+    },
+    "source": "pending-tasks",
+    "task_checksum": "80ea0190dcfce961e3d59dec2b93d0ceb3b46202fb8a5cdb2c617aed11650cb5",
+    "config": {
+        "task": {
+            "path": "/home/kweizh/zealt/liveblocks-benchmark/scratchpad/pending-tasks/liveblocks-collaborative-drawing-strokes",
+            "git_url": null,
+            "git_commit_id": null,
+            "name": null,
+            "ref": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "pending-tasks"
+        },
+        "trial_name": "liveblocks-collaborative-drawing__vefbCD2",
+        "trials_dir": "jobs/2026-06-05__22-10-06",
+        "timeout_multiplier": 1.0,
+        "agent_timeout_multiplier": null,
+        "verifier_timeout_multiplier": null,
+        "agent_setup_timeout_multiplier": null,
+        "environment_build_timeout_multiplier": null,
+        "agent": {
+            "name": null,
+            "import_path": "agents.pochi:Pochi",
+            "model_name": "google/gemini-3-flash",
+            "skills": [],
+            "override_timeout_sec": null,
+            "override_setup_timeout_sec": null,
+            "max_timeout_sec": null,
+            "kwargs": {},
+            "env": {},
+            "mcp_servers": []
+        },
+        "environment": {
+            "type": "docker",
+            "import_path": null,
+            "force_build": false,
+            "delete": true,
+            "cpu_enforcement_policy": "auto",
+            "memory_enforcement_policy": "auto",
+            "override_cpus": null,
+            "override_memory_mb": null,
+            "override_storage_mb": null,
+            "override_gpus": null,
+            "suppress_override_warnings": false,
+            "mounts": [
+                {
+                    "type": "bind",
+                    "source": "test_initial_state.py",
+                    "target": "/bootstrap/test_initial_state.py"
+                }
+            ],
+            "extra_docker_compose": [],
+            "env": {},
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null,
+            "max_timeout_sec": null,
+            "env": {},
+            "disable": false
+        },
+        "artifacts": [
+            "/home/user"
+        ],
+        "extra_instruction_paths": [],
+        "job_id": "957bc75c-3c72-49fa-8ec1-fd46454298de"
+    },
+    "agent_info": {
+        "name": "pochi",
+        "version": "0.6.12",
+        "model_info": {
+            "name": "gemini-3-flash",
+            "provider": "google"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 50902,
+        "cost_usd": null,
+        "rollout_details": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2026-06-05T22:20:36.043263Z",
+    "finished_at": "2026-06-05T22:24:09.708652Z",
+    "environment_setup": {
+        "started_at": "2026-06-05T22:20:36.056576Z",
+        "finished_at": "2026-06-05T22:20:38.946441Z"
+    },
+    "agent_setup": {
+        "started_at": "2026-06-05T22:20:38.946479Z",
+        "finished_at": "2026-06-05T22:21:06.604956Z"
+    },
+    "agent_execution": {
+        "started_at": "2026-06-05T22:21:06.605461Z",
+        "finished_at": "2026-06-05T22:22:53.263047Z"
+    },
+    "verifier": {
+        "started_at": "2026-06-05T22:23:27.332251Z",
+        "finished_at": "2026-06-05T22:23:56.957183Z"
+    },
+    "step_results": null
+}

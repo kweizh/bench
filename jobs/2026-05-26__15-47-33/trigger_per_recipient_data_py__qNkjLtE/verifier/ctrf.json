@@ -1,0 +1,127 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 10,
+            "passed": 2,
+            "failed": 8,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779783226863,
+            "stop": 1779783551604
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_key",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 26,
+                "start": 1779783227097,
+                "stop": 1779783227123,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "log_contents = '2026-05-26 08:04:45,418 - INFO - Using run-id: zr-qnkjlte\\n2026-05-26 08:04:45,418 - INFO - Upserting workflow: per-r...RROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/workflows/per-recipient-alert-zr-qnkjlte\\n'\n\n    def test_log_file_contains_workflow_key(log_contents):\n        expected_line = f\"Workflow key: {WORKFLOW_KEY}\"\n>       assert expected_line in log_contents, (\n            f\"Expected log file {LOG_FILE} to contain the line '{expected_line}'. \"\n            f\"Got contents:\\n{log_contents}\"\n        )\nE       AssertionError: Expected log file /home/user/myproject/output.log to contain the line 'Workflow key: per-recipient-alert-zr-qnkjlte'. Got contents:\nE         2026-05-26 08:04:45,418 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:04:45,418 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:04:46,083 - ERROR - Failed to create workflow: 404 - {\"errors\":{\"detail\":\"404 Not Found\"}}\nE         2026-05-26 08:04:46,083 - ERROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/workflows?environment=development\nE         2026-05-26 08:05:23,937 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:05:23,937 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:05:24,027 - ERROR - Error: HTTPSConnectionPool(host='manage.knock.app', port=443): Max retries exceeded with url: /v1/workflows (Caused by NameResolutionError(\"HTTPSConnection(host='manage.knock.app', port=443): Failed to resolve 'manage.knock.app' ([Errno -2] Name or service not known)\"))\nE         2026-05-26 08:05:43,729 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:05:43,729 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:05:44,300 - ERROR - Failed to create workflow: 404 - {\"errors\":{\"detail\":\"404 Not Found\"}}\nE         2026-05-26 08:05:44,300 - ERROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/management/workflows\nE         2026-05-26 08:06:16,179 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:06:16,179 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:06:16,799 - ERROR - Failed to create workflow: 404 - {\"errors\":{\"detail\":\"404 Not Found\"}}\nE         2026-05-26 08:06:16,800 - ERROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/workflows\nE         2026-05-26 08:06:32,264 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:06:32,264 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:06:32,848 - ERROR - Failed to create workflow: 404 - {\"errors\":{\"detail\":\"404 Not Found\"}}\nE         2026-05-26 08:06:32,849 - ERROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/workflows/per-recipient-alert-zr-qnkjlte\nE         \nE       assert 'Workflow key: per-recipient-alert-zr-qnkjlte' in '2026-05-26 08:04:45,418 - INFO - Using run-id: zr-qnkjlte\\n2026-05-26 08:04:45,418 - INFO - Upserting workflow: per-r...RROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/workflows/per-recipient-alert-zr-qnkjlte\\n'\n\ntests/test_final_state.py:175: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_run_id",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 4,
+                "start": 1779783227123,
+                "stop": 1779783227127,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "log_contents = '2026-05-26 08:04:45,418 - INFO - Using run-id: zr-qnkjlte\\n2026-05-26 08:04:45,418 - INFO - Upserting workflow: per-r...RROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/workflows/per-recipient-alert-zr-qnkjlte\\n'\n\n    def test_log_file_contains_workflow_run_id(log_contents):\n        match = re.search(r\"Workflow run ID:\\s*([0-9a-fA-F-]+)\", log_contents)\n>       assert match, (\n            f\"Expected log file {LOG_FILE} to contain a line like 'Workflow run ID: <uuid>'. \"\n            f\"Got contents:\\n{log_contents}\"\n        )\nE       AssertionError: Expected log file /home/user/myproject/output.log to contain a line like 'Workflow run ID: <uuid>'. Got contents:\nE         2026-05-26 08:04:45,418 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:04:45,418 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:04:46,083 - ERROR - Failed to create workflow: 404 - {\"errors\":{\"detail\":\"404 Not Found\"}}\nE         2026-05-26 08:04:46,083 - ERROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/workflows?environment=development\nE         2026-05-26 08:05:23,937 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:05:23,937 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:05:24,027 - ERROR - Error: HTTPSConnectionPool(host='manage.knock.app', port=443): Max retries exceeded with url: /v1/workflows (Caused by NameResolutionError(\"HTTPSConnection(host='manage.knock.app', port=443): Failed to resolve 'manage.knock.app' ([Errno -2] Name or service not known)\"))\nE         2026-05-26 08:05:43,729 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:05:43,729 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:05:44,300 - ERROR - Failed to create workflow: 404 - {\"errors\":{\"detail\":\"404 Not Found\"}}\nE         2026-05-26 08:05:44,300 - ERROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/management/workflows\nE         2026-05-26 08:06:16,179 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:06:16,179 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:06:16,799 - ERROR - Failed to create workflow: 404 - {\"errors\":{\"detail\":\"404 Not Found\"}}\nE         2026-05-26 08:06:16,800 - ERROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/workflows\nE         2026-05-26 08:06:32,264 - INFO - Using run-id: zr-qnkjlte\nE         2026-05-26 08:06:32,264 - INFO - Upserting workflow: per-recipient-alert-zr-qnkjlte\nE         2026-05-26 08:06:32,848 - ERROR - Failed to create workflow: 404 - {\"errors\":{\"detail\":\"404 Not Found\"}}\nE         2026-05-26 08:06:32,849 - ERROR - Error: 404 Client Error: Not Found for url: https://api.knock.app/v1/workflows/per-recipient-alert-zr-qnkjlte\nE         \nE       assert None\n\ntests/test_final_state.py:183: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_exists_and_is_active",
+                "status": "failed",
+                "duration": 730,
+                "start": 1779783227128,
+                "stop": 1779783227858,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def workflow_payload():\n        token = os.environ.get(\"KNOCK_SERVICE_TOKEN\")\n        assert token, \"KNOCK_SERVICE_TOKEN environment variable is not set.\"\n        url = f\"https://control.knock.app/v1/workflows/{WORKFLOW_KEY}\"\n        response = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {token}\"},\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"Expected GET {url} to return 200, got {response.status_code}: {response.text}\"\n        )\nE       AssertionError: Expected GET https://control.knock.app/v1/workflows/per-recipient-alert-zr-qnkjlte to return 200, got 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:167: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_single_mailtrap_channel_step",
+                "status": "failed",
+                "duration": 11,
+                "start": 1779783227858,
+                "stop": 1779783227869,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def workflow_payload():\n        token = os.environ.get(\"KNOCK_SERVICE_TOKEN\")\n        assert token, \"KNOCK_SERVICE_TOKEN environment variable is not set.\"\n        url = f\"https://control.knock.app/v1/workflows/{WORKFLOW_KEY}\"\n        response = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {token}\"},\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"Expected GET {url} to return 200, got {response.status_code}: {response.text}\"\n        )\nE       AssertionError: Expected GET https://control.knock.app/v1/workflows/per-recipient-alert-zr-qnkjlte to return 200, got 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:167: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_template_references_per_recipient_data",
+                "status": "failed",
+                "duration": 10,
+                "start": 1779783227869,
+                "stop": 1779783227879,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def workflow_payload():\n        token = os.environ.get(\"KNOCK_SERVICE_TOKEN\")\n        assert token, \"KNOCK_SERVICE_TOKEN environment variable is not set.\"\n        url = f\"https://control.knock.app/v1/workflows/{WORKFLOW_KEY}\"\n        response = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {token}\"},\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"Expected GET {url} to return 200, got {response.status_code}: {response.text}\"\n        )\nE       AssertionError: Expected GET https://control.knock.app/v1/workflows/per-recipient-alert-zr-qnkjlte to return 200, got 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:167: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_owner_email_subject_mentions_role",
+                "status": "failed",
+                "duration": 245803,
+                "start": 1779783227879,
+                "stop": 1779783473682,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "owner_address = 'codes.icy+r1-zr-qnkjlte@gmail.com'\n\n    @pytest.fixture(scope=\"module\")\n    def owner_message(owner_address):\n>       return _wait_for_gmail_message(owner_address)\n\ntests/test_final_state.py:148: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nrecipient_address = 'codes.icy+r1-zr-qnkjlte@gmail.com'\n\n    def _wait_for_gmail_message(recipient_address: str):\n        service = _gmail_service()\n        deadline = time.time() + GMAIL_POLL_TIMEOUT_SECONDS\n        last_err = None\n        while time.time() < deadline:\n            try:\n                match = _search_gmail_message(service, recipient_address)\n                if match is not None:\n                    return match\n            except Exception as exc:  # noqa: BLE001\n                last_err = exc\n            time.sleep(GMAIL_POLL_INTERVAL_SECONDS)\n>       raise AssertionError(\n            f\"No Gmail message addressed to {recipient_address} found within \"\n            f\"{GMAIL_POLL_TIMEOUT_SECONDS} seconds (last error: {last_err}).\"\n        )\nE       AssertionError: No Gmail message addressed to codes.icy+r1-zr-qnkjlte@gmail.com found within 240 seconds (last error: None).\n\ntests/test_final_state.py:114: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_owner_email_body_mentions_role_and_dashboard",
+                "status": "failed",
+                "duration": 9,
+                "start": 1779783473683,
+                "stop": 1779783473692,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "owner_address = 'codes.icy+r1-zr-qnkjlte@gmail.com'\n\n    @pytest.fixture(scope=\"module\")\n    def owner_message(owner_address):\n>       return _wait_for_gmail_message(owner_address)\n\ntests/test_final_state.py:148: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nrecipient_address = 'codes.icy+r1-zr-qnkjlte@gmail.com'\n\n    def _wait_for_gmail_message(recipient_address: str):\n        service = _gmail_service()\n        deadline = time.time() + GMAIL_POLL_TIMEOUT_SECONDS\n        last_err = None\n        while time.time() < deadline:\n            try:\n                match = _search_gmail_message(service, recipient_address)\n                if match is not None:\n                    return match\n            except Exception as exc:  # noqa: BLE001\n                last_err = exc\n            time.sleep(GMAIL_POLL_INTERVAL_SECONDS)\n>       raise AssertionError(\n            f\"No Gmail message addressed to {recipient_address} found within \"\n            f\"{GMAIL_POLL_TIMEOUT_SECONDS} seconds (last error: {last_err}).\"\n        )\nE       AssertionError: No Gmail message addressed to codes.icy+r1-zr-qnkjlte@gmail.com found within 240 seconds (last error: None).\n\ntests/test_final_state.py:114: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_paleo_email_subject_mentions_role",
+                "status": "passed",
+                "duration": 77892,
+                "start": 1779783473692,
+                "stop": 1779783551584,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_paleo_email_body_mentions_role_and_dashboard",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779783551585,
+                "stop": 1779783551586,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_per_recipient_data_does_not_leak_between_recipients",
+                "status": "failed",
+                "duration": 16,
+                "start": 1779783551587,
+                "stop": 1779783551603,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "owner_address = 'codes.icy+r1-zr-qnkjlte@gmail.com'\n\n    @pytest.fixture(scope=\"module\")\n    def owner_message(owner_address):\n>       return _wait_for_gmail_message(owner_address)\n\ntests/test_final_state.py:148: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nrecipient_address = 'codes.icy+r1-zr-qnkjlte@gmail.com'\n\n    def _wait_for_gmail_message(recipient_address: str):\n        service = _gmail_service()\n        deadline = time.time() + GMAIL_POLL_TIMEOUT_SECONDS\n        last_err = None\n        while time.time() < deadline:\n            try:\n                match = _search_gmail_message(service, recipient_address)\n                if match is not None:\n                    return match\n            except Exception as exc:  # noqa: BLE001\n                last_err = exc\n            time.sleep(GMAIL_POLL_INTERVAL_SECONDS)\n>       raise AssertionError(\n            f\"No Gmail message addressed to {recipient_address} found within \"\n            f\"{GMAIL_POLL_TIMEOUT_SECONDS} seconds (last error: {last_err}).\"\n        )\nE       AssertionError: No Gmail message addressed to codes.icy+r1-zr-qnkjlte@gmail.com found within 240 seconds (last error: None).\n\ntests/test_final_state.py:114: AssertionError"
+            }
+        ]
+    }
+}

@@ -1,0 +1,47 @@
+- Initializing MCP connections...
+You
+# Query Parameter Validation ## Background Create a Zuplo API gateway that enforces query parameter validation on a specific route. ## Requirements * Create a new Zuplo project. * Add a route for `GET /search`. * Implement logic (via a custom policy or handler) to require a query parameter named `q`. * If the query parameter `q` is missing, the API must return a `400 Bad Request` status with a JSON error message. * If `q` is provided, the API should return a `200 OK` status with a JSON response containing the value of `q`. ## Implementation Hints * Use the Zuplo CLI (`create-zuplo-api`) to scaffold the project. * Define the route in `config/routes.oas.json`. * Create a custom inbound policy or a custom handler in TypeScript (e.g., in the `modules/` directory) to check for the `q` parameter in the request URL. * Use `ZuploRequest` to parse the URL and access `searchParams`. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: zuplo dev --port 9200 * Port: 9200 * API Endpoints: * GET `/search`: Returns status 400 if the `q` query parameter is missing. ```json // Response (Missing q) { "error": "Missing required query parameter: q" } ``` * GET `/search?q=something`: Returns status 200 and a JSON object with the value. ```json // Response (With q) { "q": "something" } ```   
+
+Pochi
+💭 Thinking for 261 characters   
+📋 Updating todo list (3 items) ✔ 
+📂 Listing files in /home ✔ 
+📂 Listing files in /home/user ✔ 
+📋 Updating todo list (3 items) ✔ 
+💫 Executing npx -y create-zuplo-api /home/user/myproject ✔ 
+💭 Thinking for 313 characters   
+📂 Listing files in /home/user ✔ 
+💭 Thinking for 0 characters   
+💫 Executing yes n | npx -y create-zuplo-api /home/user/myproject ✔ 
+💭 Thinking for 177 characters   
+📋 Updating todo list (3 items) ✔ 
+📂 Listing files in /home/user/myproject ✔ 
+💭 Thinking for 174 characters   
+📖 Reading /home/user/myproject/config/routes.oas.json ✔ 
+💭 Thinking for 134 characters   
+📂 Listing files in /home/user/myproject/modules ✔ 
+📖 Reading /home/user/myproject/modules/hello-world.ts ✔ 
+💭 Thinking for 468 characters   
+✏️  Writing /home/user/myproject/modules/search.ts ✔ 
+💭 Thinking for 220 characters   
+🔧 Applying diff to /home/user/myproject/config/routes.oas.json ✔ 
+💭 Thinking for 0 characters   
+📋 Updating todo list (3 items) ✔ 
+💭 Thinking for 157 characters   
+🎉 Task Completed
+Created the Zuplo project at /home/user/myproject and added GET /search with query parameter validation.
+
+Key changes:
+- Added modules/search.ts to validate the q query parameter and return JSON responses.
+- Added /search route in config/routes.oas.json wired to the new handler.
+
+Start the gateway:
+- cd /home/user/myproject
+- zuplo dev --port 9200
+
+Endpoints:
+- GET http://localhost:9200/search -> 400 with {"error":"Missing required query parameter: q"}
+- GET http://localhost:9200/search?q=something -> 200 with {"q":"something"}
+
+Note: The scaffold tried (and failed) to create a portal project due to account permissions, but the local project is ready to run.   
+  

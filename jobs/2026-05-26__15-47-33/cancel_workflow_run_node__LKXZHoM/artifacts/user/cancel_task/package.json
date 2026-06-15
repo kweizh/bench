@@ -1,0 +1,15 @@
+{
+  "name": "cancel-task",
+  "version": "1.0.0",
+  "description": "Knock workflow cancellation automation",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@knocklabs/mgmt": "^0.25.0",
+    "@knocklabs/node": "^1.32.0",
+    "dotenv": "^16.4.5"
+  }
+}

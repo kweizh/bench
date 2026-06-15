@@ -1,0 +1,88 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 7,
+            "passed": 7,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779763871648,
+            "stop": 1779763875105
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_exists",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779763871734,
+                "stop": 1779763871735,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_key_and_active_lines",
+                "status": "passed",
+                "duration": 0,
+                "start": 1779763871735,
+                "stop": 1779763871735,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_exists_and_is_active",
+                "status": "passed",
+                "duration": 712,
+                "start": 1779763871736,
+                "stop": 1779763872448,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_required_steps_in_order",
+                "status": "passed",
+                "duration": 785,
+                "start": 1779763872449,
+                "stop": 1779763873234,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_delay_step_uses_5_minutes",
+                "status": "passed",
+                "duration": 775,
+                "start": 1779763873234,
+                "stop": 1779763874009,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_mailtrap_step_has_engagement_status_condition",
+                "status": "passed",
+                "duration": 412,
+                "start": 1779763874009,
+                "stop": 1779763874421,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_trigger_data_json_schema",
+                "status": "passed",
+                "duration": 683,
+                "start": 1779763874421,
+                "stop": 1779763875104,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

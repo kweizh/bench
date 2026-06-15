@@ -1,0 +1,56 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "8.4.1"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779336681.2644315,
+            "stop": 1779336684.761585
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_typescript_compilation",
+                "status": "passed",
+                "duration": 0.9738366776145995,
+                "start": 1779336681.2775362,
+                "stop": 1779336682.2516441,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_correlation_ts_exists_and_implements_interface",
+                "status": "passed",
+                "duration": 0.0005281544290482998,
+                "start": 1779336682.2518888,
+                "stop": 1779336682.252557,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_registration_ts_registers_hook",
+                "status": "passed",
+                "duration": 0.0004140213131904602,
+                "start": 1779336682.252733,
+                "stop": 1779336682.2533092,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_hook_runtime_behavior",
+                "status": "passed",
+                "duration": 2.5076834061183035,
+                "start": 1779336682.253479,
+                "stop": 1779336684.7613986,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

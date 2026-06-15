@@ -1,0 +1,99 @@
+{
+    "id": "37f1c7b3-b9dd-4714-8f27-1b83046ddab4",
+    "started_at": "2026-05-26T14:59:38.519973",
+    "updated_at": "2026-05-26T15:23:29.125028",
+    "finished_at": "2026-05-26T15:23:29.125028",
+    "n_total_trials": 8,
+    "stats": {
+        "n_completed_trials": 8,
+        "n_errored_trials": 0,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3-flash__tasks": {
+                "n_trials": 2,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.5
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "tenant_scoped_email_node__tADBw8b"
+                        ],
+                        "0.0": [
+                            "once_per_recipient_dedup_node__SoLoZJx"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            },
+            "pochi__gemini-3.1-pro__tasks": {
+                "n_trials": 2,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 1.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "tenant_scoped_email_node__bpicLad",
+                            "once_per_recipient_dedup_node__xJ3d6Sb"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            },
+            "pochi__gpt-5.2-codex__tasks": {
+                "n_trials": 2,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 1.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "tenant_scoped_email_node__HTXnutU",
+                            "once_per_recipient_dedup_node__sD4r8z7"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            },
+            "pochi__claude-4-6-sonnet__tasks": {
+                "n_trials": 2,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 1.0
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "tenant_scoped_email_node__BJkwTs2",
+                            "once_per_recipient_dedup_node__W3NoTzT"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 332717,
+        "cost_usd": null
+    }
+}

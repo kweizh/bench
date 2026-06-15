@@ -1,0 +1,56 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 10 items
+
+tests/test_final_state.py .....F....                                     [100%]
+
+=================================== FAILURES ===================================
+______________________ test_branch_step_has_email_branch _______________________
+
+fetched_workflow = {'active': True, 'created_at': '2026-05-26T02:04:24.499909Z', 'created_by': {'avatar_url': 'https://secure.gravatar.co...11-87e2-e02a5fea6adf@knock.app', 'id': 'cd52ef75-c6d8-40e0-912e-984c1beee235', ...}, 'environment': 'development', ...}
+
+    def test_branch_step_has_email_branch(fetched_workflow):
+        branch_step = _find_branch_step(fetched_workflow)
+        branches = _branches_of(branch_step)
+    
+        email_branch_found = False
+        for branch in branches:
+            conditions = branch.get("conditions") or {}
+            clauses = conditions.get("all") or conditions.get("any") or []
+            references_channel_pref = any(
+                (c.get("variable") == "data.channel_preference"
+                 and c.get("operator") == "equal_to"
+                 and c.get("argument") == "email")
+                for c in clauses
+            )
+            if not references_channel_pref:
+                continue
+            nested = _branch_nested_steps(branch)
+            if any(_step_channel_key(s) == "mailtrap" for s in nested):
+                email_branch_found = True
+                break
+    
+>       assert email_branch_found, (
+            "Expected a non-default branch with conditions on "
+            "data.channel_preference == 'email' containing a channel step "
+            "bound to channel_key 'mailtrap'."
+        )
+E       AssertionError: Expected a non-default branch with conditions on data.channel_preference == 'email' containing a channel step bound to channel_key 'mailtrap'.
+E       assert False
+
+tests/test_final_state.py:188: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_log_file_records_workflow_key
+PASSED tests/test_final_state.py::test_log_file_records_email_run_id
+PASSED tests/test_final_state.py::test_log_file_records_inapp_run_id
+PASSED tests/test_final_state.py::test_workflow_exists_in_development
+PASSED tests/test_final_state.py::test_workflow_is_active
+PASSED tests/test_final_state.py::test_branch_step_has_default_inapp_branch
+PASSED tests/test_final_state.py::test_email_run_produced_mailtrap_message
+PASSED tests/test_final_state.py::test_inapp_run_produced_in_app_message
+PASSED tests/test_final_state.py::test_email_arrived_in_gmail_inbox
+FAILED tests/test_final_state.py::test_branch_step_has_email_branch - Asserti...
+========================= 1 failed, 9 passed in 2.95s ==========================

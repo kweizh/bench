@@ -1,0 +1,61 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 4,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780695462768,
+            "stop": 1780695512257
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_no_liveblocks_mocks_or_stubs",
+                "status": "passed",
+                "duration": 39420,
+                "start": 1780695463195,
+                "stop": 1780695502615,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_auth_endpoint_returns_real_token",
+                "status": "passed",
+                "duration": 681,
+                "start": 1780695502616,
+                "stop": 1780695503297,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_two_client_realtime_sync",
+                "status": "passed",
+                "duration": 8373,
+                "start": 1780695503299,
+                "stop": 1780695511672,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_storage_schema_via_liveblocks_rest",
+                "status": "passed",
+                "duration": 584,
+                "start": 1780695511673,
+                "stop": 1780695512257,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

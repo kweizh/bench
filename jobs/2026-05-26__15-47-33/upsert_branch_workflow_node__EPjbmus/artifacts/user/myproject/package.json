@@ -1,0 +1,14 @@
+{
+  "name": "knock-branch-workflow",
+  "version": "1.0.0",
+  "description": "Knock workflow with branch step",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@knocklabs/mgmt": "^0.25.0",
+    "@knocklabs/node": "^1.32.0"
+  }
+}

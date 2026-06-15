@@ -1,0 +1,1054 @@
+Skipping image OS validation for hb__cancel_workflow_run_node: docker inspect returned 1
+Skipping image OS validation for hb__embed_feed_popover_nextjs: docker inspect returned 1
+Skipping image OS validation for hb__push_workflow_cli: docker inspect returned 1
+Skipping image OS validation for hb__tenant_scoped_email_node: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-eujxjag > /logs/artifacts/run-id && echo push_workflow_cli__EUJXJAG > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: echo zr-lkxzhom > /logs/artifacts/run-id && echo cancel_workflow_run_node__LKXZHoM > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Push a Knock workflow with the Knock CLI
+
+## Background
+
+Knock (https://knock.app) is a notification infrastructure platform. The Knock CLI (`@knocklabs/cli`) is the recommended way to manage notification workflows as code. In this task you will use the CLI to author a workflow on the local filesystem, push it to the `development` environment, activate it, and commit the change.
+
+The Knock CLI is already installed in the environment as the `knock` binary. A `KNOCK_SERVICE_TOKEN` environment variable is already set and the CLI is configured to pick it up automatically.
+
+## Requirements
+
+- Create a Knock project directory on disk that the CLI can operate against.
+- Author a workflow JSON file locally that defines a workflow with **two steps**:
+  1. An in-app feed channel step that posts a welcome message to the recipient.
+  2. An email channel step that sends a welcome email (subject and HTML body) to the recipient.
+- Push the workflow to the `development` environment using the Knock CLI.
+- Activate the workflow in the `development` environment using the Knock CLI.
+- Commit the workflow change to the `development` environment using the Knock CLI so that the workflow is no longer in an uncommitted state.
+- Record the resulting workflow key in a log file once everything succeeds.
+- All resource identifiers that are externally visible must be suffixed with the current `run-id` so concurrent runs do not collide.
+
+## Implementation Hints
+
+- Read the current `run-id` from the `ZEALT_RUN_ID` environment variable and append it to the workflow key (and to any human-readable workflow name).
+- The two pre-configured channel keys available in the Knock account are `in-app` (in-app feed) and `mailtrap` (email). Reference those `channel_key` values inside your workflow step definitions.
+- A minimal `knock.json` only needs a `knockDir` entry; the CLI uses this directory to find workflows.
+- The CLI expects a workflow's source files to live under `<knockDir>/workflows/<workflow_key>/workflow.json`.
+- Channel template content (in-app `markdown_body`, email `subject`, email `html_body`) is required on the corresponding step.
+- The relevant CLI commands you will need are some combination of `knock workflow push`, `knock workflow activate`, and `knock commit` (use `--force` to skip confirmation prompts in a non-interactive environment).
+- After all commands succeed, write the workflow key into the log file in the exact format required by the acceptance criteria.
+
+## Acceptance Criteria
+
+- Project path: /home/user/knock-project
+- Ensure the workflow is really pushed, activated, and committed against the live Knock development environment (no mocks).
+- Log file: /home/user/knock-project/output.log
+- The workflow key MUST be `cli-welcome-${run-id}` where `run-id` is read from the `ZEALT_RUN_ID` environment variable.
+- The workflow must exist in the `development` environment (queryable via the Knock Management API at `GET /v1/workflows/{workflow_key}?environment=development`).
+- The workflow must be active in the `development` environment.
+- The workflow must have no uncommitted changes in the `development` environment after the task finishes.
+- The workflow must contain at least one channel step whose `channel_key` is `in-app` and at least one channel step whose `channel_key` is `mailtrap`.
+- The log file must contain a line in the exact format: `Workflow key: cli-welcome-<run-id>`
+
+
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Cancel a Triggered Knock Workflow Before Email Delivery
+
+## Background
+Knock (https://knock.app) is a notification infrastructure platform whose workflow engine orchestrates cross-channel messaging from a single trigger. Knock supports **workflow cancellation**: if a triggered workflow contains a step that pauses execution (such as a `delay`), the workflow run can be aborted before the downstream channel steps deliver any messages. To enable this, the trigger request must include a `cancellation_key`, and a subsequent `POST /v1/workflows/{key}/cancel` request must reference the same `cancellation_key`.
+
+The Knock workspace used for this task already has two channels configured:
+- An in-app feed channel with channel key `in-app`.
+- A Mailtrap email channel with channel key `mailtrap`.
+
+You will build a Node.js automation that creates a delayed email workflow, triggers it for a Gmail-backed recipient with a `cancellation_key`, and then cancels the triggered run before the delay window elapses so that the email is **never delivered**.
+
+## Requirements
+- Implement the automation as a Node.js project located at `/home/user/cancel_task` that runs end-to-end with `npm start`.
+- Use the `@knocklabs/mgmt` SDK (authenticated with `KNOCK_SERVICE_TOKEN`) to **upsert** a workflow in the `development` environment whose body contains:
+  1. A `delay` function step that pauses the workflow long enough for cancellation to be issued (use a delay of at least 30 seconds).
+  2. An email `channel` step that sends a Mailtrap email after the delay using channel key `mailtrap`. The sender address must use the Mailtrap domain restricted by `MAILTRAP_DOMAIN`. The subject and HTML body templates must render the recipient's name.
+- **Activate** the workflow in the `development` environment via the Management API after upserting.
+- Use the `@knocklabs/node` SDK (authenticated with `KNOCK_API_TOKEN`) to **trigger** the workflow exactly once with:
+  - A single inline recipient whose `email` is a Gmail `+receiver-<run-id>` address (so we can confirm the email did NOT arrive).
+  - A `cancellation_key` that uniquely identifies this run.
+- After triggering, wait long enough that the cancellation request will not overtake the trigger (Knock recommends at least 5 seconds between trigger and cancel), then call the Knock cancel workflow API with the same workflow key and `cancellation_key` to abort the run before the delay completes.
+- Persist the workflow key, workflow run id (returned by the trigger call), cancellation key, and recipient email to a log file in the format described in the Acceptance Criteria.
+- All resource identifiers that are externally visible must be suffixed with the current `run-id` so concurrent runs do not collide.
+
+## Implementation Hints
+- Read the current `run-id` from the `ZEALT_RUN_ID` environment variable and append it to the workflow key, recipient id, cancellation key, and email subject so concurrent runs do not collide.
+- The Knock Management API only writes to the `development` environment; pass `environment: "development"` to both `workflows.upsert` and the activation call.
+- The workflow must include both a `delay` function step **and** an email `channel` step in that order. The `delay.settings.delay_for` shape uses `{ unit, value }` (for example `{ unit: "seconds", value: 30 }`). Cancelling only works because the delay pauses the run before the email is dispatched.
+- The email step's sender address must be the Mailtrap-allowed address `sender-<run-id>@<MAILTRAP_DOMAIN>` configured via the email step's `settings.from_email_address`.
+- The Knock `cancellation_key` must be supplied on the trigger call (top-level field) and again on the cancel call. Use a key derived from the `run-id` so the cancel API can match the queued run.
+- The Knock cancel API returns `204 No Content` on success; do not treat the empty body as an error.
+- The script SHOULD wait at least 5 seconds between trigger and cancel and exit before the workflow's delay elapses — otherwise the email will be sent.
+
+## Acceptance Criteria
+- Project path: `/home/user/cancel_task`
+- Ensure the real Knock workflow upsert, activation, trigger, and cancel API calls are executed against the live Knock environment (no mocks).
+- Log file: `/home/user/cancel_task/output.log`
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable.
+- A workflow whose `key` equals `cancel-flow-<run-id>` MUST exist in the `development` environment of the Knock workspace and MUST be `active`.
+- The workflow MUST contain at least one `delay` function step followed by a `channel` step whose `channel_key` is `mailtrap`.
+- The workflow MUST be triggered exactly once with a single inline recipient whose:
+  - `id` is `user-<run-id>`.
+  - `email` is `<GMAIL_USER_NAME>+receiver-<run-id>@gmail.com`.
+  - `name` is `User <run-id>`.
+- The trigger call MUST include a `cancellation_key` equal to `cancel-<run-id>`.
+- The cancel API MUST be called with the same workflow key and `cancellation_key` after the trigger so that the email is never delivered.
+- The log file MUST contain the following lines (one per line, in any order):
+  - `Workflow Key: cancel-flow-<run-id>`
+  - `Workflow Run ID: <uuid>` where `<uuid>` is the `workflow_run_id` returned by the trigger call.
+  - `Cancellation Key: cancel-<run-id>`
+  - `Recipient Email: <GMAIL_USER_NAME>+receiver-<run-id>@gmail.com`
+- No email matching the workflow's subject for this recipient may arrive in the Gmail inbox of `<GMAIL_USER_NAME>+receiver-<run-id>@gmail.com`.
+
+
+EOF
+Command outputs captured
+Running command: echo zr-bxetycz > /logs/artifacts/run-id && echo tenant_scoped_email_node__bXEtYCz > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Tenant-Scoped Knock Email Workflow (Node.js)
+
+## Background
+Knock (https://knock.app) is a notification infrastructure platform. Its workflow engine supports multi-tenancy: when a workflow is triggered with a `tenant` field, the engine exposes the full tenant object inside the workflow run scope (available in templates as `{{ tenant.* }}`), tags every produced message with the tenant id, and applies any tenant-level branding overrides.
+
+The Knock workspace used for this task already has two channels configured:
+- An in-app feed channel with channel key `in-app`.
+- A Mailtrap email channel with channel key `mailtrap`.
+
+You will build a Node.js automation that explicitly creates a tenant with custom properties using the Knock Node SDK, upserts a workflow whose email template uses tenant data, activates the workflow, and triggers it for a Gmail-backed recipient scoped to that tenant.
+
+## Requirements
+- Implement the automation as a Node.js project located at `/home/user/tenant_task` that runs end-to-end with `npm start`.
+- Use `@knocklabs/node` (authenticated with `KNOCK_API_TOKEN`) to **set a tenant** in Knock with custom properties:
+  - The tenant `name` must include the run id.
+  - The tenant `settings.branding.primary_color` must be set to a non-empty hex color string.
+  - The tenant must carry a custom top-level property `app_name` with a non-empty string value.
+- Use `@knocklabs/mgmt` (authenticated with `KNOCK_SERVICE_TOKEN`) to **upsert** a workflow in the `development` environment whose body contains a single channel step bound to the `mailtrap` channel.
+  - The email step's subject template MUST reference `{{ tenant.app_name }}` so the rendered subject contains the tenant's `app_name` value.
+  - The email step's HTML body template MUST reference `{{ recipient.name }}` and `{{ tenant.name }}` so the rendered body contains both values.
+  - The email step's `settings.from_email_address` MUST be `sender-${run-id}@${MAILTRAP_DOMAIN}`.
+- **Activate** the workflow in the `development` environment via the Management API after upserting it.
+- Use `@knocklabs/node` to **trigger** the workflow exactly once with:
+  - The `tenant` field set to the tenant id created above.
+  - A single inline recipient whose `email` is the Gmail `+receiver-${run-id}` address described in the Acceptance Criteria.
+- Persist the workflow key, tenant id, workflow run id, and recipient email to a log file in the format described in the Acceptance Criteria.
+- All resource identifiers that are externally visible must be suffixed with the current `run-id` so concurrent runs do not collide.
+
+## Implementation Hints
+- Read the current `run-id` from the `ZEALT_RUN_ID` environment variable and append it to the tenant id, workflow key, recipient id, and email subject so concurrent runs do not collide.
+- The Knock Node client exposes `client.tenants.set(id, { name, settings, ...customProps })`. Custom properties (such as `app_name`) sit alongside `name` and `settings` at the top level of the request body.
+- The Knock Management API only writes to the `development` environment; pass `environment: "development"` to both `workflows.upsert` and the activation call.
+- Inside Liquid templates the tenant payload is available under the `tenant` namespace (for example, `{{ tenant.name }}` and `{{ tenant.app_name }}`).
+- When triggering the workflow, set the top-level `tenant` field to the tenant id you created; Knock will associate every message produced for the run with that tenant.
+- After triggering, append the workflow key, tenant id, run id, and recipient email to the log file using the exact prefixes shown in Acceptance Criteria.
+
+## Acceptance Criteria
+- Project path: `/home/user/tenant_task`
+- Ensure the real Knock tenant set, workflow upsert, activation, and trigger actions are executed against the live Knock environment (no mocks).
+- Log file: `/home/user/tenant_task/output.log`
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable.
+- A tenant whose `id` equals `tenant-${run-id}` MUST exist in Knock with:
+  - A `name` that contains the `run-id` (Knock may return this under `properties.name`).
+  - `settings.branding.primary_color` set to a non-empty hex color string.
+  - A custom property `app_name` whose value is a non-empty string (Knock may return this under `properties.app_name`).
+- A workflow whose `key` equals `tenant-welcome-${run-id}` MUST exist in the `development` environment and MUST be `active`.
+- The workflow MUST contain at least one `channel` step whose `channel_key` is `mailtrap`, whose subject template references `tenant.app_name`, and whose HTML body template references both `recipient.name` and `tenant.name`.
+- The workflow MUST be triggered exactly once with `tenant` set to `tenant-${run-id}` and a single inline recipient whose:
+  - `id` is `user-${run-id}`.
+  - `email` is `${GMAIL_USER_NAME}+receiver-${run-id}@gmail.com`.
+  - `name` includes the `run-id`.
+- A Knock message that was produced from workflow `tenant-welcome-${run-id}` for user `user-${run-id}` MUST be tagged with `tenant = tenant-${run-id}`.
+- The log file MUST contain the following four lines (one per line, in any order):
+  - `Tenant ID: tenant-<run-id>`
+  - `Workflow Key: tenant-welcome-<run-id>`
+  - `Workflow Run ID: <uuid>` where `<uuid>` is the `workflow_run_id` returned by the trigger call.
+  - `Recipient Email: <GMAIL_USER_NAME>+receiver-<run-id>@gmail.com`
+- An email matching the rendered subject (containing the tenant `app_name` value) MUST arrive in the Gmail inbox of `${GMAIL_USER_NAME}+receiver-${run-id}@gmail.com`.
+
+
+EOF
+Running command: echo zr-aeekovf > /logs/artifacts/run-id && echo embed_feed_popover_nextjs__AeEkovF > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Embed Knock NotificationFeedPopover in a Next.js App
+
+## Background
+Knock provides a pre-built React in-app feed UI (the `NotificationFeedPopover`) that connects to a Knock in-app feed channel and renders messages produced by Knock workflows in real time. In this task, you will build a small Next.js application that embeds Knock's pre-built popover UI and wire it to an in-app feed workflow that you provision in Knock.
+
+## Requirements
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable and use it to scope all run-specific resources.
+- Provision a Knock in-app workflow in the `development` environment with key `popover-demo-${run-id}` using the Management API (or CLI) authenticated by `KNOCK_SERVICE_TOKEN`. The workflow must:
+  - Contain a single in-app feed step that targets the in-app feed channel with channel key `in-app`.
+  - Render the trigger payload field `data.body` as the notification body using a Liquid expression (e.g., `{{ data.body }}`).
+  - Be **active** in the `development` environment so it can be triggered with the environment API key.
+- Build a Next.js application (App Router) at `/home/user/myproject` that:
+  - Uses `@knocklabs/react` to render Knock's pre-built popover UI on the root route `/`.
+  - Wires the UI to the in-app feed channel using `NEXT_PUBLIC_KNOCK_PUBLIC_API_KEY` and `NEXT_PUBLIC_KNOCK_FEED_CHANNEL_ID` (which mirror `KNOCK_PUBLIC_API_TOKEN` and `KNOCK_INAPP_FEED_CHANNEL_ID`).
+  - Identifies the current user with id `popover-user-${run-id}` so the embedded feed loads messages addressed to that recipient.
+  - Renders a `NotificationIconButton` and a `NotificationFeedPopover` together; the popover must open when the icon button is clicked and close when its `onClose` callback fires.
+  - Imports the Knock stylesheet (`@knocklabs/react/dist/index.css`) so the popover renders with default styling.
+
+## Implementation Hints
+- Use the Knock Management API SDK (`@knocklabs/mgmt`) or the Knock CLI to upsert and activate the workflow. Remember that upserts target the `development` environment and that the trigger API requires the workflow to be active in that environment.
+- The popover requires a `buttonRef` pointing at the `NotificationIconButton`, plus `isVisible` / `onClose` state that you manage in a client component.
+- Wrap the Knock UI in both `KnockProvider` (with the public API key and user) and `KnockFeedProvider` (with the feed channel id).
+- The Next.js page that renders Knock components must be a client component (`"use client"`).
+- Run the app on port `3000` and start it with `npm start` after producing a production build (`npm run build`).
+
+## Acceptance Criteria
+- Project path: `/home/user/myproject`
+- Start command: `npm start`
+- Port: `3000`
+- The Next.js app must build successfully with `npm run build` before being started.
+- Workflow provisioned in Knock:
+  - Key: `popover-demo-${run-id}` where `run-id` is read from `ZEALT_RUN_ID`.
+  - Active in the `development` environment.
+  - Contains an in-app feed step bound to channel key `in-app` whose template renders `data.body`.
+- Web app routes:
+  - `GET /`: returns HTTP 200 and serves an HTML page whose rendered DOM contains:
+    - A notification icon button element with CSS class `rnf-notification-icon-button` (the default class emitted by Knock's `NotificationIconButton`).
+    - A reference to the Knock React stylesheet (the CSS class names produced by `@knocklabs/react` such as `rnf-*` must appear in the page).
+  - Clicking the notification icon button must reveal a popover element with CSS class `rnf-notification-feed-popover` (the default class emitted by Knock's `NotificationFeedPopover`).
+  - After Knock workflow `popover-demo-${run-id}` is triggered with `recipients: ["popover-user-${run-id}"]` and `data: {"body": "hello from popover ${run-id}"}`, the popover content must display the text `hello from popover ${run-id}` once it is opened.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__upsert_step_conditions_py: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-qr5ub4b > /logs/artifacts/run-id && echo upsert_step_conditions_py__qr5ub4B > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Author a Knock Channel-Escalation Workflow with Step Conditions (Python + Management API)
+
+## Background
+Knock workflows can implement intelligent channel escalation: send an in-app notification first, wait for a short window, and only escalate to email if the recipient has not seen the in-app message yet. You will author such a workflow using the Knock Management API from Python and then activate it so that subsequent triggers will execute it. The workflow must be created in the `development` environment, where the Management API allows upserts.
+
+## Requirements
+- Author a Python script that upserts a Knock workflow consisting of three sequential steps:
+  1. An in-app feed channel step (`channel_key: in-app`) that renders a markdown body.
+  2. A delay step that waits 5 minutes.
+  3. An email channel step (`channel_key: mailtrap`) that has a step condition that fires the email **only when the preceding in-app message has not been seen**.
+- Set a `trigger_data_json_schema` on the workflow that requires a string field named `onboarding_url`.
+- Activate the workflow in the `development` environment after the upsert.
+- Write a log artifact describing the result of the operation.
+
+## Implementation Hints
+- Read the `run-id` from the `ZEALT_RUN_ID` environment variable and append it to the workflow key so concurrent runs do not collide.
+- The Management API base URL is `https://control.knock.app`. Authenticate with the service token from `KNOCK_SERVICE_TOKEN` using a bearer header.
+- Use `PUT /v1/workflows/{workflow_key}?environment=development` with a JSON body of the form `{ "workflow": { ... } }` to upsert; use `PUT /v1/workflows/{workflow_key}/activate?environment=development` with `{ "status": true }` to activate.
+- Step refs can use the conventional names `in_app_feed_1`, `delay_1`, and `email_1`.
+- For the engagement-status step condition, refer to the Knock step-conditions docs: the condition variable is `refs.<in_app_step_ref>.engagement_status`, the operator is `not_contains`, and the argument is `$message.seen`.
+- The delay step uses `settings.delay_for` with `unit: "minutes"` and `value: 5`.
+- Any well-formed templates are acceptable; the in-app step needs a markdown body and the email step needs a subject and html body (Liquid expressions like `{{ recipient.name }}` and `{{ data.onboarding_url }}` are fine).
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Ensure the script is executed and the artifacts exist.
+- Log file: /home/user/myproject/output.log
+- The workflow key MUST be `escalation-${run-id}` where `run-id` is the value of the `ZEALT_RUN_ID` environment variable.
+- The workflow MUST exist in the Knock `development` environment after the script runs and MUST be active.
+- The workflow MUST contain at least three steps with the following properties:
+  - A `channel` step using `channel_key: in-app` that precedes the delay step.
+  - A `delay` step that waits for 5 minutes (i.e. `settings.delay_for` is `{ unit: "minutes", value: 5 }`).
+  - A `channel` step using `channel_key: mailtrap` whose `conditions` reference the in-app step's `engagement_status` with operator `not_contains` and argument `$message.seen`.
+- The workflow MUST define a `trigger_data_json_schema` that requires a string property named `onboarding_url`.
+- The log file MUST contain the line `Workflow key: escalation-${run-id}` and the line `Active: true`.
+
+
+EOF
+Skipping image OS validation for hb__upsert_branch_workflow_node: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-epjbmus > /logs/artifacts/run-id && echo upsert_branch_workflow_node__EPjbmus > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Upsert a Knock Workflow with a Branch Step via the Node.js Management SDK
+
+## Background
+Knock (https://knock.app) is a notification infrastructure platform whose workflow engine orchestrates cross-channel messaging from a single trigger. Workflows can be authored as code through the Management API (`https://control.knock.app`), upserted into the `development` environment, and then triggered by the regular Knock API (`https://api.knock.app`). The `branch` function step lets a workflow take one of several `if / else if / else` paths at runtime based on the workflow run scope (`recipient.*`, `data.*`, etc.).
+
+The Knock workspace used for this task already has two channels configured:
+- An **in-app feed** channel with channel key `in-app`.
+- A **Mailtrap email** channel with channel key `mailtrap`.
+
+## Requirements
+Build a small Node.js project that, in a single `npm start` run, performs the following with the Knock SDKs:
+1. Uses `@knocklabs/mgmt` (authenticated with `KNOCK_SERVICE_TOKEN`) to **upsert** a workflow in the `development` environment whose body contains a single top-level `branch` function step. The `branch` step must contain two branches whose `terminates` flag is `true` so each branch ends the workflow on its own path:
+   - A non-default branch that runs when `data.channel_preference` equals the string `email`. This branch contains a single `channel` step that sends an email via the `mailtrap` channel.
+   - A default branch that contains a single `channel` step that sends an in-app message via the `in-app` channel.
+2. Sets a `trigger_data_json_schema` on the workflow that requires a string property named `channel_preference`.
+3. **Activates** the workflow in the `development` environment via the Management API after upserting it.
+4. Uses `@knocklabs/node` (authenticated with `KNOCK_API_TOKEN`) to **trigger** the workflow twice against the `development` environment, in this order:
+   1. First trigger with `data.channel_preference = "email"` — this MUST exercise the email branch.
+   2. Second trigger with `data.channel_preference = "in-app"` — this MUST exercise the default in-app branch.
+5. Each trigger MUST use **a single inline recipient** (a `Recipient` object with `id`, `email`, and `name`) whose `email` is set to the Gmail address described in the Acceptance Criteria so that the email branch delivers to a Gmail inbox we can verify.
+6. Logs the workflow key and both `workflow_run_id` values to a log file in the exact format described in the Acceptance Criteria.
+
+## Implementation Hints
+- Read the current run identifier from the `ZEALT_RUN_ID` environment variable and append it to any externally visible identifier (workflow key, recipient IDs, log lines) so concurrent runs do not collide.
+- The Management API only writes to the `development` environment; do not pass any other environment to `workflows.upsert`/`workflows.activate`.
+- The branch step schema (`type: "branch"`) uses a `branches` array. Each non-default branch must declare `conditions` and a nested `steps` array; the final branch must be marked as the default branch and contains the in-app fallback step. Mark each branch as terminating so the workflow exits at the end of the branch.
+- Use the `mailtrap` channel key for the email step and the `in-app` channel key for the in-app step. Provide simple Liquid templates referencing `recipient.name` so a message body is produced.
+- For the email recipient, use the Gmail user name available in `GMAIL_USER_NAME` to build a `+receiver-<run-id>@gmail.com` address (so the email can be verified via Gmail inbound).
+- After triggering, append the workflow key and run IDs to the log file using the exact prefixes shown in Acceptance Criteria.
+
+## Acceptance Criteria
+- Project path: `/home/user/myproject`
+- Ensure the real Knock workflow upsert, activation, and trigger actions are executed and that the log artifact exists.
+- Log file: `/home/user/myproject/output.log`
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable.
+- A workflow whose `key` equals `branch-flow-${run-id}` MUST exist in the `development` environment of the Knock workspace and MUST be `active`.
+- The workflow MUST contain a single top-level `branch` step that has:
+  - A non-default branch whose conditions evaluate `data.channel_preference == "email"` and whose nested step is a `channel` step bound to channel key `mailtrap`.
+  - A default branch whose nested step is a `channel` step bound to channel key `in-app`.
+- The workflow MUST be triggered exactly twice in this order using the workflow trigger API: first with `data.channel_preference = "email"`, then with `data.channel_preference = "in-app"`. Each trigger MUST use a single inline recipient with:
+  - `id` equal to `user-${run-id}`.
+  - `email` equal to `${GMAIL_USER_NAME}+receiver-${run-id}@gmail.com`.
+  - `name` equal to `User ${run-id}`.
+- The log file MUST contain the following three lines (in any order):
+  - `Workflow Key: branch-flow-<run-id>`
+  - `Email Run ID: <uuid>`
+  - `InApp Run ID: <uuid>`
+  where each `<uuid>` is the `workflow_run_id` returned by the corresponding trigger call.
+
+
+EOF
+Skipping image OS validation for hb__upsert_workflow_top_level_conditions_node: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-4cgse3q > /logs/artifacts/run-id && echo upsert_workflow_top_level_condit__4Cgse3Q > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Gate a Knock workflow with top-level conditions (Node.js)
+
+## Background
+[Knock](https://docs.knock.app) workflows can carry a top-level [`conditions`](https://docs.knock.app/mapi-reference/workflows/schemas/workflow) object (a `ConditionGroup` of `all`/`any` rules) that determines whether the workflow runs at all when triggered. When the trigger conditions evaluate to false for a recipient, Knock short-circuits the workflow for that recipient and no channel step is executed.
+
+You are building an internal "admin-only security alert" notification. The same trigger fires for an arbitrary set of users, but only users whose `role` attribute equals `admin` should actually receive the email. You must implement this gate via the workflow's top-level `conditions` (not via per-step conditions or a branch step).
+
+## Requirements
+- Create a Node.js project at `/home/user/myproject` with a `package.json` and a runnable script `app.js`.
+- Use the official [`@knocklabs/mgmt`](https://github.com/knocklabs/knock-mgmt-node) SDK to upsert and activate a workflow in the `development` environment.
+- Use the [`@knocklabs/node`](https://github.com/knocklabs/knock-node) SDK to trigger that workflow.
+- The workflow must:
+  - Have a top-level `conditions` group of type `all` containing a single condition that requires `recipient.role` to be `equal_to` the string `admin`.
+  - Contain exactly one channel step targeting the pre-configured `mailtrap` email channel (`channel_key: "mailtrap"`). The step's template must produce an email subject of exactly `Admin alert <run-id>` (substituting the actual run id at upsert time) and a non-empty HTML body that addresses the recipient by `{{ recipient.name }}`.
+  - Be marked `active: true` in the `development` environment.
+- The trigger call must use **inline recipient identification** to send two recipients in a single `workflows.trigger` request:
+  - An admin recipient with `role: "admin"`.
+  - A viewer recipient with `role: "viewer"`.
+- Append `<run-id>` (from the `ZEALT_RUN_ID` environment variable) as a suffix to the workflow key, both recipient IDs, the recipient email local-parts, and the email subject so the resource names are safe to use concurrently.
+- Write the resulting `workflow_run_id` to the log file in the exact format specified below.
+
+## Implementation Hints
+- Read all secrets and shared identifiers from environment variables (`KNOCK_SERVICE_TOKEN`, `KNOCK_API_TOKEN`, `MAILTRAP_DOMAIN`, `GMAIL_USER_NAME`, `ZEALT_RUN_ID`).
+- The Management API only accepts writes in the `development` environment; activate the workflow there as well.
+- For inline recipients, set both the standard fields (`id`, `name`, `email`) and the custom `role` attribute that the workflow condition references. The email of each recipient must follow Gmail's plus-addressing convention required by the test harness: `<gmail_user_name>+<receiver_id>@gmail.com`.
+- The single channel step should use `channel_key: "mailtrap"` (this email channel is already configured in the Knock account). You do not need to configure the channel yourself.
+- The Knock workflow key must match the regex `^[a-z0-9_-]+$`.
+
+## Acceptance Criteria
+- Project path: `/home/user/myproject`
+- Ensure the real upsert, activate, and trigger actions are executed against the live Knock account (no mocking).
+- Log file: `/home/user/myproject/output.log`
+- The log file must contain a line in the exact format: `Workflow run ID: <workflow_run_id>` where `<workflow_run_id>` is a UUID returned by the Knock trigger API.
+- The workflow key in Knock must be `top-level-conditions-${run-id}` where `${run-id}` is the value of `ZEALT_RUN_ID`.
+- When fetched via the Management API in the `development` environment, the workflow must:
+  - Be `active: true`.
+  - Have a top-level `conditions` group whose `all` array contains a single rule with `variable == "recipient.role"`, `operator == "equal_to"`, and `argument == "admin"`.
+  - Contain exactly one channel step with `type == "channel"` and `channel_key == "mailtrap"`, whose template `subject` equals `Admin alert ${run-id}`.
+- After the trigger executes, the test Gmail inbox must contain exactly **one** new message with subject `Admin alert ${run-id}` addressed to `${GMAIL_USER_NAME}+admin-${run-id}@gmail.com`, and **zero** messages with that subject addressed to `${GMAIL_USER_NAME}+viewer-${run-id}@gmail.com`.
+
+
+EOF
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Skipping image OS validation for hb__trigger_email_workflow_py: docker inspect returned 1
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__upsert_trigger_data_schema_node: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-emf8n35 > /logs/artifacts/run-id && echo trigger_email_workflow_py__EMF8N35 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Trigger a Knock Email Workflow with the Python SDK
+
+## Background
+Knock is a notification infrastructure platform. Your team wants a small Python automation that programmatically creates a Knock workflow that sends a single email notification (using the pre-configured `mailtrap` channel), and then triggers it for a specific user so the user receives a welcome email at a Gmail inbox the QA team monitors.
+
+The Knock account already has two channels configured for this environment:
+- An in-app feed channel with key `in-app`
+- An email channel with key `mailtrap`
+
+You will:
+1. Use the Knock Management API (authenticated with `KNOCK_SERVICE_TOKEN`) to upsert a workflow in the `development` environment.
+2. Activate the workflow so it can be triggered.
+3. Use the Knock Python SDK (`knockapi`) to identify a user and trigger the workflow for that user.
+4. Persist the resulting `workflow_run_id` and recipient details to a log file.
+
+## Requirements
+- Implement the automation as a single Python script located at `/home/user/knock_task/run.py`.
+- Read the following environment variables in the script:
+  - `ZEALT_RUN_ID` — the run id used to scope all created resources.
+  - `KNOCK_SERVICE_TOKEN` — Management API token (account-level).
+  - `KNOCK_API_TOKEN` — environment-level secret API key for triggering workflows.
+  - `MAILTRAP_DOMAIN` — sender domain accepted by Mailtrap.
+  - `GMAIL_USER_NAME` — Gmail account used to verify inbound email.
+- Create (upsert) a Knock workflow in the `development` environment whose key is `welcome-email-${ZEALT_RUN_ID}` and whose name is `Welcome Email ${ZEALT_RUN_ID}`. The workflow must have exactly one step: an email channel step that uses the channel key `mailtrap`.
+  - The email step `ref` must be `welcome_email`.
+  - The email subject template must be exactly: `Welcome to Knock, {{ recipient.name }}!`.
+  - The email HTML body template must render the recipient's name and a dashboard URL provided through trigger `data` (`{{ data.dashboard_url }}`).
+  - The email sender address must be `sender-${ZEALT_RUN_ID}@${MAILTRAP_DOMAIN}` (configured via the email step's `settings.from_email_address`).
+  - The workflow `trigger_data_json_schema` must require a string `dashboard_url` field.
+- Activate the workflow in `development` so it is runnable.
+- Identify a user in Knock with:
+  - `id`: `user-${ZEALT_RUN_ID}`
+  - `name`: `Knock User ${ZEALT_RUN_ID}`
+  - `email`: `${GMAIL_USER_NAME}+receiver-${ZEALT_RUN_ID}@gmail.com`
+- Trigger the workflow once for that recipient with `data.dashboard_url` set to `https://app.example.com/dashboard/${ZEALT_RUN_ID}`.
+- Write a log file at `/home/user/knock_task/output.log` containing the following two lines (in this order):
+
+  ```
+  Workflow key: welcome-email-<run-id>
+  Workflow run id: <workflow_run_id>
+  Recipient id: user-<run-id>
+  Recipient email: <gmail_user_name>+receiver-<run-id>@gmail.com
+  ```
+
+## Implementation Hints
+- Use HTTP `PUT https://control.knock.app/v1/workflows/{key}?environment=development` (with `Authorization: Bearer $KNOCK_SERVICE_TOKEN`) or the management endpoint via `requests` / `httpx` to upsert the workflow. You can also use any officially supported management SDK if installed.
+- After upserting, send a request to activate the workflow in the `development` environment so it transitions to `active`.
+- Install the `knockapi` package and use `Knock(api_key=...)`. Identify the user via `client.users.update(user_id=..., ...)` (or equivalent identify call) and trigger the workflow via `client.workflows.trigger(key=..., recipients=[...], data=...)`.
+- The workflow run identifier returned by the trigger call must be stored verbatim in the log file.
+- Make the script idempotent: re-running it for the same `ZEALT_RUN_ID` must continue to succeed (upserts and identifies must overwrite existing data).
+
+## Acceptance Criteria
+- Project path: /home/user/knock_task
+- Ensure the script is executed and the resulting artifacts exist.
+- Log file: /home/user/knock_task/output.log
+- The log file must contain a line in the format `Workflow key: welcome-email-${ZEALT_RUN_ID}`.
+- The log file must contain a line in the format `Workflow run id: <uuid>` where `<uuid>` is the value returned by the Knock trigger API.
+- The log file must contain a line in the format `Recipient id: user-${ZEALT_RUN_ID}`.
+- The log file must contain a line in the format `Recipient email: ${GMAIL_USER_NAME}+receiver-${ZEALT_RUN_ID}@gmail.com`.
+- The workflow `welcome-email-${ZEALT_RUN_ID}` must exist in Knock's `development` environment with `active = true` and contain exactly one channel step whose `channel_key` is `mailtrap` and whose `ref` is `welcome_email`.
+- An email matching the configured subject must arrive in the Gmail inbox of `${GMAIL_USER_NAME}+receiver-${ZEALT_RUN_ID}@gmail.com`.
+
+
+EOF
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-ddqdjmw > /logs/artifacts/run-id && echo upsert_trigger_data_schema_node__DDQdjmw > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Upsert a Knock Workflow With Trigger Data Validation (Node.js)
+
+## Background
+Knock supports JSON-Schema validation of the `data` payload sent to a workflow trigger via the `trigger_data_json_schema` field on a workflow. When this field is set, the Knock trigger endpoint will reject any payload that does not match the schema with a `422 Unprocessable Entity` response. Your job is to programmatically create such a validated workflow using the Knock Node.js Management SDK, activate it, and then exercise it by triggering it with both a valid and an invalid payload using the Knock Node.js SDK.
+
+## Requirements
+- Build a Node.js script that uses the `@knocklabs/mgmt` SDK to upsert a workflow in the `development` environment of your Knock account.
+  - Workflow key: `order-confirmation-${run-id}` (where `${run-id}` is the value of the `ZEALT_RUN_ID` environment variable).
+  - Workflow `name`: `Order Confirmation ${run-id}`.
+  - The workflow must declare a `trigger_data_json_schema` requiring all three properties below as `required`, with the following exact JSON Schema types:
+    - `order_id`: string
+    - `total_amount`: number
+    - `customer_email`: string with `format` set to `email`
+  - The workflow must contain exactly one channel step targeting the `in-app` channel (channel key `in-app`) with a Markdown template body that includes the Liquid placeholders `{{ data.order_id }}` and `{{ data.total_amount }}`.
+- After upsert, activate the workflow in the `development` environment so it can be triggered.
+- Build a second Node.js script that uses the `@knocklabs/node` SDK to:
+  1. Trigger the workflow once with a valid payload and capture the returned `workflow_run_id`.
+  2. Trigger the workflow a second time with an invalid payload (a payload that the schema rejects, e.g., `total_amount` sent as a string) and capture the error.
+- Both scripts must write structured results to a single shared log file so the verifier can inspect them.
+
+## Implementation Hints
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable and append it to the workflow key and workflow name to keep concurrent runs isolated.
+- `@knocklabs/mgmt` provides `client.workflows.upsert(workflowKey, { environment, workflow })` and `client.workflows.activate(workflowKey, { environment, status })` — use the management service token (`KNOCK_SERVICE_TOKEN`) for these calls. Service tokens authenticate management API calls; the trigger API requires the environment-scoped secret API key (`KNOCK_API_TOKEN`).
+- `@knocklabs/node`'s `knock.workflows.trigger(key, { recipients, data })` returns `{ workflow_run_id }` on success and throws on validation errors. Catch the validation error from the invalid trigger and serialize its HTTP status code and message into the log.
+- Use any non-empty recipient identifier for trigger calls (e.g., `recipient-${run-id}`); inline recipients are fine.
+
+## Acceptance Criteria
+- Project path: /home/user/knock_task
+- Ensure both scripts are executed and produce the artifacts listed below.
+- Log file: /home/user/knock_task/output.log
+- The workflow created by the upsert script must be named `order-confirmation-${run-id}` in the `development` environment, must be active, and must carry a `trigger_data_json_schema` requiring `order_id`, `total_amount`, and `customer_email`.
+- The log file must contain the following lines (in any order, one per line) where `${run-id}` is read from the `ZEALT_RUN_ID` environment variable:
+  - `Workflow Key: order-confirmation-${run-id}`
+  - `Workflow Active: true`
+  - `Valid Trigger Workflow Run ID: <uuid>` where `<uuid>` is the `workflow_run_id` returned by the valid trigger call.
+  - `Invalid Trigger Status: 422`
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__trigger_per_recipient_data_py: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-qnkjlte > /logs/artifacts/run-id && echo trigger_per_recipient_data_py__qNkjLtE > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Personalize Knock workflow emails with per-recipient trigger data (Python)
+
+## Background
+Your team uses [Knock](https://knock.app) for transactional notifications. Knock lets a single workflow trigger call notify multiple recipients, and each recipient can receive its own merged data via the inline-recipient `$trigger_data` field. You need to ship a Python script that defines (upserts) a Knock email workflow whose template renders per-recipient data, and then triggers it once for multiple inline recipients so each person receives an email customized with their role and dashboard URL.
+
+The Knock account already has an email channel with key `mailtrap` configured for delivery. Inbound mail is captured through Gmail using sub-addressed inboxes. All actions in this task must be scoped to the current `run-id` so concurrent runs do not collide.
+
+## Requirements
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable and use it to namespace every externally visible resource (workflow key, recipient identifiers, and recipient email addresses).
+- Use the Knock Management API (raw HTTP from Python is fine) to upsert a workflow in the `development` environment, and activate it so the trigger endpoint can run it.
+  - Workflow key: `per-recipient-alert-${run-id}`.
+  - The workflow must contain exactly one channel step that targets the email channel with key `mailtrap`.
+  - The email template MUST render the per-recipient values from the trigger data. Specifically:
+    - The subject line MUST include the merged `data.alert_type` and the recipient's `data.role`.
+    - The body MUST include the recipient's `data.role` and `data.dashboard_url`.
+- From a Python script, trigger the workflow exactly once using the Knock backend SDK (`knockapi`) and provide:
+  - A shared `data` payload containing `alert_type` (use the literal string `security_breach`).
+  - Two inline recipients identified entirely on the trigger call (no separate identify step required):
+    1. id `owner-${run-id}`, name `John Hammond`, email `${GMAIL_USER_NAME}+r1-${run-id}@gmail.com`, with `$trigger_data` containing `role = "Park Owner"` and `dashboard_url = "https://jurassicpark.com/dashboard/owner-${run-id}"`.
+    2. id `paleo-${run-id}`, name `Ellie Sattler`, email `${GMAIL_USER_NAME}+r2-${run-id}@gmail.com`, with `$trigger_data` containing `role = "Paleobotanist"` and `dashboard_url = "https://jurassicpark.com/dashboard/paleo-${run-id}"`.
+- Log the resulting workflow key and `workflow_run_id` to a log file so the verifier can confirm the trigger happened.
+
+## Implementation Hints
+- The Management API requires the account-level service token `KNOCK_SERVICE_TOKEN` (header `Authorization: Bearer ...`) and only supports writes in the `development` environment. After upserting the workflow, you must activate it so it can be triggered. The CLI is not required — you can do everything from Python with `requests` or `urllib`.
+- The backend trigger SDK is `knockapi` (v1+). Authenticate with `KNOCK_API_TOKEN` and use `client.workflows.trigger(...)`. Inline recipients are passed as full dicts so Knock can identify them just-in-time.
+- Knock email templates use Liquid; reference per-recipient values with `{{ data.role }}` and `{{ data.dashboard_url }}`. The `$trigger_data` on each inline recipient is merged with the top-level `data` for that recipient's run.
+- Gmail sub-addressing means each `+suffix` address still lands in the same `${GMAIL_USER_NAME}@gmail.com` inbox, so you can fan out to multiple `+r1-${run-id}` / `+r2-${run-id}` addresses without provisioning new mailboxes.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Ensure the script is executed and the artifacts exist. Do not mock Knock or Gmail.
+- Log file: /home/user/myproject/output.log
+- The workflow MUST be created in Knock with the exact key `per-recipient-alert-${run-id}` and a single email channel step bound to the `mailtrap` channel.
+- The workflow MUST be active in the `development` environment so it can be triggered.
+- The Python script MUST call `client.workflows.trigger` (or the equivalent HTTP `POST /v1/workflows/{key}/trigger`) exactly once with two inline recipients carrying the per-recipient `$trigger_data` described above.
+- The log file MUST contain a line in the format `Workflow key: <key>` and another line in the format `Workflow run ID: <workflow_run_id>` printed after a successful trigger.
+- After the trigger runs, the Gmail inbox MUST receive one email per recipient delivered through the `mailtrap` channel. Each email's subject and body MUST render that recipient's own `role` and `dashboard_url` (e.g. the email sent to `+r1-${run-id}` mentions `Park Owner` and the owner dashboard URL; the email sent to `+r2-${run-id}` mentions `Paleobotanist` and the paleo dashboard URL).
+
+
+EOF
+Skipping image OS validation for hb__once_per_recipient_dedup_node: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-5eebdvv > /logs/artifacts/run-id && echo once_per_recipient_dedup_node__5eebdvv > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model zai/glm-4.7 --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Knock workflow with once-per-recipient deduplication (Node.js)
+
+## Background
+Knock supports a workflow-level `trigger_frequency` setting that limits how often a recipient can be enrolled in a workflow. When set to `once_per_recipient`, the second (and any subsequent) trigger of the same workflow for the same recipient is dropped, no matter how many times your backend calls the trigger API. This is the recommended primitive for one-shot lifecycle notifications such as a welcome email.
+
+You will build a small Node.js script that uses the Knock **Management API** (`@knocklabs/mgmt`) to create and activate a one-step email workflow with `once_per_recipient` deduplication enabled, and then uses the Knock **API SDK** (`@knocklabs/node`) to trigger the workflow twice for the same recipient. The Knock backend should only deliver a single email even though the script triggers the workflow twice.
+
+The project must run end-to-end against the real Knock control plane and the real Knock trigger API — do NOT mock either of them.
+
+## Requirements
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable and use it to isolate every shared resource you create.
+- Use the Knock Management API (via `@knocklabs/mgmt` or HTTPS) authenticated with `KNOCK_SERVICE_TOKEN` to upsert a workflow in the `development` environment with:
+  - workflow key: `dedup-test-${run-id}`
+  - `trigger_frequency` set to `once_per_recipient`
+  - exactly one step: an email channel step using the channel key `mailtrap` whose template subject contains the run-id (so the test can find the message in Gmail).
+- Activate the workflow (set status to active) so that triggers in the development environment are accepted.
+- Use `@knocklabs/node` authenticated with `KNOCK_API_TOKEN` to trigger the workflow **twice** for the same single inline recipient. The recipient must be identified by:
+  - `id`: `dedup-recipient-${run-id}`
+  - `email`: `${GMAIL_USER_NAME}+receiver-${run-id}@gmail.com`
+  - `name`: `Recipient ${run-id}`
+- The email channel's `from` address must live under the Mailtrap-allowed domain — use `dedup-${run-id}@${MAILTRAP_DOMAIN}` as the sender email.
+- Append a single log line for **each** trigger call to the log file, in the exact format described below, including the returned `workflow_run_id` (or the literal string `null` when Knock skipped the trigger because of the once-per-recipient rule).
+
+## Implementation Hints
+- Two Knock credentials are required and they are not interchangeable: `KNOCK_SERVICE_TOKEN` (account-level, used by the Management SDK / CLI) and `KNOCK_API_TOKEN` (environment-level, used by the trigger API).
+- Workflow upserts are only permitted in the `development` environment. The Management SDK returns the upserted workflow; use it (or a follow-up call) to activate the workflow in `development`.
+- For each trigger call, the `trigger` API returns an object with `workflow_run_id`. Print this value (or `null` if the call returned no run id because of `once_per_recipient` enforcement) along with a stable label.
+- Use a single inline recipient object for the trigger payload; you don't need to pre-identify the user separately.
+- It can take several seconds for an email triggered through Knock to reach Gmail. The verifier will poll for the message, so you only need to ensure the trigger calls themselves succeeded.
+
+## Acceptance Criteria
+- Project path: `/home/user/myproject`
+- Ensure the script is actually executed against Knock; the workflow must exist and the email must be delivered. Do not stub or mock Knock.
+- Log file: `/home/user/myproject/output.log`
+- The Knock workflow must exist in the development environment with key `dedup-test-${run-id}` and `trigger_frequency` equal to `once_per_recipient`, where `run-id` is read from `ZEALT_RUN_ID`.
+- The workflow must be in the `active` status in the development environment.
+- The workflow must contain at least one channel step whose `channel_key` is `mailtrap`.
+- The log file must contain exactly the following two lines (in order), with each `<workflow_run_id>` replaced by the value returned from the corresponding trigger call (use the literal string `null` if no run id is returned):
+  - `First trigger workflow_run_id: <workflow_run_id>`
+  - `Second trigger workflow_run_id: <workflow_run_id>`
+- Exactly one email must be delivered to `${GMAIL_USER_NAME}+receiver-${run-id}@gmail.com`, sent from an address whose domain matches `MAILTRAP_DOMAIN`, and whose subject contains the substring `dedup-test-${run-id}`.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached

@@ -1,0 +1,59 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 3 items
+
+tests/test_final_state.py ..F                                            [100%]
+
+=================================== FAILURES ===================================
+__________ test_collaborative_stroke_propagation_and_eraser_and_undo ___________
+
+start_app = None, room_id = 'liveblocks-drawing-zr-tpexieh'
+
+    def test_collaborative_stroke_propagation_and_eraser_and_undo(start_app, room_id):
+        assert _wait_for_http_ok(f"{APP_URL}/?user=alice", timeout=180), "Next.js app did not become ready."
+        from playwright.sync_api import sync_playwright
+    
+        unique_a = f"alice-{uuid.uuid4().hex[:6]}"
+        unique_b = f"bob-{uuid.uuid4().hex[:6]}"
+    
+        with sync_playwright() as p:
+            browser, ctx_a, ctx_b, page_a, page_b = _open_two_contexts(p)
+            try:
+                page_a.goto(f"{APP_URL}/?user={unique_a}")
+                page_b.goto(f"{APP_URL}/?user={unique_b}")
+                _wait_selector(page_a, '[data-testid="canvas"]')
+                _wait_selector(page_b, '[data-testid="canvas"]')
+                # Allow connection to room.
+                time.sleep(3)
+    
+                # --- Scenario 1: A draws a stroke, B sees it. ---
+                _select_pen(page_a)
+                _set_color(page_a, "#ff0000")
+                _set_width(page_a, 6)
+                _draw_stroke(page_a, [(120, 120), (160, 160), (200, 200), (240, 240), (280, 280)])
+                # Wait for propagation.
+                deadline = time.time() + 10
+                propagated = False
+                while time.time() < deadline:
+                    if page_b.locator(f'[data-testid="canvas"] polyline[data-user-id="{unique_a}"]').count() >= 1:
+                        propagated = True
+                        break
+                    time.sleep(0.5)
+>               assert propagated, "Bob's canvas did not receive Alice's stroke within 10 seconds."
+E               AssertionError: Bob's canvas did not receive Alice's stroke within 10 seconds.
+E               assert False
+
+tests/test_final_state.py:249: AssertionError
+==================================== PASSES ====================================
+__________________________ test_static_page_contract ___________________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/drawing_app$ npm run dev
+process 'drawing_app' started pid=616
+drawing_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_dependencies_declared_and_no_mock
+PASSED tests/test_final_state.py::test_static_page_contract
+FAILED tests/test_final_state.py::test_collaborative_stroke_propagation_and_eraser_and_undo
+========================= 1 failed, 2 passed in 36.67s =========================

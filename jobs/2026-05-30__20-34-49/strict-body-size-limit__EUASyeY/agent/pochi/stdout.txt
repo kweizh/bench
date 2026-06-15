@@ -1,0 +1,62 @@
+- Initializing MCP connections...
+You
+# Enforce Strict Body Size Limit ## Background To protect backend services from excessively large payloads, we need to enforce a strict request body size limit at the API gateway layer using Zuplo. ## Requirements * Initialize a new Zuplo project. * Create a custom inbound policy that restricts the request body size to a maximum of 1024 bytes. * Create a POST route at `/upload` that returns a 200 OK with the text `Upload successful`. * Apply the custom policy to the `/upload` route. * If a request is missing the `content-length` header or its value exceeds 1024, the policy must reject the request with a `413 Payload Too Large` status code and the text `Payload Too Large`. ## Implementation Hints * Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project. * Create a custom policy module (e.g., `modules/body-limit.ts`) that inspects the `content-length` header of the incoming `ZuploRequest`. * Register the policy in `config/policies.json`. * Define the `/upload` POST route in `config/routes.oas.json` and attach the policy and a simple handler. * Remember to kill the background dev server before completing the task. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: zuplo dev --port 9200 * Port: 9200 * API Endpoints: * POST `/upload`: * Rejects requests without a `content-length` header with status 413 and text `Payload Too Large`. * Rejects requests where `content-length` > 1024 with status 413 and text `Payload Too Large`. * Accepts requests where `content-length` <= 1024, returning status 200 and text `Upload successful`.   
+
+Pochi
+📋 Updating todo list (5 items) ✔ 
+💫 Executing mkdir -p /home/user && cd /home/user && npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes ✖ "Command execution timed out after 120 seconds."
+📂 Listing files in /home/user/myproject recursively ✔ 
+📋 Updating todo list (5 items) ✔ 
+✏️  Writing /home/user/myproject/modules/body-limit.ts ✔ 
+📋 Updating todo list (5 items) ✔ 
+📖 Reading /home/user/myproject/config/policies.json ✔ 
+✏️  Writing /home/user/myproject/config/policies.json ✔ 
+📋 Updating todo list (5 items) ✔ 
+📖 Reading /home/user/myproject/config/routes.oas.json ✔ 
+✏️  Writing /home/user/myproject/config/routes.oas.json ✔ 
+✏️  Writing /home/user/myproject/modules/upload-handler.ts ✔ 
+📋 Updating todo list (5 items) ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+💫 Executing sleep 10 && curl -i -X POST http://localhost:9200/upload -H "Content-Length: 500" -d "some data" ✖ "Command exited with code 7"
+🛠️ Tool readBackgroundJobOutput ✔ 
+✏️  Writing /home/user/myproject/config/policies.json ✔ 
+✏️  Writing /home/user/myproject/config/routes.oas.json ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+💫 Executing sleep 20 && curl -i -X POST http://localhost:9200/upload -H "Content-Length: 500" -d "some data" ✖ "Command exited with code 7"
+🛠️ Tool readBackgroundJobOutput ✔ 
+✏️  Writing /home/user/myproject/config/policies.json ✔ 
+✏️  Writing /home/user/myproject/config/routes.oas.json ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+💫 Executing sleep 20 && curl -i -X POST http://localhost:9200/upload -H "Content-Length: 500" -d "some data" ✔ 
+✏️  Writing /home/user/myproject/modules/body-limit.ts ✔ 
+💫 Executing sleep 5 && curl -i -X POST http://localhost:9200/upload -H "Content-Length: 500" -d "some data" ✔ 
+💫 Executing curl -i -X POST http://localhost:9200/upload -H "Content-Length: 1025" -d "$(printf 'a%.0s' {1..1025})" && \
+curl -i -X POST http://localhost:9200/upload -H "Content-Length: 1024" -d "$(printf 'a%.0s' {1..1024})" && \
+curl -i -X POST http://localhost:9200/upload -d "no content length" ✔ 
+💫 Executing curl -i -X POST http://localhost:9200/upload --header "Content-Length: " -d "test" ✔ 
+🛠️ Tool killBackgroundJob ✔ 
+📋 Updating todo list (5 items) ✔ 
+🎉 Task Completed
+I have successfully enforced a strict request body size limit at the API gateway layer using Zuplo.
+
+### Accomplishments:
+- **Initialized Zuplo Project**: Scaffolded a new Zuplo project in `/home/user/myproject`.
+- **Created Custom Inbound Policy**: Developed a custom policy in `modules/body-limit.ts` that:
+    - Rejects requests missing the `content-length` header with a `413 Payload Too Large` status.
+    - Rejects requests where the `content-length` exceeds 1024 bytes with a `413 Payload Too Large` status.
+    - Allows requests within the limit to proceed.
+- **Configured Routes**: 
+    - Defined a POST route at `/upload`.
+    - Applied the `body-limit-policy` to the `/upload` route.
+    - Implemented a simple handler in `modules/upload-handler.ts` that returns `200 OK` with the text `Upload successful`.
+- **Verification**: Verified the implementation using the Zuplo dev server on port 9200, confirming that:
+    - Requests > 1024 bytes are rejected with 413.
+    - Requests <= 1024 bytes are accepted with 200.
+    - Requests without a `content-length` header (or empty) are rejected with 413.
+
+The project is ready and the development server has been stopped as requested.   
+- Waiting for background jobs to complete (timeout: 60000ms)...
+✖ Async wait timeout reached. Remaining: 1 job(s)
+  

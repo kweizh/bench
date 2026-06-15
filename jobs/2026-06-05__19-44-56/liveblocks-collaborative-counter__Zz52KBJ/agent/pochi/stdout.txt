@@ -1,0 +1,176 @@
+- Initializing MCP connections...
+You
+# Liveblocks Collaborative Multi-Counter Dashboard ## Background You are extending a Next.js (App Router) starter application that already wires up a Liveblocks room. The room must host a collaborative multi-counter dashboard where every connected client sees the same set of named counters in real time. The starter has a placeholder page with no Storage-backed behavior yet — your job is to make every counter creation, increment, decrement and reset propagate through Liveblocks Storage so that multiple browsers stay in sync. ## Requirements * The dashboard lives at the dynamic route `/dashboard/[room]` (App Router). Visiting `/dashboard/foo` joins a Liveblocks room named `foo`. * Storage layout (must match exactly): `Storage.counters: LiveMap<string, LiveObject<{ value: number; lastIncrementBy: string; lastUpdated: number }>>`. * A `RoomProvider` declared with `initialStorage={{ counters: new LiveMap() }}` so first-visit rooms get an empty map. * A user identity input (any text field) saved client-side; this value is the one written into `lastIncrementBy` on every Storage mutation. * A "Create counter" form with two inputs (counter key text + numeric initial value) and a submit button labelled `Create counter`. Submitting must add a new `LiveObject` entry to `Storage.counters` under the given key with the provided initial `value`, `lastIncrementBy = current identity`, and `lastUpdated = Date.now()`. If the key already exists in the map, do not overwrite it. * For every counter currently in the map, render a row containing: * the counter key, * the current value, * a `+` button labelled exactly `Increment` that adds 1 to `value`, * a `-` button labelled exactly `Decrement` that subtracts 1 from `value`, * a text line of the form `Last touched by <identity> at <ISO timestamp>` (use `new Date(lastUpdated).toISOString()`). * Every increment/decrement must update `value`, `lastIncrementBy`, and `lastUpdated` together inside a single `useMutation` callback (Liveblocks automatically batches updates inside `useMutation`). * A global `Reset all` button that, inside a single `useMutation`, iterates every counter in `Storage.counters` and sets each one's `value` back to `0`, `lastIncrementBy = current identity`, and `lastUpdated = Date.now()` so that other clients receive the reset as one batched update. * Use **real** Liveblocks cloud — never mock the client, never stub Storage, never fake the WebSocket. Authentication must go through a server route at `/api/liveblocks-auth` that uses `LIVEBLOCKS_SECRET_KEY` to mint a session via `@liveblocks/node`. The browser must access the room via the official `@liveblocks/react` provider configured to use that auth endpoint. `NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY` may be used as a fallback `publicApiKey`, but the auth endpoint route MUST be present and functional. ## Implementation Hints * Read the room name from the route segment `[room]` and pass it down as the `RoomProvider id`. * Type Storage globally so `useStorage((root) => root.counters)` returns a typed `ReadonlyMap`. Iterate it for rendering. * Inside `useMutation`, access the LiveMap via `storage.get("counters")`, fetch a `LiveObject` with `.get(key)`, and mutate fields with `.set(field, value)`. Wrapping these calls in a `useMutation` callback already produces a batched update — you do **not** need to call `room.batch` separately. * The `Reset all` mutation should walk every entry via `counters.values()` (or `forEach`) inside the same `useMutation` callback so all writes ship as one batch. * Persist the identity in `localStorage` (or React state seeded from `localStorage`) so refreshes keep the same name. Default to `anonymous` if no identity is set. * The dashboard route must be a Client Component (or wrap a Client Component) because Liveblocks hooks require the client runtime. ## Acceptance Criteria * Project path: `/home/user/project` * Start command: `npm run start` (after `npm run build`) * Port: `3000` * Route: `/dashboard/[room]` renders the dashboard for the given `room` segment. * Auth endpoint: `POST /api/liveblocks-auth` returns a valid Liveblocks session token (status 200 with a JSON body that includes a `token` field) when called with a JSON body shaped like `{ "room": "<room>" }`. * Storage schema observable from any connected client: `root.counters` is a `LiveMap`, and each entry is a `LiveObject` with the three fields `value` (number), `lastIncrementBy` (string), `lastUpdated` (number, ms epoch). * DOM contract for verification (per dashboard page): * Identity input has `data-testid="identity-input"`. * Create-counter form: key input has `data-testid="new-counter-key"`, initial-value input has `data-testid="new-counter-initial"`, submit button has `data-testid="create-counter"`. * Each counter row is rendered with `data-testid="counter-row"` and `data-counter-key="<key>"`. * Inside each row: the value element has `data-testid="counter-value"`, the increment button has `data-testid="increment"`, the decrement button has `data-testid="decrement"`, and the audit line has `data-testid="last-touched"` with the literal text `Last touched by <identity> at <ISO timestamp>`. * The global reset button has `data-testid="reset-all"`. * Two-browser sync: when client A creates a counter and client B is already connected to the same `/dashboard/<room>`, the counter appears in B's DOM without a manual reload. Increments and the global reset performed by either client must propagate to the other client's DOM within a few seconds. * Real Liveblocks cloud only — do not stub the Liveblocks client, do not write a fake WebSocket server, do not replace `@liveblocks/react` or `@liveblocks/client` with mocks. * The room name used during verification MUST be derived from the `ZEALT_RUN_ID` environment variable (e.g., `counter-room-${ZEALT_RUN_ID}`) so concurrent trials do not collide.   
+
+Pochi
+💭 Thinking for 675 characters   
+💫 Executing ls -la ✔ 
+💭 Thinking for 217 characters   
+📖 Reading package.json ✔ 
+📖 Reading liveblocks.config.ts ✔ 
+💫 Executing ls -la app ✔ 
+💭 Thinking for 183 characters   
+💫 Executing ls -la app/api ✔ 
+📖 Reading app/api/liveblocks-auth/route.ts ✔ 
+💫 Executing ls -la app/dashboard/[room] ✔ 
+💭 Thinking for 298 characters   
+📖 Reading app/dashboard/[room]/page.tsx ✔ 
+💭 Thinking for 208 characters   
+📖 Reading app/dashboard/[room]/Room.tsx ✔ 
+💭 Thinking for 1291 characters   
+💫 Executing cat << 'EOF' > app/dashboard/\[room\]/page.tsx
+"use client";
+
+import { useParams } from "next/navigation";
+import { Room } from "./Room";
+import { useStorage, useMutation } from "@liveblocks/react/suspense";
+import { LiveObject } from "@liveblocks/client";
+import { useState, useEffect } from "react";
+
+function Dashboard() {
+  const [identity, setIdentity] = useState("anonymous");
+  
+  useEffect(() => {
+    const saved = localStorage.getItem("identity");
+    if (saved) setIdentity(saved);
+  }, []);
+
+  const handleIdentityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newIdentity = e.target.value;
+    setIdentity(newIdentity);
+    localStorage.setItem("identity", newIdentity);
+  };
+
+  const counters = useStorage((root) => root.counters);
+
+  const [newKey, setNewKey] = useState("");
+  const [newInitial, setNewInitial] = useState(0);
+
+  const createCounter = useMutation(({ storage }, key: string, initialValue: number) => {
+    const countersMap = storage.get("counters");
+    if (!countersMap.has(key)) {
+      countersMap.set(
+        key,
+        new LiveObject({
+          value: initialValue,
+          lastIncrementBy: identity,
+          lastUpdated: Date.now()
+        })
+      );
+    }
+  }, [identity]);
+
+  const increment = useMutation(({ storage }, key: string) => {
+    const countersMap = storage.get("counters");
+    const counter = countersMap.get(key);
+    if (counter) {
+      counter.set("value", counter.get("value") + 1);
+      counter.set("lastIncrementBy", identity);
+      counter.set("lastUpdated", Date.now());
+    }
+  }, [identity]);
+
+  const decrement = useMutation(({ storage }, key: string) => {
+    const countersMap = storage.get("counters");
+    const counter = countersMap.get(key);
+    if (counter) {
+      counter.set("value", counter.get("value") - 1);
+      counter.set("lastIncrementBy", identity);
+      counter.set("lastUpdated", Date.now());
+    }
+  }, [identity]);
+
+  const resetAll = useMutation(({ storage }) => {
+    const countersMap = storage.get("counters");
+    const now = Date.now();
+    for (const [key, counter] of countersMap.entries()) {
+      counter.set("value", 0);
+      counter.set("lastIncrementBy", identity);
+      counter.set("lastUpdated", now);
+    }
+  }, [identity]);
+
+  return (
+    <main style={{ padding: 24, fontFamily: "system-ui" }}>
+      <h1>Collaborative Counter Dashboard</h1>
+      
+      <div style={{ marginBottom: 20 }}>
+        <label>
+          Identity:{" "}
+          <input
+            data-testid="identity-input"
+            value={identity}
+            onChange={handleIdentityChange}
+          />
+        </label>
+      </div>
+
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (newKey) {
+            createCounter(newKey, newInitial);
+            setNewKey("");
+            setNewInitial(0);
+          }
+        }}
+        style={{ marginBottom: 20 }}
+      >
+        <input
+          data-testid="new-counter-key"
+          placeholder="Counter Key"
+          value={newKey}
+          onChange={(e) => setNewKey(e.target.value)}
+        />
+        <input
+          type="number"
+          data-testid="new-counter-initial"
+          value={newInitial}
+          onChange={(e) => setNewInitial(Number(e.target.value))}
+        />
+        <button type="submit" data-testid="create-counter">
+          Create counter
+        </button>
+      </form>
+
+      <button data-testid="reset-all" onClick={() => resetAll()} style={{ marginBottom: 20 }}>
+        Reset all
+      </button>
+
+      <div>
+        {Array.from(counters.entries()).map(([key, counter]) => (
+          <div key={key} data-testid="counter-row" data-counter-key={key} style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
+            <h3>{key}</h3>
+            <p data-testid="counter-value">{counter.value}</p>
+            <button data-testid="increment" onClick={() => increment(key)}>
+              Increment
+            </button>
+            <button data-testid="decrement" onClick={() => decrement(key)}>
+              Decrement
+            </button>
+            <p data-testid="last-touched">
+              Last touched by {counter.lastIncrementBy} at {new Date(counter.lastUpdated).toISOString()}
+            </p>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+}
+
+export default function DashboardPage() {
+  const params = useParams<{ room: string }>();
+  const roomId =
+    (Array.isArray(params?.room) ? params?.room[0] : params?.room) ||
+    "default-room";
+
+  return (
+    <Room roomId={roomId}>
+      <Dashboard />
+    </Room>
+  );
+}
+EOF ✔ 
+💭 Thinking for 933 characters   
+💫 Executing npm run build ✔ 
+💭 Thinking for 2308 characters   

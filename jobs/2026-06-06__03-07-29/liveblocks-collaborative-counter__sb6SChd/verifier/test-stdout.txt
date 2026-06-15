@@ -1,0 +1,95 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 4 items
+
+../../../tests/test_final_state.py ..F.                                  [100%]
+
+=================================== FAILURES ===================================
+________________________ test_two_client_realtime_sync _________________________
+
+app_server = 'http://localhost:3000'
+
+    def test_two_client_realtime_sync(app_server):
+        from playwright.sync_api import sync_playwright
+    
+        url = f"{BASE_URL}/dashboard/{ROOM}"
+    
+        with sync_playwright() as pw:
+            browser = pw.chromium.launch(args=["--no-sandbox"])
+            try:
+                ctx_a = browser.new_context()
+                ctx_b = browser.new_context()
+                page_a = ctx_a.new_page()
+                page_b = ctx_b.new_page()
+    
+                page_a.goto(url, wait_until="domcontentloaded", timeout=60_000)
+                page_b.goto(url, wait_until="domcontentloaded", timeout=60_000)
+    
+                # Both pages must expose the static skeleton.
+                for page in (page_a, page_b):
+                    page.locator('[data-testid="identity-input"]').wait_for(
+                        state="visible", timeout=30_000
+                    )
+                    page.locator('[data-testid="reset-all"]').wait_for(
+                        state="visible", timeout=30_000
+                    )
+    
+                _set_identity(page_a, "alice")
+                _set_identity(page_b, "bob")
+    
+                # 1. A creates `alpha` at 10.
+                _create_counter(page_a, "alpha", 10)
+                _wait_for_value(page_a, "alpha", 10)
+                _wait_for_last_toucher(page_a, "alpha", "alice")
+    
+                # 2. B should see the new counter without a reload.
+                _wait_for_value(page_b, "alpha", 10)
+    
+                # 3. B increments twice — A should see 12 and bob as toucher.
+                page_b.locator(
+                    f'[data-testid="counter-row"][data-counter-key="alpha"] '
+                    f'[data-testid="increment"]'
+                ).click()
+                page_b.locator(
+                    f'[data-testid="counter-row"][data-counter-key="alpha"] '
+                    f'[data-testid="increment"]'
+                ).click()
+>               _wait_for_value(page_a, "alpha", 12)
+
+/tests/test_final_state.py:270: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+page = <Page url='http://localhost:3000/dashboard/counter-room-zr-sb6schd'>
+key = 'alpha', expected = 12, timeout_ms = 15000
+
+    def _wait_for_value(page, key: str, expected: int, timeout_ms: int = 15_000) -> None:
+        locator = _row(page, key).locator('[data-testid="counter-value"]')
+        locator.wait_for(state="visible", timeout=timeout_ms)
+        deadline = time.time() + timeout_ms / 1000.0
+        last = None
+        while time.time() < deadline:
+            last = (locator.text_content() or "").strip()
+            if last == str(expected):
+                return
+            time.sleep(0.25)
+>       raise AssertionError(
+            f"Timed out waiting for counter {key!r} to read {expected}; "
+            f"last observed value: {last!r}"
+        )
+E       AssertionError: Timed out waiting for counter 'alpha' to read 12; last observed value: '10'
+
+/tests/test_final_state.py:198: AssertionError
+==================================== PASSES ====================================
+______________________ test_no_liveblocks_mocks_or_stubs _______________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/liveblocks_counter_app$ npm run start -- -p 3000
+process 'liveblocks_counter_app' started pid=1286
+liveblocks_counter_app process startup detected
+=========================== short test summary info ============================
+PASSED ../../../tests/test_final_state.py::test_no_liveblocks_mocks_or_stubs
+PASSED ../../../tests/test_final_state.py::test_auth_endpoint_returns_real_token
+PASSED ../../../tests/test_final_state.py::test_storage_schema_via_liveblocks_rest
+FAILED ../../../tests/test_final_state.py::test_two_client_realtime_sync - As...
+========================= 1 failed, 3 passed in 45.72s =========================

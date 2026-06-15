@@ -1,0 +1,50 @@
+{
+    "id": "7dec4bc6-3ae0-4603-a3cf-d09deaac0c7b",
+    "started_at": "2026-05-30T21:20:24.412330",
+    "updated_at": "2026-05-30T21:39:28.680021",
+    "finished_at": "2026-05-30T21:39:28.680021",
+    "n_total_trials": 10,
+    "stats": {
+        "n_completed_trials": 10,
+        "n_errored_trials": 0,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gpt-5.2-codex__tasks": {
+                "n_trials": 10,
+                "n_errors": 0,
+                "metrics": [
+                    {
+                        "mean": 0.4
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "header-based-api-versioning__Yu2imvh",
+                            "path-prefix-routing__LDbeNpf",
+                            "ip-based-rate-limiting__PDA6rc6",
+                            "graphql-endpoint-proxy__PGEZ5sV"
+                        ],
+                        "0.0": [
+                            "api_key_metadata_routing__Z8LVhwq",
+                            "jwt-auth-validation__CxLvLuL",
+                            "strict-timeout-policy__RJ7MJPZ",
+                            "custom-not-found-handler__ukL5nbM",
+                            "strict-body-size-limit__9N7moBm",
+                            "strip_sensitive_query_params__xUSxr7W"
+                        ]
+                    }
+                },
+                "exception_stats": {}
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 511490,
+        "cost_usd": null
+    }
+}

@@ -1,0 +1,55 @@
+{
+    "id": "086cb2c0-c322-4a90-8639-211f4a009395",
+    "started_at": "2026-05-30T20:58:47.366448",
+    "updated_at": "2026-05-30T21:20:19.262003",
+    "finished_at": "2026-05-30T21:20:19.262003",
+    "n_total_trials": 10,
+    "stats": {
+        "n_completed_trials": 10,
+        "n_errored_trials": 2,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3.1-pro__tasks": {
+                "n_trials": 10,
+                "n_errors": 2,
+                "metrics": [
+                    {
+                        "mean": 0.7
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "header-based-api-versioning__BZCnTgb",
+                            "path-prefix-routing__zLK7oAd",
+                            "ip-based-rate-limiting__axcX7fb",
+                            "graphql-endpoint-proxy__yGkudkD",
+                            "api_key_metadata_routing__ypVuBDu",
+                            "strict-body-size-limit__NEtk8Rv",
+                            "strip_sensitive_query_params__pQscG4L"
+                        ],
+                        "0.0": [
+                            "jwt-auth-validation__XzxJw6T",
+                            "strict-timeout-policy__Wr6KdRC",
+                            "custom-not-found-handler__UxGDTNa"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "AgentTimeoutError": [
+                        "path-prefix-routing__zLK7oAd",
+                        "custom-not-found-handler__UxGDTNa"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 183110,
+        "cost_usd": null
+    }
+}

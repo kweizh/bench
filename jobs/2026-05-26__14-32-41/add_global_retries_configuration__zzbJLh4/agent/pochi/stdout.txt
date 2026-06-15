@@ -1,0 +1,14 @@
+- Initializing MCP connections...
+You
+# Add Global Retries Configuration ## Background Speakeasy allows you to configure automatic retries for requests that fail due to network errors or specific HTTP status codes. This can be configured globally in the OpenAPI specification using the `x-speakeasy-retries` extension. ## Requirements - Add a global retries configuration to the root of `openapi.yaml`. - The retry strategy should be `backoff`. - The initial interval should be 500 milliseconds. - The max interval should be 60000 milliseconds (60 seconds). - The max elapsed time should be 3600000 milliseconds (1 hour). - The exponent should be 1.5. - It should retry on `5XX` status codes. - Connection errors should be retried. ## Implementation Guide 1. Open `/home/user/project/openapi.yaml`. 2. Add the `x-speakeasy-retries` extension at the root level with the specified configuration. 3. Validate the OpenAPI specification using `speakeasy lint openapi -s openapi.yaml` to ensure it is correct. ## Constraints - Project path: `/home/user/project` - The `openapi.yaml` file must be valid according to `speakeasy lint openapi`. ## Integrations - None   
+
+Pochi
+💭 Thinking for 262 characters   
+📖 Reading /home/user/project/openapi.yaml ✔ 
+💭 Thinking for 627 characters   
+🔧 Applying diff to /home/user/project/openapi.yaml ✔ 
+💫 Executing speakeasy lint openapi -s openapi.yaml ✔ 
+💭 Thinking for 525 characters   
+🎉 Task Completed
+I have successfully added the global retries configuration to the root of `openapi.yaml` with the specified parameters. The `x-speakeasy-retries` extension now includes the backoff strategy, initial interval, max interval, max elapsed time, exponent, status codes, and connection errors retry setting. I also validated the OpenAPI specification using `speakeasy lint openapi` and it is valid.   
+  

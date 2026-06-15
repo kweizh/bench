@@ -1,0 +1,58 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 1,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780689944593,
+            "stop": 1780690357122
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_dependencies_declared_and_no_mock",
+                "status": "passed",
+                "duration": 1644,
+                "start": 1780689945022,
+                "stop": 1780689946666,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_static_page_contract",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 210157,
+                "start": 1780689946666,
+                "stop": 1780690156823,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_static_page_contract(start_app):\n>       assert _wait_for_http_ok(f\"{APP_URL}/?user=alice\", timeout=180), \"Next.js app did not become ready.\"\nE       AssertionError: Next.js app did not become ready.\nE       assert False\nE        +  where False = _wait_for_http_ok('http://localhost:3000/?user=alice', timeout=180)\n\ntests/test_final_state.py:200: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_collaborative_stroke_propagation_and_eraser_and_undo",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 198709,
+                "start": 1780690157002,
+                "stop": 1780690355711,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None, room_id = 'liveblocks-drawing-zr-w7kzjap'\n\n    def test_collaborative_stroke_propagation_and_eraser_and_undo(start_app, room_id):\n>       assert _wait_for_http_ok(f\"{APP_URL}/?user=alice\", timeout=180), \"Next.js app did not become ready.\"\nE       AssertionError: Next.js app did not become ready.\nE       assert False\nE        +  where False = _wait_for_http_ok('http://localhost:3000/?user=alice', timeout=180)\n\ntests/test_final_state.py:220: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

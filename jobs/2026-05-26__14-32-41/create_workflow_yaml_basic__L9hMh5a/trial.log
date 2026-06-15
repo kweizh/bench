@@ -1,0 +1,79 @@
+Skipping image OS validation for hb__create_workflow_yaml_basic: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-l9hmh5a > /logs/artifacts/run-id && echo create_workflow_yaml_basic__L9hMh5a > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Create a Basic Speakeasy Workflow File
+
+## Background
+Speakeasy is an AI-native API development platform that generates idiomatic, type-safe artifacts (SDKs, Terraform providers, CLIs, MCP servers) from OpenAPI specifications. The Speakeasy CLI is driven by a `.speakeasy/workflow.yaml` file that maps one or more OpenAPI **sources** to one or more code-generation **targets**.
+
+You have a minimal OpenAPI 3.0 specification (`openapi.yaml`) in the project root. Author a `.speakeasy/workflow.yaml` from scratch so that it would drive a single TypeScript SDK generation from this spec.
+
+## Requirements
+- Create the workflow file at `/home/user/project/.speakeasy/workflow.yaml`.
+- Define exactly one source named `my-api` whose only input location is the local file `./openapi.yaml`.
+- Define exactly one target named `typescript-sdk` whose `target` type is `typescript` and whose `source` is `my-api`.
+- The workflow must be structurally valid per the Speakeasy workflow schema (top-level `workflowVersion`, `sources`, and `targets` keys).
+- Do not run `speakeasy quickstart` or any command that requires authentication; create the file manually based on the workflow.yaml reference.
+
+## Implementation Hints
+- The top-level structure of `workflow.yaml` is `workflowVersion`, optional `speakeasyVersion`, `sources`, and `targets`.
+- A source has an `inputs` list, where each entry is an object with a `location` key pointing to an OpenAPI document.
+- A target has a `target` field (language/artifact type) and a `source` field referencing the source name.
+- Refer to the Speakeasy workflow file documentation for the exact schema.
+- You can sanity-check structure with `yq` or by inspecting `speakeasy run --help`.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- The file `/home/user/project/.speakeasy/workflow.yaml` must exist and be valid YAML.
+- The YAML must contain a top-level `workflowVersion` string.
+- Under `sources`, a key `my-api` must exist with `inputs[0].location` equal to `./openapi.yaml`.
+- Under `targets`, a key `typescript-sdk` must exist with `target: typescript` and `source: my-api`.
+- The seed file `/home/user/project/openapi.yaml` must remain unchanged.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

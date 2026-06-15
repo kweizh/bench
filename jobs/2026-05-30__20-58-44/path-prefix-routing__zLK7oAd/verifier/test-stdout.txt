@@ -1,0 +1,30 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 2 items
+
+tests/test_final_state.py ..                                             [100%]
+
+==================================== PASSES ====================================
+_____________________________ test_users_route_get _____________________________
+---------------------------- Captured stdout setup -----------------------------
+
+added 1 package, and audited 1362 packages in 10s
+
+354 packages are looking for funding
+  run `npm fund` for details
+
+17 vulnerabilities (3 low, 2 moderate, 10 high, 2 critical)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ zuplo dev --port 9200
+process 'zuplo_dev' started pid=2394
+zuplo_dev process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_users_route_get
+PASSED tests/test_final_state.py::test_products_route_post
+============================== 2 passed in 41.27s ==============================

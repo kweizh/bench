@@ -1,0 +1,16 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 5 items
+
+tests/test_final_state.py .....                                          [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_output_log_records_workflow_key
+PASSED tests/test_final_state.py::test_workflow_exists_in_development_via_mapi
+PASSED tests/test_final_state.py::test_workflow_is_committed_in_development
+PASSED tests/test_final_state.py::test_workflow_is_active_in_development
+PASSED tests/test_final_state.py::test_workflow_has_in_app_and_email_channel_steps
+============================== 5 passed in 2.05s ===============================

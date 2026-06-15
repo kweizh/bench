@@ -1,0 +1,59 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 3 items
+
+tests/test_final_state.py FFF                                            [100%]
+
+=================================== FAILURES ===================================
+________________________ test_missing_tenant_id_header _________________________
+
+start_app = None
+
+    def test_missing_tenant_id_header(start_app):
+        """Verify that omitting the header returns a 401 Unauthorized."""
+        response = requests.get("http://localhost:3000/api/data")
+>       assert response.status_code == 401, f"Expected 401 Unauthorized, got {response.status_code}"
+E       AssertionError: Expected 401 Unauthorized, got 400
+E       assert 400 == 401
+E        +  where 400 = <Response [400]>.status_code
+
+tests/test_final_state.py:38: AssertionError
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ npx zuplo dev --port 3000
+process 'zuplo_dev' started pid=981
+zuplo_dev process startup detected
+____________________________ test_route_to_tenant_a ____________________________
+
+start_app = None
+
+    def test_route_to_tenant_a(start_app):
+        """Verify routing to tenant-a backend."""
+        headers = {"x-mock-tenant-id": "tenant-a"}
+        response = requests.get("http://localhost:3000/api/data", headers=headers)
+>       assert response.status_code == 200, f"Expected 200 OK, got {response.status_code}"
+E       AssertionError: Expected 200 OK, got 400
+E       assert 400 == 200
+E        +  where 400 = <Response [400]>.status_code
+
+tests/test_final_state.py:44: AssertionError
+____________________________ test_route_to_tenant_b ____________________________
+
+start_app = None
+
+    def test_route_to_tenant_b(start_app):
+        """Verify routing to tenant-b backend."""
+        headers = {"x-mock-tenant-id": "tenant-b"}
+        response = requests.get("http://localhost:3000/api/data", headers=headers)
+>       assert response.status_code == 200, f"Expected 200 OK, got {response.status_code}"
+E       AssertionError: Expected 200 OK, got 400
+E       assert 400 == 200
+E        +  where 400 = <Response [400]>.status_code
+
+tests/test_final_state.py:54: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_missing_tenant_id_header - AssertionEr...
+FAILED tests/test_final_state.py::test_route_to_tenant_a - AssertionError: Ex...
+FAILED tests/test_final_state.py::test_route_to_tenant_b - AssertionError: Ex...
+============================== 3 failed in 10.85s ==============================

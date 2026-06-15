@@ -1,0 +1,37 @@
+configVersion: 2.0.0
+generation:
+  sdkClassName: speakeasybar
+  maintainOpenAPIOrder: true
+  usageSnippets:
+    optionalPropertyRendering: withExample
+  useClassNamesForArrayFields: true
+  fixes:
+    nameResolutionDec2023: true
+    parameterOrderingFeb2024: true
+    requestResponseComponentNamesFeb2024: true
+    securityFeb2025: true
+  auth:
+    oAuth2ClientCredentialsEnabled: true
+    oAuth2PasswordEnabled: false
+typescript:
+  version: 0.1.0
+  author: speakeasy-eval
+  packageName: "@speakeasy-eval/sdk"
+  clientServerStatusCodesAsErrors: true
+  enumFormat: enum
+  flattenGlobalSecurity: true
+  imports:
+    option: openapi
+    paths:
+      callbacks: sdk/models/callbacks
+      errors: sdk/models/errors
+      operations: sdk/models/operations
+      shared: sdk/models/shared
+      webhooks: sdk/models/webhooks
+  inputModelSuffix: input
+  maxMethodParams: 5
+  methodArguments: require-security-and-request
+  moduleFormat: commonjs
+  outputModelSuffix: output
+  responseFormat: envelope
+  templateVersion: v1

@@ -1,0 +1,89 @@
+- Initializing MCP connections...
+You
+# Zuplo Metadata-Based Routing ## Background In multi-tenant Zuplo gateways, it is common to route requests to different backend URLs based on metadata attached to the authenticated user (typically populated by the API Key or JWT policy). In this task, you will implement a custom handler that routes requests dynamically based on `request.user.data.tenantId`. ## Requirements * Initialize a new Zuplo project. * Create a custom inbound policy named `mock-api-key-metadata`. This policy should read the `x-mock-tenant-id` header. If the header is present, it must set `request.user = { sub: "mock-user", data: { tenantId: <header-value> } }` and allow the request to proceed. If missing, it must return a 401 Unauthorized response. * Create an API route for `GET /api/data` and apply the `mock-api-key-metadata` policy to it. * Create a custom handler for the `/api/data` route. The handler must read `tenantId` from `request.user.data.tenantId`. * The custom handler must proxy the request to `https://echo.zuplo.io/{tenantId}/data` and return the upstream response to the client. * If `tenantId` is somehow missing in the handler, it should return a 400 Bad Request. ## Implementation Hints * Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project. * Create the custom policy and custom handler as TypeScript modules in the `modules/` directory. * Update `config/policies.json` to register your custom policy. * Update `config/routes.oas.json` to define the `/api/data` route, attach your policy, and route to your custom handler. * Use the native `fetch` API in your handler to call the upstream URL. ## Acceptance Criteria * Project path: /home/user/myproject * Start command: zuplo dev --port 3000 * Port: 3000 * API Endpoints: * GET `/api/data`: * When `x-mock-tenant-id` header is missing: Returns 401 Unauthorized. * When `x-mock-tenant-id: tenant-a` is provided: Proxies to `https://echo.zuplo.io/tenant-a/data` and returns the successful response. * When `x-mock-tenant-id: tenant-b` is provided: Proxies to `https://echo.zuplo.io/tenant-b/data` and returns the successful response.   
+
+Pochi
+📂 Listing files in /home/user ✔ 
+💫 Executing npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes ✖ "Command execution timed out after 120 seconds."
+📂 Listing files in /home/user/myproject ✔ 
+📋 Updating todo list (5 items) ✔ 
+📂 Listing files in /home/user/myproject/modules ✔ 
+📖 Reading /home/user/myproject/modules/hello-world.ts ✔ 
+💭 Thinking for 281 characters   
+📋 Updating todo list (5 items) ✔ 
+✏️  Writing /home/user/myproject/modules/mock-api-key-metadata.ts ✔ 
+💭 Thinking for 339 characters   
+📋 Updating todo list (5 items) ✔ 
+✏️  Writing /home/user/myproject/modules/tenant-router.ts ✔ 
+📖 Reading /home/user/myproject/config/policies.json ✔ 
+📋 Updating todo list (5 items) ✔ 
+✏️  Writing /home/user/myproject/config/policies.json ✔ 
+💭 Thinking for 289 characters   
+📖 Reading /home/user/myproject/zuplo.jsonc ✔ 
+📂 Listing files in /home/user/myproject/config ✔ 
+📖 Reading /home/user/myproject/config/routes.oas.json ✔ 
+💭 Thinking for 243 characters   
+✏️  Writing /home/user/myproject/config/policies.json ✔ 
+📋 Updating todo list (5 items) ✔ 
+✏️  Writing /home/user/myproject/config/routes.oas.json ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+💫 Executing curl -i http://localhost:3000/api/data ✖ "Command exited with code 7"
+🛠️ Tool readBackgroundJobOutput ✔ 
+📂 Listing files in /home/user/myproject/node_modules/.bin ✔ 
+📖 Reading /home/user/myproject/package.json ✔ 
+🛠️ Tool killBackgroundJob ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+💫 Executing sleep 5 && curl -i http://localhost:3000/api/data ✖ "Command exited with code 7"
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 262 characters   
+🔧 Applying diff to /home/user/myproject/config/policies.json ✔ 
+💭 Thinking for 229 characters   
+🔧 Applying diff to /home/user/myproject/config/routes.oas.json ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+💫 Executing sleep 10 && curl -i http://localhost:3000/api/data ✖ "Command exited with code 7"
+🛠️ Tool readBackgroundJobOutput ✔ 
+💭 Thinking for 422 characters   
+🔧 Applying diff to /home/user/myproject/config/policies.json ✔ 
+🔧 Applying diff to /home/user/myproject/config/routes.oas.json ✔ 
+🛠️ Tool startBackgroundJob ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+🛠️ Tool readBackgroundJobOutput ✔ 
+💫 Executing sleep 10 && curl -i http://localhost:3000/api/data ✔ 
+💫 Executing curl -i -H "x-mock-tenant-id: tenant-a" http://localhost:3000/api/data ✔ 
+💫 Executing curl -i -H "x-mock-tenant-id: tenant-b" http://localhost:3000/api/data ✔ 
+🛠️ Tool killBackgroundJob ✔ 
+📋 Updating todo list (5 items) ✔ 
+🎉 Task Completed
+I have successfully implemented the Zuplo metadata-based routing system.
+
+### Implementation Details:
+
+1.  **Project Initialization**: Created a new Zuplo project in `/home/user/myproject`.
+2.  **Custom Policy**: Implemented `modules/mock-api-key-metadata.ts` which:
+    *   Reads the `x-mock-tenant-id` header.
+    *   Sets `request.user` with the `tenantId` in the user metadata.
+    *   Returns a 401 Unauthorized response if the header is missing.
+3.  **Custom Handler**: Implemented `modules/tenant-router.ts` which:
+    *   Extracts `tenantId` from `request.user.data.tenantId`.
+    *   Proxies the request to `https://echo.zuplo.io/{tenantId}/data` using the native `fetch` API.
+    *   Returns a 400 Bad Request if `tenantId` is missing.
+4.  **Configuration**:
+    *   Registered the custom policy in `config/policies.json` using the `custom-code-inbound` type.
+    *   Defined the `GET /api/data` route in `config/routes.oas.json`, attached the policy, and set the custom handler.
+
+### Verification:
+
+*   **No Header**: `curl -i http://localhost:3000/api/data` returns `401 Unauthorized`.
+*   **With Header `tenant-a`**: `curl -i -H "x-mock-tenant-id: tenant-a" http://localhost:3000/api/data` returns `200 OK` with the response from `https://echo.zuplo.io/tenant-a/data`.
+*   **With Header `tenant-b`**: `curl -i -H "x-mock-tenant-id: tenant-b" http://localhost:3000/api/data` returns `200 OK` with the response from `https://echo.zuplo.io/tenant-b/data`.
+
+The solution meets all requirements and acceptance criteria.   
+- Waiting for background jobs to complete (timeout: 60000ms)...
+✖ Async wait timeout reached. Remaining: 1 job(s)
+  

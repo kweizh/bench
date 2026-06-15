@@ -1,0 +1,73 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 4,
+            "passed": 0,
+            "failed": 4,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779764424645,
+            "stop": 1779764609499
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_output_log_contains_workflow_run_id",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 38,
+                "start": 1779764424862,
+                "stop": 1779764424900,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_output_log_contains_workflow_run_id():\n>       assert os.path.isfile(LOG_FILE), f\"Log file {LOG_FILE} does not exist.\"\nE       AssertionError: Log file /home/user/myproject/output.log does not exist.\nE       assert False\nE        +  where False = <function isfile at 0x7252ccffc220>('/home/user/myproject/output.log')\nE        +    where <function isfile at 0x7252ccffc220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:99: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_active_with_top_level_conditions",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 741,
+                "start": 1779764424900,
+                "stop": 1779764425641,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_workflow_active_with_top_level_conditions():\n        service_token = os.environ.get(\"KNOCK_SERVICE_TOKEN\")\n        assert service_token, \"KNOCK_SERVICE_TOKEN must be set for verification.\"\n    \n        workflow_key = _workflow_key()\n        url = f\"{KNOCK_MAPI_BASE}/v1/workflows/{workflow_key}\"\n        response = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {service_token}\"},\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"Expected HTTP 200 fetching workflow '{workflow_key}', got \"\n            f\"{response.status_code}: {response.text}\"\n        )\nE       AssertionError: Expected HTTP 200 fetching workflow 'top-level-conditions-zr-d9umkns', got 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:125: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_single_mailtrap_step_with_expected_subject",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 718,
+                "start": 1779764425642,
+                "stop": 1779764426360,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_workflow_has_single_mailtrap_step_with_expected_subject():\n        service_token = os.environ.get(\"KNOCK_SERVICE_TOKEN\")\n        assert service_token, \"KNOCK_SERVICE_TOKEN must be set for verification.\"\n    \n        workflow_key = _workflow_key()\n        url = f\"{KNOCK_MAPI_BASE}/v1/workflows/{workflow_key}\"\n        response = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {service_token}\"},\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"Expected HTTP 200 fetching workflow '{workflow_key}', got \"\n            f\"{response.status_code}: {response.text}\"\n        )\nE       AssertionError: Expected HTTP 200 fetching workflow 'top-level-conditions-zr-d9umkns', got 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:169: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_admin_received_email_but_viewer_did_not",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 183139,
+                "start": 1779764426360,
+                "stop": 1779764609499,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_admin_received_email_but_viewer_did_not():\n        service = _gmail_service()\n        expected_subject = _expected_subject()\n        admin_address = _gmail_address(_admin_email_local())\n        viewer_address = _gmail_address(_viewer_email_local())\n    \n        deadline = time.time() + 180  # up to 3 minutes for Mailtrap \u2192 Gmail delivery\n        matched = []\n        while time.time() < deadline:\n            matched = _list_inbox_messages_matching(service, expected_subject)\n            if matched:\n                break\n            time.sleep(5)\n    \n>       assert matched, (\n            f\"Did not find any inbox message with subject '{expected_subject}' \"\n            f\"after polling for delivery.\"\n        )\nE       AssertionError: Did not find any inbox message with subject 'Admin alert zr-d9umkns' after polling for delivery.\nE       assert []\n\ntests/test_final_state.py:210: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

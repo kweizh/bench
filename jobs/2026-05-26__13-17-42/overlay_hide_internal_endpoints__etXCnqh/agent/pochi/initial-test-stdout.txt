@@ -1,0 +1,17 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /bootstrap
+plugins: json-ctrf-0.5.0
+collected 9 items
+
+bootstrap/test_initial_state.py::test_speakeasy_binary_available PASSED
+bootstrap/test_initial_state.py::test_yq_binary_available PASSED
+bootstrap/test_initial_state.py::test_project_dir_exists PASSED
+bootstrap/test_initial_state.py::test_openapi_spec_seeded PASSED
+bootstrap/test_initial_state.py::test_openapi_spec_has_internal_health_get PASSED
+bootstrap/test_initial_state.py::test_openapi_spec_has_public_items_get PASSED
+bootstrap/test_initial_state.py::test_openapi_spec_has_no_speakeasy_ignore_initially PASSED
+bootstrap/test_initial_state.py::test_overlay_not_yet_created PASSED
+bootstrap/test_initial_state.py::test_result_not_yet_created PASSED
+
+============================== 9 passed in 0.03s ===============================

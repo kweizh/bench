@@ -1,0 +1,14 @@
+{
+    "task": [
+        "KNOCK_SERVICE_TOKEN",
+        "KNOCK_API_TOKEN",
+        "MAILTRAP_DOMAIN",
+        "GMAIL_USER_NAME"
+    ],
+    "verifier": [
+        "KNOCK_SERVICE_TOKEN",
+        "MAILTRAP_DOMAIN",
+        "GMAIL_USER_NAME",
+        "GMAIL_TOKEN_JSON"
+    ]
+}

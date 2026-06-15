@@ -1,0 +1,215 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 8 items
+
+tests/test_final_state.py FFFFFFFF                                       [100%]
+
+=================================== FAILURES ===================================
+_______________________ test_log_file_contains_tenant_id _______________________
+
+    def test_log_file_contains_tenant_id():
+        run_id = _run_id()
+>       content = _read_log()
+
+tests/test_final_state.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log():
+>       assert os.path.isfile(LOG_PATH), f"Expected log file {LOG_PATH} to exist."
+E       AssertionError: Expected log file /home/user/tenant_task/output.log to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7e67d3168220>('/home/user/tenant_task/output.log')
+E        +    where <function isfile at 0x7e67d3168220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:50: AssertionError
+_____________________ test_log_file_contains_workflow_key ______________________
+
+    def test_log_file_contains_workflow_key():
+        run_id = _run_id()
+>       content = _read_log()
+
+tests/test_final_state.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log():
+>       assert os.path.isfile(LOG_PATH), f"Expected log file {LOG_PATH} to exist."
+E       AssertionError: Expected log file /home/user/tenant_task/output.log to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7e67d3168220>('/home/user/tenant_task/output.log')
+E        +    where <function isfile at 0x7e67d3168220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:50: AssertionError
+____________________ test_log_file_contains_workflow_run_id ____________________
+
+    def test_log_file_contains_workflow_run_id():
+>       content = _read_log()
+
+tests/test_final_state.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log():
+>       assert os.path.isfile(LOG_PATH), f"Expected log file {LOG_PATH} to exist."
+E       AssertionError: Expected log file /home/user/tenant_task/output.log to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7e67d3168220>('/home/user/tenant_task/output.log')
+E        +    where <function isfile at 0x7e67d3168220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:50: AssertionError
+____________________ test_log_file_contains_recipient_email ____________________
+
+    def test_log_file_contains_recipient_email():
+        run_id = _run_id()
+        gmail = _gmail_user_name()
+>       content = _read_log()
+
+tests/test_final_state.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _read_log():
+>       assert os.path.isfile(LOG_PATH), f"Expected log file {LOG_PATH} to exist."
+E       AssertionError: Expected log file /home/user/tenant_task/output.log to exist.
+E       assert False
+E        +  where False = <function isfile at 0x7e67d3168220>('/home/user/tenant_task/output.log')
+E        +    where <function isfile at 0x7e67d3168220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:50: AssertionError
+_____________ test_tenant_exists_with_branding_and_custom_property _____________
+
+    def test_tenant_exists_with_branding_and_custom_property():
+        run_id = _run_id()
+>       tenant = _fetch_tenant()
+
+tests/test_final_state.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _fetch_tenant():
+        run_id = _run_id()
+        tenant_id = f"tenant-{run_id}"
+        url = f"{KNOCK_API_BASE}/tenants/{tenant_id}"
+        resp = requests.get(
+            url,
+            headers={"Authorization": f"Bearer {_api_token()}"},
+            timeout=30,
+        )
+>       assert resp.status_code == 200, (
+            f"Expected tenant {tenant_id} to be retrievable (status 200), got "
+            f"{resp.status_code}: {resp.text}"
+        )
+E       AssertionError: Expected tenant tenant-zr-bxetycz to be retrievable (status 200), got 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:77: AssertionError
+____________ test_knock_workflow_exists_and_uses_tenant_templating _____________
+
+    def test_knock_workflow_exists_and_uses_tenant_templating():
+        run_id = _run_id()
+        workflow_key = f"tenant-welcome-{run_id}"
+        url = f"{KNOCK_MAPI_BASE}/workflows/{workflow_key}"
+        resp = requests.get(
+            url,
+            params={"environment": "development"},
+            headers={"Authorization": f"Bearer {_service_token()}"},
+            timeout=30,
+        )
+>       assert resp.status_code == 200, (
+            f"Expected workflow {workflow_key} to be retrievable (status 200), got "
+            f"{resp.status_code}: {resp.text}"
+        )
+E       AssertionError: Expected workflow tenant-welcome-zr-bxetycz to be retrievable (status 200), got 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:155: AssertionError
+__________________ test_knock_user_message_tagged_with_tenant __________________
+
+    def test_knock_user_message_tagged_with_tenant():
+        run_id = _run_id()
+        user_id = f"user-{run_id}"
+        workflow_key = f"tenant-welcome-{run_id}"
+        expected_tenant = f"tenant-{run_id}"
+        url = f"{KNOCK_API_BASE}/users/{user_id}/messages"
+        headers = {"Authorization": f"Bearer {_api_token()}"}
+    
+        deadline = time.time() + 120
+        last_payload = None
+        matched = None
+        while time.time() < deadline:
+            resp = requests.get(url, headers=headers, timeout=30)
+            if resp.status_code == 200:
+                last_payload = resp.json()
+                items = last_payload.get("items") or last_payload.get("entries") or []
+                for item in items:
+                    source = item.get("source") or {}
+                    if source.get("key") != workflow_key:
+                        continue
+                    # Tenant may be reported either as a string id or as a
+                    # tenant-shaped object. Accept either representation.
+                    tenant_field = item.get("tenant")
+                    tenant_id = None
+                    if isinstance(tenant_field, str):
+                        tenant_id = tenant_field
+                    elif isinstance(tenant_field, dict):
+                        tenant_id = tenant_field.get("id")
+                    if tenant_id == expected_tenant:
+                        matched = item
+                        break
+                if matched:
+                    break
+            time.sleep(5)
+    
+>       assert matched is not None, (
+            f"Expected at least one Knock message for user {user_id} from workflow "
+            f"{workflow_key} tagged with tenant '{expected_tenant}'. "
+            f"Last response: {last_payload}"
+        )
+E       AssertionError: Expected at least one Knock message for user user-zr-bxetycz from workflow tenant-welcome-zr-bxetycz tagged with tenant 'tenant-zr-bxetycz'. Last response: None
+E       assert None is not None
+
+tests/test_final_state.py:233: AssertionError
+_________ test_email_received_in_gmail_inbox_contains_tenant_app_name __________
+
+    def test_email_received_in_gmail_inbox_contains_tenant_app_name():
+        run_id = _run_id()
+        gmail_user = _gmail_user_name()
+        expected_to_fragment = f"{gmail_user}+receiver-{run_id}@gmail.com"
+    
+>       tenant = _fetch_tenant()
+
+tests/test_final_state.py:250: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _fetch_tenant():
+        run_id = _run_id()
+        tenant_id = f"tenant-{run_id}"
+        url = f"{KNOCK_API_BASE}/tenants/{tenant_id}"
+        resp = requests.get(
+            url,
+            headers={"Authorization": f"Bearer {_api_token()}"},
+            timeout=30,
+        )
+>       assert resp.status_code == 200, (
+            f"Expected tenant {tenant_id} to be retrievable (status 200), got "
+            f"{resp.status_code}: {resp.text}"
+        )
+E       AssertionError: Expected tenant tenant-zr-bxetycz to be retrievable (status 200), got 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:77: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_final_state.py::test_log_file_contains_tenant_id - Assertio...
+FAILED tests/test_final_state.py::test_log_file_contains_workflow_key - Asser...
+FAILED tests/test_final_state.py::test_log_file_contains_workflow_run_id - As...
+FAILED tests/test_final_state.py::test_log_file_contains_recipient_email - As...
+FAILED tests/test_final_state.py::test_tenant_exists_with_branding_and_custom_property
+FAILED tests/test_final_state.py::test_knock_workflow_exists_and_uses_tenant_templating
+FAILED tests/test_final_state.py::test_knock_user_message_tagged_with_tenant
+FAILED tests/test_final_state.py::test_email_received_in_gmail_inbox_contains_tenant_app_name
+======================== 8 failed in 125.79s (0:02:05) =========================

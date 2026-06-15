@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 3 items
+
+tests/test_final_state.py ...                                            [100%]
+
+==================================== PASSES ====================================
+___________________ test_single_context_renders_three_shapes ___________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/whiteboard_dev$ npm run dev
+process 'whiteboard_dev' started pid=996
+whiteboard_dev process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_single_context_renders_three_shapes
+PASSED tests/test_final_state.py::test_cross_user_selection_via_presence
+PASSED tests/test_final_state.py::test_storage_does_not_carry_selection_attribute
+============================== 3 passed in 25.95s ==============================

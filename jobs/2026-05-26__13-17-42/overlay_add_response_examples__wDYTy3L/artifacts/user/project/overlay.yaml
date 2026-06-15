@@ -1,0 +1,11 @@
+overlay: 1.0.0
+info:
+  title: Add response example to GET /ping 200
+  version: 0.0.1
+actions:
+  - target: "$.paths['/ping'].get.responses['200']"
+    update:
+      content:
+        application/json:
+          example:
+            message: pong

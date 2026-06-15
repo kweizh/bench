@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0, xprocess-1.0.2
+collected 3 items
+
+tests/test_final_state.py ...                                            [100%]
+
+==================================== PASSES ====================================
+_____________________________ test_app_serves_root _____________________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/next_app$ npm start -- -p 3000
+process 'next_app' started pid=2168
+next_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_workflow_exists_and_active
+PASSED tests/test_final_state.py::test_app_serves_root
+PASSED tests/test_final_state.py::test_popover_renders_triggered_notification
+======================== 3 passed in 337.64s (0:05:37) =========================

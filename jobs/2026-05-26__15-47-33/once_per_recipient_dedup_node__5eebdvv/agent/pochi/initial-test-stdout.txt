@@ -1,0 +1,19 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /bootstrap
+plugins: json-ctrf-0.5.0
+collected 11 items
+
+bootstrap/test_initial_state.py::test_project_directory_exists PASSED
+bootstrap/test_initial_state.py::test_node_available PASSED
+bootstrap/test_initial_state.py::test_npm_available PASSED
+bootstrap/test_initial_state.py::test_python3_available PASSED
+bootstrap/test_initial_state.py::test_knock_service_token_env_present PASSED
+bootstrap/test_initial_state.py::test_knock_api_token_env_present PASSED
+bootstrap/test_initial_state.py::test_mailtrap_env_present PASSED
+bootstrap/test_initial_state.py::test_gmail_env_present PASSED
+bootstrap/test_initial_state.py::test_run_id_env_present PASSED
+bootstrap/test_initial_state.py::test_knock_mgmt_sdk_installed_in_project PASSED
+bootstrap/test_initial_state.py::test_node_can_load_knock_sdks PASSED
+
+============================== 11 passed in 0.16s ==============================

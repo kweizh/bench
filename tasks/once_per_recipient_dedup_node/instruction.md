@@ -1,0 +1,42 @@
+# Knock workflow with once-per-recipient deduplication (Node.js)
+
+## Background
+Knock supports a workflow-level `trigger_frequency` setting that limits how often a recipient can be enrolled in a workflow. When set to `once_per_recipient`, the second (and any subsequent) trigger of the same workflow for the same recipient is dropped, no matter how many times your backend calls the trigger API. This is the recommended primitive for one-shot lifecycle notifications such as a welcome email.
+
+You will build a small Node.js script that uses the Knock **Management API** (`@knocklabs/mgmt`) to create and activate a one-step email workflow with `once_per_recipient` deduplication enabled, and then uses the Knock **API SDK** (`@knocklabs/node`) to trigger the workflow twice for the same recipient. The Knock backend should only deliver a single email even though the script triggers the workflow twice.
+
+The project must run end-to-end against the real Knock control plane and the real Knock trigger API — do NOT mock either of them.
+
+## Requirements
+- Read `run-id` from the `ZEALT_RUN_ID` environment variable and use it to isolate every shared resource you create.
+- Use the Knock Management API (via `@knocklabs/mgmt` or HTTPS) authenticated with `KNOCK_SERVICE_TOKEN` to upsert a workflow in the `development` environment with:
+  - workflow key: `dedup-test-${run-id}`
+  - `trigger_frequency` set to `once_per_recipient`
+  - exactly one step: an email channel step using the channel key `mailtrap` whose template subject contains the run-id (so the test can find the message in Gmail).
+- Activate the workflow (set status to active) so that triggers in the development environment are accepted.
+- Use `@knocklabs/node` authenticated with `KNOCK_API_TOKEN` to trigger the workflow **twice** for the same single inline recipient. The recipient must be identified by:
+  - `id`: `dedup-recipient-${run-id}`
+  - `email`: `${GMAIL_USER_NAME}+receiver-${run-id}@gmail.com`
+  - `name`: `Recipient ${run-id}`
+- The email channel's `from` address must live under the Mailtrap-allowed domain — use `dedup-${run-id}@${MAILTRAP_DOMAIN}` as the sender email.
+- Append a single log line for **each** trigger call to the log file, in the exact format described below, including the returned `workflow_run_id` (or the literal string `null` when Knock skipped the trigger because of the once-per-recipient rule).
+
+## Implementation Hints
+- Two Knock credentials are required and they are not interchangeable: `KNOCK_SERVICE_TOKEN` (account-level, used by the Management SDK / CLI) and `KNOCK_API_TOKEN` (environment-level, used by the trigger API).
+- Workflow upserts are only permitted in the `development` environment. The Management SDK returns the upserted workflow; use it (or a follow-up call) to activate the workflow in `development`.
+- For each trigger call, the `trigger` API returns an object with `workflow_run_id`. Print this value (or `null` if the call returned no run id because of `once_per_recipient` enforcement) along with a stable label.
+- Use a single inline recipient object for the trigger payload; you don't need to pre-identify the user separately.
+- It can take several seconds for an email triggered through Knock to reach Gmail. The verifier will poll for the message, so you only need to ensure the trigger calls themselves succeeded.
+
+## Acceptance Criteria
+- Project path: `/home/user/myproject`
+- Ensure the script is actually executed against Knock; the workflow must exist and the email must be delivered. Do not stub or mock Knock.
+- Log file: `/home/user/myproject/output.log`
+- The Knock workflow must exist in the development environment with key `dedup-test-${run-id}` and `trigger_frequency` equal to `once_per_recipient`, where `run-id` is read from `ZEALT_RUN_ID`.
+- The workflow must be in the `active` status in the development environment.
+- The workflow must contain at least one channel step whose `channel_key` is `mailtrap`.
+- The log file must contain exactly the following two lines (in order), with each `<workflow_run_id>` replaced by the value returned from the corresponding trigger call (use the literal string `null` if no run id is returned):
+  - `First trigger workflow_run_id: <workflow_run_id>`
+  - `Second trigger workflow_run_id: <workflow_run_id>`
+- Exactly one email must be delivered to `${GMAIL_USER_NAME}+receiver-${run-id}@gmail.com`, sent from an address whose domain matches `MAILTRAP_DOMAIN`, and whose subject contains the substring `dedup-test-${run-id}`.
+

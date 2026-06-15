@@ -1,0 +1,74 @@
+Skipping image OS validation for hb__configure_pypi_publishing_python: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-mk7mevm > /logs/artifacts/run-id && echo configure_pypi_publishing_python__MK7MEVm > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Configure PyPI Publishing Metadata for Python SDK in gen.yaml
+
+## Background
+Speakeasy generates Python client SDKs from an OpenAPI specification using a `gen.yaml` configuration file. The Python target block in `gen.yaml` controls the identity and metadata that ends up in the published PyPI package: things like the PyPI distribution name and the authors listed on the package page. Before a Python SDK can be published to PyPI, those metadata fields must be set to project-specific values instead of the defaults.
+
+Your task is to update the Python target metadata in an existing `gen.yaml` file so the generated SDK is published under the correct PyPI distribution name and lists the correct authors.
+
+## Requirements
+- Update the existing `gen.yaml` so the Python SDK target uses the PyPI distribution name `example-my-sdk`.
+- Update the Python SDK target so the `authors` list includes `Example Team`.
+- Preserve the rest of the existing `gen.yaml` structure; do not remove other unrelated fields.
+
+## Implementation Hints
+- Per Speakeasy's Python configuration reference, Python SDK metadata lives under the top-level `python:` block in `gen.yaml`. The PyPI distribution name is the `packageName` field, and the authors list is the `authors` field (a YAML sequence of strings).
+- You can edit `gen.yaml` directly with any text editor, or use a YAML-aware tool such as `yq` to update specific fields without disturbing the rest of the file.
+- After editing, you can sanity-check the file by running `speakeasy --version` to confirm the CLI is available and by inspecting `gen.yaml` with `cat` or `yq`.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- The file `/home/user/project/gen.yaml` must remain a valid YAML file containing a top-level `python:` mapping.
+- `.python.packageName` in `/home/user/project/gen.yaml` must equal the string `example-my-sdk`.
+- `.python.authors` in `/home/user/project/gen.yaml` must be a YAML sequence whose entries include the string `Example Team`.
+- Other unrelated top-level keys and fields that existed in the seeded `gen.yaml` must still be present after the edit.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

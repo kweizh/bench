@@ -1,0 +1,52 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780173773945,
+            "stop": 1780173774473
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_missing_tenant_id_header",
+                "status": "passed",
+                "duration": 149,
+                "start": 1780173774185,
+                "stop": 1780173774334,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_route_to_tenant_a",
+                "status": "passed",
+                "duration": 101,
+                "start": 1780173774336,
+                "stop": 1780173774437,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_route_to_tenant_b",
+                "status": "passed",
+                "duration": 34,
+                "start": 1780173774438,
+                "stop": 1780173774472,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

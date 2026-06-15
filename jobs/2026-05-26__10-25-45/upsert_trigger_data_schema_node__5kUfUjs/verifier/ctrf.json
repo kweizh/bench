@@ -1,0 +1,106 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 9,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779765543994,
+            "stop": 1779765546459
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_contains_workflow_key",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779765544082,
+                "stop": 1779765544083,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_workflow_active",
+                "status": "passed",
+                "duration": 1,
+                "start": 1779765544083,
+                "stop": 1779765544084,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_valid_trigger_run_id",
+                "status": "passed",
+                "duration": 0,
+                "start": 1779765544084,
+                "stop": 1779765544084,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_log_contains_invalid_trigger_status",
+                "status": "passed",
+                "duration": 0,
+                "start": 1779765544085,
+                "stop": 1779765544085,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_exists_via_management_api",
+                "status": "passed",
+                "duration": 395,
+                "start": 1779765544085,
+                "stop": 1779765544480,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_trigger_data_json_schema",
+                "status": "passed",
+                "duration": 390,
+                "start": 1779765544481,
+                "stop": 1779765544871,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_in_app_channel_step",
+                "status": "passed",
+                "duration": 405,
+                "start": 1779765544871,
+                "stop": 1779765545276,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_valid_trigger_succeeds",
+                "status": "passed",
+                "duration": 599,
+                "start": 1779765545276,
+                "stop": 1779765545875,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_invalid_trigger_returns_422",
+                "status": "passed",
+                "duration": 583,
+                "start": 1779765545876,
+                "stop": 1779765546459,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

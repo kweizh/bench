@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: Speakeasy Bar Mixed API
+  version: 1.0.0
+  description: |
+    Sample API exposing both internal and public endpoints. Used to demonstrate
+    OpenAPI Overlays that hide internal endpoints from generated SDKs.
+servers:
+  - url: https://api.example.com
+paths:
+  /internal/health:
+    get:
+      operationId: getInternalHealth
+      summary: Internal health probe
+      description: Used by internal monitoring; should be excluded from public SDKs.
+      tags:
+        - internal
+      responses:
+        '200':
+          description: Service is healthy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+  /public/items:
+    get:
+      operationId: listItems
+      summary: List public items
+      description: Returns a list of items visible to public API consumers.
+      tags:
+        - public
+      responses:
+        '200':
+          description: A list of items.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Item'
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum: [ok, degraded, down]
+    Item:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+        name:
+          type: string

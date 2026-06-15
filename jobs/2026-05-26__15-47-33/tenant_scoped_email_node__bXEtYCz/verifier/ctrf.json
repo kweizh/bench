@@ -1,0 +1,121 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 8,
+            "passed": 0,
+            "failed": 8,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779781937557,
+            "stop": 1779782063344
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_contains_tenant_id",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 27,
+                "start": 1779781937814,
+                "stop": 1779781937841,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_tenant_id():\n        run_id = _run_id()\n>       content = _read_log()\n\ntests/test_final_state.py:86: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log():\n>       assert os.path.isfile(LOG_PATH), f\"Expected log file {LOG_PATH} to exist.\"\nE       AssertionError: Expected log file /home/user/tenant_task/output.log to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7e67d3168220>('/home/user/tenant_task/output.log')\nE        +    where <function isfile at 0x7e67d3168220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:50: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_key",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 6,
+                "start": 1779781937841,
+                "stop": 1779781937847,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_workflow_key():\n        run_id = _run_id()\n>       content = _read_log()\n\ntests/test_final_state.py:95: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log():\n>       assert os.path.isfile(LOG_PATH), f\"Expected log file {LOG_PATH} to exist.\"\nE       AssertionError: Expected log file /home/user/tenant_task/output.log to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7e67d3168220>('/home/user/tenant_task/output.log')\nE        +    where <function isfile at 0x7e67d3168220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:50: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_run_id",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 5,
+                "start": 1779781937847,
+                "stop": 1779781937852,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_workflow_run_id():\n>       content = _read_log()\n\ntests/test_final_state.py:103: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log():\n>       assert os.path.isfile(LOG_PATH), f\"Expected log file {LOG_PATH} to exist.\"\nE       AssertionError: Expected log file /home/user/tenant_task/output.log to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7e67d3168220>('/home/user/tenant_task/output.log')\nE        +    where <function isfile at 0x7e67d3168220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:50: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_recipient_email",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 5,
+                "start": 1779781937853,
+                "stop": 1779781937858,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_recipient_email():\n        run_id = _run_id()\n        gmail = _gmail_user_name()\n>       content = _read_log()\n\ntests/test_final_state.py:114: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log():\n>       assert os.path.isfile(LOG_PATH), f\"Expected log file {LOG_PATH} to exist.\"\nE       AssertionError: Expected log file /home/user/tenant_task/output.log to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7e67d3168220>('/home/user/tenant_task/output.log')\nE        +    where <function isfile at 0x7e67d3168220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:50: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_tenant_exists_with_branding_and_custom_property",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 694,
+                "start": 1779781937858,
+                "stop": 1779781938552,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_tenant_exists_with_branding_and_custom_property():\n        run_id = _run_id()\n>       tenant = _fetch_tenant()\n\ntests/test_final_state.py:123: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _fetch_tenant():\n        run_id = _run_id()\n        tenant_id = f\"tenant-{run_id}\"\n        url = f\"{KNOCK_API_BASE}/tenants/{tenant_id}\"\n        resp = requests.get(\n            url,\n            headers={\"Authorization\": f\"Bearer {_api_token()}\"},\n            timeout=30,\n        )\n>       assert resp.status_code == 200, (\n            f\"Expected tenant {tenant_id} to be retrievable (status 200), got \"\n            f\"{resp.status_code}: {resp.text}\"\n        )\nE       AssertionError: Expected tenant tenant-zr-bxetycz to be retrievable (status 200), got 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:77: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_knock_workflow_exists_and_uses_tenant_templating",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 782,
+                "start": 1779781938552,
+                "stop": 1779781939334,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_knock_workflow_exists_and_uses_tenant_templating():\n        run_id = _run_id()\n        workflow_key = f\"tenant-welcome-{run_id}\"\n        url = f\"{KNOCK_MAPI_BASE}/workflows/{workflow_key}\"\n        resp = requests.get(\n            url,\n            params={\"environment\": \"development\"},\n            headers={\"Authorization\": f\"Bearer {_service_token()}\"},\n            timeout=30,\n        )\n>       assert resp.status_code == 200, (\n            f\"Expected workflow {workflow_key} to be retrievable (status 200), got \"\n            f\"{resp.status_code}: {resp.text}\"\n        )\nE       AssertionError: Expected workflow tenant-welcome-zr-bxetycz to be retrievable (status 200), got 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:155: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_knock_user_message_tagged_with_tenant",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 123421,
+                "start": 1779781939334,
+                "stop": 1779782062755,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_knock_user_message_tagged_with_tenant():\n        run_id = _run_id()\n        user_id = f\"user-{run_id}\"\n        workflow_key = f\"tenant-welcome-{run_id}\"\n        expected_tenant = f\"tenant-{run_id}\"\n        url = f\"{KNOCK_API_BASE}/users/{user_id}/messages\"\n        headers = {\"Authorization\": f\"Bearer {_api_token()}\"}\n    \n        deadline = time.time() + 120\n        last_payload = None\n        matched = None\n        while time.time() < deadline:\n            resp = requests.get(url, headers=headers, timeout=30)\n            if resp.status_code == 200:\n                last_payload = resp.json()\n                items = last_payload.get(\"items\") or last_payload.get(\"entries\") or []\n                for item in items:\n                    source = item.get(\"source\") or {}\n                    if source.get(\"key\") != workflow_key:\n                        continue\n                    # Tenant may be reported either as a string id or as a\n                    # tenant-shaped object. Accept either representation.\n                    tenant_field = item.get(\"tenant\")\n                    tenant_id = None\n                    if isinstance(tenant_field, str):\n                        tenant_id = tenant_field\n                    elif isinstance(tenant_field, dict):\n                        tenant_id = tenant_field.get(\"id\")\n                    if tenant_id == expected_tenant:\n                        matched = item\n                        break\n                if matched:\n                    break\n            time.sleep(5)\n    \n>       assert matched is not None, (\n            f\"Expected at least one Knock message for user {user_id} from workflow \"\n            f\"{workflow_key} tagged with tenant '{expected_tenant}'. \"\n            f\"Last response: {last_payload}\"\n        )\nE       AssertionError: Expected at least one Knock message for user user-zr-bxetycz from workflow tenant-welcome-zr-bxetycz tagged with tenant 'tenant-zr-bxetycz'. Last response: None\nE       assert None is not None\n\ntests/test_final_state.py:233: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_email_received_in_gmail_inbox_contains_tenant_app_name",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 588,
+                "start": 1779782062756,
+                "stop": 1779782063344,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_email_received_in_gmail_inbox_contains_tenant_app_name():\n        run_id = _run_id()\n        gmail_user = _gmail_user_name()\n        expected_to_fragment = f\"{gmail_user}+receiver-{run_id}@gmail.com\"\n    \n>       tenant = _fetch_tenant()\n\ntests/test_final_state.py:250: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _fetch_tenant():\n        run_id = _run_id()\n        tenant_id = f\"tenant-{run_id}\"\n        url = f\"{KNOCK_API_BASE}/tenants/{tenant_id}\"\n        resp = requests.get(\n            url,\n            headers={\"Authorization\": f\"Bearer {_api_token()}\"},\n            timeout=30,\n        )\n>       assert resp.status_code == 200, (\n            f\"Expected tenant {tenant_id} to be retrievable (status 200), got \"\n            f\"{resp.status_code}: {resp.text}\"\n        )\nE       AssertionError: Expected tenant tenant-zr-bxetycz to be retrievable (status 200), got 404: {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:77: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

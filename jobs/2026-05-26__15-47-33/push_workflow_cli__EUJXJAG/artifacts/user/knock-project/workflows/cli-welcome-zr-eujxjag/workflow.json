@@ -1,0 +1,36 @@
+{
+  "name": "CLI Welcome Workflow zr-eujxjag",
+  "steps": [
+    {
+      "channel_key": "in-app",
+      "channel_type": "in_app_feed",
+      "ref": "in-app-welcome-step",
+      "template": {
+        "action_url": "https://example.com/welcome",
+        "markdown_body@": "in-app-welcome-step/markdown_body.md"
+      },
+      "type": "channel"
+    },
+    {
+      "channel_key": "mailtrap",
+      "channel_type": "email",
+      "ref": "email-welcome-step",
+      "template": {
+        "settings": {
+          "attachment_key": "attachments",
+          "layout_key": null
+        },
+        "subject": "Welcome to our platform!",
+        "html_body@": "email-welcome-step/html_body.html"
+      },
+      "type": "channel"
+    }
+  ],
+  "trigger_frequency": "every_trigger",
+  "__readonly": {
+    "key": "cli-welcome-zr-eujxjag",
+    "active": true,
+    "valid": true
+  },
+  "$schema": "https://schemas.knock.app/cli/workflow.json"
+}

@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /bootstrap
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 11 items
+
+../../../bootstrap/test_initial_state.py::test_node_binary_available PASSED
+../../../bootstrap/test_initial_state.py::test_npm_binary_available PASSED
+../../../bootstrap/test_initial_state.py::test_project_directory_exists PASSED
+../../../bootstrap/test_initial_state.py::test_package_json_exists PASSED
+../../../bootstrap/test_initial_state.py::test_package_json_declares_liveblocks_dependencies PASSED
+../../../bootstrap/test_initial_state.py::test_node_modules_installed PASSED
+../../../bootstrap/test_initial_state.py::test_dashboard_route_skeleton_exists PASSED
+../../../bootstrap/test_initial_state.py::test_liveblocks_auth_route_exists PASSED
+../../../bootstrap/test_initial_state.py::test_liveblocks_config_skeleton_exists PASSED
+../../../bootstrap/test_initial_state.py::test_storage_mutations_not_yet_implemented PASSED
+../../../bootstrap/test_initial_state.py::test_initial_state_does_not_create_counter_dom_contracts PASSED
+
+============================== 11 passed in 0.07s ==============================
+pytest-xprocess reminder::Be sure to terminate the started process by running 'pytest --xkill' if you have not explicitly done so in your fixture with 'xprocess.getinfo(<process_name>).terminate()'.

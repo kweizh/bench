@@ -1,0 +1,115 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 8,
+            "passed": 2,
+            "failed": 6,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779783108805,
+            "stop": 1779783329089
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_key",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 27,
+                "start": 1779783108981,
+                "stop": 1779783109008,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_workflow_key():\n        run_id = _run_id()\n>       content = _read_log()\n\ntests/test_final_state.py:66: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log():\n>       assert os.path.isfile(LOG_PATH), f\"Expected log file {LOG_PATH} to exist.\"\nE       AssertionError: Expected log file /home/user/knock_task/output.log to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7a51ca984220>('/home/user/knock_task/output.log')\nE        +    where <function isfile at 0x7a51ca984220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:46: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_workflow_run_id",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 5,
+                "start": 1779783109008,
+                "stop": 1779783109013,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_workflow_run_id():\n>       content = _read_log()\n\ntests/test_final_state.py:74: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log():\n>       assert os.path.isfile(LOG_PATH), f\"Expected log file {LOG_PATH} to exist.\"\nE       AssertionError: Expected log file /home/user/knock_task/output.log to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7a51ca984220>('/home/user/knock_task/output.log')\nE        +    where <function isfile at 0x7a51ca984220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:46: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_recipient_id",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 5,
+                "start": 1779783109013,
+                "stop": 1779783109018,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_recipient_id():\n        run_id = _run_id()\n>       content = _read_log()\n\ntests/test_final_state.py:87: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log():\n>       assert os.path.isfile(LOG_PATH), f\"Expected log file {LOG_PATH} to exist.\"\nE       AssertionError: Expected log file /home/user/knock_task/output.log to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7a51ca984220>('/home/user/knock_task/output.log')\nE        +    where <function isfile at 0x7a51ca984220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:46: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_contains_recipient_email",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 5,
+                "start": 1779783109018,
+                "stop": 1779783109023,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_contains_recipient_email():\n        run_id = _run_id()\n        gmail = _gmail_user_name()\n>       content = _read_log()\n\ntests/test_final_state.py:97: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log():\n>       assert os.path.isfile(LOG_PATH), f\"Expected log file {LOG_PATH} to exist.\"\nE       AssertionError: Expected log file /home/user/knock_task/output.log to exist.\nE       assert False\nE        +  where False = <function isfile at 0x7a51ca984220>('/home/user/knock_task/output.log')\nE        +    where <function isfile at 0x7a51ca984220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:46: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_knock_workflow_exists_and_active",
+                "status": "passed",
+                "duration": 740,
+                "start": 1779783109024,
+                "stop": 1779783109764,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_knock_user_identified_with_email",
+                "status": "passed",
+                "duration": 591,
+                "start": 1779783109765,
+                "stop": 1779783110356,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_knock_user_message_for_workflow",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 90031,
+                "start": 1779783110356,
+                "stop": 1779783200387,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_knock_user_message_for_workflow():\n        run_id = _run_id()\n        user_id = f\"user-{run_id}\"\n        workflow_key = f\"welcome-email-{run_id}\"\n        url = f\"{KNOCK_API_BASE}/users/{user_id}/messages\"\n        headers = {\"Authorization\": f\"Bearer {_api_token()}\"}\n    \n        deadline = time.time() + 90\n        last_payload = None\n        matched = None\n        while time.time() < deadline:\n            resp = requests.get(url, headers=headers, timeout=30)\n            if resp.status_code == 200:\n                last_payload = resp.json()\n                items = last_payload.get(\"items\") or last_payload.get(\"entries\") or []\n                for item in items:\n                    source = item.get(\"source\") or {}\n                    if source.get(\"key\") == workflow_key:\n                        matched = item\n                        break\n                if matched:\n                    break\n            time.sleep(5)\n    \n>       assert matched is not None, (\n            f\"Expected at least one Knock message for user {user_id} from workflow \"\n            f\"{workflow_key}. Last response: {last_payload}\"\n        )\nE       AssertionError: Expected at least one Knock message for user user-zr-emf8n35 from workflow welcome-email-zr-emf8n35. Last response: {'items': [{'data': {'dashboard_url': 'https://app.example.com/dashboard/zr-emf8n35'}, 'id': '3EFmuuF2wrrXD1KltFoza7uHJt1', 'status': 'sent', 'metadata': {'external_id': '19b34590-58da-11f1-0040-f19bc97d8f56'}, 'source': {'type': 'workflow', 'key': 'cli-welcome-zr-eujxjag', 'version_id': '53e46d69-21b1-4920-ad6e-b6061765365d', 'categories': [], 'workflow_recipient_run_id': '22050ea6-25eb-501d-ae69-90e704bd5111', 'workflow_run_id': 'fdff05c6-7725-56fc-b9cb-caa327972eec', 'step_ref': 'email-welcome-step', '__typename': 'NotificationSource'}, 'channel': {'id': '8499b082-bdd2-4830-90bc-7eafdfc571d9', 'name': 'Mailtrap', 'type': 'email', 'key': 'mailtrap', 'updated_at': '2026-05-25T16:38:35.535018Z', 'provider': 'email_mailtrap', 'created_at': '2026-05-25T16:38:35.535018Z'}, 'inserted_at': '2026-05-26T08:08:37.903381Z', 'updated_at': '2026-05-26T08:08:38.268490Z', 'recipient': 'user-zr-emf8n35', 'scheduled_at': None, 'workflow': 'cli-welcome-zr-eujxjag', 'channel_id': '8499b082-bdd2-4830-90bc-7eafdfc571d9', 'tenant': None, 'seen_at': None, 'read_at': None, 'link_clicked_at': None, 'interacted_at': None, 'archived_at': None, '__typename': 'Message', 'clicked_at': None, 'actors': [], 'engagement_statuses': [], '__cursor': 'g3QAAAABdwtpbnNlcnRlZF9hdHQAAAANdwttaWNyb3NlY29uZGgCYgANyNVhBncGc2Vjb25kYSV3CGNhbGVuZGFydxNFbGl4aXIuQ2FsZW5kYXIuSVNPdwVtb250aGEFdwpfX3N0cnVjdF9fdw9FbGl4aXIuRGF0ZVRpbWV3CnN0ZF9vZmZzZXRhAHcKdXRjX29mZnNldGEAdwl6b25lX2FiYnJtAAAAA1VUQ3cEeWVhcmIAAAfqdwRob3VyYQh3A2RheWEadwZtaW51dGVhCHcJdGltZV96b25lbQAAAAdFdGMvVVRD'}, {'data': {'dashboard_url': 'https://app.example.com/dashboard/zr-emf8n35'}, 'id': '3EFmuysjSvfaujIKEMI4KHQXpol', 'status': 'delivered', 'metadata': None, 'source': {'type': 'workflow', 'key': 'cli-welcome-zr-eujxjag', 'version_id': '53e46d69-21b1-4920-ad6e-b6061765365d', 'categories': [], 'workflow_recipient_run_id': '22050ea6-25eb-501d-ae69-90e704bd5111', 'workflow_run_id': 'fdff05c6-7725-56fc-b9cb-caa327972eec', 'step_ref': 'in-app-welcome-step', '__typename': 'NotificationSource'}, 'channel': {'id': '6bac3ebb-1c37-4590-b4c7-e2c72e5b4f34', 'name': 'In-app', 'type': 'in_app_feed', 'key': 'in-app', 'updated_at': '2026-05-11T04:34:50.087842Z', 'provider': 'in_app_feed_knock', 'created_at': '2026-05-11T04:34:50.087842Z'}, 'inserted_at': '2026-05-26T08:08:37.835995Z', 'updated_at': '2026-05-26T08:08:37.835995Z', 'recipient': 'user-zr-emf8n35', 'scheduled_at': None, 'workflow': 'cli-welcome-zr-eujxjag', 'channel_id': '6bac3ebb-1c37-4590-b4c7-e2c72e5b4f34', 'tenant': None, 'seen_at': None, 'read_at': None, 'link_clicked_at': None, 'interacted_at': None, 'archived_at': None, '__typename': 'Message', 'clicked_at': None, 'actors': [], 'engagement_statuses': [], '__cursor': 'g3QAAAABdwtpbnNlcnRlZF9hdHQAAAANdwttaWNyb3NlY29uZGgCYgAMwZthBncGc2Vjb25kYSV3CGNhbGVuZGFydxNFbGl4aXIuQ2FsZW5kYXIuSVNPdwVtb250aGEFdwpfX3N0cnVjdF9fdw9FbGl4aXIuRGF0ZVRpbWV3CnN0ZF9vZmZzZXRhAHcKdXRjX29mZnNldGEAdwl6b25lX2FiYnJtAAAAA1VUQ3cEeWVhcmIAAAfqdwRob3VyYQh3A2RheWEadwZtaW51dGVhCHcJdGltZV96b25lbQAAAAdFdGMvVVRD'}], 'page_info': {'after': None, 'before': None, 'page_size': 50, 'total_count': 2, '__typename': 'PageInfo'}}\nE       assert None is not None\n\ntests/test_final_state.py:188: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_email_received_in_gmail_inbox",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 128701,
+                "start": 1779783200388,
+                "stop": 1779783329089,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_email_received_in_gmail_inbox():\n        run_id = _run_id()\n        gmail_user = _gmail_user_name()\n        expected_to_fragment = f\"{gmail_user}+receiver-{run_id}@gmail.com\"\n        expected_subject_fragment = f\"Welcome to Knock, Knock User {run_id}!\"\n    \n        token_info = json.loads(os.environ[\"GMAIL_TOKEN_JSON\"])\n        creds = Credentials.from_authorized_user_info(token_info, GMAIL_SCOPES)\n        service = build(\"gmail\", \"v1\", credentials=creds, cache_discovery=False)\n    \n        deadline = time.time() + 120\n        matched = None\n        last_inbox = []\n        while time.time() < deadline:\n            query = f\"to:{expected_to_fragment}\"\n            response = (\n                service.users()\n                .messages()\n                .list(userId=\"me\", q=query, maxResults=20)\n                .execute()\n            )\n            last_inbox = response.get(\"messages\", []) or []\n            for msg in last_inbox:\n                detail = (\n                    service.users()\n                    .messages()\n                    .get(\n                        userId=\"me\",\n                        id=msg[\"id\"],\n                        format=\"metadata\",\n                        metadataHeaders=[\"From\", \"To\", \"Subject\", \"Date\"],\n                    )\n                    .execute()\n                )\n                headers = detail.get(\"payload\", {}).get(\"headers\", [])\n                to_header = _get_header(headers, \"To\")\n                subject = _get_header(headers, \"Subject\")\n                if expected_to_fragment in to_header and expected_subject_fragment in subject:\n                    matched = {\"to\": to_header, \"subject\": subject}\n                    break\n            if matched:\n                break\n            time.sleep(10)\n    \n>       assert matched is not None, (\n            \"Expected an email in the Gmail inbox addressed to \"\n            f\"'{expected_to_fragment}' with subject containing \"\n            f\"'{expected_subject_fragment}'. Found {len(last_inbox)} candidate(s).\"\n        )\nE       AssertionError: Expected an email in the Gmail inbox addressed to 'codes.icy+receiver-zr-emf8n35@gmail.com' with subject containing 'Welcome to Knock, Knock User zr-emf8n35!'. Found 1 candidate(s).\nE       assert None is not None\n\ntests/test_final_state.py:243: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

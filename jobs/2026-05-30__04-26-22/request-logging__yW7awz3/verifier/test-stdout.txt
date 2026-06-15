@@ -1,0 +1,18 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 2 items
+
+tests/test_final_state.py ..                                             [100%]
+
+==================================== PASSES ====================================
+_____________________________ test_route_response ______________________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ bash -c npx zuplo dev --editor-port 9200 --port 3000 > /home/user/server.log 2>&1
+process 'zuplo_dev' started pid=823
+zuplo_dev process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_route_response
+PASSED tests/test_final_state.py::test_server_logs
+============================== 2 passed in 14.10s ==============================

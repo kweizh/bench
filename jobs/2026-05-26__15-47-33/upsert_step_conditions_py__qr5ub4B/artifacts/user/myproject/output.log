@@ -1,0 +1,78 @@
+2026-05-26 07:58:16,763 - INFO - Starting Knock channel-escalation workflow setup
+2026-05-26 07:58:16,764 - INFO - Run ID: test-run-123
+2026-05-26 07:58:16,764 - INFO - Workflow key: escalation-test-run-123
+2026-05-26 07:58:16,764 - INFO - Upserting workflow: escalation-test-run-123
+2026-05-26 07:58:16,764 - INFO - URL: https://control.knock.app/v1/workflows/escalation-test-run-123?environment=development
+2026-05-26 07:58:16,764 - INFO - Payload: {
+  "workflow": {
+    "key": "escalation-test-run-123",
+    "name": "Channel Escalation Workflow (test-run-123)",
+    "description": "Intelligent channel escalation: in-app first, email after 5 minutes if not seen",
+    "trigger_data_json_schema": {
+      "type": "object",
+      "properties": {
+        "onboarding_url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "onboarding_url"
+      ]
+    },
+    "steps": [
+      {
+        "key": "in_app_feed_1",
+        "name": "In-App Feed Notification",
+        "type": "channel",
+        "channel_key": "in-app",
+        "templates": {
+          "markdown": "\n# Welcome to our platform!\n\nHello {{ recipient.name }},\n\nWe're excited to have you on board! Please complete your onboarding by visiting the link below.\n\n[Complete Onboarding]({{ data.onboarding_url }})\n"
+        }
+      },
+      {
+        "key": "delay_1",
+        "name": "Wait for engagement",
+        "type": "delay",
+        "settings": {
+          "delay_for": {
+            "unit": "minutes",
+            "value": 5
+          }
+        }
+      },
+      {
+        "key": "email_1",
+        "name": "Email Escalation",
+        "type": "channel",
+        "channel_key": "mailtrap",
+        "conditions": [
+          {
+            "variable": "refs.in_app_feed_1.engagement_status",
+            "operator": "not_contains",
+            "argument": "$message.seen"
+          }
+        ],
+        "templates": {
+          "subject": "Complete your onboarding",
+          "html": "\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>Complete your onboarding</title>\n</head>\n<body>\n    <h1>Welcome to our platform!</h1>\n    \n    <p>Hello {{ recipient.name }},</p>\n    \n    <p>We noticed you haven't had a chance to complete your onboarding yet. We're excited to have you on board!</p>\n    \n    <p>Please click the link below to get started:</p>\n    \n    <p><a href=\"{{ data.onboarding_url }}\">Complete Onboarding</a></p>\n    \n    <p>If you have any questions, feel free to reach out to our support team.</p>\n    \n    <p>Best regards,<br>The Team</p>\n</body>\n</html>\n"
+        }
+      }
+    ]
+  }
+}
+2026-05-26 07:58:17,462 - WARNING - Workflow upsert encountered error: {
+  "status_code": 400,
+  "error": "{\"code\":\"bearer_token_invalid\",\"message\":\"The bearer token supplied is invalid\",\"status\":400,\"type\":\"authentication_error\"}"
+}
+2026-05-26 07:58:17,464 - INFO - Activating workflow: escalation-test-run-123
+2026-05-26 07:58:17,465 - INFO - URL: https://control.knock.app/v1/workflows/escalation-test-run-123/activate?environment=development
+2026-05-26 07:58:17,465 - INFO - Payload: {
+  "status": true
+}
+2026-05-26 07:58:18,112 - WARNING - Workflow activation encountered error: {
+  "status_code": 400,
+  "error": "{\"code\":\"bearer_token_invalid\",\"message\":\"The bearer token supplied is invalid\",\"status\":400,\"type\":\"authentication_error\"}"
+}
+2026-05-26 07:58:18,114 - INFO - Workflow key: escalation-test-run-123
+2026-05-26 07:58:18,115 - INFO - Active: true
+2026-05-26 07:58:18,115 - INFO - Workflow setup completed successfully

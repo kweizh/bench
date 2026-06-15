@@ -1,0 +1,1542 @@
+Skipping image OS validation for hb__configure_custom_sdk_class_name: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command failed
+Trial configure_custom_sdk_class_name__fx9H5xP failed: Command failed (exit 127): set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+stdout: + return 0
++ install_dir=/root/.pochi
++ version_to_install=
++ '[' 1 -gt 0 ']'
++ case "$1" in
++ version_to_install=pochi-v0.6.8
++ '[' -z pochi-v0.6.8 ']'
++ version_to_install=cli@0.6.8
++ install_version cli@0.6.8 /root/.pochi
++ local version_to_install=cli@0.6.8
++ local install_dir=/root/.pochi
++ case "$version_to_install" in
++ info Installing 'Pochi version cli@0.6.8'
++ local action=Installing
++ local 'details=Pochi version cli@0.6.8'
++ command printf '\033[1;32m%12s\033[0m %s\n' Installing 'Pochi version cli@0.6.8'
+[1;32m  Installing[0m Pochi version cli@0.6.8
++ install_release cli@0.6.8 /root/.pochi
++ local version=cli@0.6.8
++ local install_dir=/root/.pochi
++ info Checking 'for existing Pochi installation'
++ local action=Checking
++ local 'details=for existing Pochi installation'
++ command printf '\033[1;32m%12s\033[0m %s\n' Checking 'for existing Pochi installation'
+[1;32m    Checking[0m for existing Pochi installation
++ upgrade_is_ok cli@0.6.8 /root/.pochi
++ return 0
+++ download ... [truncated]
+stderr: None
+Not retrying trial because the maximum number of retries has been reached
+Skipping image OS validation for hb__configure_csharp_sdk_target: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-66lny3f > /logs/artifacts/run-id && echo configure_csharp_sdk_target__66LnY3f > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Configure C# SDK Generation Target
+
+## Background
+You have a Speakeasy project initialized with an `openapi.yaml` file. You need to configure a C# SDK generation target and run the generation using the CLI.
+
+## Requirements
+- Configure a source named `my-source` pointing to `openapi.yaml`.
+- Configure a C# SDK target named `csharp` using `my-source`.
+- Set the output directory for the C# target to `./sdk/csharp`.
+- Run the Speakeasy CLI to generate the C# SDK.
+
+## Implementation Guide
+1. Use `speakeasy configure sources --location openapi.yaml --source-name my-source --non-interactive` to add `openapi.yaml` as `my-source`.
+2. Use `speakeasy configure targets --target-type csharp --source my-source --non-interactive --target-name csharp --output ./sdk/csharp` to add a `csharp` target.
+3. Run `speakeasy run` to generate the SDK.
+
+## Constraints
+- Project path: /home/user/myproject
+- The generated SDK must be located in `/home/user/myproject/sdk/csharp`.
+
+## Integrations
+- Speakeasy
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__generate_terraform_provider_basic: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-c4vkrbl > /logs/artifacts/run-id && echo generate_terraform_provider_basi__C4VkRBL > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate a Terraform Provider from OpenAPI
+
+## Background
+You have an `openapi.yaml` file defining a simple Petstore API. Your goal is to use the Speakeasy CLI to generate a Terraform provider for this API.
+
+## Requirements
+- The OpenAPI spec is located at `/home/user/myproject/openapi.yaml`.
+- Annotate the `openapi.yaml` to expose the `Pet` resource to Terraform.
+- The `Pet` resource should support `create` and `read` operations based on the `POST /pet` and `GET /pet/{petId}` endpoints.
+- Generate the Terraform provider code in the `/home/user/myproject/terraform` directory.
+- The generated provider must compile successfully.
+
+## Implementation Guide
+1. Modify `/home/user/myproject/openapi.yaml` to include Speakeasy Terraform annotations (`x-speakeasy-entity-operation`, `x-speakeasy-entity`) for the `Pet` resource.
+2. Use the Speakeasy CLI to generate the Terraform provider in the `terraform` directory.
+3. Ensure the generated Go code compiles by running `go mod tidy` and `go build` inside the `terraform` directory.
+
+## Constraints
+- Project path: `/home/user/myproject`
+- The generated provider must be placed in `/home/user/myproject/terraform`.
+- Use `speakeasy generate sdk -l terraform -o ./terraform -s ./openapi.yaml` or set up a `workflow.yaml` to generate the provider.
+- The environment variable `SPEAKEASY_API_KEY` is already set for authentication.
+
+## Integrations
+- Speakeasy
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__generate_python_sdk_with_pagination: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-s7ax5rv > /logs/artifacts/run-id && echo generate_python_sdk_with_paginat__s7aX5rV > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Generate Python SDK with Pagination
+
+## Background
+Speakeasy SDKs support automatic pagination. You can configure this by adding the `x-speakeasy-pagination` extension to the OpenAPI description. We have an existing OpenAPI specification for a simple API with a paginated `/items` endpoint.
+
+## Requirements
+- Modify the OpenAPI specification at `/home/user/openapi.yaml` to include the `x-speakeasy-pagination` extension for the `GET /items` operation.
+- The pagination configuration must use the `offsetLimit` type.
+- It must map the `page` query parameter as the page input.
+- It must extract the output results from the `$.data` field of the response.
+- After modifying the spec, use the Speakeasy CLI to generate a Python SDK into the `/home/user/sdk` directory.
+
+## Implementation Guide
+1. Open `/home/user/openapi.yaml`.
+2. Locate the `GET /items` operation.
+3. Add the `x-speakeasy-pagination` extension to the operation with the following structure:
+   ```yaml
+   x-speakeasy-pagination:
+     type: offsetLimit
+     inputs:
+       - name: page
+         in: parameters
+         type: page
+     outputs:
+       results: $.data
+   ```
+4. Generate the Python SDK using the Speakeasy CLI:
+   ```bash
+   speakeasy generate sdk -s /home/user/openapi.yaml -l python -o /home/user/sdk
+   ```
+
+## Constraints
+- Project path: `/home/user`
+- The generated SDK must be placed in `/home/user/sdk`.
+- You must use the Speakeasy CLI to generate the SDK.
+
+## Integrations
+- Speakeasy
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__create_cli_target_from_spec: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-ftpbj4c > /logs/artifacts/run-id && echo create_cli_target_from_spec__fTpbj4C > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Configure a Speakeasy CLI Target
+
+## Background
+You have an `openapi.yaml` file for a simple API. Use Speakeasy to configure a project that generates a CLI application from this specification.
+
+## Requirements
+- Initialize a Speakeasy workflow configuration in `.speakeasy/workflow.yaml` with a target named `my-target` of type `cli`.
+- The workflow should reference a source named `my-source` pointing to `./openapi.yaml`.
+- Create a valid `gen.yaml` in `.speakeasy/gen.yaml` for the `cli` target.
+- The `gen.yaml` must define the `cli` target with `version: 1.0.0` and the generation config must have `sdkClassName: TestAPI`.
+
+## Implementation Guide
+1. Create the `.speakeasy` directory.
+2. Create `.speakeasy/workflow.yaml` with the source and target configuration.
+3. Create `.speakeasy/gen.yaml` with the `cli` target configuration.
+4. Run `speakeasy lint config` to ensure your configuration is valid.
+
+## Constraints
+- Project path: /home/user/myproject
+- Do not attempt to use commands that require authentication (like `speakeasy generate` or `speakeasy configure`). You must create the configuration files manually based on Speakeasy documentation.
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__implement_go_response_hook: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-gj8tvz3 > /logs/artifacts/run-id && echo implement_go_response_hook__gJ8TVz3 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement a Go Response Hook in Speakeasy
+
+## Background
+Speakeasy allows customizing generated SDKs using hooks. In this task, you will generate a Go SDK from an OpenAPI specification and implement a custom response hook that intercepts all successful responses and injects a specific header before returning the response to the caller.
+
+## Requirements
+- You are provided with a Speakeasy project in `/home/user/project` containing `openapi.yaml` and `gen.yaml` configured for Go SDK generation.
+- Run `speakeasy generate sdk` to scaffold the SDK and the `internal/hooks` directory.
+- Implement an `AfterSuccessHook` in Go that adds an `X-Hook-Injected` header with the value `true` to every successful HTTP response (`http.Response`).
+- Register the hook correctly in the generated registration file so that it is executed by the SDK.
+- Ensure the Go code compiles successfully (`go build ./...` inside the `sdk` directory).
+
+## Implementation Guide
+1. Move to `/home/user/project`.
+2. Run `speakeasy generate sdk` to scaffold the SDK.
+3. Create or modify the hook implementation in `sdk/internal/hooks/` to intercept successful responses and append the `X-Hook-Injected: true` header to the `http.Response.Header` map.
+4. Register your hook in `sdk/internal/hooks/registration.go`.
+5. Run `go mod tidy` and `go build ./...` inside the `sdk` directory to ensure there are no compilation errors.
+
+## Constraints
+- Project path: `/home/user/project`
+- The header name must be exactly `X-Hook-Injected`.
+- The header value must be exactly `true`.
+- The SDK language must be Go.
+- The hook must be an `AfterSuccessHook`.
+
+## Integrations
+- Speakeasy
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__implement_python_request_hook: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-q4pb5lb > /logs/artifacts/run-id && echo implement_python_request_hook__q4pb5Lb > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement a Python Request Hook in Speakeasy
+
+## Background
+Speakeasy allows customizing generated SDKs using hooks. In this task, you will generate a Python SDK from an OpenAPI specification and implement a custom request hook that injects a specific header into all outgoing requests.
+
+## Requirements
+- Initialize a Speakeasy project in `/home/user/project` using the provided `openapi.yaml`.
+- Configure the `gen.yaml` to generate a Python SDK named `my_sdk`.
+- Enable custom hooks in the SDK configuration.
+- Implement a `BeforeRequestHook` in Python that adds an `X-Organization-Id` header with the value `org_12345` to every request.
+- Register the hook correctly so that it is executed by the SDK.
+- Run `speakeasy generate sdk` to apply the changes.
+
+## Implementation Guide
+1. Move to `/home/user/project` where `openapi.yaml` is located.
+2. Create a `gen.yaml` file configuring the Python SDK generation, ensuring hooks are enabled.
+3. Run `speakeasy generate sdk` to scaffold the SDK and the `src/my_sdk/hooks` directory.
+4. Create or modify the hook implementation in `src/my_sdk/hooks/` to intercept the request and append the `X-Organization-Id: org_12345` header.
+5. Register your hook in `src/my_sdk/hooks/registration.py` (or the equivalent registration file generated by Speakeasy).
+6. Run `speakeasy generate sdk` again to ensure the SDK is fully updated and valid.
+
+## Constraints
+- Project path: `/home/user/project`
+- The header name must be exactly `X-Organization-Id`.
+- The header value must be exactly `org_12345`.
+- The SDK language must be Python.
+
+## Integrations
+- None
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__setup_speakeasy_ignore_rules: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-ydmiepv > /logs/artifacts/run-id && echo setup_speakeasy_ignore_rules__YDMiEPV > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Setup Speakeasy Ignore Rules
+
+## Background
+You have a Speakeasy Python SDK project in `/home/user/myproject`. You want to customize the generated SDK by modifying a file manually, but you don't want Speakeasy to overwrite your changes during the next generation.
+
+## Requirements
+- Create a `.genignore` file in the project root to instruct Speakeasy to ignore specific files.
+- Add a rule to ignore the `src/sdk/custom_logic.py` file.
+
+## Implementation Guide
+1. Navigate to `/home/user/myproject`.
+2. Create a `.genignore` file.
+3. Add `src/sdk/custom_logic.py` to the `.genignore` file.
+
+## Constraints
+- Project path: `/home/user/myproject`
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__implement_typescript_error_hook: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-y97tl3u > /logs/artifacts/run-id && echo implement_typescript_error_hook__Y97tL3U > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Implement Custom TypeScript Error Hook
+
+## Background
+Speakeasy allows customizing SDK behavior using "hooks". You need to implement a custom TypeScript error hook that intercepts API errors and extracts a custom `x-correlation-id` header from the response, throwing a custom error with this ID.
+
+## Requirements
+- You have a Speakeasy SDK hooks directory at `/home/user/sdk/src/hooks`.
+- Create a custom hook `src/hooks/custom/correlation.ts` that implements `AfterErrorHook`.
+- In `afterError`, if the `response` is not null, has a status code of 500, and contains the header `x-correlation-id`, the hook should throw a new standard `Error` with the exact message: `Correlation Error: <correlation_id>` (replace `<correlation_id>` with the actual header value).
+- If the condition is not met, the hook must return the original `response` and `error` unchanged as `{ response, error }`.
+- Register the hook in `src/hooks/registration.ts` by calling `hooks.registerAfterErrorHook(new CorrelationHook())`.
+
+## Implementation Guide
+1. Navigate to `/home/user/sdk`.
+2. Create `src/hooks/custom/correlation.ts`.
+3. Implement the `CorrelationHook` class using the `AfterErrorHook` and `AfterErrorContext` interfaces from `../types.js`.
+4. Update `src/hooks/registration.ts` to import and register your hook in `initHooks(hooks: Hooks)`.
+5. Run `npx tsc --noEmit` in the `sdk` directory to ensure there are no TypeScript errors.
+
+## Constraints
+- Project path: /home/user/sdk
+- Do not modify `src/hooks/types.ts`.
+- Ensure you export `CorrelationHook` from `correlation.ts`.
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__overlay_remove_deprecated_endpoints: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-bmkuemj > /logs/artifacts/run-id && echo overlay_remove_deprecated_endpoi__bMKUeMj > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Remove Deprecated Endpoints with OpenAPI Overlays
+
+## Background
+OpenAPI Overlays provide a standard way to modify an OpenAPI specification without altering the original source file. Speakeasy CLI fully supports applying these overlays.
+
+## Requirements
+- Create an OpenAPI overlay file named `overlay.yaml` that removes the deprecated `/old-endpoint` from the provided `openapi.yaml`.
+- Apply the overlay using the Speakeasy CLI and output the result to `modified.yaml`.
+
+## Implementation Guide
+1. Review the provided `openapi.yaml` in the project directory.
+2. Create an `overlay.yaml` file that uses the OpenAPI Overlay specification to target and remove `$.paths['/old-endpoint']`.
+3. Run the command `speakeasy overlay apply -s openapi.yaml -o overlay.yaml --out modified.yaml` to generate the new specification.
+
+## Constraints
+- Project path: /home/user/project
+- The original `openapi.yaml` must not be modified.
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__overlay_add_response_examples: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-wdyty3l > /logs/artifacts/run-id && echo overlay_add_response_examples__wDYTy3L > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Add Response Examples with OpenAPI Overlay
+
+## Background
+OpenAPI Overlays are a standard way to modify or extend an OpenAPI specification without changing the original source file. In this task, you will use the Speakeasy CLI to apply an overlay that adds a response example to an existing API endpoint.
+
+## Requirements
+- Create an `overlay.yaml` file conforming to the OpenAPI Overlay Specification 1.0.0.
+- The overlay must target the `GET /ping` operation's `200` response in the provided `openapi.yaml`.
+- It should add a `content` object for `application/json` with an `example` of `{"message": "pong"}`.
+- Apply the overlay using the Speakeasy CLI and save the merged output to `openapi-modified.yaml`.
+
+## Implementation Guide
+1. Review the `openapi.yaml` file in the project directory.
+2. Create an `overlay.yaml` file that uses JSONPath `$.paths['/ping'].get.responses['200']` to add the required `content` object.
+3. Run the following command to apply the overlay:
+   `speakeasy overlay apply -o overlay.yaml -s openapi.yaml --out openapi-modified.yaml`
+
+## Constraints
+- Project path: `/home/user/project`
+- Do not modify the original `openapi.yaml` directly.
+- Use the `speakeasy` CLI which is already installed.
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__add_global_retries_configuration: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-p3dryaz > /logs/artifacts/run-id && echo add_global_retries_configuration__P3dRYaz > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Add Global Retries Configuration
+
+## Background
+Speakeasy allows you to configure automatic retries for requests that fail due to network errors or specific HTTP status codes. This can be configured globally in the OpenAPI specification using the `x-speakeasy-retries` extension.
+
+## Requirements
+- Add a global retries configuration to the root of `openapi.yaml`.
+- The retry strategy should be `backoff`.
+- The initial interval should be 500 milliseconds.
+- The max interval should be 60000 milliseconds (60 seconds).
+- The max elapsed time should be 3600000 milliseconds (1 hour).
+- The exponent should be 1.5.
+- It should retry on `5XX` status codes.
+- Connection errors should be retried.
+
+## Implementation Guide
+1. Open `/home/user/project/openapi.yaml`.
+2. Add the `x-speakeasy-retries` extension at the root level with the specified configuration.
+3. Validate the OpenAPI specification using `speakeasy lint openapi -s openapi.yaml` to ensure it is correct.
+
+## Constraints
+- Project path: `/home/user/project`
+- The `openapi.yaml` file must be valid according to `speakeasy lint openapi`.
+
+## Integrations
+- None
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__configure_pypi_publishing_python: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-djsuyqj > /logs/artifacts/run-id && echo configure_pypi_publishing_python__djsUYQj > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Configure PyPI Publishing Metadata for Python SDK in gen.yaml
+
+## Background
+Speakeasy generates Python client SDKs from an OpenAPI specification using a `gen.yaml` configuration file. The Python target block in `gen.yaml` controls the identity and metadata that ends up in the published PyPI package: things like the PyPI distribution name and the authors listed on the package page. Before a Python SDK can be published to PyPI, those metadata fields must be set to project-specific values instead of the defaults.
+
+Your task is to update the Python target metadata in an existing `gen.yaml` file so the generated SDK is published under the correct PyPI distribution name and lists the correct authors.
+
+## Requirements
+- Update the existing `gen.yaml` so the Python SDK target uses the PyPI distribution name `example-my-sdk`.
+- Update the Python SDK target so the `authors` list includes `Example Team`.
+- Preserve the rest of the existing `gen.yaml` structure; do not remove other unrelated fields.
+
+## Implementation Hints
+- Per Speakeasy's Python configuration reference, Python SDK metadata lives under the top-level `python:` block in `gen.yaml`. The PyPI distribution name is the `packageName` field, and the authors list is the `authors` field (a YAML sequence of strings).
+- You can edit `gen.yaml` directly with any text editor, or use a YAML-aware tool such as `yq` to update specific fields without disturbing the rest of the file.
+- After editing, you can sanity-check the file by running `speakeasy --version` to confirm the CLI is available and by inspecting `gen.yaml` with `cat` or `yq`.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- The file `/home/user/project/gen.yaml` must remain a valid YAML file containing a top-level `python:` mapping.
+- `.python.packageName` in `/home/user/project/gen.yaml` must equal the string `example-my-sdk`.
+- `.python.authors` in `/home/user/project/gen.yaml` must be a YAML sequence whose entries include the string `Example Team`.
+- Other unrelated top-level keys and fields that existed in the seeded `gen.yaml` must still be present after the edit.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__create_workflow_yaml_basic: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-eo9dg7h > /logs/artifacts/run-id && echo create_workflow_yaml_basic__Eo9Dg7H > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Create a Basic Speakeasy Workflow File
+
+## Background
+Speakeasy is an AI-native API development platform that generates idiomatic, type-safe artifacts (SDKs, Terraform providers, CLIs, MCP servers) from OpenAPI specifications. The Speakeasy CLI is driven by a `.speakeasy/workflow.yaml` file that maps one or more OpenAPI **sources** to one or more code-generation **targets**.
+
+You have a minimal OpenAPI 3.0 specification (`openapi.yaml`) in the project root. Author a `.speakeasy/workflow.yaml` from scratch so that it would drive a single TypeScript SDK generation from this spec.
+
+## Requirements
+- Create the workflow file at `/home/user/project/.speakeasy/workflow.yaml`.
+- Define exactly one source named `my-api` whose only input location is the local file `./openapi.yaml`.
+- Define exactly one target named `typescript-sdk` whose `target` type is `typescript` and whose `source` is `my-api`.
+- The workflow must be structurally valid per the Speakeasy workflow schema (top-level `workflowVersion`, `sources`, and `targets` keys).
+- Do not run `speakeasy quickstart` or any command that requires authentication; create the file manually based on the workflow.yaml reference.
+
+## Implementation Hints
+- The top-level structure of `workflow.yaml` is `workflowVersion`, optional `speakeasyVersion`, `sources`, and `targets`.
+- A source has an `inputs` list, where each entry is an object with a `location` key pointing to an OpenAPI document.
+- A target has a `target` field (language/artifact type) and a `source` field referencing the source name.
+- Refer to the Speakeasy workflow file documentation for the exact schema.
+- You can sanity-check structure with `yq` or by inspecting `speakeasy run --help`.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- The file `/home/user/project/.speakeasy/workflow.yaml` must exist and be valid YAML.
+- The YAML must contain a top-level `workflowVersion` string.
+- Under `sources`, a key `my-api` must exist with `inputs[0].location` equal to `./openapi.yaml`.
+- Under `targets`, a key `typescript-sdk` must exist with `target: typescript` and `source: my-api`.
+- The seed file `/home/user/project/openapi.yaml` must remain unchanged.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__configure_oauth2_in_gen_yaml: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-zcbtns9 > /logs/artifacts/run-id && echo configure_oauth2_in_gen_yaml__ZCbTNS9 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Enable OAuth 2.0 Client Credentials in Speakeasy gen.yaml
+
+## Background
+Speakeasy generates idiomatic SDKs from OpenAPI specifications. The `gen.yaml` file is the primary configuration file for SDK generation targets, and the `generation.auth` section controls authentication-related code generation. To support APIs that authenticate via the OAuth 2.0 client-credentials flow, Speakeasy exposes the `oAuth2ClientCredentialsEnabled` flag under `generation.auth`. When set to `true`, Speakeasy generates the code required to handle OAuth 2.0 client credentials in the generated SDK.
+
+A partial Speakeasy project has been initialized at `/home/user/project`. The existing `gen.yaml` configures a TypeScript SDK target but currently has `oAuth2ClientCredentialsEnabled: false`. Your job is to flip this single flag on so the next generation run will produce SDK code that supports the OAuth 2.0 client-credentials flow.
+
+## Requirements
+- Edit `/home/user/project/gen.yaml` so that `generation.auth.oAuth2ClientCredentialsEnabled` is set to `true`.
+- Do **not** rename, remove, or restructure any other fields in `gen.yaml`. All existing keys (configuration version, SDK class name, language target, etc.) must remain valid and unchanged in meaning.
+- The resulting `gen.yaml` must still be valid YAML that Speakeasy can read.
+
+## Implementation Hints
+- This is a configuration-only change inside `gen.yaml`. No CLI command is required to be executed against Speakeasy's servers.
+- You can edit the file directly with any text editor, or use a tool such as `yq` to update the specific key in place.
+- Refer to the Speakeasy `gen.yaml` reference if you need to confirm the exact location of the flag inside the `generation.auth` block.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- The file `/home/user/project/gen.yaml` exists and is valid YAML.
+- In `/home/user/project/gen.yaml`, the value at path `.generation.auth.oAuth2ClientCredentialsEnabled` is the boolean `true` (verified by `yq` evaluating to the string `"true"`).
+- The top-level keys `configVersion` and `generation` are still present, and `generation.auth` still exists as a mapping.
+- The TypeScript target section (top-level key `typescript`) is still present in `gen.yaml`.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__overlay_hide_internal_endpoints: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-etxcnqh > /logs/artifacts/run-id && echo overlay_hide_internal_endpoints__etXCnqh > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Hide Internal Endpoints with a Speakeasy OpenAPI Overlay
+
+## Background
+Your team maintains an OpenAPI 3 specification that mixes public-facing endpoints with internal-only endpoints (for example, `/internal/health`). You want to ship a public SDK that excludes the internal endpoints, but you cannot modify the source `openapi.yaml`. Speakeasy supports the [OpenAPI Overlay Specification](https://overlays.openapi.org/) and provides a `speakeasy overlay` CLI to author and apply overlays.
+
+In this task, you must author an OpenAPI Overlay that marks the internal GET operation on `/internal/health` with the Speakeasy extension `x-speakeasy-ignore: true`, then apply that overlay against the base spec to produce a merged `result.yaml`.
+
+## Requirements
+- Create an overlay file at `/home/user/project/overlay.yaml` that conforms to the OpenAPI Overlay Specification v1.0.0.
+- The overlay must contain at least one action whose `target` JSONPath expression resolves to the `get` operation on the `/internal/health` path of the base spec.
+- The matching action must use an `update` block that adds the extension `x-speakeasy-ignore: true` to that operation.
+- Apply the overlay against the base spec `/home/user/project/openapi.yaml` using the Speakeasy CLI, writing the merged document to `/home/user/project/result.yaml`.
+- Do **not** modify the original `/home/user/project/openapi.yaml`; the public operation(s) must remain unchanged in `result.yaml`.
+
+## Implementation Hints
+- The Speakeasy CLI exposes an `overlay` command group; its `apply` subcommand merges an overlay onto a base schema. Use the documented flags to point at the schema and the overlay, and to write the output to a file.
+- A minimal overlay document has top-level `overlay`, `info`, and `actions` keys. Each action needs a `target` (JSONPath) and either `update` or `remove`.
+- JSONPath expressions in overlays start with `$`. To address the GET operation on `/internal/health`, use a bracket-notation path that escapes the literal `/` characters (e.g. `$.paths["/internal/health"].get`).
+- You may run `speakeasy overlay validate` first to sanity-check your overlay before applying it.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- `/home/user/project/overlay.yaml` exists and:
+  - Has top-level key `overlay` with value `1.0.0`.
+  - Has an `info.title` and `info.version`.
+  - Contains an `actions` entry whose `target` JSONPath resolves to the GET operation on `/internal/health`.
+  - That action contains an `update` block setting `x-speakeasy-ignore` to `true`.
+- `/home/user/project/result.yaml` exists and:
+  - Is a valid OpenAPI 3 document derived from `openapi.yaml` with the overlay applied.
+  - `paths./internal/health.get.x-speakeasy-ignore` is the boolean `true`.
+  - The public operation under `/public/items` (GET) is preserved with no `x-speakeasy-ignore` key.
+- The original `/home/user/project/openapi.yaml` must remain byte-for-byte identical to its seeded contents.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__add_x_speakeasy_name_override: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-erfqhjj > /logs/artifacts/run-id && echo add_x_speakeasy_name_override__ERFqHjJ > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Override a Speakeasy SDK method name with `x-speakeasy-name-override`
+
+## Background
+Your team is generating a client SDK with Speakeasy from an `openapi.yaml` file. The OpenAPI spec was produced by an internal code generator that assigns cryptic operation IDs, such as `pst_user_create` for `POST /users`. When Speakeasy generates the SDK, that operationId becomes the method name on the generated client (e.g. `client.users.pst_user_create(...)`), which is confusing for SDK consumers.
+
+Speakeasy provides the OpenAPI extension `x-speakeasy-name-override` so SDK authors can rename the generated method without rewriting the underlying `operationId` in the source spec. Your job is to edit the seeded `openapi.yaml` so that the method generated from the `POST /users` operation will be named `createUser` instead of `pst_user_create`.
+
+## Requirements
+- Edit `/home/user/project/openapi.yaml` in place to add an `x-speakeasy-name-override` rule that renames the `pst_user_create` operation to `createUser`.
+- Either form documented by Speakeasy is acceptable:
+  - Operation-level: `paths./users.post.x-speakeasy-name-override: createUser`.
+  - Global-level: a top-level `x-speakeasy-name-override` list containing an entry that matches operationId `pst_user_create` (an exact-match regex is fine) with `methodNameOverride: createUser`.
+- Do **not** change the existing `operationId` `pst_user_create` itself. The renaming must come from the extension.
+- Do **not** remove or rename any existing operations, paths, or schemas. Keep the OpenAPI version as `3.0.x` and keep the `User` schema component intact.
+- After your edits, the spec must remain valid: running `speakeasy lint openapi -s /home/user/project/openapi.yaml --non-interactive` must still exit with code 0.
+
+## Implementation Hints
+- The Speakeasy CLI is preinstalled and available on the `PATH` as `speakeasy`. `yq` is also available for YAML inspection.
+- Refer to the Speakeasy documentation for `x-speakeasy-name-override` on the "Customize methods" page; both global and operation-level placements are documented and accepted.
+- When using the global form, remember that the matching key is `operationId` (a regex) and the value key is `methodNameOverride`.
+- When using the operation-level form, the extension is a plain string value placed directly on the operation object.
+- You only need to modify `openapi.yaml`. Do not introduce additional files or change the project layout.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- Spec file: /home/user/project/openapi.yaml
+- The spec still parses as valid YAML and declares OpenAPI `3.0.x`.
+- The spec still contains the original path `/users` with method `post` and operationId `pst_user_create`, and the `User` schema component.
+- `openapi.yaml` contains an `x-speakeasy-name-override` rule that renames the `POST /users` operation (operationId `pst_user_create`) to `createUser`. Either form is acceptable:
+  - Operation-level: `paths./users.post.x-speakeasy-name-override` equals the string `createUser`, **or**
+  - Global-level: a top-level `x-speakeasy-name-override` list/array that contains an entry with `operationId` matching `pst_user_create` and `methodNameOverride` equal to `createUser`.
+- Running `speakeasy lint openapi -s /home/user/project/openapi.yaml --non-interactive` exits with status code 0.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__configure_go_module_path: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-m5ev5mw > /logs/artifacts/run-id && echo configure_go_module_path__m5Ev5Mw > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Configure the Go Module Path in `gen.yaml`
+
+## Background
+You are working on a Speakeasy-generated Go SDK. The project already contains a `gen.yaml` file under `/home/user/project` with a Go generation target configured, but it is still using the default module path. Before publishing the SDK to a real Go module proxy, you need to update the configuration so the generated Go SDK is published under the module path `github.com/example/my-sdk`.
+
+Speakeasy reads SDK generation settings from `gen.yaml`. For the Go target, the configuration lives under the top-level `go:` section and the field that controls the Go module path is `modulePath` (see the official Speakeasy Go configuration reference).
+
+## Requirements
+- Update `/home/user/project/gen.yaml` so that the Go target's module path is set to `github.com/example/my-sdk`.
+- Preserve all other fields and sections of `gen.yaml` (for example `configVersion`, the `generation` block, and any other Go fields such as `version` and `sdkPackageName`).
+- Do **not** introduce a `targets:` wrapper or rename the existing top-level `go:` section. The Go configuration must remain under the top-level `go:` key, matching the structure described in the Speakeasy Go configuration documentation.
+
+## Implementation Hints
+- The relevant Speakeasy documentation is the Go configuration reference at `https://www.speakeasy.com/docs/speakeasy-reference/generation/go-config`. Verify the exact field name from that page rather than guessing.
+- You can edit the YAML manually or use a CLI tool such as `yq`, which is preinstalled in the environment.
+- After editing, the file must still be valid YAML and Speakeasy's other configuration fields must remain intact.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- The file `/home/user/project/gen.yaml` exists and is valid YAML.
+- The value at the YAML path `.go.modulePath` is exactly `github.com/example/my-sdk`.
+- The top-level `configVersion` and `generation.sdkClassName` keys from the initial file are preserved.
+- The other Go fields (`version`, `sdkPackageName`) from the initial file are preserved (not removed or blanked out).
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__bundle_specs_with_speakeasy_merge: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-qa5spaz > /logs/artifacts/run-id && echo bundle_specs_with_speakeasy_merg__Qa5sPaz > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Bundle Two OpenAPI Specs with Speakeasy Merge
+
+## Background
+You have the Speakeasy CLI available in the environment. A project ships two separate OpenAPI 3.0 specifications that each describe a different resource group. To prepare a single source for downstream SDK generation, the two specs must be combined into one merged OpenAPI document using the Speakeasy CLI.
+
+## Requirements
+- Combine the two source specifications at `/home/user/project/spec_a.yaml` and `/home/user/project/spec_b.yaml` into a single merged OpenAPI document.
+- Write the merged document to `/home/user/project/merged.yaml`.
+- The merged file must remain a valid OpenAPI 3.x document that passes Speakeasy's lint.
+- The merged file must contain the endpoints from BOTH source specs.
+
+## Implementation Hints
+- Use the `speakeasy merge` CLI subcommand to combine the two specs. The command accepts multiple input schemas (one `-s` flag per input) and an output path with `-o`.
+- After merging, use `speakeasy lint openapi` with the `--non-interactive` flag to confirm the result is a valid OpenAPI document.
+- Do not hand-edit the merged YAML; produce it entirely from the CLI.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- The file `/home/user/project/merged.yaml` exists.
+- `/home/user/project/merged.yaml` parses as valid YAML.
+- The top-level `openapi` field starts with `3.` (e.g. `3.0.x` or `3.1.x`).
+- The `paths` object in `/home/user/project/merged.yaml` contains both the `/users` path (from `spec_a.yaml`) and the `/products` path (from `spec_b.yaml`).
+- Running `speakeasy lint openapi -s /home/user/project/merged.yaml --non-interactive` returns exit code 0.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__configure_npm_publishing_typescript: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-kdvmesw > /logs/artifacts/run-id && echo configure_npm_publishing_typescr__kDVMESW > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Configure npm Publishing for a Speakeasy TypeScript SDK
+
+## Background
+Speakeasy generates TypeScript SDKs from OpenAPI specifications. Before such an SDK can be published to npm, the `gen.yaml` configuration file must declare the npm package name (and ideally the author) under the `typescript` section. A project has been bootstrapped at `/home/user/project` with an existing `gen.yaml` that still uses the default `packageName` (`openapi`). You must update the configuration so the SDK is publishable as a scoped npm package.
+
+## Requirements
+- Update `/home/user/project/gen.yaml` so that the npm package name for the TypeScript target is set to `@example/my-sdk`.
+- Also set the package `author` for the TypeScript target to `Example Team`.
+- Keep the rest of the file valid YAML (do not corrupt existing keys such as `configVersion`, `generation`, or the TypeScript `version` field).
+
+## Implementation Hints
+- Speakeasy TypeScript publishing fields live directly under the top-level `typescript` key in `gen.yaml` (not under a `targets` block). Refer to the [TypeScript configuration reference](https://www.speakeasy.com/docs/speakeasy-reference/generation/ts-config) for the exact field names.
+- You can edit `gen.yaml` directly with a text editor, or use a YAML-aware tool such as `yq` to set the fields.
+- The Speakeasy CLI (`speakeasy`) and `yq` are installed in the environment if you want to use them for inspection.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- The file `/home/user/project/gen.yaml` exists and is valid YAML.
+- In `gen.yaml`, the value at `.typescript.packageName` equals `@example/my-sdk`.
+- In `gen.yaml`, the value at `.typescript.author` equals `Example Team`.
+- The TypeScript `version` field (`.typescript.version`) and the top-level `configVersion` field remain present and unchanged.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__set_max_method_params_typescript: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.8 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-3uerqvb > /logs/artifacts/run-id && echo set_max_method_params_typescript__3UeRQVB > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model anthropic/claude-4-6-sonnet --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Configure `maxMethodParams` for the TypeScript SDK in Speakeasy `gen.yaml`
+
+## Background
+Speakeasy generates idiomatic, type-safe client SDKs from an OpenAPI specification. SDK method signatures can either accept a single request object or a list of positional parameters. The `maxMethodParams` option in `gen.yaml` controls the threshold at which Speakeasy switches from positional parameters to a single input object. The default value `0` means every method always uses an input object. Increasing this value gives SDK consumers a more ergonomic call-site experience for small parameter sets.
+
+The SDK project lives at `/home/user/project` and already has a `gen.yaml` with a top-level `typescript:` block (alongside other top-level blocks such as `generation:` and `configVersion:`). Your job is to tune the TypeScript SDK generation configuration without changing any other settings.
+
+## Requirements
+- Edit `/home/user/project/gen.yaml` so that the TypeScript SDK is generated using positional parameters for methods with up to four parameters before falling back to an input object.
+- Do not change unrelated keys (other fields inside `typescript:` and other top-level blocks must be preserved).
+
+## Implementation Hints
+- Refer to the Speakeasy `gen.yaml` reference and TypeScript configuration options to confirm the correct field path; the field lives under the top-level `typescript:` block (it is not nested under any `targets:` section).
+- Any YAML-aware tool (a text editor or a CLI such as `yq`) can be used to apply the change.
+
+## Acceptance Criteria
+- Project path: /home/user/project
+- File modified: /home/user/project/gen.yaml
+- The top-level `typescript.maxMethodParams` value in `gen.yaml` is `4`.
+- All other previously-present keys in the `typescript:` block and all other top-level blocks remain present with their original values.
+- `gen.yaml` remains a valid YAML document.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured

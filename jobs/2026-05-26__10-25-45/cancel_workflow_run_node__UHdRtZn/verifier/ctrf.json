@@ -1,0 +1,124 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 9,
+            "passed": 1,
+            "failed": 8,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1779762762931,
+            "stop": 1779762892559
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_log_file_records_workflow_key",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 20,
+                "start": 1779762763013,
+                "stop": 1779762763033,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_records_workflow_key():\n>       content = _read_log()\n\ntests/test_final_state.py:93: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log() -> str:\n>       assert os.path.isfile(LOG_FILE), f\"Expected log file at {LOG_FILE}.\"\nE       AssertionError: Expected log file at /home/user/cancel_task/output.log.\nE       assert False\nE        +  where False = <function isfile at 0x7b738dc44220>('/home/user/cancel_task/output.log')\nE        +    where <function isfile at 0x7b738dc44220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:56: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_records_workflow_run_id",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 6,
+                "start": 1779762763033,
+                "stop": 1779762763039,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_records_workflow_run_id():\n>       content = _read_log()\n\ntests/test_final_state.py:101: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log() -> str:\n>       assert os.path.isfile(LOG_FILE), f\"Expected log file at {LOG_FILE}.\"\nE       AssertionError: Expected log file at /home/user/cancel_task/output.log.\nE       assert False\nE        +  where False = <function isfile at 0x7b738dc44220>('/home/user/cancel_task/output.log')\nE        +    where <function isfile at 0x7b738dc44220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:56: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_records_cancellation_key",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 6,
+                "start": 1779762763039,
+                "stop": 1779762763045,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_records_cancellation_key():\n>       content = _read_log()\n\ntests/test_final_state.py:107: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log() -> str:\n>       assert os.path.isfile(LOG_FILE), f\"Expected log file at {LOG_FILE}.\"\nE       AssertionError: Expected log file at /home/user/cancel_task/output.log.\nE       assert False\nE        +  where False = <function isfile at 0x7b738dc44220>('/home/user/cancel_task/output.log')\nE        +    where <function isfile at 0x7b738dc44220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:56: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_log_file_records_recipient_email",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 6,
+                "start": 1779762763045,
+                "stop": 1779762763051,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_log_file_records_recipient_email():\n>       content = _read_log()\n\ntests/test_final_state.py:115: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log() -> str:\n>       assert os.path.isfile(LOG_FILE), f\"Expected log file at {LOG_FILE}.\"\nE       AssertionError: Expected log file at /home/user/cancel_task/output.log.\nE       assert False\nE        +  where False = <function isfile at 0x7b738dc44220>('/home/user/cancel_task/output.log')\nE        +    where <function isfile at 0x7b738dc44220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:56: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_exists_in_development",
+                "status": "failed",
+                "duration": 737,
+                "start": 1779762763051,
+                "stop": 1779762763788,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def fetched_workflow() -> dict:\n        url = f\"{MGMT_BASE}/v1/workflows/{_workflow_key()}\"\n        response = requests.get(\n            url,\n            headers=_mgmt_headers(),\n            params={\"environment\": \"development\"},\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"Failed to fetch workflow {_workflow_key()}: \"\n            f\"{response.status_code} {response.text}\"\n        )\nE       AssertionError: Failed to fetch workflow cancel-flow-zr-uhdrtzn: 404 {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:136: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_is_active",
+                "status": "failed",
+                "duration": 10,
+                "start": 1779762763789,
+                "stop": 1779762763799,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def fetched_workflow() -> dict:\n        url = f\"{MGMT_BASE}/v1/workflows/{_workflow_key()}\"\n        response = requests.get(\n            url,\n            headers=_mgmt_headers(),\n            params={\"environment\": \"development\"},\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"Failed to fetch workflow {_workflow_key()}: \"\n            f\"{response.status_code} {response.text}\"\n        )\nE       AssertionError: Failed to fetch workflow cancel-flow-zr-uhdrtzn: 404 {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:136: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_has_delay_then_mailtrap_email",
+                "status": "failed",
+                "duration": 7,
+                "start": 1779762763799,
+                "stop": 1779762763806,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "@pytest.fixture(scope=\"module\")\n    def fetched_workflow() -> dict:\n        url = f\"{MGMT_BASE}/v1/workflows/{_workflow_key()}\"\n        response = requests.get(\n            url,\n            headers=_mgmt_headers(),\n            params={\"environment\": \"development\"},\n            timeout=30,\n        )\n>       assert response.status_code == 200, (\n            f\"Failed to fetch workflow {_workflow_key()}: \"\n            f\"{response.status_code} {response.text}\"\n        )\nE       AssertionError: Failed to fetch workflow cancel-flow-zr-uhdrtzn: 404 {\"code\":\"resource_missing\",\"message\":\"The resource you requested does not exist\",\"status\":404,\"type\":\"api_error\"}\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:136: AssertionError"
+            },
+            {
+                "name": "test_final_state.py::test_workflow_run_did_not_deliver_email",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 6,
+                "start": 1779762763807,
+                "stop": 1779762763813,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "def test_workflow_run_did_not_deliver_email():\n>       content = _read_log()\n\ntests/test_final_state.py:243: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\n    def _read_log() -> str:\n>       assert os.path.isfile(LOG_FILE), f\"Expected log file at {LOG_FILE}.\"\nE       AssertionError: Expected log file at /home/user/cancel_task/output.log.\nE       assert False\nE        +  where False = <function isfile at 0x7b738dc44220>('/home/user/cancel_task/output.log')\nE        +    where <function isfile at 0x7b738dc44220> = <module 'posixpath' (frozen)>.isfile\nE        +      where <module 'posixpath' (frozen)> = os.path\n\ntests/test_final_state.py:56: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_no_email_arrived_in_gmail_inbox",
+                "status": "passed",
+                "duration": 128745,
+                "start": 1779762763813,
+                "stop": 1779762892558,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

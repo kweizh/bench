@@ -1,0 +1,20 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 4 items
+
+../../../tests/test_final_state.py ....                                  [100%]
+
+==================================== PASSES ====================================
+______________________ test_no_liveblocks_mocks_or_stubs _______________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/liveblocks_counter_app$ npm run start -- -p 3000
+process 'liveblocks_counter_app' started pid=988
+liveblocks_counter_app process startup detected
+=========================== short test summary info ============================
+PASSED ../../../tests/test_final_state.py::test_no_liveblocks_mocks_or_stubs
+PASSED ../../../tests/test_final_state.py::test_auth_endpoint_returns_real_token
+PASSED ../../../tests/test_final_state.py::test_two_client_realtime_sync
+PASSED ../../../tests/test_final_state.py::test_storage_schema_via_liveblocks_rest
+============================== 4 passed in 42.12s ==============================

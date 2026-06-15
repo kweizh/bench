@@ -1,0 +1,128 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 5 items
+
+tests/test_final_state.py EEEFF                                          [100%]
+
+==================================== ERRORS ====================================
+___ ERROR at setup of test_workflow_trigger_frequency_is_once_per_recipient ____
+
+workflow_key = 'dedup-test-zr-5eebdvv'
+
+    @pytest.fixture(scope="module")
+    def workflow_payload(workflow_key):
+        """Fetch the workflow from the Knock Management API and return parsed JSON."""
+        service_token = os.environ.get("KNOCK_SERVICE_TOKEN")
+        assert service_token, "KNOCK_SERVICE_TOKEN env var is not set."
+        url = f"{KNOCK_CONTROL_URL}/v1/workflows/{workflow_key}"
+        resp = requests.get(
+            url,
+            params={"environment": "development"},
+            headers={"Authorization": f"Bearer {service_token}"},
+            timeout=30,
+        )
+>       assert resp.status_code == 200, (
+            f"Knock Management API GET workflow {workflow_key} returned "
+            f"status {resp.status_code}: {resp.text}"
+        )
+E       AssertionError: Knock Management API GET workflow dedup-test-zr-5eebdvv returned status 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:48: AssertionError
+___________ ERROR at setup of test_workflow_is_active_in_development ___________
+
+workflow_key = 'dedup-test-zr-5eebdvv'
+
+    @pytest.fixture(scope="module")
+    def workflow_payload(workflow_key):
+        """Fetch the workflow from the Knock Management API and return parsed JSON."""
+        service_token = os.environ.get("KNOCK_SERVICE_TOKEN")
+        assert service_token, "KNOCK_SERVICE_TOKEN env var is not set."
+        url = f"{KNOCK_CONTROL_URL}/v1/workflows/{workflow_key}"
+        resp = requests.get(
+            url,
+            params={"environment": "development"},
+            headers={"Authorization": f"Bearer {service_token}"},
+            timeout=30,
+        )
+>       assert resp.status_code == 200, (
+            f"Knock Management API GET workflow {workflow_key} returned "
+            f"status {resp.status_code}: {resp.text}"
+        )
+E       AssertionError: Knock Management API GET workflow dedup-test-zr-5eebdvv returned status 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:48: AssertionError
+__________ ERROR at setup of test_workflow_has_mailtrap_channel_step ___________
+
+workflow_key = 'dedup-test-zr-5eebdvv'
+
+    @pytest.fixture(scope="module")
+    def workflow_payload(workflow_key):
+        """Fetch the workflow from the Knock Management API and return parsed JSON."""
+        service_token = os.environ.get("KNOCK_SERVICE_TOKEN")
+        assert service_token, "KNOCK_SERVICE_TOKEN env var is not set."
+        url = f"{KNOCK_CONTROL_URL}/v1/workflows/{workflow_key}"
+        resp = requests.get(
+            url,
+            params={"environment": "development"},
+            headers={"Authorization": f"Bearer {service_token}"},
+            timeout=30,
+        )
+>       assert resp.status_code == 200, (
+            f"Knock Management API GET workflow {workflow_key} returned "
+            f"status {resp.status_code}: {resp.text}"
+        )
+E       AssertionError: Knock Management API GET workflow dedup-test-zr-5eebdvv returned status 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:48: AssertionError
+=================================== FAILURES ===================================
+_________________ test_log_file_has_two_workflow_run_id_lines __________________
+
+    def test_log_file_has_two_workflow_run_id_lines():
+>       assert os.path.isfile(LOG_FILE), f"Log file {LOG_FILE} does not exist."
+E       AssertionError: Log file /home/user/myproject/output.log does not exist.
+E       assert False
+E        +  where False = <function isfile at 0x7271428a8220>('/home/user/myproject/output.log')
+E        +    where <function isfile at 0x7271428a8220> = <module 'posixpath' (frozen)>.isfile
+E        +      where <module 'posixpath' (frozen)> = os.path
+
+tests/test_final_state.py:182: AssertionError
+_____________________ test_exactly_one_email_was_delivered _____________________
+
+run_id = 'zr-5eebdvv', workflow_key = 'dedup-test-zr-5eebdvv'
+
+    def test_exactly_one_email_was_delivered(run_id, workflow_key):
+        gmail_user = os.environ["GMAIL_USER_NAME"]
+        mailtrap_domain = os.environ["MAILTRAP_DOMAIN"]
+        recipient_email = f"{gmail_user}+receiver-{run_id}@gmail.com"
+        subject_substr = workflow_key  # `dedup-test-{run-id}`
+    
+        matches = _list_matching_gmail_messages(
+            subject_substr=subject_substr,
+            recipient_email=recipient_email,
+            deadline_seconds=120,
+        )
+    
+>       assert len(matches) >= 1, (
+            f"No matching email arrived in Gmail within the timeout. "
+            f"Looked for subject containing {subject_substr!r} to {recipient_email!r}."
+        )
+E       AssertionError: No matching email arrived in Gmail within the timeout. Looked for subject containing 'dedup-test-zr-5eebdvv' to 'codes.icy+receiver-zr-5eebdvv@gmail.com'.
+E       assert 0 >= 1
+E        +  where 0 = len([])
+
+tests/test_final_state.py:231: AssertionError
+=========================== short test summary info ============================
+ERROR tests/test_final_state.py::test_workflow_trigger_frequency_is_once_per_recipient
+ERROR tests/test_final_state.py::test_workflow_is_active_in_development - Ass...
+ERROR tests/test_final_state.py::test_workflow_has_mailtrap_channel_step - As...
+FAILED tests/test_final_state.py::test_log_file_has_two_workflow_run_id_lines
+FAILED tests/test_final_state.py::test_exactly_one_email_was_delivered - Asse...
+=================== 2 failed, 3 errors in 124.52s (0:02:04) ====================

@@ -1,0 +1,51 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 3 items
+
+tests/test_final_state.py .FF                                            [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_missing_header_request __________________________
+
+start_app = None
+
+    def test_missing_header_request(start_app):
+        """Test that a request without the custom header fails."""
+        url = f"{BASE_URL}/protected"
+        response = requests.get(url)
+    
+>       assert response.status_code == 401, f"Expected status 401, got {response.status_code}. Response: {response.text}"
+E       AssertionError: Expected status 401, got 200. Response: {"message":"success"}
+E       assert 200 == 401
+E        +  where 200 = <Response [200]>.status_code
+
+tests/test_final_state.py:48: AssertionError
+_________________________ test_invalid_header_request __________________________
+
+start_app = None
+
+    def test_invalid_header_request(start_app):
+        """Test that a request with an incorrect custom header fails."""
+        url = f"{BASE_URL}/protected"
+        headers = {"x-custom-auth": "wrong-token"}
+        response = requests.get(url, headers=headers)
+    
+>       assert response.status_code == 401, f"Expected status 401, got {response.status_code}. Response: {response.text}"
+E       AssertionError: Expected status 401, got 200. Response: {"message":"success"}
+E       assert 200 == 401
+E        +  where 200 = <Response [200]>.status_code
+
+tests/test_final_state.py:58: AssertionError
+==================================== PASSES ====================================
+______________________________ test_valid_request ______________________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ npx zuplo dev --port 9200
+process 'zuplo_dev' started pid=1184
+zuplo_dev process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_valid_request
+FAILED tests/test_final_state.py::test_missing_header_request - AssertionErro...
+FAILED tests/test_final_state.py::test_invalid_header_request - AssertionErro...
+========================= 2 failed, 1 passed in 7.75s ==========================

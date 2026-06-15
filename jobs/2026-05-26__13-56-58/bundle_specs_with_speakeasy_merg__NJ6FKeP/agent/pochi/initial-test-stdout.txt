@@ -1,0 +1,16 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /bootstrap
+plugins: json-ctrf-0.5.0
+collected 8 items
+
+bootstrap/test_initial_state.py::test_speakeasy_binary_available PASSED
+bootstrap/test_initial_state.py::test_speakeasy_cli_runs PASSED
+bootstrap/test_initial_state.py::test_project_directory_exists PASSED
+bootstrap/test_initial_state.py::test_spec_a_exists PASSED
+bootstrap/test_initial_state.py::test_spec_b_exists PASSED
+bootstrap/test_initial_state.py::test_spec_a_is_valid_openapi3_with_users_path PASSED
+bootstrap/test_initial_state.py::test_spec_b_is_valid_openapi3_with_products_path PASSED
+bootstrap/test_initial_state.py::test_merged_yaml_not_yet_created PASSED
+
+============================== 8 passed in 0.15s ===============================

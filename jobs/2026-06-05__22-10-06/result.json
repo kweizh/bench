@@ -1,0 +1,64 @@
+{
+    "id": "957bc75c-3c72-49fa-8ec1-fd46454298de",
+    "started_at": "2026-06-05T22:10:09.656772",
+    "updated_at": "2026-06-05T22:31:23.552532",
+    "finished_at": "2026-06-05T22:31:23.552532",
+    "n_total_trials": 19,
+    "stats": {
+        "n_completed_trials": 19,
+        "n_errored_trials": 3,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3-flash__pending-tasks": {
+                "n_trials": 16,
+                "n_errors": 3,
+                "metrics": [
+                    {
+                        "mean": 0.15789473684210525
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "liveblocks-collaborative-kanban__y22aVQt",
+                            "liveblocks-whiteboard-selection__gjRqQsQ",
+                            "liveblocks-inbox-notifications-f__XBVFmz8",
+                            "liveblocks-typing-indicator-form__vozPyph",
+                            "liveblocks-yjs-tiptap-editor__uMHrbnC",
+                            "liveblocks-spreadsheet-cells__tsg47qt",
+                            "liveblocks-collaborative-poll-vo__Q3cLfe3",
+                            "liveblocks-room-readonly-access__tmXXJNo",
+                            "liveblocks-collaborative-todo-li__h9y3Hgp",
+                            "liveblocks-yjs-blocknote-editor__kyCetK6",
+                            "liveblocks-nextjs-auth-organizat__VeADzjs",
+                            "liveblocks-mind-map-nodes__g6FUnya",
+                            "liveblocks-presence-avatars-stac__DbrZSot"
+                        ],
+                        "1.0": [
+                            "liveblocks-collaborative-drawing__vefbCD2",
+                            "liveblocks-collaborative-counter__3mfP5kq",
+                            "liveblocks-history-undo-redo__drRZjsy"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "InitialStateError": [
+                        "liveblocks-cursor-follow-user__xgkFRhq",
+                        "liveblocks-comments-resolve__VDeZRgK"
+                    ],
+                    "VerifierTimeoutError": [
+                        "liveblocks-comments-mentions-res__fBsSeEv"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 751584,
+        "cost_usd": null
+    }
+}

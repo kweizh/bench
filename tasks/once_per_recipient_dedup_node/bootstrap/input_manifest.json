@@ -1,0 +1,7 @@
+{
+  "library_name": "knock",
+  "task_name": "once_per_recipient_dedup_node",
+  "complexity_level": "multi-step sequential command set",
+  "research_plan_path": "plan.md",
+  "output_dir": "tasks/"
+}

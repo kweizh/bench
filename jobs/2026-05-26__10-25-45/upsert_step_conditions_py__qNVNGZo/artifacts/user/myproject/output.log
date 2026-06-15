@@ -1,0 +1,149 @@
+Workflow key: escalation-zr-qnvngzo
+Environment:  development
+
+── Step 1/2: Upserting workflow …
+Upsert response: {
+  "workflow": {
+    "active": true,
+    "created_at": "2026-05-26T02:50:40.949854Z",
+    "environment": "development",
+    "key": "escalation-zr-qnvngzo",
+    "name": "Channel Escalation \u2013 zr-qnvngzo",
+    "sha": "xKcJu+qzbyAquhEBt6fQo9FSw4gvpwsRk35hFXgMOMQ=",
+    "steps": [
+      {
+        "channel_key": "in-app",
+        "channel_type": "in_app_feed",
+        "ref": "in_app_feed_1",
+        "template": {
+          "action_url": "{{ data.onboarding_url }}",
+          "markdown_body": "\ud83d\udc4b **Welcome, {{ recipient.name }}!**\n\nGet started with your onboarding: [Open now]({{ data.onboarding_url }})"
+        },
+        "type": "channel"
+      },
+      {
+        "ref": "delay_1",
+        "settings": {
+          "delay_for": {
+            "unit": "minutes",
+            "value": 5
+          }
+        },
+        "type": "delay"
+      },
+      {
+        "channel_key": "mailtrap",
+        "channel_type": "email",
+        "conditions": {
+          "all": [
+            {
+              "argument": "$message.seen",
+              "operator": "not_contains",
+              "variable": "refs.in_app_feed_1.engagement_status"
+            }
+          ]
+        },
+        "ref": "email_1",
+        "template": {
+          "html_body": "<p>Hi {{ recipient.name }},</p><p>We noticed you haven't had a chance to check your in-app notification yet.</p><p>Get started with your personalised onboarding:</p><p><a href=\"{{ data.onboarding_url }}\">{{ data.onboarding_url }}</a></p><p>If you have any questions, just reply to this email.</p><p>Cheers,<br>The Team</p>",
+          "settings": {
+            "attachment_key": "attachments",
+            "layout_key": "default"
+          },
+          "subject": "You have a new onboarding message, {{ recipient.name }}"
+        },
+        "type": "channel"
+      }
+    ],
+    "trigger_data_json_schema": {
+      "properties": {
+        "onboarding_url": {
+          "description": "The personalised onboarding URL for the recipient.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "onboarding_url"
+      ],
+      "type": "object"
+    },
+    "trigger_frequency": "every_trigger",
+    "updated_at": "2026-05-26T02:50:40.979847Z",
+    "valid": true
+  }
+}
+
+── Step 2/2: Activating workflow …
+Activate response: {
+  "workflow": {
+    "active": true,
+    "created_at": "2026-05-26T02:50:40.949854Z",
+    "environment": "development",
+    "key": "escalation-zr-qnvngzo",
+    "name": "Channel Escalation \u2013 zr-qnvngzo",
+    "sha": "xKcJu+qzbyAquhEBt6fQo9FSw4gvpwsRk35hFXgMOMQ=",
+    "steps": [
+      {
+        "channel_key": "in-app",
+        "channel_type": "in_app_feed",
+        "ref": "in_app_feed_1",
+        "template": {
+          "action_url": "{{ data.onboarding_url }}",
+          "markdown_body": "\ud83d\udc4b **Welcome, {{ recipient.name }}!**\n\nGet started with your onboarding: [Open now]({{ data.onboarding_url }})"
+        },
+        "type": "channel"
+      },
+      {
+        "ref": "delay_1",
+        "settings": {
+          "delay_for": {
+            "unit": "minutes",
+            "value": 5
+          }
+        },
+        "type": "delay"
+      },
+      {
+        "channel_key": "mailtrap",
+        "channel_type": "email",
+        "conditions": {
+          "all": [
+            {
+              "argument": "$message.seen",
+              "operator": "not_contains",
+              "variable": "refs.in_app_feed_1.engagement_status"
+            }
+          ]
+        },
+        "ref": "email_1",
+        "template": {
+          "html_body": "<p>Hi {{ recipient.name }},</p><p>We noticed you haven't had a chance to check your in-app notification yet.</p><p>Get started with your personalised onboarding:</p><p><a href=\"{{ data.onboarding_url }}\">{{ data.onboarding_url }}</a></p><p>If you have any questions, just reply to this email.</p><p>Cheers,<br>The Team</p>",
+          "settings": {
+            "attachment_key": "attachments",
+            "layout_key": "default"
+          },
+          "subject": "You have a new onboarding message, {{ recipient.name }}"
+        },
+        "type": "channel"
+      }
+    ],
+    "trigger_data_json_schema": {
+      "properties": {
+        "onboarding_url": {
+          "description": "The personalised onboarding URL for the recipient.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "onboarding_url"
+      ],
+      "type": "object"
+    },
+    "trigger_frequency": "every_trigger",
+    "updated_at": "2026-05-26T02:50:40.979847Z",
+    "valid": true
+  }
+}
+
+Active: true
+Done.

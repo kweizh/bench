@@ -1,0 +1,78 @@
+{
+    "id": "57d38e61-9894-40a7-8910-f9ccd1ee6f12",
+    "started_at": "2026-05-30T03:40:54.714521",
+    "updated_at": "2026-05-30T04:26:15.795752",
+    "finished_at": "2026-05-30T04:26:15.795752",
+    "n_total_trials": 23,
+    "stats": {
+        "n_completed_trials": 23,
+        "n_errored_trials": 9,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gemini-3-flash__tasks": {
+                "n_trials": 22,
+                "n_errors": 9,
+                "metrics": [
+                    {
+                        "mean": 0.21739130434782608
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "0.0": [
+                            "ip-whitelisting__kbbSNvJ",
+                            "custom-auth-policy__3uRKWAH",
+                            "basic-proxy-auth__6vRcJo5",
+                            "custom-response-header__LUdZr9i",
+                            "custom-error-handling__kJTfZ8q",
+                            "cors-configuration__b5XUDHn",
+                            "request-logging__eZ7NJ63",
+                            "request_body_cloning__bvFo2Wv",
+                            "mcp-tool-implementation__e3L3BiD",
+                            "tiered-rate-limiting__J8Jheyk",
+                            "response-transformation__D2So8q9",
+                            "zuplo-custom-response-header__uHMDAhJ",
+                            "caching-policy__gYfzwno",
+                            "circuit_breaker_setup__pvPbHSC",
+                            "zuplo-dynamic-routing__kckaNV7",
+                            "request-body-transformation__kiDmzy3",
+                            "dynamic-upstream-routing__ogk2yiF"
+                        ],
+                        "1.0": [
+                            "zuplo-basic-proxy-auth__xQhry8z",
+                            "query-parameter-validation__CrnGcaa",
+                            "header-validation__NHcXzhd",
+                            "url-rewrite-policy__c49fjgi",
+                            "mock-response-handler__LRMezjn"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "NonZeroAgentExitCodeError": [
+                        "custom-auth-policy__3uRKWAH",
+                        "custom-response-header__LUdZr9i",
+                        "tiered-rate-limiting__J8Jheyk",
+                        "caching-policy__gYfzwno"
+                    ],
+                    "AgentTimeoutError": [
+                        "zuplo-basic-proxy-auth__xQhry8z",
+                        "basic-proxy-auth__6vRcJo5",
+                        "mcp-tool-implementation__e3L3BiD",
+                        "request-body-transformation__kiDmzy3"
+                    ],
+                    "InitialStateError": [
+                        "multi-tenant-gateway__9aazq3B"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 654913,
+        "cost_usd": null
+    }
+}

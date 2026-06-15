@@ -1,0 +1,79 @@
+openapi: 3.0.3
+info:
+  title: User Service API
+  version: 1.0.0
+  description: A small CRUD API for managing users.
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /users:
+    get:
+      operationId: lst_users_list
+      summary: List users
+      tags:
+        - users
+      responses:
+        '200':
+          description: A list of users.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      operationId: pst_user_create
+      x-speakeasy-name-override: createUser
+      summary: Create a user
+      tags:
+        - users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: The created user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/{userId}:
+    get:
+      operationId: get_user_by_id
+      summary: Get a user by id
+      tags:
+        - users
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the user.
+        name:
+          type: string
+          description: Display name of the user.
+        email:
+          type: string
+          format: email
+          description: Contact email for the user.

@@ -1,0 +1,14 @@
+{
+  "name": "myproject",
+  "version": "1.0.0",
+  "description": "Admin-only security alert workflow with Knock top-level conditions",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@knocklabs/mgmt": "latest",
+    "@knocklabs/node": "latest"
+  }
+}

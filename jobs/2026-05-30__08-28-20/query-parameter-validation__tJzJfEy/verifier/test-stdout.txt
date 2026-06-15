@@ -1,0 +1,144 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 2 items
+
+tests/test_final_state.py EE                                             [100%]
+
+==================================== ERRORS ====================================
+________________ ERROR at setup of test_missing_query_parameter ________________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x7fd33fcc8a10>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """
+        Starts the zuplo dev server on port 9200 using xprocess.
+        """
+        # First run npm install
+        subprocess.run(["npm", "install"], cwd=PROJECT_DIR, check=True)
+    
+        class Starter(ProcessStarter):
+            name = "zuplo_dev"
+            args = ["zuplo", "dev", "--port", "9200"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    return s.connect_ex(("localhost", 9200)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x7fd33fad1e50>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+---------------------------- Captured stdout setup -----------------------------
+
+changed 1 package, and audited 1477 packages in 11s
+
+380 packages are looking for funding
+  run `npm fund` for details
+
+17 vulnerabilities (3 low, 2 moderate, 10 high, 2 critical)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ zuplo dev --port 9200
+process 'zuplo_dev' started pid=1263
+_________________ ERROR at setup of test_valid_query_parameter _________________
+
+xprocess = <xprocess.xprocess.XProcess object at 0x7fd33fcc8a10>
+
+    @pytest.fixture(scope="session")
+    def start_app(xprocess):
+        """
+        Starts the zuplo dev server on port 9200 using xprocess.
+        """
+        # First run npm install
+        subprocess.run(["npm", "install"], cwd=PROJECT_DIR, check=True)
+    
+        class Starter(ProcessStarter):
+            name = "zuplo_dev"
+            args = ["zuplo", "dev", "--port", "9200"]
+            env = os.environ.copy()
+            popen_kwargs = {
+                "cwd": PROJECT_DIR,
+                "text": True,
+            }
+            timeout = 180
+            terminate_on_interrupt = True
+    
+            def startup_check(self):
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                    return s.connect_ex(("localhost", 9200)) == 0
+    
+>       xprocess.ensure(Starter.name, Starter)
+
+tests/test_final_state.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:284: in ensure
+    if not starter.wait(log_file_handle):
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:413: in wait
+    callback_ok = self.wait_callback()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <test_final_state.start_app.<locals>.Starter object at 0x7fd33fad1e50>
+
+    def wait_callback(self):
+        """Assert that process is ready to answer queries using provided
+        callback funtion. Will raise TimeoutError if self.callback does not
+        return True before self.timeout seconds"""
+        while True:
+            sleep(0.1)
+            if self.startup_check():
+                return True
+            if datetime.now() > self._max_time:
+>               raise TimeoutError(
+                    "The provided startup callback could not assert process\
+                    responsiveness within the specified time interval of {} \
+                    seconds".format(
+                        self.timeout
+                    )
+                )
+E               TimeoutError: The provided startup callback could not assert process                    responsiveness within the specified time interval of 180                     seconds
+
+usr/local/lib/python3.12/dist-packages/xprocess/xprocess.py:391: TimeoutError
+=========================== short test summary info ============================
+ERROR tests/test_final_state.py::test_missing_query_parameter - TimeoutError:...
+ERROR tests/test_final_state.py::test_valid_query_parameter - TimeoutError: T...
+======================== 2 errors in 191.98s (0:03:11) =========================

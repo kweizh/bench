@@ -1,0 +1,65 @@
+{
+    "id": "6bb088fc-01d7-4cb6-b38b-6e02f7ef5024",
+    "started_at": "2026-05-26T13:57:00.281497",
+    "updated_at": "2026-05-26T14:32:39.960955",
+    "finished_at": "2026-05-26T14:32:39.960955",
+    "n_total_trials": 21,
+    "stats": {
+        "n_completed_trials": 21,
+        "n_errored_trials": 2,
+        "n_running_trials": 0,
+        "n_pending_trials": 0,
+        "n_cancelled_trials": 0,
+        "n_retries": 0,
+        "evals": {
+            "pochi__gpt-5.2-codex__tasks": {
+                "n_trials": 20,
+                "n_errors": 2,
+                "metrics": [
+                    {
+                        "mean": 0.6190476190476191
+                    }
+                ],
+                "pass_at_k": {},
+                "reward_stats": {
+                    "reward": {
+                        "1.0": [
+                            "configure_custom_sdk_class_name__L52Nsco",
+                            "create_cli_target_from_spec__HMARxXe",
+                            "setup_speakeasy_ignore_rules__JVbsAQX",
+                            "implement_typescript_error_hook__HiacHhW",
+                            "overlay_remove_deprecated_endpoi__UMNiZqG",
+                            "add_global_retries_configuration__Ed7mkGo",
+                            "configure_pypi_publishing_python__kswCuiQ",
+                            "create_workflow_yaml_basic__fQohWWM",
+                            "configure_oauth2_in_gen_yaml__Y8WqRx9",
+                            "add_x_speakeasy_name_override__eTkVSYe",
+                            "configure_go_module_path__qc7PAW2",
+                            "bundle_specs_with_speakeasy_merg__NJ6FKeP",
+                            "set_max_method_params_typescript__gkKkC8G"
+                        ],
+                        "0.0": [
+                            "configure_csharp_sdk_target__LaUmD3k",
+                            "generate_terraform_provider_basi__Qh3B4Mw",
+                            "generate_python_sdk_with_paginat__6TdzTbt",
+                            "implement_go_response_hook__etxi9w9",
+                            "implement_python_request_hook__QVqFuH5",
+                            "overlay_add_response_examples__HrAcYes",
+                            "configure_npm_publishing_typescr__iAHC4qa"
+                        ]
+                    }
+                },
+                "exception_stats": {
+                    "NonZeroAgentExitCodeError": [
+                        "implement_python_request_hook__QVqFuH5",
+                        "overlay_hide_internal_endpoints__5kV5Gnk"
+                    ]
+                }
+            }
+        },
+        "n_input_tokens": 0,
+        "n_cache_tokens": 0,
+        "n_output_tokens": 266165,
+        "cost_usd": null
+    }
+}

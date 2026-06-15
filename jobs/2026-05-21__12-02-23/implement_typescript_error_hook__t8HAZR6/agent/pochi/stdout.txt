@@ -1,0 +1,45 @@
+- Initializing MCP connections...
+You
+# Implement Custom TypeScript Error Hook ## Background Speakeasy allows customizing SDK behavior using "hooks". You need to implement a custom TypeScript error hook that intercepts API errors and extracts a custom `x-correlation-id` header from the response, throwing a custom error with this ID. ## Requirements * You have a Speakeasy SDK hooks directory at `/home/user/sdk/src/hooks`. * Create a custom hook `src/hooks/custom/correlation.ts` that implements `AfterErrorHook`. * In `afterError`, if the `response` is not null, has a status code of 500, and contains the header `x-correlation-id`, the hook should throw a new standard `Error` with the exact message: `Correlation Error: <correlation_id>` (replace `<correlation_id>` with the actual header value). * If the condition is not met, the hook must return the original `response` and `error` unchanged as `{ response, error }`. * Register the hook in `src/hooks/registration.ts` by calling `hooks.registerAfterErrorHook(new CorrelationHook())`. ## Implementation Guide 1. Navigate to `/home/user/sdk`. 2. Create `src/hooks/custom/correlation.ts`. 3. Implement the `CorrelationHook` class using the `AfterErrorHook` and `AfterErrorContext` interfaces from `../types.js`. 4. Update `src/hooks/registration.ts` to import and register your hook in `initHooks(hooks: Hooks)`. 5. Run `npx tsc --noEmit` in the `sdk` directory to ensure there are no TypeScript errors. ## Constraints * Project path: /home/user/sdk * Do not modify `src/hooks/types.ts`. * Ensure you export `CorrelationHook` from `correlation.ts`.   
+
+Pochi
+💭 Thinking for 367 characters   
+📋 Updating todo list (4 items) ✔ 
+📂 Listing files in /home/user/sdk/src/hooks recursively ✔ 
+💭 Thinking for 335 characters   
+📋 Updating todo list (4 items) ✔ 
+📖 Reading /home/user/sdk/src/hooks/types.ts ✔ 
+💭 Thinking for 605 characters   
+📖 Reading /home/user/sdk/src/hooks/registration.ts ✔ 
+📋 Updating todo list (4 items) ✔ 
+✏️  Writing /home/user/sdk/src/hooks/custom/correlation.ts ✔ 
+💭 Thinking for 239 characters   
+📋 Updating todo list (4 items) ✔ 
+🔧 Applying diff to /home/user/sdk/src/hooks/registration.ts ✔ 
+📋 Updating todo list (4 items) ✔ 
+💫 Executing npx tsc --noEmit ✖ "Command exited with code 2"
+💭 Thinking for 289 characters   
+🔧 Applying diff to /home/user/sdk/src/hooks/custom/correlation.ts ✔ 
+💫 Executing npx tsc --noEmit ✔ 
+💭 Thinking for 397 characters   
+📋 Updating todo list (4 items) ✔ 
+🎉 Task Completed
+I have implemented the custom TypeScript error hook as requested.
+
+### Changes made:
+1.  **Created `src/hooks/custom/correlation.ts`**:
+    *   Implemented the `CorrelationHook` class which implements the `AfterErrorHook` interface.
+    *   The `afterError` method checks if the response has a status of `500` and contains the `x-correlation-id` header.
+    *   If both conditions are met, it throws a standard `Error` with the message: `Correlation Error: <correlation_id>`.
+    *   Otherwise, it returns the original `response` and `error` unchanged.
+2.  **Updated `src/hooks/registration.ts`**:
+    *   Imported `CorrelationHook` from `./custom/correlation.js`.
+    *   Registered the hook using `hooks.registerAfterErrorHook(new CorrelationHook())` inside the `initHooks` function.
+    *   Removed the `@ts-expect-error` comment as the `hooks` parameter is now used.
+3.  **Verified Implementation**:
+    *   Ran `npx tsc --noEmit` in the `/home/user/sdk` directory, which completed successfully with no errors.
+
+### Files Created/Modified:
+- `/home/user/sdk/src/hooks/custom/correlation.ts` (New)
+- `/home/user/sdk/src/hooks/registration.ts` (Modified)   
+  

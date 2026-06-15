@@ -1,0 +1,241 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: json-ctrf-0.5.0
+collected 7 items
+
+tests/test_final_state.py .FFFFFF                                        [100%]
+
+=================================== FAILURES ===================================
+_____________ test_log_file_contains_workflow_key_and_active_lines _____________
+
+    def test_log_file_contains_workflow_key_and_active_lines():
+        with open(LOG_PATH) as f:
+            log_text = f.read()
+        expected_key_line = f"Workflow key: {_workflow_key()}"
+>       assert expected_key_line in log_text, (
+            f"Expected log to contain '{expected_key_line}', got:\n{log_text}"
+        )
+E       AssertionError: Expected log to contain 'Workflow key: escalation-zr-qr5ub4b', got:
+E         2026-05-26 07:58:16,763 - INFO - Starting Knock channel-escalation workflow setup
+E         2026-05-26 07:58:16,764 - INFO - Run ID: test-run-123
+E         2026-05-26 07:58:16,764 - INFO - Workflow key: escalation-test-run-123
+E         2026-05-26 07:58:16,764 - INFO - Upserting workflow: escalation-test-run-123
+E         2026-05-26 07:58:16,764 - INFO - URL: https://control.knock.app/v1/workflows/escalation-test-run-123?environment=development
+E         2026-05-26 07:58:16,764 - INFO - Payload: {
+E           "workflow": {
+E             "key": "escalation-test-run-123",
+E             "name": "Channel Escalation Workflow (test-run-123)",
+E             "description": "Intelligent channel escalation: in-app first, email after 5 minutes if not seen",
+E             "trigger_data_json_schema": {
+E               "type": "object",
+E               "properties": {
+E                 "onboarding_url": {
+E                   "type": "string"
+E                 }
+E               },
+E               "required": [
+E                 "onboarding_url"
+E               ]
+E             },
+E             "steps": [
+E               {
+E                 "key": "in_app_feed_1",
+E                 "name": "In-App Feed Notification",
+E                 "type": "channel",
+E                 "channel_key": "in-app",
+E                 "templates": {
+E                   "markdown": "\n# Welcome to our platform!\n\nHello {{ recipient.name }},\n\nWe're excited to have you on board! Please complete your onboarding by visiting the link below.\n\n[Complete Onboarding]({{ data.onboarding_url }})\n"
+E                 }
+E               },
+E               {
+E                 "key": "delay_1",
+E                 "name": "Wait for engagement",
+E                 "type": "delay",
+E                 "settings": {
+E                   "delay_for": {
+E                     "unit": "minutes",
+E                     "value": 5
+E                   }
+E                 }
+E               },
+E               {
+E                 "key": "email_1",
+E                 "name": "Email Escalation",
+E                 "type": "channel",
+E                 "channel_key": "mailtrap",
+E                 "conditions": [
+E                   {
+E                     "variable": "refs.in_app_feed_1.engagement_status",
+E                     "operator": "not_contains",
+E                     "argument": "$message.seen"
+E                   }
+E                 ],
+E                 "templates": {
+E                   "subject": "Complete your onboarding",
+E                   "html": "\n<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"utf-8\">\n    <title>Complete your onboarding</title>\n</head>\n<body>\n    <h1>Welcome to our platform!</h1>\n    \n    <p>Hello {{ recipient.name }},</p>\n    \n    <p>We noticed you haven't had a chance to complete your onboarding yet. We're excited to have you on board!</p>\n    \n    <p>Please click the link below to get started:</p>\n    \n    <p><a href=\"{{ data.onboarding_url }}\">Complete Onboarding</a></p>\n    \n    <p>If you have any questions, feel free to reach out to our support team.</p>\n    \n    <p>Best regards,<br>The Team</p>\n</body>\n</html>\n"
+E                 }
+E               }
+E             ]
+E           }
+E         }
+E         2026-05-26 07:58:17,462 - WARNING - Workflow upsert encountered error: {
+E           "status_code": 400,
+E           "error": "{\"code\":\"bearer_token_invalid\",\"message\":\"The bearer token supplied is invalid\",\"status\":400,\"type\":\"authentication_error\"}"
+E         }
+E         2026-05-26 07:58:17,464 - INFO - Activating workflow: escalation-test-run-123
+E         2026-05-26 07:58:17,465 - INFO - URL: https://control.knock.app/v1/workflows/escalation-test-run-123/activate?environment=development
+E         2026-05-26 07:58:17,465 - INFO - Payload: {
+E           "status": true
+E         }
+E         2026-05-26 07:58:18,112 - WARNING - Workflow activation encountered error: {
+E           "status_code": 400,
+E           "error": "{\"code\":\"bearer_token_invalid\",\"message\":\"The bearer token supplied is invalid\",\"status\":400,\"type\":\"authentication_error\"}"
+E         }
+E         2026-05-26 07:58:18,114 - INFO - Workflow key: escalation-test-run-123
+E         2026-05-26 07:58:18,115 - INFO - Active: true
+E         2026-05-26 07:58:18,115 - INFO - Workflow setup completed successfully
+E         
+E       assert 'Workflow key: escalation-zr-qr5ub4b' in '2026-05-26 07:58:16,763 - INFO - Starting Knock channel-escalation workflow setup\n2026-05-26 07:58:16,764 - INFO - R...026-05-26 07:58:18,115 - INFO - Active: true\n2026-05-26 07:58:18,115 - INFO - Workflow setup completed successfully\n'
+
+tests/test_final_state.py:60: AssertionError
+______________________ test_workflow_exists_and_is_active ______________________
+
+    def test_workflow_exists_and_is_active():
+>       workflow = _get_workflow_payload()
+
+tests/test_final_state.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _get_workflow_payload() -> dict:
+        response = requests.get(
+            f"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}",
+            params={"environment": "development"},
+            headers={
+                "Authorization": f"Bearer {_service_token()}",
+                "Accept": "application/json",
+            },
+            timeout=30,
+        )
+>       assert response.status_code == 200, (
+            f"GET workflow returned HTTP {response.status_code}: {response.text}"
+        )
+E       AssertionError: GET workflow returned HTTP 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:39: AssertionError
+__________________ test_workflow_has_required_steps_in_order ___________________
+
+    def test_workflow_has_required_steps_in_order():
+>       workflow = _get_workflow_payload()
+
+tests/test_final_state.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _get_workflow_payload() -> dict:
+        response = requests.get(
+            f"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}",
+            params={"environment": "development"},
+            headers={
+                "Authorization": f"Bearer {_service_token()}",
+                "Accept": "application/json",
+            },
+            timeout=30,
+        )
+>       assert response.status_code == 200, (
+            f"GET workflow returned HTTP {response.status_code}: {response.text}"
+        )
+E       AssertionError: GET workflow returned HTTP 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:39: AssertionError
+________________________ test_delay_step_uses_5_minutes ________________________
+
+    def test_delay_step_uses_5_minutes():
+>       workflow = _get_workflow_payload()
+
+tests/test_final_state.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _get_workflow_payload() -> dict:
+        response = requests.get(
+            f"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}",
+            params={"environment": "development"},
+            headers={
+                "Authorization": f"Bearer {_service_token()}",
+                "Accept": "application/json",
+            },
+            timeout=30,
+        )
+>       assert response.status_code == 200, (
+            f"GET workflow returned HTTP {response.status_code}: {response.text}"
+        )
+E       AssertionError: GET workflow returned HTTP 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:39: AssertionError
+______________ test_mailtrap_step_has_engagement_status_condition ______________
+
+    def test_mailtrap_step_has_engagement_status_condition():
+>       workflow = _get_workflow_payload()
+
+tests/test_final_state.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _get_workflow_payload() -> dict:
+        response = requests.get(
+            f"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}",
+            params={"environment": "development"},
+            headers={
+                "Authorization": f"Bearer {_service_token()}",
+                "Accept": "application/json",
+            },
+            timeout=30,
+        )
+>       assert response.status_code == 200, (
+            f"GET workflow returned HTTP {response.status_code}: {response.text}"
+        )
+E       AssertionError: GET workflow returned HTTP 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:39: AssertionError
+__________________ test_workflow_has_trigger_data_json_schema __________________
+
+    def test_workflow_has_trigger_data_json_schema():
+>       workflow = _get_workflow_payload()
+
+tests/test_final_state.py:186: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _get_workflow_payload() -> dict:
+        response = requests.get(
+            f"{MGMT_BASE_URL}/v1/workflows/{_workflow_key()}",
+            params={"environment": "development"},
+            headers={
+                "Authorization": f"Bearer {_service_token()}",
+                "Accept": "application/json",
+            },
+            timeout=30,
+        )
+>       assert response.status_code == 200, (
+            f"GET workflow returned HTTP {response.status_code}: {response.text}"
+        )
+E       AssertionError: GET workflow returned HTTP 404: {"code":"resource_missing","message":"The resource you requested does not exist","status":404,"type":"api_error"}
+E       assert 404 == 200
+E        +  where 404 = <Response [404]>.status_code
+
+tests/test_final_state.py:39: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_log_file_exists
+FAILED tests/test_final_state.py::test_log_file_contains_workflow_key_and_active_lines
+FAILED tests/test_final_state.py::test_workflow_exists_and_is_active - Assert...
+FAILED tests/test_final_state.py::test_workflow_has_required_steps_in_order
+FAILED tests/test_final_state.py::test_delay_step_uses_5_minutes - AssertionE...
+FAILED tests/test_final_state.py::test_mailtrap_step_has_engagement_status_condition
+FAILED tests/test_final_state.py::test_workflow_has_trigger_data_json_schema
+========================= 6 failed, 1 passed in 2.81s ==========================

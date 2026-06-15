@@ -1,0 +1,61 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 0,
+            "failed": 3,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780176402810,
+            "stop": 1780176413664
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_missing_tenant_id_header",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 9700,
+                "start": 1780176403613,
+                "stop": 1780176413313,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_missing_tenant_id_header(start_app):\n        \"\"\"Verify that omitting the header returns a 401 Unauthorized.\"\"\"\n        response = requests.get(\"http://localhost:3000/api/data\")\n>       assert response.status_code == 401, f\"Expected 401 Unauthorized, got {response.status_code}\"\nE       AssertionError: Expected 401 Unauthorized, got 400\nE       assert 400 == 401\nE        +  where 400 = <Response [400]>.status_code\n\ntests/test_final_state.py:38: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_route_to_tenant_a",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 12,
+                "start": 1780176413314,
+                "stop": 1780176413326,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_route_to_tenant_a(start_app):\n        \"\"\"Verify routing to tenant-a backend.\"\"\"\n        headers = {\"x-mock-tenant-id\": \"tenant-a\"}\n        response = requests.get(\"http://localhost:3000/api/data\", headers=headers)\n>       assert response.status_code == 200, f\"Expected 200 OK, got {response.status_code}\"\nE       AssertionError: Expected 200 OK, got 400\nE       assert 400 == 200\nE        +  where 400 = <Response [400]>.status_code\n\ntests/test_final_state.py:44: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_route_to_tenant_b",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 338,
+                "start": 1780176413326,
+                "stop": 1780176413664,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_route_to_tenant_b(start_app):\n        \"\"\"Verify routing to tenant-b backend.\"\"\"\n        headers = {\"x-mock-tenant-id\": \"tenant-b\"}\n        response = requests.get(\"http://localhost:3000/api/data\", headers=headers)\n>       assert response.status_code == 200, f\"Expected 200 OK, got {response.status_code}\"\nE       AssertionError: Expected 200 OK, got 400\nE       assert 400 == 200\nE        +  where 400 = <Response [400]>.status_code\n\ntests/test_final_state.py:54: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

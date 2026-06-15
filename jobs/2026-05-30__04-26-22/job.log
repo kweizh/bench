@@ -1,0 +1,1842 @@
+Skipping image OS validation for hb__custom-auth-policy: docker inspect returned 1
+Skipping image OS validation for hb__zuplo-basic-proxy-auth: docker inspect returned 1
+Skipping image OS validation for hb__ip-whitelisting: docker inspect returned 1
+Skipping image OS validation for hb__custom-response-header: docker inspect returned 1
+Skipping image OS validation for hb__basic-proxy-auth: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Command outputs captured
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-7awwzbg > /logs/artifacts/run-id && echo ip-whitelisting__7AwWzBG > /logs/artifacts/trial_id
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Running command: echo zr-zwtyacc > /logs/artifacts/run-id && echo basic-proxy-auth__ZWtYACC > /logs/artifacts/trial_id
+Command outputs captured
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Running command: echo zr-jovhjra > /logs/artifacts/run-id && echo custom-auth-policy__JoVHJrA > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Running command: echo zr-wcxfoqv > /logs/artifacts/run-id && echo zuplo-basic-proxy-auth__wcxfoqv > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Basic Proxy with API Key Auth
+
+## Background
+Zuplo is an edge-native API gateway that allows developers to add authentication, rate limiting, and other policies to APIs. In this task, you will create a simple proxy route protected by an API key.
+
+## Requirements
+- Initialize a new Zuplo project named `myproject`.
+- Create a route at `GET /proxy` that proxies requests to `https://echo.zuplo.io/`.
+- Protect the route using Zuplo's `api-key-inbound` policy so that only requests with a valid API key can access it.
+- For local testing purposes, configure a local API key consumer with the API key value `test-api-key-123`.
+
+## Implementation Hints
+- Use `create-zuplo-api` to scaffold the project.
+- Modify `config/routes.oas.json` to define the `/proxy` route.
+- Use the `url-rewrite` handler to proxy the request to `https://echo.zuplo.io/`.
+- Add the `api-key-inbound` policy to the inbound policies of the route.
+- Make sure to configure `config/policies.json` to define the `api-key-inbound` policy instance.
+- Create a `consumers.json` or equivalent local API key configuration to register `test-api-key-123` so it works in local dev.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: zuplo dev --port 9200
+- Port: 9200
+- API Endpoints:
+  - GET `/proxy`: Proxies to `https://echo.zuplo.io/`.
+    - If no API key or an invalid API key is provided, it should return a 401 Unauthorized status.
+    - If a valid API key (`test-api-key-123`) is provided (via `REDACTED` header), it should return a 200 OK status and the response from `https://echo.zuplo.io/`.
+
+
+EOF
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# IP Whitelisting Policy
+
+## Background
+Create a Zuplo API gateway that restricts access to an endpoint based on the client's IP address. You will implement a custom inbound policy to validate the IP against a whitelist.
+
+## Requirements
+- Initialize a new Zuplo project in `/home/user/myproject`.
+- Create a `GET /hello` route.
+- Implement a custom inbound policy named `ip-whitelist-inbound` that checks the `x-test-ip` header (to simulate the client IP for testing).
+- The policy must read a comma-separated list of allowed IPs from the `ALLOWED_IPS` environment variable.
+- If the `x-test-ip` value is in the allowed list, the request should proceed to the handler.
+- If the `x-test-ip` value is missing or not in the allowed list, the policy must return a 403 Forbidden status with a JSON body `{"error": "Forbidden IP"}`.
+- The route handler for `/hello` should return a 200 OK status with a JSON body `{"message": "Hello from the edge!"}`.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project.
+- Define the route in `config/routes.oas.json`.
+- Define the policy in `config/policies.json`.
+- Write the policy module in `modules/ip-whitelist.ts` (or similar).
+- Write the handler module in `modules/hello.ts`.
+- Use `ZuploRequest` and `ZuploContext` in your custom modules.
+- Read environment variables using `process.env.ALLOWED_IPS` or `context.environmentVariables`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 8787
+- API Endpoints:
+  - GET `/hello`:
+    - If `x-test-ip` is allowed: Returns status 200 and JSON `{"message": "Hello from the edge!"}`.
+    - If `x-test-ip` is not allowed or missing: Returns status 403 and JSON `{"error": "Forbidden IP"}`.
+
+EOF
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Custom Auth Policy in Zuplo
+
+## Background
+You need to implement a custom authentication policy for a Zuplo API Gateway that validates a proprietary token format.
+
+## Requirements
+- Create a new Zuplo project at `/home/user/myproject`.
+- Implement a custom inbound policy in TypeScript that checks the `Authorization` header.
+- The header must be in the format `CustomToken <token>`.
+- The `<token>` must exactly match `secret-token-${run-id}` (read `run-id` from the `ZEALT_RUN_ID` environment variable).
+- If the token is valid, allow the request to proceed to a handler that returns a 200 OK response with the body `Hello, authenticated user!`.
+- If the header is missing, incorrectly formatted, or the token is invalid, return a 401 Unauthorized status with a JSON body `{"error": "Unauthorized"}`.
+- Apply this custom policy to a `GET /protected` route.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project.
+- Create a custom TypeScript module in the `modules/` directory for your policy.
+- Configure the policy in `config/policies.json` and apply it to the route in `config/routes.oas.json`.
+- You can use a simple custom handler for the route response, or just a mock response policy.
+- Zuplo's local dev server typically runs the API on port 8787.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 8787
+- API Endpoints:
+  - GET `/protected`: Protected endpoint that requires the custom token.
+    - Request Header: `REDACTED${run-id}`
+    - Success Response: 200 OK with text `Hello, authenticated user!`
+    - Failure Response: 401 Unauthorized with JSON `{"error": "Unauthorized"}`
+
+
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Basic Proxy with API Key Authentication
+
+## Background
+Zuplo is an edge-native API gateway that can add authentication, rate limiting, and other policies to your APIs. In this task, you will create a new Zuplo project that proxies requests to a public API and secures the route with an API Key Authentication policy.
+
+## Requirements
+- Initialize a new Zuplo project in the `/home/user/myproject` directory.
+- Create a route at `/echo` that forwards `GET` requests to `https://echo.zuplo.io`.
+- Add the `api-key-inbound` policy to the route to require a Zuplo-managed API key.
+
+## Implementation Hints
+- You can scaffold the project using `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes`.
+- Edit `config/routes.oas.json` to define the `/echo` route and configure the `urlForwardHandler` to point to the upstream API (`https://echo.zuplo.io`).
+- Add the `api-key-inbound` policy to the route's inbound policies.
+- Ensure the policy is defined in `config/policies.json`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 9000
+- API Endpoints:
+  - GET `/echo`: Returns status 401 Unauthorized when requested without an API key. (We only test the unauthorized case to verify the policy is active locally.)
+
+
+EOF
+Running command: echo zr-x2n8xxg > /logs/artifacts/run-id && echo custom-response-header__x2N8XxG > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo Custom Response Header Policy
+
+## Background
+Zuplo is a serverless, programmable API gateway. You can use custom TypeScript policies to modify requests and responses. In this task, you will create a custom outbound policy that adds a signature header based on the response body.
+
+## Requirements
+- Scaffold a new Zuplo project named `myproject`.
+- Create a route `GET /api/data` that returns a JSON response: `{"message": "hello edge"}`. You can use a standard handler or custom module for this.
+- Create a custom outbound policy in TypeScript.
+- The policy must read the response body, calculate the SHA-256 hash of the body text (as a hex string), and add it as the `x-response-signature` header to the response.
+- Apply this policy to the `GET /api/data` route.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project.
+- To read the response body safely without consuming the original stream for the final response, use `response.clone()`.
+- Use the standard Web Crypto API (`crypto.subtle.digest`) available in the edge runtime to calculate the SHA-256 hash. Convert the resulting ArrayBuffer to a hex string.
+- Return a new `Response` object with the body and the updated headers.
+- Configure the route in `config/routes.oas.json` and the policy in `config/policies.json`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 8787
+- API Endpoints:
+  - GET `/api/data`: Returns status 200 and a JSON response containing `{"message": "hello edge"}`. The response MUST contain the `x-response-signature` header with the valid SHA-256 hex string of the exact response body returned.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__custom-error-handling: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-3ttachv > /logs/artifacts/run-id && echo custom-error-handling__3tTaCHV > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Custom 404 Error Handling in Zuplo
+
+## Background
+Zuplo provides built-in error handling, but you may want to return a custom response when a route is not found (404).
+
+## Requirements
+- Create a custom not found handler in `modules/zuplo.runtime.ts`.
+- When a user requests a path that does not match any route, the handler should return a 404 status code.
+- The response body must be a JSON object containing:
+  - `error`: "Not Found"
+  - `path`: The path that was requested (e.g., `/unknown-path`)
+  - `run_id`: The `run-id` value read from the `ZEALT_RUN_ID` environment variable.
+- The response must include a custom header `X-Custom-404: true`.
+- The response must have a `Content-Type` of `application/json`.
+
+## Implementation Hints
+- You can override the default 404 behavior by setting `runtime.notFoundHandler` in the `runtimeInit` function inside `modules/zuplo.runtime.ts`.
+- Read the requested path from `request.url`.
+- Read the `run-id` by importing `environment` from `@zuplo/runtime` and reading `environment.ZEALT_RUN_ID`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev -- --port 9000 --editor-port 9200 --docs-port 9300
+- Port: 9000
+- API Endpoints:
+  - GET `/any-unknown-path`: Returns status 404.
+
+    ```json
+    // Response Body
+    {
+      "error": "Not Found",
+      "path": "/any-unknown-path",
+      "run_id": "<value-of-ZEALT_RUN_ID>"
+    }
+    ```
+    ```http
+    // Response Headers
+    X-Custom-404: true
+    Content-Type: application/json
+    ```
+
+
+EOF
+Skipping image OS validation for hb__query-parameter-validation: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Skipping image OS validation for hb__cors-configuration: docker inspect returned 1
+Running command: echo zr-brtcxa6 > /logs/artifacts/run-id && echo query-parameter-validation__brtcXA6 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Query Parameter Validation
+
+## Background
+Create a Zuplo API gateway that enforces query parameter validation on a specific route.
+
+## Requirements
+- Create a new Zuplo project.
+- Add a route for `GET /search`.
+- Implement logic (via a custom policy or handler) to require a query parameter named `q`.
+- If the query parameter `q` is missing, the API must return a `400 Bad Request` status with a JSON error message.
+- If `q` is provided, the API should return a `200 OK` status with a JSON response containing the value of `q`.
+
+## Implementation Hints
+- Use the Zuplo CLI (`create-zuplo-api`) to scaffold the project.
+- Define the route in `config/routes.oas.json`.
+- Create a custom inbound policy or a custom handler in TypeScript (e.g., in the `modules/` directory) to check for the `q` parameter in the request URL.
+- Use `ZuploRequest` to parse the URL and access `searchParams`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: zuplo dev --port 9200
+- Port: 9200
+- API Endpoints:
+  - GET `/search`: Returns status 400 if the `q` query parameter is missing.
+
+    ```json
+    // Response (Missing q)
+    {
+      "error": "Missing required query parameter: q"
+    }
+    ```
+
+  - GET `/search?q=something`: Returns status 200 and a JSON object with the value.
+
+    ```json
+    // Response (With q)
+    {
+      "q": "something"
+    }
+    ```
+
+
+EOF
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-z43ucgn > /logs/artifacts/run-id && echo cors-configuration__z43uCGN > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo CORS Configuration
+
+## Background
+Cross-Origin Resource Sharing (CORS) is a critical security feature for APIs accessed from web browsers. You need to configure a custom CORS policy for a Zuplo API gateway to securely allow requests from a specific frontend application.
+
+## Requirements
+- Initialize a new Zuplo project in `/home/user/myproject`.
+- Create a route `/api/data` that accepts `GET` requests and returns a JSON response: `{"message": "Hello CORS"}`.
+- Configure a CORS policy and apply it to the `/api/data` route.
+- The CORS policy must allow the origin `https://example-${run-id}.com` (where `${run-id}` is read from the `ZEALT_RUN_ID` environment variable).
+- The CORS policy must allow the methods `GET` and `OPTIONS`.
+- The CORS policy must allow the headers `Content-Type` and `Authorization`.
+
+## Implementation Hints
+- Use the Zuplo CLI to scaffold a new project (`create-zuplo-api`).
+- Define the route in `config/routes.oas.json`.
+- Define the CORS policy in `config/policies.json`. You can use Zuplo's built-in `cors-inbound` policy type and configure its `options` with the required allowed origins, methods, and headers.
+- Apply the CORS policy to the `/api/data` route in the OpenAPI file.
+- Ensure you read the `ZEALT_RUN_ID` environment variable to dynamically construct the allowed origin in the configuration. (You may need to write a custom TypeScript policy or a custom handler if Zuplo's JSON config doesn't support reading environment variables directly for CORS origins, or you can use a custom TS policy that handles the CORS headers manually by checking the Origin header and `process.env.ZEALT_RUN_ID`).
+*Note: Since policies.json is static, a custom TypeScript inbound policy is the recommended way to dynamically read the environment variable and set the CORS headers on the response.*
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: zuplo dev --port 3000
+- Port: 3000
+- API Endpoints:
+  - `OPTIONS /api/data`:
+    - Request Header: `Origin: https://example-${run-id}.com`
+    - Response Status: 200 or 204
+    - Response Headers must include:
+      - `Access-Control-Allow-Origin: https://example-${run-id}.com`
+      - `Access-Control-Allow-Methods` containing `GET` and `OPTIONS`
+      - `Access-Control-Allow-Headers` containing `Content-Type` and `Authorization`
+  - `GET /api/data`:
+    - Request Header: `Origin: https://example-${run-id}.com`
+    - Response Status: 200
+    - Response Header must include: `Access-Control-Allow-Origin: https://example-${run-id}.com`
+    - Response Body: `{"message": "Hello CORS"}`
+  - `GET /api/data` (Invalid Origin):
+    - Request Header: `Origin: https://evil.com`
+    - Response Header `Access-Control-Allow-Origin` should NOT be `https://evil.com` (it can be missing or restricted).
+
+
+EOF
+Running command: rm -f ~/.pochi/config.jsonc
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Skipping image OS validation for hb__header-validation: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Skipping image OS validation for hb__url-rewrite-policy: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Running command: echo zr-dpebksk > /logs/artifacts/run-id && echo header-validation__DPebkSK > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo Header Validation
+
+## Background
+Create a programmable API gateway using Zuplo that enforces a custom header check before allowing access to a route.
+
+## Requirements
+- Scaffold a new Zuplo project.
+- Create a route at `GET /protected`.
+- Implement a custom inbound policy (or use a built-in one if applicable) to check for the presence and value of a custom header: `x-custom-auth`.
+- The header value must be exactly `my-secret-token`.
+- If the header is missing or incorrect, the gateway should return a `401 Unauthorized` status code with a JSON response: `{"error": "Unauthorized"}`.
+- If the header is correct, the gateway should return a `200 OK` status code with a JSON response: `{"message": "success"}`.
+
+## Implementation Hints
+- Use `npx create-zuplo-api@latest` to scaffold the project.
+- You can write a custom policy in TypeScript within the `modules/` directory to inspect the `request.headers`.
+- Bind the policy to the `/protected` route in `config/routes.oas.json` and register the policy in `config/policies.json`.
+- Ensure the dev server runs on port 9200 to avoid port conflicts.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev -- --port 9200 (or zuplo dev --port 9200)
+- Port: 9200
+- API Endpoints:
+  - GET `/protected`: 
+    - Without header or wrong header: Returns status 401 and JSON `{"error": "Unauthorized"}`.
+    - With header `x-custom-auth: my-secret-token`: Returns status 200 and JSON `{"message": "success"}`.
+
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-ryrzqfd > /logs/artifacts/run-id && echo url-rewrite-policy__RyRZqfD > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo URL Rewrite Policy
+
+## Background
+Zuplo is an edge-native API gateway. A common requirement is to rewrite the URL path of an incoming request before it is forwarded to the upstream backend. In this task, you will implement a custom inbound policy that rewrites the URL path for a specific route.
+
+## Requirements
+- Initialize a Zuplo project.
+- Create a route for `GET /api/v1/users`.
+- The route should forward requests to the backend `https://echo.zuplo.io`.
+- Implement a custom inbound policy in TypeScript that rewrites the URL path from `/api/v1/users` to `/users` before the request is forwarded.
+- Apply this policy to the route.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project.
+- Define the route in `config/routes.oas.json` using the URL rewrite policy you will create.
+- A custom inbound policy should export a default function that takes `(request: ZuploRequest, context: ZuploContext)`.
+- To rewrite the URL, construct a new URL object from `request.url`, modify its `pathname`, and return a new `ZuploRequest` using `new ZuploRequest(newUrl.toString(), request)`.
+- Configure the policy in `config/policies.json` and attach it to the route's `inbound` policies.
+- Use the built-in URL Rewrite policy or a custom TypeScript policy.
+- Ensure the dev server runs on port 9200.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev -- --port 9200
+- Port: 9200
+- API Endpoints:
+  - GET `/api/v1/users`: Forwards the request to `https://echo.zuplo.io/users`.
+    The response from `echo.zuplo.io` must indicate that the path received by the backend was `/users`.
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__request-logging: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Skipping image OS validation for hb__request_body_cloning: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Skipping image OS validation for hb__mcp-tool-implementation: docker inspect returned 1
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-yw7awz3 > /logs/artifacts/run-id && echo request-logging__yW7awz3 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo Request Logging Policy
+
+## Background
+Zuplo is a programmable API gateway. You can write custom policies in TypeScript to intercept and modify requests. In this task, you will create a custom inbound policy that logs a specific request header to the console.
+
+## Requirements
+- Scaffold a new Zuplo project in `/home/user/myproject`.
+- Create a custom inbound policy in TypeScript that reads the `x-custom-id` header from the incoming request.
+- If the header is present, log exactly `Custom ID: <value>` using `context.log.info()`.
+- Apply this policy to a new `GET /hello` route.
+- The route should return a 200 OK with the text `Hello World`.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project.
+- Create a custom policy module in `modules/` (e.g., `modules/log-header.ts`) that exports a default function taking `request: ZuploRequest` and `context: ZuploContext`.
+- Read the header using `request.headers.get('x-custom-id')`.
+- Register the policy in `config/policies.json`.
+- Define the `GET /hello` route in `config/routes.oas.json` and apply the policy in the `inbound` array of `x-zuplo-route.policies`.
+- The handler for `/hello` can be a simple inline handler or a custom module that returns `new Response("Hello World")`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: `npx zuplo dev --editor-port 9200 --port 3000`
+- Port: 3000
+- API Endpoints:
+  - GET `/hello`: Returns status 200 and response body `Hello World`.
+- Logging behavior:
+  - When a request is made to `/hello` with the header `x-custom-id: <value>`, the server must log `Custom ID: <value>` to stdout.
+
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-afdzrgk > /logs/artifacts/run-id && echo request_body_cloning__aFDZrGK > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Request Body Cloning in Zuplo
+
+## Background
+In Zuplo, a common error is trying to read the body of a request or response twice (e.g., once for logging and once for forwarding). Because the body is a `ReadableStream`, it can only be read once. To log the body and still forward the request, developers must use `request.clone()` and `response.clone()` to avoid "body used" exceptions.
+
+## Requirements
+- Initialize a new Zuplo project.
+- Create a custom handler for the route `POST /api/echo`.
+- The handler must perform the following:
+  1. Read and log the incoming request body as text using `context.log.info()`. The log message must be exactly in the format: `Intercepted Request: <body>`.
+  2. Forward the request to an upstream service at `http://127.0.0.1:8080/echo` using `fetch()`.
+  3. Read and log the response body from the upstream service as text using `context.log.info()`. The log message must be exactly in the format: `Intercepted Response: <body>`.
+  4. Return the upstream response to the client.
+- Configure `config/routes.oas.json` to route `POST /api/echo` to your custom handler.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project.
+- Create a custom handler module (e.g., in `modules/`).
+- Use `request.clone()` to safely read the request body for logging while keeping the original `request` intact to pass to `fetch()`.
+- Use `response.clone()` to safely read the response body for logging while keeping the original `response` intact to return.
+- Make sure the route in `routes.oas.json` uses the `$import()` syntax to reference your custom handler.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 3000
+- API Endpoints:
+  - `POST /api/echo`: Accepts any text/JSON body, forwards it to `http://127.0.0.1:8080/echo`, and returns the upstream response.
+- The dev server output must contain the exact log messages for both the intercepted request and response bodies.
+
+EOF
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-5vnqkhe > /logs/artifacts/run-id && echo mcp-tool-implementation__5VNqkhE > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo MCP Tool Implementation
+
+## Background
+Create a Zuplo gateway that exposes internal data to AI agents by implementing the Model Context Protocol (MCP).
+
+## Requirements
+- Initialize a new Zuplo project.
+- Create an MCP Server Handler that exposes a tool named `get_customer_summary`.
+- The tool should accept a `customerId` (string) argument.
+- The tool should return a summary of the customer, retrieving data from an in-memory dataset or a local file.
+- Expose the MCP server on a POST route (e.g., `/mcp`).
+- Configure the Zuplo dev server to use port 9200 for its editor to avoid port conflicts.
+
+## Implementation Hints
+- Use `create-zuplo-api` to scaffold the project.
+- Define the route in `config/routes.oas.json` and point it to a custom module.
+- Use the `@zuplo/runtime` to implement the MCP Server Handler.
+- Define the tool schema and execution logic within the handler.
+- Use `request.clone()` if you need to read the body multiple times, though the MCP handler usually manages this.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run build && zuplo dev --editor-port 9200
+- Port: 8787
+- API Endpoints:
+  - POST `/mcp`: Handles MCP JSON-RPC requests. When sent a `tools/call` request for `get_customer_summary` with a valid `customerId`, it returns a successful JSON-RPC response containing the customer summary text.
+
+
+EOF
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Skipping image OS validation for hb__tiered-rate-limiting: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-rdhmac5 > /logs/artifacts/run-id && echo tiered-rate-limiting__rdhMAc5 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Tiered Rate Limiting with Zuplo
+
+## Background
+Zuplo is an edge-native API gateway that allows you to add authentication, rate limiting, and other policies to your APIs. In this task, you will create a Zuplo API gateway that implements tiered rate limiting based on a user's subscription plan extracted from a JWT claim.
+
+## Requirements
+- Initialize a new Zuplo project in `/home/user/myproject`.
+- Create a single GET endpoint at `/api/data`.
+- Secure the endpoint using JWT authentication. The JWTs will be signed using the HS256 algorithm with a symmetric secret.
+- Implement a tiered rate limiting mechanism:
+  - Users with the claim `"plan": "free"` in their JWT should be limited to 2 requests per minute.
+  - Users with the claim `"plan": "pro"` in their JWT should be limited to 5 requests per minute.
+- Return a 429 Too Many Requests status when a user exceeds their limit.
+- Valid requests should return a 200 OK with a simple JSON response.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest` to scaffold the project.
+- You can use Zuplo's built-in JWT authentication policy and configure it to use a symmetric secret (e.g., `my-super-secret-key`).
+- To implement tiered rate limiting, you might need to use Zuplo's custom policies or configure multiple rate limit policies with different conditions based on `request.user.data.plan`.
+- When starting the dev server, ensure the editor port is set to 9200 (e.g., using `--editor-port 9200` or modifying `package.json`) to avoid port conflicts, while leaving the gateway on port 8787.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 8787
+- API Endpoints:
+  - GET `/api/data`:
+    - Requires a valid HS256 JWT signed with the secret `my-super-secret-key`.
+    - Returns 401 Unauthorized if the JWT is missing or invalid.
+    - Returns 200 OK with `{"data": "success"}` for valid requests within the rate limit.
+    - Returns 429 Too Many Requests if the rate limit is exceeded.
+    - Rate limits: 2 requests/minute for `"plan": "free"` and 5 requests/minute for `"plan": "pro"`.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Skipping image OS validation for hb__response-transformation: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Skipping image OS validation for hb__multi-tenant-gateway: docker inspect returned 1
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-mivhvlj > /logs/artifacts/run-id && echo response-transformation__MivHvLj > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Response Transformation (XML to JSON)
+
+## Background
+You need to proxy an API that returns legacy XML responses and transform those responses into modern JSON format before returning them to the client. This is a common pattern when modernizing legacy backends using an API gateway.
+
+## Requirements
+- Create a new Zuplo project.
+- Create a custom handler module that returns a predefined XML response (to simulate the legacy backend).
+- Define a route `GET /legacy-data` that uses this custom handler.
+- Create an outbound policy that intercepts the XML response, parses it into JSON, and returns the JSON payload to the client.
+- Apply the policy to the `/legacy-data` route.
+
+## Implementation Hints
+- Use `fast-xml-parser` (which works in edge environments) to parse the XML.
+- The custom handler should return a `Response` with `Content-Type: application/xml` and the exact XML body: `<note><to>User</to><from>Admin</from><heading>Reminder</heading><body>Don't forget the meeting!</body></note>`.
+- The outbound policy should read the response body as text, parse it using `fast-xml-parser`, and create a new `Response` object with `Content-Type: application/json` and the JSON stringified body.
+- Remember to install `fast-xml-parser` in your Zuplo project.
+- Start the dev server using the appropriate ports to avoid conflicts.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev -- --port 9000 --editor-port 9200 --docs-port 9300
+- Port: 9000
+- API Endpoints:
+  - GET `/legacy-data`: Returns status 200 and a JSON object representing the XML data.
+
+    ```json
+    // Expected JSON Response
+    {
+      "note": {
+        "to": "User",
+        "from": "Admin",
+        "heading": "Reminder",
+        "body": "Don't forget the meeting!"
+      }
+    }
+    ```
+
+
+EOF
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-ukvsl9t > /logs/artifacts/run-id && echo multi-tenant-gateway__UkVsL9t > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command failed
+Trial multi-tenant-gateway__UkVsL9t failed: Initial state test failed
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__mock-response-handler: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-u6sdhab > /logs/artifacts/run-id && echo mock-response-handler__U6sDHAB > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo Mock Response Handler
+
+## Background
+Zuplo allows developers to create custom handlers using TypeScript. In this task, you will create a custom handler that returns a static JSON response, which is useful for mocking backend services during development.
+
+## Requirements
+- Initialize a new Zuplo project named `myproject`.
+- Create a custom TypeScript handler that returns a static JSON response: `{"status": "success", "message": "This is a mocked response"}`.
+- Configure a new route `GET /mock` in `routes.oas.json` that uses this custom handler.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project.
+- Create the custom handler in the `modules/` directory (e.g., `modules/mock-handler.ts`).
+- In the handler, use `new Response(JSON.stringify({...}), { headers: { 'content-type': 'application/json' } })` to return the JSON.
+- Update `config/routes.oas.json` to define the `/mock` path with the `get` method, and bind your custom handler using the `x-zuplo-route` extension with `$import(./modules/mock-handler)`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev -- --port 9200
+- Port: 9200
+- API Endpoints:
+  - GET `/mock`: Returns status 200 and a JSON object.
+    ```json
+    // Response
+    {
+      "status": "success",
+      "message": "This is a mocked response"
+    }
+    ```
+
+
+EOF
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Skipping image OS validation for hb__zuplo-custom-response-header: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Not retrying trial because the maximum number of retries has been reached
+Skipping image OS validation for hb__caching-policy: docker inspect returned 1
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-yceuay6 > /logs/artifacts/run-id && echo zuplo-custom-response-header__yCEuAY6 > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo Custom Response Header Policy
+
+## Background
+Zuplo allows developers to build custom policies in TypeScript. In this task, you will create a custom outbound policy that reads the response body and adds an `X-Signature` header based on its contents.
+
+## Requirements
+- Create a new Zuplo project at `/home/user/myproject`.
+- Add a custom route handler for `GET /hello` that returns the JSON response `{"message": "Hello World"}`.
+- Create a custom outbound policy that reads the response body as text.
+- The policy must append an `X-Signature` header to the response. The value of this header must be the base64 encoded string of the response body text.
+- Apply this custom outbound policy to the `GET /hello` route.
+
+## Implementation Hints
+- You will need to clone the response (e.g., `response.clone()`) to safely read the body text without causing a "body used" exception when returning the response.
+- You can use the standard Web API `btoa()` function to base64 encode the text.
+- Make sure the policy is correctly defined in `config/policies.json` and applied to the route in `config/routes.oas.json`.
+- A new `Response` object might need to be constructed if the original response headers are immutable.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 8787
+- API Endpoints:
+  - GET `/hello`: Returns status 200 and the JSON `{"message": "Hello World"}`. The response must include an `X-Signature` header containing the base64 encoded string of the exact response body.
+
+EOF
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-hdgnf2v > /logs/artifacts/run-id && echo caching-policy__HdgNF2v > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Custom Caching Handler
+
+## Background
+Zuplo provides a programmable API including `ZoneCache` to store data. In this task, you will create a custom handler that caches responses from a backend service to improve performance.
+
+## Requirements
+- Create a new route in `config/routes.oas.json` that listens on `GET /api/${run-id}/data`.
+- The route must use a custom TypeScript handler.
+- The handler should check `ZoneCache` (cache name: `test-cache`) using the request URL as the key.
+- If the data is found in the cache, return it as a JSON response with the header `x-cache: hit`.
+- If the data is not in the cache, fetch it from `https://echo.zuplo.io/`, store the parsed JSON in the cache with a TTL of 60 seconds, and return it as a JSON response with the header `x-cache: miss`.
+
+## Implementation Hints
+- Read the current `run-id` from the `ZEALT_RUN_ID` environment variable.
+- Use the `ZoneCache` API available in `@zuplo/runtime` to get and put data.
+- Make sure to await the cache `get` and `put` operations, or handle promises correctly.
+- Return a standard `Response` object with the correct headers.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: zuplo dev --port 9200
+- Port: 9200
+- API Endpoints:
+  - GET `/api/${run-id}/data`: 
+    - First request should return status 200, the JSON data from echo.zuplo.io, and the header `x-cache: miss`.
+    - Subsequent requests within 60 seconds should return status 200, the same JSON data, and the header `x-cache: hit`.
+
+
+EOF
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Skipping image OS validation for hb__circuit_breaker_setup: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Skipping image OS validation for hb__zuplo-dynamic-routing: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-ypkektk > /logs/artifacts/run-id && echo circuit_breaker_setup__YpkEKTk > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo Circuit Breaker Policy
+
+## Background
+Zuplo allows you to build custom policies using TypeScript. To protect downstream services from cascading failures, you need to implement a Circuit Breaker pattern that stops forwarding requests to a backend if it is consistently failing.
+
+## Requirements
+- Create a custom policy in Zuplo that acts as a circuit breaker.
+- The policy should monitor the response status from the backend.
+- If the backend returns a 5xx status code for 5 consecutive requests, the circuit breaker should "trip" (open).
+- When the circuit breaker is open, the gateway should immediately return a `503 Service Unavailable` response to the client without calling the backend.
+- Use Zuplo's `ZoneCache` to store the circuit breaker state (e.g., consecutive failure count, circuit state) across requests, ensuring it is scoped correctly.
+- Apply this policy to a route `GET /api/data` that proxies to a backend URL (provided via environment variable or hardcoded for testing).
+- Ensure the circuit breaker state is isolated per `run-id` by appending the `run-id` to the cache key.
+
+## Implementation Hints
+- You may need both an inbound policy (to check if the circuit is open and reject early) and an outbound policy (to monitor the backend response and update the failure count).
+- Read the current `run-id` from the `ZEALT_RUN_ID` environment variable.
+- Use `ZoneCache` to persist the failure count and state. Use the `run-id` in the cache key to avoid conflicts between parallel test runs.
+- Use `HttpProblems.serviceUnavailable` or return a `new Response` with status 503 when the circuit is open.
+- Create a route in `config/routes.oas.json` and configure the policies in `config/policies.json`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run start (or zuplo dev)
+- Port: 3000
+- Route: `GET /api/data` proxies to a backend.
+- When the backend returns 200, the route returns 200.
+- When the backend returns 500 for 5 consecutive requests, the 6th request must return 503 immediately without hitting the backend, and the response should indicate the service is unavailable.
+- The cache key used to store the circuit state MUST include the `run-id` from the `ZEALT_RUN_ID` environment variable.
+
+
+EOF
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-nupcm6x > /logs/artifacts/run-id && echo zuplo-dynamic-routing__NUPcM6x > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Zuplo Dynamic Upstream Routing
+
+## Background
+Zuplo is an edge-native API gateway that allows programmable routing. You need to implement dynamic upstream routing that proxies requests to different backends based on the client's country, determined via the `cf-ipcountry` header.
+
+## Requirements
+- Create a Zuplo project.
+- Implement a custom route handler at `GET /api/data`.
+- The handler should check the `cf-ipcountry` header of the incoming request.
+- If the header is `US`, proxy the request to `https://echo.zuplo.io/us`.
+- For all other values (or if the header is missing), proxy the request to `https://echo.zuplo.io/default`.
+- The handler must return the exact response from the proxied backend.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold a project.
+- Define the route in `config/routes.oas.json`.
+- Implement a custom module handler (e.g., in `modules/routing.ts`) that reads the `cf-ipcountry` header from the `ZuploRequest` and uses `fetch()` to proxy the request.
+- Make sure to return the `Response` object obtained from `fetch()`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run dev
+- Port: 8787
+- API Endpoints:
+  - GET `/api/data`: Returns the response from `https://echo.zuplo.io/us` if `cf-ipcountry: US` is provided, otherwise returns the response from `https://echo.zuplo.io/default`.
+
+
+EOF
+Command failed
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached
+Skipping image OS validation for hb__request-body-transformation: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-dl8ncpp > /logs/artifacts/run-id && echo request-body-transformation__dL8nCpP > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Request Body Transformation (JSON to XML)
+
+## Background
+In enterprise API gateways, it's common to integrate modern JSON-based clients with legacy backend systems that only accept XML. You need to implement a custom policy in Zuplo that transforms an incoming JSON payload into an XML format before the request reaches the backend.
+
+## Requirements
+- Create a new Zuplo project.
+- Define a route for `POST /api/submit`.
+- Implement a custom inbound policy that intercepts the request, reads the JSON body, converts it to XML, and forwards the transformed request.
+- The JSON payload will look like: `{"user": {"name": "Alice", "role": "admin"}}`.
+- The transformed XML payload should look like: `<user><name>Alice</name><role>admin</role></user>`.
+- Set the `Content-Type` header of the forwarded request to `application/xml`.
+- Route the transformed request to a custom handler that simply echoes back the request body as text, so the transformation can be verified.
+
+## Implementation Hints
+- Use `zuplo` CLI to create a new project.
+- Write a custom inbound policy in TypeScript (e.g., `./modules/json-to-xml.ts`).
+- Since Zuplo runs on the edge, you can use standard Web APIs. You can manually construct the XML string or use a lightweight library that is edge-compatible.
+- Remember to clone or recreate the `Request` object in your policy because the request body cannot be read twice or modified directly in place. Return a new `Request` object with the new XML body and updated headers.
+- For the backend handler, create another module (e.g., `./modules/echo.ts`) that reads `request.text()` and returns it in a `Response`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: zuplo dev --port 3000
+- Port: 3000
+- API Endpoints:
+  - POST `/api/submit`: Accepts a JSON payload and returns the transformed XML payload as text.
+
+    ```json
+    // Request
+    {
+      "user": {
+        "name": string,
+        "role": string
+      }
+    }
+    ```
+    ```xml
+    // Response (Echoed from the custom handler)
+    <user><name>string</name><role>string</role></user>
+    ```
+
+
+EOF
+Command failed
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Skipping image OS validation for hb__dynamic-upstream-routing: docker inspect returned 1
+Running command: apt-get update && apt-get install -y curl ripgrep
+Command outputs captured
+Running command: set -euo pipefail; curl -fsSL https://getpochi.com/install.sh | bash -x -s -- pochi-v0.6.12 && mkdir -p /logs/agent/pochi && ~/.pochi/bin/pochi --version
+Command outputs captured
+Running command: ln -sf ~/.pochi/bin/pochi /usr/local/bin/pochi
+Command outputs captured
+Running command: echo zr-fkn2qni > /logs/artifacts/run-id && echo dynamic-upstream-routing__Fkn2QNi > /logs/artifacts/trial_id
+Command outputs captured
+Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${OPENAI_API_KEY}/g" -e "s/DEEPINFRA_API_KEY/${DEEPINFRA_API_KEY}/g" > ~/.pochi/config.jsonc
+{
+  "providers": {
+    "deepinfra": {
+      "kind": "openai",
+      "baseURL": "https://api.deepinfra.com/v1/openai",
+      "apiKey": "DEEPINFRA_API_KEY",
+      "models": {
+        "zai-org/GLM-4.7-Flash": {
+          "name": "glm-4.7-flash"
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "kimi-K2.6"
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "name": "DeepSeek-V4-Pro"
+        }
+      }
+    },
+    "openai": {
+      "kind": "openai",
+      "baseURL": "https://api.openai.com/v1",
+      "apiKey": "OPENAI_API_KEY",
+      "models": {
+        "gpt-5.4": {
+          "name": "gpt-5.4"
+        }
+      }
+    }
+  }
+}
+EOF
+Command outputs captured
+Running command: if [ -f /bootstrap/test_initial_state.py ]; then pytest -s --log-cli-level=DEBUG /bootstrap/test_initial_state.py > >(tee /logs/agent/pochi/initial-test-stdout.txt) 2> >(tee /logs/agent/pochi/initial-test-stderr.txt >&2); fi
+Command outputs captured
+Running command: pochi --model google/gemini-3.1-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+# Dynamic Upstream Routing with Zuplo
+
+## Background
+Zuplo is a programmable API gateway that runs at the edge. In this task, you will create a Zuplo project that implements dynamic upstream routing based on the client's geolocation (using the `cf-ipcountry` header).
+
+## Requirements
+- Initialize a new Zuplo project named `myproject`.
+- Create a single route `GET /api/data`.
+- Implement a custom TypeScript handler for this route.
+- The handler must inspect the `cf-ipcountry` header of the incoming request.
+- If the `cf-ipcountry` header is `GB`, `FR`, or `DE`, the handler should forward the request to `https://echo.zuplo.io/eu/api/data`.
+- If the header is missing or has any other value, forward the request to `https://echo.zuplo.io/us/api/data`.
+- The handler must return the exact response received from the upstream server.
+
+## Implementation Hints
+- Use `npx -y create-zuplo-api@latest myproject --git=false --install=true --no-portal --no-eslint --yes` to scaffold the project.
+- Define the route in `config/routes.oas.json` and map it to a custom handler module.
+- In your custom handler, read the `cf-ipcountry` header from the `ZuploRequest` object.
+- Use the standard `fetch` API available in the edge runtime to call the appropriate upstream URL, and return the `Response`.
+
+## Acceptance Criteria
+- Project path: /home/user/myproject
+- Start command: npm run env -- zuplo dev --port 8080
+- Port: 8080
+- API Endpoints:
+  - GET `/api/data`: Forwards requests dynamically based on `cf-ipcountry` header.
+    - If `cf-ipcountry` is `GB`, it returns the response from `https://echo.zuplo.io/eu/api/data`.
+    - If `cf-ipcountry` is missing, it returns the response from `https://echo.zuplo.io/us/api/data`.
+
+
+EOF
+Not retrying trial because the maximum number of retries has been reached
+Command outputs captured
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+The verifier.env contains an API key (often the case for LLM-based verifiers). You will incur costs associated with the API calls.
+Running command: rm -f ~/.pochi/config.jsonc
+Command outputs captured
+Not retrying trial because the maximum number of retries has been reached
+Exception AgentTimeoutError is in exclude_exceptions, not retrying
+Not retrying trial because the exception is not in include_exceptions or the maximum number of retries has been reached

@@ -1,0 +1,52 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 3,
+            "passed": 3,
+            "failed": 0,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780688957088,
+            "stop": 1780688983833
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_single_context_renders_three_shapes",
+                "status": "passed",
+                "duration": 14003,
+                "start": 1780688957329,
+                "stop": 1780688971332,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_cross_user_selection_via_presence",
+                "status": "passed",
+                "duration": 7585,
+                "start": 1780688971333,
+                "stop": 1780688978918,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            },
+            {
+                "name": "test_final_state.py::test_storage_does_not_carry_selection_attribute",
+                "status": "passed",
+                "duration": 4912,
+                "start": 1780688978919,
+                "stop": 1780688983831,
+                "retries": 0,
+                "file_path": "test_final_state.py"
+            }
+        ]
+    }
+}

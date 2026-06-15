@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 1 item
+
+tests/test_final_state.py .                                              [100%]
+
+==================================== PASSES ====================================
+_______________________ test_request_body_transformation _______________________
+---------------------------- Captured stdout setup -----------------------------
+
+added 1 package, and audited 1451 packages in 7s
+
+380 packages are looking for funding
+  run `npm fund` for details
+
+17 vulnerabilities (3 low, 2 moderate, 10 high, 2 critical)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+/tests/.pytest_cache/d/.xprocess/zuplo_dev$ npx zuplo dev --port 3000
+process 'zuplo_dev' started pid=1846
+zuplo_dev process startup detected
+---------------------------- Captured stderr setup -----------------------------
+npm error Missing script: "build"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+npm error A complete log of this run can be found in: /root/.npm/_logs/2026-05-30T05_19_08_844Z-debug-0.log
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_request_body_transformation
+======================== 1 passed in 179.89s (0:02:59) =========================

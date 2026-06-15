@@ -1,0 +1,49 @@
+{
+    "results": {
+        "tool": {
+            "name": "pytest",
+            "version": "7.4.4"
+        },
+        "summary": {
+            "tests": 2,
+            "passed": 0,
+            "failed": 2,
+            "skipped": 0,
+            "pending": 0,
+            "other": 0,
+            "start": 1780177851721,
+            "stop": 1780177865717
+        },
+        "environment": {
+            "buildName": "Pytest JSON CTRF Report",
+            "buildNumber": "000",
+            "buildUrl": "https://ctrf.io"
+        },
+        "tests": [
+            {
+                "name": "test_final_state.py::test_users_route_get",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 13408,
+                "start": 1780177851967,
+                "stop": 1780177865375,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_users_route_get(start_app):\n        \"\"\"Test that GET /api/v1/users/{id} proxies to httpbin correctly.\"\"\"\n        url = f\"http://localhost:{PORT}/api/v1/users/u-123\"\n        response = requests.get(url)\n>       assert response.status_code == 200, f\"Expected status 200, got {response.status_code}. Response: {response.text}\"\nE       AssertionError: Expected status 200, got 404. Response: {\nE           \"type\": \"https://httpproblems.com/http-status/404\",\nE           \"title\": \"Not Found\",\nE           \"status\": 404,\nE           \"instance\": \"/api/v1/users/u-123\",\nE           \"trace\": {\nE             \"timestamp\": \"2026-05-30T21:51:05.329Z\",\nE             \"requestId\": \"eb710f00-bc52-4644-bddc-5374c6ced27c\",\nE             \"buildId\": \"518a7c36-7f48-4305-a3dc-76787c2081cc\"\nE           }\nE         }\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:48: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            },
+            {
+                "name": "test_final_state.py::test_products_route_post",
+                "status": "failed",
+                "raw_status": "call_failed",
+                "duration": 342,
+                "start": 1780177865375,
+                "stop": 1780177865717,
+                "retries": 0,
+                "file_path": "test_final_state.py",
+                "trace": "start_app = None\n\n    def test_products_route_post(start_app):\n        \"\"\"Test that POST /api/v1/products/{id} proxies to httpbin correctly and forwards body.\"\"\"\n        url = f\"http://localhost:{PORT}/api/v1/products/p-456\"\n        payload = {\"item\": \"laptop\"}\n        response = requests.post(url, json=payload)\n>       assert response.status_code == 200, f\"Expected status 200, got {response.status_code}. Response: {response.text}\"\nE       AssertionError: Expected status 200, got 404. Response: {\nE           \"type\": \"https://httpproblems.com/http-status/404\",\nE           \"title\": \"Not Found\",\nE           \"status\": 404,\nE           \"instance\": \"/api/v1/products/p-456\",\nE           \"trace\": {\nE             \"timestamp\": \"2026-05-30T21:51:05.380Z\",\nE             \"requestId\": \"22afb9d9-ef15-4e1f-8e18-121d35262de0\",\nE             \"buildId\": \"518a7c36-7f48-4305-a3dc-76787c2081cc\"\nE           }\nE         }\nE       assert 404 == 200\nE        +  where 404 = <Response [404]>.status_code\n\ntests/test_final_state.py:59: AssertionError",
+                "message": "The test failed in the call phase due to an assertion error"
+            }
+        ]
+    }
+}

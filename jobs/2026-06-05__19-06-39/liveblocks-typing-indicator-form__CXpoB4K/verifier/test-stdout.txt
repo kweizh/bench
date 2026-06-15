@@ -1,0 +1,50 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.4, pluggy-1.4.0
+rootdir: /tests
+plugins: xprocess-1.0.2, json-ctrf-0.5.0
+collected 9 items
+
+tests/test_final_state.py ..F......                                      [100%]
+
+=================================== FAILURES ===================================
+______________________ test_storage_sync_between_contexts ______________________
+
+two_contexts = (<Page url='http://localhost:3000/?name=Alice'>, <Page url='http://localhost:3000/?name=Bob'>)
+
+    def test_storage_sync_between_contexts(two_contexts):
+        page_a, page_b = two_contexts
+    
+        # Name field
+        page_a.locator('[data-testid="input-name"]').click()
+        page_a.locator('[data-testid="input-name"]').fill("")
+        page_a.locator('[data-testid="input-name"]').type("Hello", delay=40)
+        page_a.locator('[data-testid="input-name"]').blur()
+        _wait_for(
+            lambda: page_b.locator('[data-testid="input-name"]').input_value() == "Hello",
+            timeout=15.0,
+        )
+>       assert page_b.locator('[data-testid="input-name"]').input_value() == "Hello", (
+            "Name field did not sync from context A to context B via Liveblocks Storage."
+        )
+E       AssertionError: Name field did not sync from context A to context B via Liveblocks Storage.
+E       assert '' == 'Hello'
+E         - Hello
+
+tests/test_final_state.py:150: AssertionError
+==================================== PASSES ====================================
+__________________________ test_form_skeleton_renders __________________________
+---------------------------- Captured stdout setup -----------------------------
+/tests/.pytest_cache/d/.xprocess/next_app$ npm run start -- -p 3000
+process 'next_app' started pid=1286
+next_app process startup detected
+=========================== short test summary info ============================
+PASSED tests/test_final_state.py::test_form_skeleton_renders
+PASSED tests/test_final_state.py::test_liveblocks_auth_endpoint_returns_token
+PASSED tests/test_final_state.py::test_typing_indicator_appears_and_clears[name-Name]
+PASSED tests/test_final_state.py::test_typing_indicator_appears_and_clears[email-Email]
+PASSED tests/test_final_state.py::test_typing_indicator_appears_and_clears[bio-Bio]
+PASSED tests/test_final_state.py::test_lock_overlay_appears_and_clears
+PASSED tests/test_final_state.py::test_soft_lock_allows_takeover
+PASSED tests/test_final_state.py::test_codebase_uses_real_liveblocks_packages
+FAILED tests/test_final_state.py::test_storage_sync_between_contexts - Assert...
+==================== 1 failed, 8 passed in 90.67s (0:01:30) ====================
