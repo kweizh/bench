@@ -4,7 +4,7 @@
   "agent": {
     "name": "pochi",
     "version": "unknown",
-    "model_name": "deepinfra/deepseek-ai/DeepSeek-V4-Pro"
+    "model_name": "deepinfra/deepseek-ai/deepseek-4-pro"
   },
   "steps": [
     {

@@ -32,8 +32,8 @@ Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${
         "moonshotai/Kimi-K2.6": {
           "name": "kimi-K2.6"
         },
-        "deepseek-ai/DeepSeek-V4-Pro": {
-          "name": "DeepSeek-V4-Pro"
+        "deepseek-ai/deepseek-4-pro": {
+          "name": "deepseek-4-pro"
         }
       }
     },
@@ -114,8 +114,8 @@ Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${
         "moonshotai/Kimi-K2.6": {
           "name": "kimi-K2.6"
         },
-        "deepseek-ai/DeepSeek-V4-Pro": {
-          "name": "DeepSeek-V4-Pro"
+        "deepseek-ai/deepseek-4-pro": {
+          "name": "deepseek-4-pro"
         }
       }
     },
@@ -189,8 +189,8 @@ Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${
         "moonshotai/Kimi-K2.6": {
           "name": "kimi-K2.6"
         },
-        "deepseek-ai/DeepSeek-V4-Pro": {
-          "name": "DeepSeek-V4-Pro"
+        "deepseek-ai/deepseek-4-pro": {
+          "name": "deepseek-4-pro"
         }
       }
     },
@@ -270,8 +270,8 @@ Running command: mkdir -p ~/.pochi && cat << 'EOF' | sed -e "s/OPENAI_API_KEY/${
         "moonshotai/Kimi-K2.6": {
           "name": "kimi-K2.6"
         },
-        "deepseek-ai/DeepSeek-V4-Pro": {
-          "name": "DeepSeek-V4-Pro"
+        "deepseek-ai/deepseek-4-pro": {
+          "name": "deepseek-4-pro"
         }
       }
     },

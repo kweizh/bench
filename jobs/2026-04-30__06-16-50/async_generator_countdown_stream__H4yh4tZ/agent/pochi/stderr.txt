@@ -21,7 +21,7 @@ error stack:
   isRetryable: [33mtrue[39m,
   message: [32m'Model busy, retry later'[39m,
   requestBodyValues: {
-    model: [32m'deepseek-ai/DeepSeek-V4-Pro'[39m,
+    model: [32m'deepseek-ai/deepseek-4-pro'[39m,
     max_tokens: [33m4096[39m,
     messages: [
       {
@@ -1228,7 +1228,7 @@ error stack:
   isRetryable: [33mtrue[39m,
   message: [32m'Model busy, retry later'[39m,
   requestBodyValues: {
-    model: [32m'deepseek-ai/DeepSeek-V4-Pro'[39m,
+    model: [32m'deepseek-ai/deepseek-4-pro'[39m,
     max_tokens: [33m4096[39m,
     messages: [
       {
@@ -2435,7 +2435,7 @@ error stack:
   isRetryable: [33mtrue[39m,
   message: [32m'Model busy, retry later'[39m,
   requestBodyValues: {
-    model: [32m'deepseek-ai/DeepSeek-V4-Pro'[39m,
+    model: [32m'deepseek-ai/deepseek-4-pro'[39m,
     max_tokens: [33m4096[39m,
     messages: [
       {
@@ -3642,7 +3642,7 @@ error stack:
   isRetryable: [33mtrue[39m,
   message: [32m'Model busy, retry later'[39m,
   requestBodyValues: {
-    model: [32m'deepseek-ai/DeepSeek-V4-Pro'[39m,
+    model: [32m'deepseek-ai/deepseek-4-pro'[39m,
     max_tokens: [33m4096[39m,
     messages: [
       {
@@ -4849,7 +4849,7 @@ error stack:
   isRetryable: [33mtrue[39m,
   message: [32m'Model busy, retry later'[39m,
   requestBodyValues: {
-    model: [32m'deepseek-ai/DeepSeek-V4-Pro'[39m,
+    model: [32m'deepseek-ai/deepseek-4-pro'[39m,
     max_tokens: [33m4096[39m,
     messages: [
       {
@@ -6056,7 +6056,7 @@ error stack:
   isRetryable: [33mtrue[39m,
   message: [32m'Model busy, retry later'[39m,
   requestBodyValues: {
-    model: [32m'deepseek-ai/DeepSeek-V4-Pro'[39m,
+    model: [32m'deepseek-ai/deepseek-4-pro'[39m,
     max_tokens: [33m4096[39m,
     messages: [
       {

@@ -7,7 +7,7 @@
         "n_trials": 31,
         "n_errors": 19,
         "evals": {
-            "pochi__deepseek-ai-DeepSeek-V4-Pro__tasks": {
+            "pochi__deepseek-ai-deepseek-4-pro__tasks": {
                 "n_trials": 28,
                 "n_errors": 19,
                 "metrics": [

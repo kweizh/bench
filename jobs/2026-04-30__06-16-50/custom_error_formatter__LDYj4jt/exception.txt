@@ -16,7 +16,7 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^
   File "/home/kw/.local/share/uv/tools/harbor/lib/python3.12/site-packages/harbor/agents/installed/base.py", line 321, in _exec
     raise NonZeroAgentExitCodeError(
-harbor.agents.installed.base.NonZeroAgentExitCodeError: Command failed (exit 143): export PATH="$HOME/.pochi/bin:$PATH"; pochi --model deepinfra/deepseek-ai/DeepSeek-V4-Pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
+harbor.agents.installed.base.NonZeroAgentExitCodeError: Command failed (exit 143): export PATH="$HOME/.pochi/bin:$PATH"; pochi --model deepinfra/deepseek-ai/deepseek-4-pro --max-steps 200 --max-retries 10 --blobs-dir /logs/agent/pochi/blobs --experimental-stream-trajectory /logs/agent/pochi/trajectory.jsonl > >(tee /logs/agent/pochi/stdout.txt) 2> >(tee /logs/agent/pochi/stderr.txt >&2) <<'EOF'
 # Preserving your work
 
 Save a copy of files you create during this task to `/logs/artifacts/`. This directory is preserved after the run so outputs can be inspected. Organize with subdirectories if helpful (e.g., `/logs/artifacts/code/`, `/logs/artifacts/reports/`). The directory already exists and is writable.
