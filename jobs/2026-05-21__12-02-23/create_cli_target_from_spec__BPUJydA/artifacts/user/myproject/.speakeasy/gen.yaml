@@ -1,4 +1,0 @@
-configVersion: 2.0.0
-cli:
-  version: 1.0.0
-  sdkClassName: TestAPI

@@ -1,7 +1,0 @@
-{
-  "library_name": "speakeasy",
-  "complexity_level": "much more complicated task which not easy to be fixed by llm agents",
-  "deep_research_path": "../../../plan.md",
-  "task_name": "implement_python_request_hook",
-  "output_dir": "../../../scratchpad/pending-tasks/"
-}

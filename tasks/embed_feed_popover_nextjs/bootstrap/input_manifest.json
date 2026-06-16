@@ -1,7 +1,0 @@
-{
-  "library_name": "Knock",
-  "task_name": "embed_feed_popover_nextjs",
-  "complexity_level": "multi-step sequential command set",
-  "research_plan_path": "plan.md",
-  "output_dir": "tasks/"
-}

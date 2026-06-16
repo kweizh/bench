@@ -1,7 +1,0 @@
-overlay: 1.0.0
-info:
-  title: Remove deprecated /old-endpoint
-  version: 0.0.1
-actions:
-  - target: $.paths['/old-endpoint']
-    remove: true

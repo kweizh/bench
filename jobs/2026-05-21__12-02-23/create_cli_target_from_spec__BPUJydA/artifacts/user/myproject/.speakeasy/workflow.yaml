@@ -1,9 +1,0 @@
-workflowVersion: 1.0.0
-sources:
-  my-source:
-    inputs:
-      - location: ./openapi.yaml
-targets:
-  my-target:
-    target: cli
-    source: my-source

@@ -1,7 +1,0 @@
-{
-  "library_name": "speakeasy",
-  "complexity_level": "simple set of 2-5 commands",
-  "deep_research_path": "../../../plan.md",
-  "task_name": "create_cli_target_from_spec",
-  "output_dir": "../../../scratchpad/pending-tasks/"
-}

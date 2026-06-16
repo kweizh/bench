@@ -1,6 +1,7 @@
 version = "1.0"
 
 [metadata]
+tags = ["prefect"]
 [environment]
 build_timeout_sec = 600
 cpus = 4
