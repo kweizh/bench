@@ -1,6 +1,7 @@
 version = "1.0"
 
 [metadata]
+tags = ["capacitor"]
 
 [environment]
 build_timeout_sec = 3600.0
