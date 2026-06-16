@@ -23,3 +23,7 @@ mcp_servers = []
 POCHI_LOG = "debug"
 
 [solution.env]
+
+[environment.env]
+POCHI_API_KEY = "${POCHI_API_KEY}"
+
